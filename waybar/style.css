@@ -1,0 +1,116 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0.1); /* Highly transparent background */
+    border-bottom: 0px solid rgba(100, 114, 125, 0.5);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* Reset all module backgrounds to transparent for liquid look */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd,
+#workspaces button,
+#keyboard-state,
+#language {
+    background-color: transparent;
+    color: #ffffff;
+    padding: 0 10px;
+    margin: 0 2px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+}
+
+/* Hover effects to give it a 'liquid' feel when interacting */
+#workspaces button:hover,
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#clock:hover,
+#tray:hover,
+#mpd:hover,
+#custom-media:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+#workspaces button.focused {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: rgba(255, 100, 100, 0.3);
+    color: #ffffff;
+}
+
+/* Subtle indications for states without blocky colors */
+#battery.warning {
+    color: #ffd700;
+}
+
+#battery.critical:not(.charging) {
+    color: #ff5555;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        color: #ffffff;
+    }
+}
+
+#network.disconnected {
+    color: #ff5555;
+}
+
+#pulseaudio.muted {
+    color: #aaaaaa;
+}
+
+#temperature.critical {
+    color: #ff5555;
+}
+
+/* Tray adjustments */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: #ff5555;
+}
