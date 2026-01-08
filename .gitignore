@@ -1,0 +1,5 @@
+*.log
+*.cache
+secrets.conf
+private.conf
+.env
