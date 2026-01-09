@@ -6,7 +6,7 @@
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.1); /* Highly transparent background */
+    background-color: rgba(0, 0, 0, 0.4); /* Highly transparent background */
     border-bottom: 0px solid rgba(100, 114, 125, 0.5);
     color: #ffffff;
     transition-property: background-color;
