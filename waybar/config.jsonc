@@ -17,7 +17,6 @@
     ],
     "modules-center": [],
     "modules-right": [
-        "mpd",
         "idle_inhibitor",
         "custom/separator",
         "pulseaudio",
@@ -105,9 +104,10 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
+            "activated": "IDLE-OFF",
+            "deactivated": "IDLE-ON"
+        },
+        "tooltip": false
     },
 
     // ========== SYSTEM TRAY MODULE ==========
@@ -117,36 +117,39 @@
 
     // ========== CLOCK MODULE ==========
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%H:%M}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%B %d, %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
     // ========== CPU MODULE ==========
     "cpu": {
-        "format": "{usage}% ",
-        "interval": 1,
+        "format": "CPU {usage}%",
+        "interval": 2,
         "tooltip": false
     },
 
     // ========== MEMORY MODULE ==========
     "memory": {
-        "format": "{}% "
+        "format": "RAM {}%",
+        "tooltip-format": "Used: {used:0.1f}G / {total:0.1f}G"
     },
 
     // ========== TEMPERATURE MODULE ==========
     "temperature": {
         "critical-threshold": 80,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format": "{temperatureC}°C",
+        "format-critical": "{temperatureC}°C ",
+        "tooltip": false
     },
 
     // ========== BACKLIGHT MODULE ==========
     "backlight": {
         "device": "intel_backlight",
-        "format": "{percent}% {icon}",
-        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "format": "BRI {percent}%",
         "on-scroll-up": "brightnessctl set 5%+",
-        "on-scroll-down": "brightnessctl set 5%-"
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
     },
 
     // ========== BATTERY MODULE ==========
@@ -155,13 +158,11 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-
-        "format-icons": ["", "", "", "", ""]
+        "format": "BAT {capacity}%",
+        "format-charging": "CHG {capacity}%",
+        "format-plugged": "PWR {capacity}%",
+        "format-full": "FULL",
+        "tooltip-format": "{timeTo}"
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -182,32 +183,23 @@
 
     // ========== NETWORK MODULE ==========
     "network": {
-        "format-wifi": "{essid}",
-        "format-ethernet": "Connected",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n{essid} ({signalStrength}%)",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected",
-        "on-click": "nm-connection-editor"
+        "format-wifi": "NET {essid}",
+        "format-ethernet": "NET Wired",
+        "format-disconnected": "NET Disconnected",
+        "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\nSignal: {signalStrength}%",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+        "on-click": "nm-connection-editor",
+        "max-length": 30
     },
 
     // ========== AUDIO MODULE ==========
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+        "format": "VOL {volume}%",
+        "format-muted": "VOL Muted",
+        "format-source": "MIC {volume}%",
+        "format-source-muted": "MIC Muted",
+        "on-click": "pavucontrol",
+        "tooltip-format": "Volume: {volume}%"
     },
 
     // ========== CUSTOM MODULES ==========

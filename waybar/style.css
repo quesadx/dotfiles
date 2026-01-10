@@ -1,115 +1,127 @@
+/* ============================================================================
+   WAYBAR STYLES - Professional Black Theme
+   ============================================================================ */
+
+/* ========== GLOBAL STYLES ========== */
 * {
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
+    font-family: "JetBrains Mono", "Fira Code", "Roboto Mono", monospace, FontAwesome;
+    font-size: 14px;
+    font-weight: 600;
+    min-height: 0;
 }
 
+/* ========== WAYBAR WINDOW ========== */
 window#waybar {
     background-color: #000000;
-    border-bottom: none;
+    border: none;
     color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
+    transition: none;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
 }
 
-/* Reset all module backgrounds to transparent for liquid look */
+/* ========== MODULE BASE STYLES ========== */
 #clock,
 #battery,
 #cpu,
 #memory,
-#disk,
 #temperature,
 #backlight,
 #network,
 #pulseaudio,
-#wireplumber,
-#custom-media,
+#custom-separator,
 #tray,
-#mode,
 #idle_inhibitor,
-#scratchpad,
 #power-profiles-daemon,
-#mpd,
-#workspaces button,
-#keyboard-state,
-#language {
+#window {
     background-color: transparent;
     color: #ffffff;
-    padding: 0 8px;
-    margin: 0 3px;
-    border-radius: 0;
-    box-shadow: none;
+    padding: 0 10px;
+    margin: 0;
     border: none;
 }
 
-/* Hover effects to give it a 'liquid' feel when interacting */
-#workspaces button:hover,
+/* ========== SEPARATOR ========== */
+#custom-separator {
+    color: #444444;
+    padding: 0 5px;
+}
+
+/* ========== WINDOW TITLE ========== */
+#window {
+    color: #888888;
+    font-weight: normal;
+}
+
+/* ========== CLOCK ========== */
+#clock {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* ========== HOVER EFFECTS ========== */
 #pulseaudio:hover,
 #network:hover,
 #cpu:hover,
 #memory:hover,
 #battery:hover,
+#backlight:hover,
 #clock:hover,
 #tray:hover,
-#mpd:hover,
-#custom-media:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+#idle_inhibitor:hover,
+#power-profiles-daemon:hover,
+#temperature:hover {
+    background-color: #1a1a1a;
 }
 
-#workspaces button.focused {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-}
-
-#workspaces button.urgent {
-    background-color: rgba(255, 100, 100, 0.3);
-    color: #ffffff;
-}
-
-/* Subtle indications for states without blocky colors */
+/* ========== STATUS INDICATORS ========== */
 #battery.warning {
-    color: #ffd700;
+    color: #ffaa00;
 }
 
 #battery.critical:not(.charging) {
-    color: #ff5555;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-@keyframes blink {
-    to {
-        color: #ffffff;
-    }
+    color: #ff4444;
+    animation: blink 1s ease-in-out infinite;
 }
 
 #network.disconnected {
-    color: #ff5555;
+    color: #ff4444;
 }
 
 #pulseaudio.muted {
-    color: #aaaaaa;
+    color: #666666;
 }
 
 #temperature.critical {
-    color: #ff5555;
+    color: #ff4444;
 }
 
-/* Tray adjustments */
+#idle_inhibitor.activated {
+    color: #ffaa00;
+}
+
+/* ========== SYSTEM TRAY ========== */
+#tray {
+    padding: 0 10px;
+}
+
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    color: #ff5555;
+    color: #ff4444;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
 }
