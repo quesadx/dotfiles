@@ -13,7 +13,7 @@ configuration {
 
 * {
     /* Colors extracted from Waybar & Hyprland look_and_feel.conf */
-    bg: #000000;              /* Pure black background */
+    bg: rgba(0, 0, 0, 0.9);   /* 0.9 opacity black background */
     bg-alt: #1a1a1a;          /* Slightly lighter black for input/hover */
     border-col: rgba(255, 255, 255, 0.6); /* Transparent white border */
     selected-bg: rgba(255, 255, 255, 0.15); /* Subtle white selection highlight */
