@@ -112,7 +112,9 @@
             "activated": "IDLE-OFF",
             "deactivated": "IDLE-ON"
         },
-        "tooltip": false
+        "tooltip": true,
+        "tooltip-format-activated": "Idle Mode: Disabled (System will stay awake)",
+        "tooltip-format-deactivated": "Idle Mode: Enabled"
     },
 
     // ========== SYSTEM TRAY MODULE ==========
