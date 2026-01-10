@@ -1,13 +1,12 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.4); /* Highly transparent background */
-    border-bottom: 0px solid rgba(100, 114, 125, 0.5);
+    background-color: #000000;
+    border-bottom: none;
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -40,9 +39,9 @@ window#waybar.hidden {
 #language {
     background-color: transparent;
     color: #ffffff;
-    padding: 0 10px;
-    margin: 0 2px;
-    border-radius: 10px;
+    padding: 0 8px;
+    margin: 0 3px;
+    border-radius: 0;
     box-shadow: none;
     border: none;
 }
