@@ -1,0 +1,67 @@
+# Arch / CachyOS Dependencies List
+# Generated based on scanning ~/.config dotfiles
+
+### Core Window Management
+hyprland
+hypridle             # Idle daemon (lock/sleep)
+hyprlock             # Screen locker
+
+### Status Bar & Notifications
+waybar
+dunst                # Notification daemon
+swww                 # Wallpaper daemon
+
+### Application Launchers & Menus
+rofi-wayland         # Application launcher / Dmenu replacement
+# Note: Config references 'hyprlauncher' but it was not found in path.
+
+### Terminal & Shell
+kitty                # Terminal emulator
+fish                 # Shell
+fastfetch            # System information tool
+micro                # Text editor (found in config)
+
+### File Management
+lf                   # Terminal file manager (referenced in defaults.conf)
+
+### Audio & Multimedia
+pipewire
+wireplumber          # Session manager (provides wpctl)
+pavucontrol          # GUI Volume control
+playerctl            # Media control (play/pause binds)
+# Optional: mpd, mpc (referenced in Waybar config, install if using Music Player Daemon)
+
+### Bluetooth & Network
+bluez
+bluez-utils
+blueman              # Bluetooth manager/applet
+networkmanager
+nm-connection-editor # GUI for NetworkManager (nmtui is included in networkmanager)
+bluetuith            # TUI Bluetooth manager (referenced in Waybar)
+
+### Utilities & Tools
+grim                 # Screenshot tool
+slurp                # Region selector for screenshots
+wl-clipboard         # Clipboard utils (wl-copy, wl-paste)
+cliphist             # Clipboard manager
+brightnessctl        # Screen brightness control
+jq                   # JSON processor (used in custom scripts)
+udiskie              # Automounter (recommended for file managers)
+polkit-gnome         # Authentication agent (or polkit-kde-agent, needed for GUI root auth)
+
+### Fonts & Theming
+ttf-jetbrains-mono   # Primary font used in configs
+ttf-fira-code        # Referenced in Waybar css
+ttf-font-awesome     # Likely used for Waybar icons
+noto-fonts-emoji     # Standard emoji support
+
+### Custom / AUR / Specific
+# - 'hyprshutdown': Referenced in binds but not found.
+# - 'mediaplayer.py': Referenced in Waybar but missing.
+# - 'waybar_auto_hide': Custom binary found in ~/.config/hypr/scrips/
+
+### Installation Command (Arch/Pacman)
+# sudo pacman -S hyprland hypridle hyprlock waybar dunst rofi-wayland \
+# kitty fish fastfetch micro lf pipewire wireplumber pavucontrol playerctl \
+# bluez bluez-utils blueman networkmanager grim slurp wl-clipboard cliphist \
+# brightnessctl jq ttf-jetbrains-mono ttf-fira-code ttf-font-awesome

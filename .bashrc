@@ -10,6 +10,7 @@
 # ============================================================================
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias chromium-wayland='chromium --ozone-platform=wayland --enable-features=VaapiVideoDecoder' 
 
 # ============================================================================
 # PROMPT - Professional Minimal Style
