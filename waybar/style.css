@@ -1,93 +1,71 @@
 /* ============================================================================
-   WAYBAR STYLES - Professional Black Theme
+   WAYBAR STYLES - Clean & Fast
    ============================================================================ */
 
-/* ========== GLOBAL STYLES ========== */
 * {
-    font-family: "JetBrains Mono", "Fira Code", "Roboto Mono", monospace, FontAwesome;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
     font-size: 14px;
     font-weight: 600;
     min-height: 0;
 }
 
-/* ========== WAYBAR WINDOW ========== */
 window#waybar {
-    background-color: #000000;
-    border: none;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+    background: #000000;
+    border-top: 2px solid rgba(255, 255, 255, 0.6);
     color: #ffffff;
-    transition: none;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-/* ========== MODULE BASE STYLES ========== */
-#clock,
-#battery,
-#cpu,
-#memory,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#custom-separator,
-#tray,
-#idle_inhibitor,
-#power-profiles-daemon,
-#window {
-    background-color: transparent;
-    color: #ffffff;
+#clock, #battery, #cpu, #memory, #temperature,
+#backlight, #network, #pulseaudio, #custom-separator,
+#tray, #idle_inhibitor, #power-profiles-daemon,
+#workspaces, #taskbar {
     padding: 0 10px;
-    margin: 0;
-    border: none;
+    color: #ffffff;
+    background: transparent;
 }
 
-/* ========== SEPARATOR ========== */
 #custom-separator {
     color: rgba(51, 51, 51, 0.6);
     padding: 0 5px;
 }
 
-/* ========== WINDOW TITLE ========== */
-#window {
-    color: #888888;
-    font-weight: normal;
+/* Workspaces */
+#workspaces button {
+    color: #ffffff;
+    padding: 0 5px;
 }
 
-/* ========== CLOCK ========== */
-#clock {
-    font-weight: bold;
+#workspaces button.active {
+    /* Optional: Indication for active workspace */
+}
+
+/* Taskbar */
+#taskbar button {
+    padding: 0 5px;
+    margin: 0 2px;
+    border: none;
+    background: transparent;
     color: #ffffff;
 }
 
-/* ========== HOVER EFFECTS ========== */
-#pulseaudio:hover,
-#network:hover,
-#cpu:hover,
-#memory:hover,
-#battery:hover,
-#backlight:hover,
-#clock:hover,
-#tray:hover,
-#idle_inhibitor:hover,
-#power-profiles-daemon:hover,
-#temperature:hover {
-    background-color: #1a1a1a;
+#taskbar button:hover {
+    background: #222222;
+    border-radius: 4px;
 }
 
-/* ========== STATUS INDICATORS ========== */
-#battery.warning {
+#taskbar button.active {
+    background: rgba(255, 255, 255, 0.15); /* Matches Rofi selected-bg */
+    border-radius: 4px;
+}
+
+/* Status Colors */
+#battery.warning, #idle_inhibitor.activated {
     color: #ffaa00;
 }
 
-#battery.critical:not(.charging) {
-    color: #ff4444;
-    animation: blink 1s ease-in-out infinite;
-}
-
-#network.disconnected {
+#battery.critical:not(.charging),
+#network.disconnected,
+#temperature.critical {
     color: #ff4444;
 }
 
@@ -95,34 +73,10 @@ window#waybar.hidden {
     color: #666666;
 }
 
-#temperature.critical {
-    color: #ff4444;
+#battery.critical:not(.charging) {
+    animation: blink 1s ease-in-out infinite;
 }
 
-#idle_inhibitor.activated {
-    color: #ffaa00;
-}
-
-/* ========== SYSTEM TRAY ========== */
-#tray {
-    padding: 0 10px;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    color: #ff4444;
-}
-
-/* ========== ANIMATIONS ========== */
 @keyframes blink {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0.5;
-    }
+    to { opacity: 0.5; }
 }
