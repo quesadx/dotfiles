@@ -151,6 +151,7 @@
         "critical-threshold": 80,
         "format": "{temperatureC}°C",
         "format-critical": "{temperatureC}°C ",
+	"on-click": "kitty btop",
         "tooltip": false
     },
 
@@ -222,7 +223,7 @@
         "format-muted": "VOL Muted",
         "format-source": "MIC {volume}%",
         "format-source-muted": "MIC Muted",
-        "on-click": "pavucontrol",
+        "on-click": "kitty pulsemixer",
         "tooltip-format": "Volume: {volume}%"
     },
 

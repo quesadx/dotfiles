@@ -12,7 +12,7 @@ configuration {
 
 * {
     /* === Colors === */
-    bg: rgba(0, 0, 0, 0.9);
+    bg: rgba(0, 0, 0, 0.6);
     bg-alt: #1a1a1a;
     border-col: rgba(255, 255, 255, 0.6);
     selected-bg: rgba(255, 255, 255, 0.15);
