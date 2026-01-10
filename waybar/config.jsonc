@@ -25,6 +25,8 @@
         "pulseaudio",
         "backlight",
         "custom/separator",
+        "bluetooth",
+        "custom/separator",
         "network",
         "custom/separator",
         "cpu",
@@ -195,8 +197,20 @@
         "format-disconnected": "NET Disconnected",
         "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\nSignal: {signalStrength}%",
         "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
-        "on-click": "nm-connection-editor",
+        "on-click": "kitty nmtui",
         "max-length": 30
+    },
+
+    // === Bluetooth Module ===
+    "bluetooth": {
+        "format": "BT-ON",
+        "format-disabled": "BT-OFF",
+        "format-off": "BT-OFF",
+        "format-connected": "BT-ON",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "kitty bluetuith"
     },
 
     // === Audio Module ===
@@ -205,7 +219,7 @@
         "format-muted": "VOL Muted",
         "format-source": "MIC {volume}%",
         "format-source-muted": "MIC Muted",
-        "on-click": "pavucontrol",
+        "on-click": "kitty pulsemixer",
         "tooltip-format": "Volume: {volume}%"
     },
 

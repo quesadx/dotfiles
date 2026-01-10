@@ -16,7 +16,7 @@ window#waybar {
 }
 
 #clock, #battery, #cpu, #memory, #temperature,
-#backlight, #network, #pulseaudio, #custom-separator,
+#backlight, #network, #bluetooth, #pulseaudio, #custom-separator,
 #tray, #idle_inhibitor, #power-profiles-daemon,
 #workspaces, #taskbar {
     padding: 0 10px;
@@ -76,6 +76,10 @@ window#waybar {
 }
 
 #pulseaudio.muted {
+    color: #666666;
+}
+
+#bluetooth.off, #bluetooth.disabled {
     color: #666666;
 }
 
