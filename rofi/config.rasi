@@ -1,24 +1,25 @@
-// ============================================================================
-// ROFI LAUNCHER - Professional Black Theme
-// ============================================================================
+/* ============================================================================
+   ROFI LAUNCHER - Professional Black Theme (Grid & Icons)
+   Matches Waybar & Hyprland Styling
+   ============================================================================ */
 
 configuration {
-    modi: "drun,run";
-    show-icons: false;  // No icons - clean text only
-    display-drun: "RUN";
-    display-run: "CMD";
+    modi: "drun";
+    show-icons: true;
+    display-drun: "APPS";
     drun-display-format: "{name}";
     font: "JetBrains Mono 12";
 }
 
 * {
-    bg: #000000;
-    bg-light: #1a1a1a;
-    border: rgba(255, 255, 255, 0.6);
-    selected: #4a5f7a;  // Grayish blue
-    selected-text: #ffffff;
+    /* Colors extracted from Waybar & Hyprland look_and_feel.conf */
+    bg: #000000;              /* Pure black background */
+    bg-alt: #1a1a1a;          /* Slightly lighter black for input/hover */
+    border-col: rgba(255, 255, 255, 0.6); /* Transparent white border */
+    selected-bg: rgba(255, 255, 255, 0.15); /* Subtle white selection highlight */
+    selected-fg: #ffffff;
     fg: #ffffff;
-    fg-dim: #666666;  // Darker gray for unselected items
+    fg-dim: #888888;          /* Dimmed text color */
     
     background-color: transparent;
     text-color: @fg;
@@ -31,24 +32,26 @@ window {
     transparency: "real";
     background-color: @bg;
     border: 2px solid;
-    border-color: @border;
-    border-radius: 0;  // Straight edges
+    border-color: @border-col;
+    border-radius: 0;         /* Rectangular professional look */
     padding: 20px;
-    width: 600px;
+    width: 900px;             /* Wide enough for 5 columns */
+    x-offset: 0;
+    y-offset: 0;
 }
 
 mainbox {
     background-color: transparent;
     children: [inputbar, listview];
-    spacing: 10px;
+    spacing: 20px;
 }
 
 inputbar {
     children: [prompt, entry];
-    background-color: @bg-light;
+    background-color: @bg-alt;
     border-radius: 0;
     padding: 12px;
-    spacing: 10px;
+    spacing: 15px;
 }
 
 prompt {
@@ -60,7 +63,7 @@ prompt {
 entry {
     background-color: transparent;
     text-color: @fg;
-    placeholder: "Search...";
+    placeholder: "Search applications...";
     placeholder-color: @fg-dim;
 }
 
@@ -68,27 +71,79 @@ listview {
     border: 0;
     padding: 0;
     margin: 0;
-    columns: 1;
-    lines: 8;
+    columns: 5;
+    lines: 3;                 /* 3 rows feels balanced with icons */
     background-color: transparent;
-    spacing: 2px;
+    spacing: 15px;
+    cycle: true;
+    scrollbar: false;
 }
 
 element {
-    padding: 10px;
+    orientation: vertical;    /* Icons on top */
+    padding: 20px 10px;
     background-color: transparent;
-    text-color: #888888;
+    text-color: @fg-dim;
+    cursor: pointer;
     border-radius: 0;
+    spacing: 10px;
 }
 
-element selected {
-    background-color: @selected;
-    text-color: @selected-text;
-    font: "JetBrains Mono Bold 12";
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg-dim;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg-dim;
+}
+
+element selected.normal {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+    border: 1px solid;
+    border-color: @border-col;
+}
+
+element normal.active {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element alternate.active {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.active {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+    border: 1px solid;
+    border-color: @border-col;
+}
+
+element normal.urgent {
+    background-color: #ff0000;
+    text-color: #ffffff;
+}
+
+element selected.urgent {
+    background-color: #ff0000;
+    text-color: #ffffff;
+}
+
+element-icon {
+    size: 64px;
+    cursor: inherit;
+    horizontal-align: 0.5;
+    background-color: transparent;
 }
 
 element-text {
     background-color: transparent;
     text-color: inherit;
+    cursor: inherit;
+    horizontal-align: 0.5;
     vertical-align: 0.5;
 }
