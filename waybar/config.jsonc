@@ -219,7 +219,7 @@
         "format-muted": "VOL Muted",
         "format-source": "MIC {volume}%",
         "format-source-muted": "MIC Muted",
-        "on-click": "kitty pulsemixer",
+        "on-click": "pavucontrol",
         "tooltip-format": "Volume: {volume}%"
     },
 
