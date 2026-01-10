@@ -12,21 +12,26 @@
     // ========== MODULE LAYOUT ==========
     "modules-left": [
         "clock",
+        "custom/separator",
         "hyprland/window"
     ],
-    "modules-center": [
-    ],
+    "modules-center": [],
     "modules-right": [
         "mpd",
         "idle_inhibitor",
-        "backlight",
+        "custom/separator",
         "pulseaudio",
+        "backlight",
+        "custom/separator",
         "network",
+        "custom/separator",
         "cpu",
         "memory",
         "temperature",
+        "custom/separator",
         "power-profiles-daemon",
         "battery",
+        "custom/separator",
         "tray"
     ],
 
@@ -168,10 +173,10 @@
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
         "tooltip": true,
         "format-icons": {
-            "default": "",
-            "performance": "",
-            "balanced": "",
-            "power-saver": ""
+            "default": "B",
+            "performance": "HP",
+            "balanced": "B",
+            "power-saver": "LP"
         }
     },
 
@@ -206,6 +211,10 @@
     },
 
     // ========== CUSTOM MODULES ==========
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
+    },
     "custom/media": {
         "format": "{icon} {text}",
         "return-type": "json",
