@@ -14,6 +14,7 @@
 window#waybar {
     background-color: #000000;
     border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
     color: #ffffff;
     transition: none;
 }

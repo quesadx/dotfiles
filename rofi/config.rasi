@@ -14,11 +14,11 @@ configuration {
 * {
     bg: #000000;
     bg-light: #1a1a1a;
-    border: #ffffff;
+    border: rgba(255, 255, 255, 0.6);
     selected: #4a5f7a;  // Grayish blue
     selected-text: #ffffff;
     fg: #ffffff;
-    fg-dim: #888888;
+    fg-dim: #666666;  // Darker gray for unselected items
     
     background-color: transparent;
     text-color: @fg;
@@ -77,7 +77,7 @@ listview {
 element {
     padding: 10px;
     background-color: transparent;
-    text-color: @fg-dim;
+    text-color: #888888;
     border-radius: 0;
 }
 
