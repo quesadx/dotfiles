@@ -1,19 +1,18 @@
 /* ============================================================================
    ROFI CLIPBOARD - List View Override
-   Inherits from config.rasi but overrides for list layout
    ============================================================================ */
 
-/* Import main config to keep colors and fonts */
+/* Import main config */
 @import "config.rasi"
 
-/* Override window size for a more menu-like appearance */
+/* === Window Overrides === */
 window {
     width: 600px;
-    height: 600px; /* Optional limit */
+    height: 600px;
     padding: 10px;
 }
 
-/* Override listview to be a vertical list instead of a grid */
+/* === List View Overrides === */
 listview {
     columns: 1;
     lines: 10;
@@ -22,27 +21,24 @@ listview {
     spacing: 5px;
 }
 
-/* Override element orientation to horizontal (icon left of text, if visible) */
+/* === Element Overrides === */
 element {
     orientation: horizontal;
     padding: 8px 10px;
     spacing: 10px;
 }
 
-/* Make icons smaller or hide them if cliphist doesn't provide good ones */
 element-icon {
     size: 24px;
     horizontal-align: 0.5;
     vertical-align: 0.5;
 }
 
-/* Align text to the left */
 element-text {
     horizontal-align: 0;
     vertical-align: 0.5;
 }
 
-/* Adjust entry placeholder */
 entry {
     placeholder: "Search Clipboard...";
 }

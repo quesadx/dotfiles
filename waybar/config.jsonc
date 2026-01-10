@@ -1,16 +1,16 @@
 // ============================================================================
-// WAYBAR CONFIGURATION - CachyOS + Hyprland
+// WAYBAR CONFIGURATION
 // ============================================================================
 
 {
-    // ========== BAR SETTINGS ==========
+    // === Bar Settings ===
     "position": "bottom",
     "height": 45,
     "spacing": 6,
     "on-sigusr1": "hide",
     "on-sigusr2": "show",
 
-    // ========== MODULE LAYOUT ==========
+    // === Module Layout ===
     "modules-left": [
         "clock",
         "custom/separator",
@@ -37,12 +37,12 @@
         "tray"
     ],
 
-    // ========== WORKSPACE MODULE ==========
+    // === Workspace Module ===
     "hyprland/workspaces": {
         "format": "[{name}]"
     },
 
-    // ========== TASKBAR MODULE ==========
+    // === Taskbar Module ===
     "wlr/taskbar": {
         "format": "{icon}",
         "icon-size": 18,
@@ -54,7 +54,7 @@
         ]
     },
 
-    // ========== KEYBOARD STATE MODULE ==========
+    // === Keyboard State Module ===
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -65,7 +65,7 @@
         }
     },
 
-    // ========== SWAY MODULES ==========
+    // === Sway Modules ===
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -77,7 +77,7 @@
         "tooltip-format": "{app}: {title}"
     },
 
-    // ========== MEDIA MODULE ==========
+    // === Media Module ===
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",
@@ -105,7 +105,7 @@
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
 
-    // ========== IDLE INHIBITOR MODULE ==========
+    // === Idle Inhibitor Module ===
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -113,36 +113,36 @@
             "deactivated": "IDLE-ON"
         },
         "tooltip": true,
-        "tooltip-format-activated": "Idle Mode: Disabled (System will stay awake)",
+        "tooltip-format-activated": "Idle Mode: Disabled",
         "tooltip-format-deactivated": "Idle Mode: Enabled"
     },
 
-    // ========== SYSTEM TRAY MODULE ==========
+    // === System Tray Module ===
     "tray": {
         "spacing": 10
     },
 
-    // ========== CLOCK MODULE ==========
+    // === Clock Module ===
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%Y-%m-%d}",
         "tooltip-format": "<big>{:%B %d, %Y}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
-    // ========== CPU MODULE ==========
+    // === CPU Module ===
     "cpu": {
         "format": "CPU {usage}%",
         "interval": 2,
         "tooltip": false
     },
 
-    // ========== MEMORY MODULE ==========
+    // === Memory Module ===
     "memory": {
         "format": "RAM {}%",
         "tooltip-format": "Used: {used:0.1f}G / {total:0.1f}G"
     },
 
-    // ========== TEMPERATURE MODULE ==========
+    // === Temperature Module ===
     "temperature": {
         "critical-threshold": 80,
         "format": "{temperatureC}°C",
@@ -150,7 +150,7 @@
         "tooltip": false
     },
 
-    // ========== BACKLIGHT MODULE ==========
+    // === Backlight Module ===
     "backlight": {
         "device": "intel_backlight",
         "format": "BRI {percent}%",
@@ -159,7 +159,7 @@
         "tooltip": false
     },
 
-    // ========== BATTERY MODULE ==========
+    // === Battery Module ===
     "battery": {
         "states": {
             "warning": 30,
@@ -175,7 +175,7 @@
         "bat": "BAT2"
     },
 
-    // ========== POWER PROFILES MODULE ==========
+    // === Power Profiles Module ===
     "power-profiles-daemon": {
         "format": "{icon}",
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -188,7 +188,7 @@
         }
     },
 
-    // ========== NETWORK MODULE ==========
+    // === Network Module ===
     "network": {
         "format-wifi": "NET {essid}",
         "format-ethernet": "NET Wired",
@@ -199,7 +199,7 @@
         "max-length": 30
     },
 
-    // ========== AUDIO MODULE ==========
+    // === Audio Module ===
     "pulseaudio": {
         "format": "VOL {volume}%",
         "format-muted": "VOL Muted",
@@ -209,7 +209,7 @@
         "tooltip-format": "Volume: {volume}%"
     },
 
-    // ========== CUSTOM MODULES ==========
+    // === Custom Modules ===
     "custom/separator": {
         "format": "|",
         "tooltip": false

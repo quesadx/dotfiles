@@ -1,5 +1,5 @@
 /* ============================================================================
-   WAYBAR STYLES - Clean & Fast
+   WAYBAR STYLES
    ============================================================================ */
 
 * {
@@ -11,7 +11,7 @@
 
 window#waybar {
     background: rgba(0, 0, 0, 0.9);
-    border-top: 2px solid rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
     color: #ffffff;
 }
 
@@ -29,7 +29,7 @@ window#waybar {
     padding: 0 5px;
 }
 
-/* Workspaces */
+/* === Workspaces === */
 #workspaces button {
     color: #ffffff;
     padding: 0 5px;
@@ -42,10 +42,10 @@ window#waybar {
 }
 
 #workspaces button.active {
-    /* Optional: Indication for active workspace */
+    
 }
 
-/* Taskbar */
+/* === Taskbar === */
 #taskbar button {
     padding: 0 5px;
     margin: 0 2px;
@@ -60,11 +60,11 @@ window#waybar {
 }
 
 #taskbar button.active {
-    background: rgba(255, 255, 255, 0.15); /* Matches Rofi selected-bg */
+    background: rgba(255, 255, 255, 0.15); 
     border-radius: 4px;
 }
 
-/* Status Colors */
+/* === Status Colors === */
 #battery.warning, #idle_inhibitor.activated {
     color: #ffaa00;
 }

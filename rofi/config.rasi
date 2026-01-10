@@ -1,6 +1,5 @@
 /* ============================================================================
-   ROFI LAUNCHER - Professional Black Theme (Grid & Icons)
-   Matches Waybar & Hyprland Styling
+   ROFI LAUNCHER - Professional Black Theme
    ============================================================================ */
 
 configuration {
@@ -12,14 +11,14 @@ configuration {
 }
 
 * {
-    /* Colors extracted from Waybar & Hyprland look_and_feel.conf */
-    bg: rgba(0, 0, 0, 0.9);   /* 0.9 opacity black background */
-    bg-alt: #1a1a1a;          /* Slightly lighter black for input/hover */
-    border-col: rgba(255, 255, 255, 0.6); /* Transparent white border */
-    selected-bg: rgba(255, 255, 255, 0.15); /* Subtle white selection highlight */
+    /* === Colors === */
+    bg: rgba(0, 0, 0, 0.9);
+    bg-alt: #1a1a1a;
+    border-col: rgba(255, 255, 255, 0.6);
+    selected-bg: rgba(255, 255, 255, 0.15);
     selected-fg: #ffffff;
     fg: #ffffff;
-    fg-dim: #888888;          /* Dimmed text color */
+    fg-dim: #888888;
     
     background-color: transparent;
     text-color: @fg;
@@ -31,11 +30,11 @@ configuration {
 window {
     transparency: "real";
     background-color: @bg;
-    border: 2px solid;
+    border: 1px solid;
     border-color: @border-col;
-    border-radius: 0;         /* Rectangular professional look */
+    border-radius: 0;
     padding: 20px;
-    width: 900px;             /* Wide enough for 5 columns */
+    width: 900px;
     x-offset: 0;
     y-offset: 0;
 }
@@ -72,7 +71,7 @@ listview {
     padding: 0;
     margin: 0;
     columns: 5;
-    lines: 3;                 /* 3 rows feels balanced with icons */
+    lines: 3;
     background-color: transparent;
     spacing: 15px;
     cycle: true;
@@ -80,7 +79,7 @@ listview {
 }
 
 element {
-    orientation: vertical;    /* Icons on top */
+    orientation: vertical;
     padding: 20px 10px;
     background-color: transparent;
     text-color: @fg-dim;
