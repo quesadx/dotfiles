@@ -5,7 +5,7 @@
 {
     // === Bar Settings ===
     "position": "bottom",
-    "height": 45,
+    "height": 40,
     "spacing": 6,
     "on-sigusr1": "hide",
     "on-sigusr2": "show",
@@ -171,7 +171,8 @@
         "format-charging": "CHG {capacity}%",
         "format-plugged": "PWR {capacity}%",
         "format-full": "FULL",
-        "tooltip-format": "{timeTo}"
+        "tooltip-format": "{timeTo}",
+	"on-click": "kitty battop"
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -198,7 +199,7 @@
         "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\nSignal: {signalStrength}%",
         "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
         "on-click": "kitty nmtui",
-        "max-length": 30
+        "max-length": 50
     },
 
     // === Bluetooth Module ===

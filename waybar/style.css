@@ -19,7 +19,7 @@ window#waybar {
 #backlight, #network, #bluetooth, #pulseaudio, #custom-separator,
 #tray, #idle_inhibitor, #power-profiles-daemon,
 #workspaces, #taskbar {
-    padding: 0 10px;
+    padding: 0 6px;
     color: #ffffff;
     background: transparent;
 }
@@ -42,7 +42,8 @@ window#waybar {
 }
 
 #workspaces button.active {
-    
+    background: #ffffff;
+    color: #000000;
 }
 
 /* === Taskbar === */
