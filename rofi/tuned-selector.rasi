@@ -4,7 +4,7 @@
 @import "config.rasi"
 
 window {
-    width: 300px;
+    width: 450px;
 }
 
 listview {
