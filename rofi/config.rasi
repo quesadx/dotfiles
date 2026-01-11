@@ -1,5 +1,5 @@
 /* ============================================================================
-   ROFI LAUNCHER - Professional Black Theme
+   ROFI LAUNCHER - MATCHING WAYBAR STYLE
    ============================================================================ */
 
 configuration {
@@ -11,9 +11,9 @@ configuration {
 }
 
 * {
-    /* === Colors === */
-    bg: rgba(0, 0, 0, 0.6);
-    bg-alt: #1a1a1a;
+    /* === Colors matching Waybar - Simple Black/White === */
+    bg: rgba(0, 0, 0, 0.9);
+    bg-alt: rgba(34, 34, 34, 0.9);
     border-col: rgba(255, 255, 255, 0.6);
     selected-bg: rgba(255, 255, 255, 0.15);
     selected-fg: #ffffff;
@@ -34,7 +34,7 @@ window {
     border-color: @border-col;
     border-radius: 0;
     padding: 20px;
-    width: 900px;
+    width: 500px;
     x-offset: 0;
     y-offset: 0;
 }
@@ -70,17 +70,17 @@ listview {
     border: 0;
     padding: 0;
     margin: 0;
-    columns: 5;
-    lines: 3;
+    columns: 1;
+    lines: 8;
     background-color: transparent;
-    spacing: 15px;
+    spacing: 8px;
     cycle: true;
     scrollbar: false;
 }
 
 element {
-    orientation: vertical;
-    padding: 20px 10px;
+    orientation: horizontal;
+    padding: 10px 15px;
     background-color: transparent;
     text-color: @fg-dim;
     cursor: pointer;
@@ -133,9 +133,10 @@ element selected.urgent {
 }
 
 element-icon {
-    size: 64px;
+    size: 24px;
     cursor: inherit;
-    horizontal-align: 0.5;
+    horizontal-align: 0;
+    vertical-align: 0.5;
     background-color: transparent;
 }
 
@@ -143,6 +144,6 @@ element-text {
     background-color: transparent;
     text-color: inherit;
     cursor: inherit;
-    horizontal-align: 0.5;
+    horizontal-align: 0;
     vertical-align: 0.5;
 }
