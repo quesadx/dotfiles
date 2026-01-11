@@ -1,0 +1,22 @@
+/* ============================================================================
+   ROFI POWER PROFILE SELECTOR
+   ============================================================================ */
+@import "config.rasi"
+
+window {
+    width: 300px;
+}
+
+listview {
+    columns: 1;
+    lines: 4;
+    fixed-height: true;
+}
+
+element-icon {
+    size: 0px;
+}
+
+element-text {
+    horizontal-align: 0.5;
+}

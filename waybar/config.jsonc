@@ -33,7 +33,7 @@
         "memory",
         "temperature",
         "custom/separator",
-        "power-profiles-daemon",
+        "custom/tuned",
         "battery",
         "custom/separator",
         "tray"
@@ -182,16 +182,13 @@
     },
 
     // === Power Profiles Module ===
-    "power-profiles-daemon": {
-        "format": "{icon}",
-        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-        "tooltip": true,
-        "format-icons": {
-            "default": "B",
-            "performance": "HP",
-            "balanced": "B",
-            "power-saver": "LP"
-        }
+    "custom/tuned": {
+        "format": "{}",
+        "return-type": "json",
+        "interval": 3,
+        "exec": "$HOME/.config/waybar/scripts/tuned-control.sh get",
+        "on-click": "$HOME/.config/waybar/scripts/tuned-control.sh toggle",
+        "tooltip": true
     },
 
     // === Network Module ===

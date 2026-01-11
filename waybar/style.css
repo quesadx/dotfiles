@@ -16,8 +16,8 @@ window#waybar {
 }
 
 #clock, #battery, #cpu, #memory, #temperature,
-#backlight, #network, #bluetooth, #pulseaudio,
-#tray, #idle_inhibitor, #power-profiles-daemon,
+#backlight, #network, #bluetooth, #pulseaudio, #custom-separator,
+#tray, #idle_inhibitor, #custom-tuned,
 #workspaces, #taskbar {
     padding: 0 6px;
     color: #ffffff;
@@ -25,7 +25,7 @@ window#waybar {
 }
 
 #custom-separator {
-    color: white;
+    color: #ffffff;
     padding: 0 5px;
 }
 
