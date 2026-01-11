@@ -25,27 +25,34 @@ if [ -f "$STATE_FILE" ]; then
     CURRENT_WALL=$(cat "$STATE_FILE")
 fi
 
-# Find index of current wallpaper in the list
-CURRENT_INDEX=-1
-for i in "${!WALLPAPERS[@]}"; do
-   if [[ "${WALLPAPERS[$i]}" == "$CURRENT_WALL" ]]; then
-       CURRENT_INDEX=$i
-       break
-   fi
-done
+# Determine target wallpaper
+TARGET_WALL=""
 
-# Calculate next index (cycling)
-NEXT_INDEX=$(( (CURRENT_INDEX + 1) % ${#WALLPAPERS[@]} ))
-NEXT_WALL="${WALLPAPERS[$NEXT_INDEX]}"
+if [[ "$1" == "next" ]] || [[ -z "$CURRENT_WALL" ]]; then
+    # Find index of current wallpaper in the list
+    CURRENT_INDEX=-1
+    for i in "${!WALLPAPERS[@]}"; do
+       if [[ "${WALLPAPERS[$i]}" == "$CURRENT_WALL" ]]; then
+           CURRENT_INDEX=$i
+           break
+       fi
+    done
+
+    # Calculate next index (cycling)
+    NEXT_INDEX=$(( (CURRENT_INDEX + 1) % ${#WALLPAPERS[@]} ))
+    TARGET_WALL="${WALLPAPERS[$NEXT_INDEX]}"
+
+    # Save state for next run
+    echo "$TARGET_WALL" > "$STATE_FILE"
+else
+    TARGET_WALL="$CURRENT_WALL"
+fi
 
 # Apply wallpaper
-swww img "$NEXT_WALL" \
+swww img "$TARGET_WALL" \
     --transition-type grow \
     --transition-pos 0.5,0.5 \
     --transition-fps 60 \
     --transition-step 90 \
     --transition-duration 2
-
-# Save state for next run
-echo "$NEXT_WALL" > "$STATE_FILE"
 
