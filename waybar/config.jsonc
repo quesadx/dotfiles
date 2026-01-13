@@ -41,7 +41,7 @@
 
     // === Workspace Module ===
     "hyprland/workspaces": {
-        "format": "[{name}]"
+        "format": "({name})"
     },
 
     // === Taskbar Module ===
