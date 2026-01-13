@@ -17,7 +17,7 @@ window#waybar {
 
 #clock, #battery, #cpu, #memory, #temperature,
 #backlight, #network, #bluetooth, #pulseaudio, #custom-separator,
-#tray, #idle_inhibitor, #custom-tuned,
+#tray, #idle_inhibitor, #power-profiles-daemon,
 #workspaces, #taskbar {
     padding: 0 6px;
     color: #ffffff;
