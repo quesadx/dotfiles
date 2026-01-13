@@ -13,47 +13,41 @@
     // === Module Layout ===
     "modules-left": [
         "clock",
-        "custom/separator",
         "hyprland/workspaces",
-        "custom/separator",
         "wlr/taskbar"
     ],
     "modules-center": [],
     "modules-right": [
         "idle_inhibitor",
-        "custom/separator",
         "pulseaudio",
         "backlight",
-        "custom/separator",
         "bluetooth",
-        "custom/separator",
         "network",
-        "custom/separator",
         "cpu",
         "memory",
         "temperature",
-        "custom/separator",
         "power-profiles-daemon",
         "battery",
-        "custom/separator",
         "tray"
     ],
 
     // === Workspace Module ===
     "hyprland/workspaces": {
-        "format": "({name})"
+        "format": " {name} ",
+        "on-click": "activate",
+        "sort-by-number": true
     },
 
     // === Taskbar Module ===
     "wlr/taskbar": {
-        "format": "{icon}",
-        "icon-size": 18,
+        "format": "{title}",
         "tooltip-format": "{title}",
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
            "wofi"
-        ]
+        ],
+        "max-length": 30
     },
 
     // === Keyboard State Module ===
@@ -149,8 +143,8 @@
     // === Temperature Module ===
     "temperature": {
         "critical-threshold": 80,
-        "format": "{temperatureC}°C",
-        "format-critical": "{temperatureC}°C ",
+        "format": "TMP {temperatureC}°C",
+        "format-critical": "TMP {temperatureC}°C ",
 	"on-click": "kitty btop",
         "tooltip": false
     },
@@ -183,14 +177,14 @@
 
     // === Power Profiles Module ===
     "power-profiles-daemon": {
-      "format": "{icon}",
+      "format": "PWR {icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
+        "default": "DEF",
+        "performance": "PERF",
+        "balanced": "BAL",
+        "power-saver": "SAV"
       }
     },
 
@@ -214,7 +208,7 @@
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "kitty bluetuith"
+        "on-click": "kitty bluetui"
     },
 
     // === Audio Module ===
