@@ -1,0 +1,120 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Fira Code", monospace;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+window#waybar.leftbar {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0 16px 16px 0;
+    border-left: none;
+}
+
+window#waybar.bottombar {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+}
+
+tooltip {
+    background: #000000;
+    border: 1px solid #ffffff;
+}
+
+tooltip label {
+    color: #ffffff;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Workspaces (Left Bar) */
+/* -------------------------------------------------------------------------- */
+#workspaces {
+    background: #ffffff;
+    padding: 5px 5px; /* Symmetrical padding */
+    border-radius: 16px;
+    color: #000000;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Vertical styling for left bar workspaces */
+window#waybar.leftbar #workspaces {
+    padding: 10px 5px;
+    margin: 0;
+}
+
+#workspaces button {
+    padding: 5px 0; /* Vertical padding for vertical stacking */
+    background: transparent;
+    color: #000000;
+    border-radius: 16px; 
+}
+
+#workspaces button.active {
+    color: #000000;
+    font-weight: bold;
+}
+
+#workspaces button:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Right Modules (Bottom Bar) */
+/* -------------------------------------------------------------------------- */
+
+/* Center and Right Modules - Plain Text */
+#clock,
+#pulseaudio,
+#bluetooth,
+#network,
+#battery,
+#cpu,
+#memory,
+#tray {
+    background: transparent;
+    color: #ffffff;
+    padding: 0 10px;
+    margin: 0 4px;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+#tray {
+    background: transparent;
+}
+
+#pulseaudio.muted {
+    color: #888888;
+}
+
+#battery.charging, #battery.plugged {
+    color: #ffffff;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #ff0000;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #000000;
+        color: #ffffff;
+    }
+}
