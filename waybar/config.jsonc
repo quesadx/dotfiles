@@ -5,18 +5,19 @@
 {
     // === Bar Settings ===
     "position": "bottom",
-    "height": 40,
+    "height": 45,
     "spacing": 6,
     "on-sigusr1": "hide",
     "on-sigusr2": "show",
 
     // === Module Layout ===
     "modules-left": [
-        "clock",
         "hyprland/workspaces",
         "wlr/taskbar"
     ],
-    "modules-center": [],
+    "modules-center": [
+        "clock"
+    ],
     "modules-right": [
         "idle_inhibitor",
         "pulseaudio",
@@ -24,7 +25,7 @@
         "bluetooth",
         "network",
         "cpu",
-        "memory",
+         "memory",
         "temperature",
         "power-profiles-daemon",
         "battery",
