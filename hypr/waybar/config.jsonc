@@ -2,12 +2,15 @@
     "name": "leftbar",
     "layer": "top",
     "position": "left",
+    "exclusive": false,
     "width": 42,
     "spacing": 4,
     "margin-left": 0,
     "margin-right": 0,
-    "margin-top": 0,
-    "margin-bottom": 34,
+    "margin-top": 300,
+    "margin-bottom": 300,
+    "on-sigusr1": "hide",
+    "on-sigusr2": "show",
 
     "modules-center": ["hyprland/workspaces"],
 
@@ -25,6 +28,8 @@
         },
         "persistent-workspaces": {}
     }
+
+
 },
 {
     "name": "bottombar",
