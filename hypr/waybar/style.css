@@ -8,7 +8,7 @@
 
 window#waybar {
     background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     color: #ffffff;
 }
 
@@ -37,8 +37,8 @@ tooltip label {
 /* Workspaces (Left Bar) */
 /* -------------------------------------------------------------------------- */
 #workspaces {
-    background: #ffffff;
-    padding: 5px 5px; /* Symmetrical padding */
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0px 10px 0px 10px; /* Symmetrical padding */
     border-radius: 16px;
     color: #000000;
     margin-top: 5px;
@@ -117,4 +117,53 @@ window#waybar.leftbar #workspaces {
         background-color: #000000;
         color: #ffffff;
     }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Bottom Bar Groups */
+/* -------------------------------------------------------------------------- */
+
+window#waybar.bottombar #connectivity,
+window#waybar.bottombar #multimedia,
+window#waybar.bottombar #hardware {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000000;
+    border-radius: 16px;
+    padding: 5px 10px;
+    margin: 5px 5px;
+}
+
+window#waybar.bottombar #connectivity #bluetooth,
+window#waybar.bottombar #connectivity #network,
+window#waybar.bottombar #multimedia #pulseaudio,
+window#waybar.bottombar #multimedia #backlight,
+window#waybar.bottombar #hardware #cpu,
+window#waybar.bottombar #hardware #memory,
+window#waybar.bottombar #hardware #battery,
+window#waybar.bottombar #hardware #power-profiles-daemon {
+    color: #000000;
+    background: transparent;
+    padding: 0 5px;
+    margin: 0;
+}
+
+/* Specific overrides for states to ensure black color */
+window#waybar.bottombar #battery.charging, 
+window#waybar.bottombar #battery.plugged,
+window#waybar.bottombar #pulseaudio.muted {
+    color: #000000;
+}
+
+/* Ensure power profiles daemon icon is visible and styled */
+#power-profiles-daemon {
+    padding: 0 5px;
+}
+
+/* Force clock module to be white, without background, bold */
+window#waybar.bottombar #clock {
+    background: transparent;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 0 10px;
+    margin: 0 4px;
 }

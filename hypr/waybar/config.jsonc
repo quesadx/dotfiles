@@ -1,25 +1,41 @@
 [{
-    "name": "leftbar",
+    "name": "dashboard",
     "layer": "top",
     "position": "left",
     "exclusive": false,
-    "width": 42,
+    "width": 220,
     "spacing": 4,
     "margin-left": 0,
     "margin-right": 0,
-    "margin-top": 300,
-    "margin-bottom": 300,
+    "margin-top": 400,
+    "margin-bottom": 400,
     "on-sigusr1": "hide",
     "on-sigusr2": "show",
+    "height": 60,
 
-    "modules-center": ["hyprland/workspaces"],
+    "modules-left": [
+        "clock",
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "cpu",
+        "memory",
+        "temperature"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "bluetooth",
+        "network",
+        "battery",
+        "tray"
+    ],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "active-only": false,
         "on-click": "activate",
-        "format": "{icon}",
+        "format": "{icon} {name}",
         "format-icons": {
             "active": "",
             "default": "",
@@ -27,26 +43,10 @@
             "empty": ""
         },
         "persistent-workspaces": {}
-    }
-
-
-},
-{
-    "name": "bottombar",
-    "layer": "top",
-    "position": "bottom",
-    "height": 34,
-    "spacing": 4,
-    "margin-top": 0,
-    "margin-left": 0,
-    "margin-right": 0,
-    "margin-bottom": 0,
-
-    "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "bluetooth", "network", "battery", "cpu", "memory", "tray"],
+    },
 
     "clock": {
-        "format": "{:%H:%M}",
+        "format": "{:%H:%M\n%Y-%m-%d}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -72,8 +72,8 @@
     },
 
     "network": {
-        "format-wifi": " {signalStrength}%",
-        "format-ethernet": "",
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "  Eth",
         "format-linked": " (No IP)",
         "format-disconnected": "⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -100,7 +100,12 @@
     },
 
     "memory": {
-        "format": " {}%"
+        "format": " {percentage}%"
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C"
     },
 
     "tray": {

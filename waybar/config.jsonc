@@ -1,1 +1,227 @@
-/home/quesadx/dotfiles/hypr/waybar/config.jsonc
+// [{
+//     "name": "dashboard",
+//     "layer": "top",
+//     "position": "left",
+//     "exclusive": false,
+//     "width": 220,
+//     "spacing": 4,
+//     "margin-left": 0,
+//     "margin-right": 0,
+//     "margin-top": 400,
+//     "margin-bottom": 400,
+//     "on-sigusr1": "hide",
+//     "on-sigusr2": "show",
+
+//     "modules-left": [
+//         "clock",
+//         "hyprland/workspaces"
+//     ],
+//     "modules-center": [
+//         "cpu",
+//         "memory",
+//         "temperature"
+//     ],
+//     "modules-right": [
+//         "pulseaudio",
+//         "bluetooth",
+//         "network",
+//         "battery",
+//         "tray"
+//     ],
+
+//     "hyprland/workspaces": {
+//         "disable-scroll": true,
+//         "all-outputs": true,
+//         "active-only": false,
+//         "on-click": "activate",
+//         "format": "{icon} {name}",
+//         "format-icons": {
+//             "active": "",
+//             "default": "",
+//             "urgent": "",
+//             "empty": ""
+//         },
+//         "persistent-workspaces": {}
+//     },
+
+//     "clock": {
+//         "format": "{:%H:%M\n%Y-%m-%d}",
+//         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+//         "format-alt": "{:%Y-%m-%d}"
+//     },
+
+//     "bluetooth": {
+//         "format": " {status}",
+//         "format-connected": " {device_alias}",
+//         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+//         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+//         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+//         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+//         "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+//         "on-click": "kitty bluetui"
+//     },
+
+//     "pulseaudio": {
+//         "format": "{icon} {volume}%",
+//         "format-muted": " Muted",
+//         "format-icons": {
+//             "default": ["", "", ""]
+//         },
+//         "on-click": "kitty pulsemixer"
+//     },
+
+//     "network": {
+//         "format-wifi": "  {signalStrength}%",
+//         "format-ethernet": "  Eth",
+//         "format-linked": " (No IP)",
+//         "format-disconnected": "⚠ Disconnected",
+//         "format-alt": "{ifname}: {ipaddr}/{cidr}",
+//         "on-click": "kitty nmtui"
+//     },
+
+//     "battery": {
+//         "states": {
+//             "good": 95,
+//             "warning": 30,
+//             "critical": 15
+//         },
+//         "format": "{icon} {capacity}%",
+//         "format-charging": " {capacity}%",
+//         "format-plugged": " {capacity}%",
+//         "format-alt": "{icon} {time}",
+//         "format-icons": ["", "", "", "", ""],
+//         "on-click": "kitty battop"
+//     },
+
+//     "cpu": {
+//         "format": " {usage}%",
+//         "tooltip": false
+//     },
+
+//     "memory": {
+//         "format": " {percentage}%"
+//     },
+
+//     "temperature": {
+//         "critical-threshold": 80,
+//         "format": " {temperatureC}°C"
+//     },
+
+//     "tray": {
+//         "icon-size": 18,
+//         "spacing": 10
+//     }
+// },
+[{
+    "name": "bottombar",
+    "layer": "top",
+    "position": "bottom",
+    "height": 45,
+    "spacing": 2,
+    "margin-left": 300,
+    "margin-right": 300,
+    "margin-bottom": 0,
+
+    "modules-left": ["group/connectivity", "hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["group/multimedia", "group/hardware"],
+
+    "hyprland/workspaces": {
+	"format": "{icon}",
+	"format-icons": {
+	    "active": "□",
+	    "default": "■"
+	}
+    },
+
+    "group/connectivity": {
+        "orientation": "horizontal",
+        "modules": ["bluetooth", "network"]
+    },
+    
+    "group/multimedia": {
+        "orientation": "horizontal",
+        "modules": ["pulseaudio", "backlight"]
+    },
+
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": ["cpu", "memory", "battery", "power-profiles-daemon"]
+    },
+
+    "clock": {
+        "format": "{:%a %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {num_connections}",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "kitty bluetui"
+    },
+    
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "  Eth",
+        "format-linked": " (No IP)",
+        "format-disconnected": "⚠ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click": "kitty nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " Muted",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "kitty pulsemixer"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": " {percentage}%"
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "kitty battop"
+    },
+
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    }
+}]
