@@ -1,227 +1,253 @@
-// [{
-//     "name": "dashboard",
-//     "layer": "top",
-//     "position": "left",
-//     "exclusive": false,
-//     "width": 220,
-//     "spacing": 4,
-//     "margin-left": 0,
-//     "margin-right": 0,
-//     "margin-top": 400,
-//     "margin-bottom": 400,
-//     "on-sigusr1": "hide",
-//     "on-sigusr2": "show",
+// ============================================================================
+// WAYBAR CONFIGURATION
+// ============================================================================
 
-//     "modules-left": [
-//         "clock",
-//         "hyprland/workspaces"
-//     ],
-//     "modules-center": [
-//         "cpu",
-//         "memory",
-//         "temperature"
-//     ],
-//     "modules-right": [
-//         "pulseaudio",
-//         "bluetooth",
-//         "network",
-//         "battery",
-//         "tray"
-//     ],
-
-//     "hyprland/workspaces": {
-//         "disable-scroll": true,
-//         "all-outputs": true,
-//         "active-only": false,
-//         "on-click": "activate",
-//         "format": "{icon} {name}",
-//         "format-icons": {
-//             "active": "",
-//             "default": "",
-//             "urgent": "",
-//             "empty": ""
-//         },
-//         "persistent-workspaces": {}
-//     },
-
-//     "clock": {
-//         "format": "{:%H:%M\n%Y-%m-%d}",
-//         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-//         "format-alt": "{:%Y-%m-%d}"
-//     },
-
-//     "bluetooth": {
-//         "format": " {status}",
-//         "format-connected": " {device_alias}",
-//         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-//         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-//         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-//         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-//         "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-//         "on-click": "kitty bluetui"
-//     },
-
-//     "pulseaudio": {
-//         "format": "{icon} {volume}%",
-//         "format-muted": " Muted",
-//         "format-icons": {
-//             "default": ["", "", ""]
-//         },
-//         "on-click": "kitty pulsemixer"
-//     },
-
-//     "network": {
-//         "format-wifi": "  {signalStrength}%",
-//         "format-ethernet": "  Eth",
-//         "format-linked": " (No IP)",
-//         "format-disconnected": "⚠ Disconnected",
-//         "format-alt": "{ifname}: {ipaddr}/{cidr}",
-//         "on-click": "kitty nmtui"
-//     },
-
-//     "battery": {
-//         "states": {
-//             "good": 95,
-//             "warning": 30,
-//             "critical": 15
-//         },
-//         "format": "{icon} {capacity}%",
-//         "format-charging": " {capacity}%",
-//         "format-plugged": " {capacity}%",
-//         "format-alt": "{icon} {time}",
-//         "format-icons": ["", "", "", "", ""],
-//         "on-click": "kitty battop"
-//     },
-
-//     "cpu": {
-//         "format": " {usage}%",
-//         "tooltip": false
-//     },
-
-//     "memory": {
-//         "format": " {percentage}%"
-//     },
-
-//     "temperature": {
-//         "critical-threshold": 80,
-//         "format": " {temperatureC}°C"
-//     },
-
-//     "tray": {
-//         "icon-size": 18,
-//         "spacing": 10
-//     }
-// },
-[{
-    "name": "bottombar",
-    "layer": "top",
+{
+    // === Bar Settings ===
     "position": "bottom",
-    "height": 45,
-    "spacing": 2,
-    "margin-left": 300,
-    "margin-right": 300,
-    "margin-bottom": 0,
+    "height": 40,
+    "spacing": 6,
+    "on-sigusr1": "hide",
+    "on-sigusr2": "show",
 
-    "modules-left": ["group/connectivity", "hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["group/multimedia", "group/hardware"],
+    // === Module Layout ===
+    "modules-left": [
+        "clock",
+        "hyprland/workspaces",
+        "wlr/taskbar"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "idle_inhibitor",
+        "pulseaudio",
+        "backlight",
+        "bluetooth",
+        "network",
+        "cpu",
+        "memory",
+        "temperature",
+        "power-profiles-daemon",
+        "battery",
+        "tray"
+    ],
 
+    // === Workspace Module ===
     "hyprland/workspaces": {
-	"format": "{icon}",
-	"format-icons": {
-	    "active": "□",
-	    "default": "■"
-	}
+        "format": " {name} ",
+        "on-click": "activate",
+        "sort-by-number": true
     },
 
-    "group/connectivity": {
-        "orientation": "horizontal",
-        "modules": ["bluetooth", "network"]
-    },
-    
-    "group/multimedia": {
-        "orientation": "horizontal",
-        "modules": ["pulseaudio", "backlight"]
-    },
-
-    "group/hardware": {
-        "orientation": "horizontal",
-        "modules": ["cpu", "memory", "battery", "power-profiles-daemon"]
+    // === Taskbar Module ===
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 24,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [
+           "wofi"
+        ],
+        "max-length": 30
     },
 
-    "clock": {
-        "format": "{:%a %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-
-    "bluetooth": {
-        "format": " {status}",
-        "format-connected": " {num_connections}",
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-        "on-click": "kitty bluetui"
-    },
-    
-    "network": {
-        "format-wifi": "  {signalStrength}%",
-        "format-ethernet": "  Eth",
-        "format-linked": " (No IP)",
-        "format-disconnected": "⚠ Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "kitty nmtui"
-    },
-
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": " Muted",
+    // === Keyboard State Module ===
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
         "format-icons": {
-            "default": ["", "", ""]
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+
+    // === Sway Modules ===
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+
+    // === Media Module ===
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+            "on": " "
         },
-        "on-click": "kitty pulsemixer"
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
     },
 
-    "backlight": {
-        "format": "{icon} {percent}%",
-        "format-icons": ["", "", "", "", "", "", "", "", ""],
-        "on-scroll-up": "brightnessctl set +5%",
-        "on-scroll-down": "brightnessctl set 5%-"
+    // === Idle Inhibitor Module ===
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "IDLE-OFF",
+            "deactivated": "IDLE-ON"
+        },
+        "tooltip": true,
+        "tooltip-format-activated": "Idle Mode: Disabled",
+        "tooltip-format-deactivated": "Idle Mode: Enabled"
     },
 
+    // === System Tray Module ===
+    "tray": {
+        "spacing": 10
+    },
+
+    // === Clock Module ===
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%B %d, %Y}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    // === CPU Module ===
     "cpu": {
-        "format": " {usage}%",
+        "format": "CPU {usage}%",
+        "interval": 2,
+        "tooltip": false,
+	"on-click": "kitty btop"
+    },
+
+    // === Memory Module ===
+    "memory": {
+        "format": "RAM {}%",
+        "tooltip-format": "Used: {used:0.1f}G / {total:0.1f}G",
+	"on-click": "kitty btop"
+    },
+
+    // === Temperature Module ===
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "TMP {temperatureC}°C",
+        "format-critical": "TMP {temperatureC}°C ",
+	"on-click": "kitty btop",
         "tooltip": false
     },
 
-    "memory": {
-        "format": " {percentage}%"
+    // === Backlight Module ===
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "BRI {percent}%",
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
     },
 
+    // === Battery Module ===
     "battery": {
         "states": {
-            "good": 95,
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{icon} {time}",
-        "format-icons": ["", "", "", "", ""],
-        "on-click": "kitty battop"
+        "format": "BAT {capacity}%",
+        "format-charging": "CHG {capacity}%",
+        "format-plugged": "PWR {capacity}%",
+        "format-full": "FULL",
+        "tooltip-format": "{timeTo}",
+	"on-click": "kitty battop"
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
     },
 
+    // === Power Profiles Module ===
     "power-profiles-daemon": {
-      "format": "{icon}",
+      "format": "PWR {icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
       "tooltip": true,
       "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
+        "default": "DEF",
+        "performance": "PERF",
+        "balanced": "BAL",
+        "power-saver": "SAV"
       }
+    },
+
+    // === Network Module ===
+    "network": {
+        "format-wifi": "NET {essid}",
+        "format-ethernet": "NET Wired",
+        "format-disconnected": "NET Disconnected",
+        "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\nSignal: {signalStrength}%",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+        "on-click": "kitty nmtui",
+        "max-length": 50
+    },
+
+    // === Bluetooth Module ===
+    "bluetooth": {
+        "format": "BT-ON",
+        "format-disabled": "BT-OFF",
+        "format-off": "BT-OFF",
+        "format-connected": "BT-ON",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "kitty bluetui"
+    },
+
+    // === Audio Module ===
+    "pulseaudio": {
+        "format": "VOL {volume}%",
+        "format-muted": "VOL Muted",
+        "format-source": "MIC {volume}%",
+        "format-source-muted": "MIC Muted",
+        "on-click": "kitty pulsemixer",
+        "tooltip-format": "Volume: {volume}%"
+    },
+
+    // === Custom Modules ===
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
+    },
+    "custom/media": {
+        "format": "{icon} {text}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+    },
+    "custom/power": {
+        "format": "⏻ ",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "$HOME/.config/waybar/power_menu.xml",
+        "menu-actions": {
+            "shutdown": "shutdown",
+            "reboot": "reboot",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
     }
-}]
+}

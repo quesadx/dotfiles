@@ -1,4 +1,4 @@
-[{
+[{/*
     "name": "dashboard",
     "layer": "top",
     "position": "left",
@@ -13,22 +13,11 @@
     "on-sigusr2": "show",
     "height": 60,
 
-    "modules-left": [
-        "clock",
-        "hyprland/workspaces"
-    ],
+    "modules-left": [],
     "modules-center": [
-        "cpu",
-        "memory",
         "temperature"
     ],
-    "modules-right": [
-        "pulseaudio",
-        "bluetooth",
-        "network",
-        "battery",
-        "tray"
-    ],
+    "modules-right": [],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -112,4 +101,4 @@
         "icon-size": 18,
         "spacing": 10
     }
-}]
+*/}]

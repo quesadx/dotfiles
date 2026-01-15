@@ -10,7 +10,8 @@
 # ============================================================================
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias chromium-wayland='chromium --ozone-platform=wayland --enable-features=VaapiVideoDecoder' 
+alias chromium-wayland='chromium --ozone-platform=wayland --enable-features=VaapiVideoDecoder'
+alias fastfetch='fastfetch -c examples/8 --logo arch' 
 
 # ============================================================================
 # PROMPT - Professional Minimal Style
@@ -23,5 +24,6 @@ PS1='\[\e[1;37m\]\u@\h\[\e[0m\] \[\e[1;36m\]|\[\e[0m\] \[\e[1;37m\]\w\[\e[0m\]\n
 # ============================================================================
 # STARTUP
 # ============================================================================
+#fastfetch -c examples/8 --logo arch
 fastfetch
 echo

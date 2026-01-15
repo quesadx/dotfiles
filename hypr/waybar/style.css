@@ -1,169 +1,93 @@
+/* ============================================================================
+   WAYBAR STYLES
+   ============================================================================ */
+
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", "Fira Code", monospace;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
     font-size: 14px;
+    font-weight: 600;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
     color: #ffffff;
 }
 
-window#waybar.leftbar {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 0 16px 16px 0;
-    border-left: none;
-}
-
-window#waybar.bottombar {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 16px 16px 0 0;
-    border-bottom: none;
-}
-
-tooltip {
-    background: #000000;
-    border: 1px solid #ffffff;
-}
-
-tooltip label {
+#clock, #battery, #cpu, #memory, #temperature,
+#backlight, #network, #bluetooth, #pulseaudio, #custom-separator,
+#tray, #idle_inhibitor, #power-profiles-daemon,
+#workspaces, #taskbar {
+    padding: 0 6px;
     color: #ffffff;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Workspaces (Left Bar) */
-/* -------------------------------------------------------------------------- */
-#workspaces {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 0px 10px 0px 10px; /* Symmetrical padding */
-    border-radius: 16px;
-    color: #000000;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/* Vertical styling for left bar workspaces */
-window#waybar.leftbar #workspaces {
-    padding: 10px 5px;
-    margin: 0;
-}
-
-#workspaces button {
-    padding: 5px 0; /* Vertical padding for vertical stacking */
     background: transparent;
-    color: #000000;
-    border-radius: 16px; 
 }
 
-#workspaces button.active {
-    color: #000000;
-    font-weight: bold;
+#custom-separator {
+    color: #ffffff;
+    padding: 0 5px;
+}
+
+/* === Workspaces === */
+#workspaces button {
+    color: #ffffff;
+    padding: 0 5px;
+    transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
-    background: rgba(0,0,0,0.1);
+    background: #ffffff;
+    color: #000000;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Right Modules (Bottom Bar) */
-/* -------------------------------------------------------------------------- */
+#workspaces button.active {
+    background: #ffffff;
+    color: #000000;
+}
 
-/* Center and Right Modules - Plain Text */
-#clock,
-#pulseaudio,
-#bluetooth,
-#network,
-#battery,
-#cpu,
-#memory,
-#tray {
+/* === Taskbar === */
+#taskbar button {
+    padding: 0 5px;
+    margin: 0 2px;
+    border: none;
     background: transparent;
     color: #ffffff;
-    padding: 0 10px;
-    margin: 0 4px;
 }
 
-#clock {
-    font-weight: bold;
+#taskbar button:hover {
+    background: #222222;
+    border-radius: 4px;
 }
 
-#tray {
-    background: transparent;
+#taskbar button.active {
+    background: rgba(255, 255, 255, 0.15); 
+    border-radius: 4px;
+}
+
+/* === Status Colors === */
+#battery.warning, #idle_inhibitor.activated {
+    color: #ffaa00;
+}
+
+#battery.critical:not(.charging),
+#network.disconnected,
+#temperature.critical {
+    color: #ff4444;
 }
 
 #pulseaudio.muted {
-    color: #888888;
+    color: #666666;
 }
 
-#battery.charging, #battery.plugged {
-    color: #ffffff;
+#bluetooth.off, #bluetooth.disabled {
+    color: #666666;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #ff0000;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation: blink 1s ease-in-out infinite;
 }
 
 @keyframes blink {
-    to {
-        background-color: #000000;
-        color: #ffffff;
-    }
-}
-
-/* -------------------------------------------------------------------------- */
-/* Bottom Bar Groups */
-/* -------------------------------------------------------------------------- */
-
-window#waybar.bottombar #connectivity,
-window#waybar.bottombar #multimedia,
-window#waybar.bottombar #hardware {
-    background: rgba(255, 255, 255, 0.8);
-    color: #000000;
-    border-radius: 16px;
-    padding: 5px 10px;
-    margin: 5px 5px;
-}
-
-window#waybar.bottombar #connectivity #bluetooth,
-window#waybar.bottombar #connectivity #network,
-window#waybar.bottombar #multimedia #pulseaudio,
-window#waybar.bottombar #multimedia #backlight,
-window#waybar.bottombar #hardware #cpu,
-window#waybar.bottombar #hardware #memory,
-window#waybar.bottombar #hardware #battery,
-window#waybar.bottombar #hardware #power-profiles-daemon {
-    color: #000000;
-    background: transparent;
-    padding: 0 5px;
-    margin: 0;
-}
-
-/* Specific overrides for states to ensure black color */
-window#waybar.bottombar #battery.charging, 
-window#waybar.bottombar #battery.plugged,
-window#waybar.bottombar #pulseaudio.muted {
-    color: #000000;
-}
-
-/* Ensure power profiles daemon icon is visible and styled */
-#power-profiles-daemon {
-    padding: 0 5px;
-}
-
-/* Force clock module to be white, without background, bold */
-window#waybar.bottombar #clock {
-    background: transparent;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 0 10px;
-    margin: 0 4px;
+    to { opacity: 0.5; }
 }
