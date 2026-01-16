@@ -11,7 +11,7 @@
 
 window#waybar {
     background: rgba(15, 18, 25, 0.85);
-    border-radius: 16px; /* 4 * 4 */
+    border-radius: 12px; /* 4 * 4 */
     color: #E6EAF0;
 }
 
@@ -39,7 +39,7 @@ window#waybar.hidden {
     /* Standard Margin: 4px top/bottom, 4px left/right */
     margin: 4px 4px;
     /* Standard Radius: 12px or 999px for pill */
-    border-radius: 12px;
+    border-radius: 8px;
     transition: all 0.3s ease;
     min-height: 24px; /* Ensure consistent height */
     min-width: 24px;
@@ -56,16 +56,13 @@ window#waybar.hidden {
     padding: 0 8px; /* Spacing between dots */
     min-width: 0;
     color: rgba(230, 234, 240, 0.3);
-    border-radius: 999px;
+    border-radius: 8px;
     margin: 4px 0;
 }
 
 #workspaces button.active {
     color: #f9e2af;
     background: rgba(255, 255, 255, 0.1);
-    background: #B48EFC;
-    background: #ffa034;
-
 }
 
 #workspaces button:hover {
@@ -135,5 +132,5 @@ window#waybar.hidden {
     color: #f38ba8;
     padding: 0 4px 0px 6px;
     margin-right: 4px;
-    border-radius: 12px;
+    border-radius: 8px;
 }

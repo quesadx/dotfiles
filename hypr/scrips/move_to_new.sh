@@ -19,3 +19,6 @@ hyprctl dispatch movetoworkspace $new_id
 
 # Focus the new workspace
 hyprctl dispatch workspace $new_id
+
+# Fullscreen the window
+hyprctl dispatch fullscreen 0

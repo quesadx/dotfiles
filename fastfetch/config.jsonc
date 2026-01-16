@@ -8,60 +8,55 @@
         }
     },
     "display": {
-        "separator": " : ",
-        "color": {
-            "keys": "white",
-            "title": "white"
+        "separator": "  ➜  ",
+        "key": {
+            "width": 15
         }
     },
     "modules": [
-        {
-            "type": "title",
-            "format": "{user-name}@{host-name}"
-        },
-        {
-            "type": "separator",
-            "string": "─────────────────────"
-        },
+        "title",
+        "separator",
         {
             "type": "os",
             "key": "OS",
-            "keyColor": "white"
+            "keyColor": "blue"
         },
         {
             "type": "kernel",
             "key": "Kernel",
-            "keyColor": "white"
+            "keyColor": "magenta"
+        },
+        {
+            "type": "packages",
+            "key": "Packages",
+            "keyColor": "green"
         },
         {
             "type": "wm",
             "key": "WM",
-            "keyColor": "white"
+            "keyColor": "yellow"
         },
         {
             "type": "shell",
             "key": "Shell",
-            "keyColor": "white"
+            "keyColor": "cyan"
         },
         {
             "type": "terminal",
             "key": "Terminal",
-            "keyColor": "white"
+            "keyColor": "red"
         },
         {
             "type": "cpu",
             "key": "CPU",
-            "keyColor": "white"
+            "keyColor": "blue"
         },
         {
             "type": "memory",
             "key": "RAM",
-            "keyColor": "white"
+            "keyColor": "magenta"
         },
-        {
-            "type": "uptime",
-            "key": "Uptime",
-            "keyColor": "white"
-        }
+        "break",
+        "colors"
     ]
 }
