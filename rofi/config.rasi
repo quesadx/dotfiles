@@ -114,7 +114,7 @@ element normal.normal {
 }
 
 element selected.normal {
-    background-color: @bg-selected;
+    background-image: linear-gradient(to right, #B48EFC, #5e5ce6);
     text-color: @fg-selected;
 }
 
