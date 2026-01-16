@@ -13,20 +13,20 @@ CURRENT=$(tuned-adm active | sed 's/Current active profile: //' | xargs)
 case "$1" in
     "get")
         if [[ "$CURRENT" == "$P_LOW" ]]; then
-            TEXT="LP"
+            TEXT=" LP"
             CLASS="power-saver"
             TOOLTIP="Mode: Powersave ($CURRENT)"
         elif [[ "$CURRENT" == "$P_HIGH" ]]; then
-            TEXT="HP"
+            TEXT=" HP"
             CLASS="performance"
             TOOLTIP="Mode: Performance ($CURRENT)"
         elif [[ "$CURRENT" == "$P_VM" ]]; then
-            TEXT="VM"
+            TEXT=" VM"
             CLASS="performance"
             TOOLTIP="Mode: Virtual Host ($CURRENT)"
         else
             # Default to Balanced
-            TEXT="B"
+            TEXT=" Bal"
             CLASS="balanced"
             TOOLTIP="Mode: Balanced ($CURRENT)"
         fi

@@ -5,11 +5,12 @@
     "layer": "top",
     "position": "top",
     "height": 40,
-    "margin-top": 4,
-    "margin-left": 4,
-    "margin-right": 4,
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
     
     "modules-left": [
+	"custom/power",
         "hyprland/workspaces"
     ],
     "modules-center": [
@@ -17,11 +18,12 @@
     ],
     "modules-right": [
         "tray",
-        "custom/notification",
         "network",
+	"bluetooth",
         "pulseaudio",
-        "battery",
-        "custom/power"
+        "power-profiles-daemon",
+	"battery",
+	"custom/notification"
     ],
 
     // === Modules ===
@@ -62,9 +64,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}%",
+        "format": "{icon}   {capacity}%",
         "format-charging": "  {capacity}%",
         "format-plugged": "  {capacity}%",
+        "format-icons": ["", "", "", "", ""],
         "tooltip-format": "{timeTo}",
         "on-click": "kitty battop"
     },
@@ -79,8 +82,31 @@
     },
 
     "custom/power": {
-        "format": "",
+        "format": " ",
         "on-click": "wlogout",
         "tooltip": false
+    },
+
+    "bluetooth": {
+        "format": "  {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+        "on-click": "kitty bluetui"
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}    {profile}",
+        "tooltip-format": "Power Profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
     }
 }

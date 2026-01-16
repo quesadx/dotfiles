@@ -10,9 +10,9 @@
 }
 
 window#waybar {
-    background: rgba(15, 18, 25, 0.85);
-    border-radius: 12px; /* 4 * 4 */
-    color: #E6EAF0;
+    background: radial-gradient(circle, #1d0f2c 0%, #12091b 50%);
+    border-bottom: 3px solid #5f3480;
+    color: #e0d0ff;
 }
 
 window#waybar.hidden {
@@ -29,15 +29,17 @@ window#waybar.hidden {
 #workspaces,
 #clock,
 #network,
+#bluetooth,
 #battery,
 #pulseaudio,
 #custom-notification,
 #tray,
-#custom-power {
-    background: rgba(255, 255, 255, 0.08);
+#custom-power,
+#power-profiles-daemon {
+    background: rgba(166, 96, 219, 0.15);
     /* Standard Padding: 4px top/bottom, 12px left/right */
     /* Standard Margin: 4px top/bottom, 4px left/right */
-    margin: 4px 4px;
+    margin: 4px 4px 7px 4px;
     /* Standard Radius: 12px or 999px for pill */
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -47,7 +49,7 @@ window#waybar.hidden {
 
 /* === Workspaces === */
 #workspaces {
-    background: rgba(255, 255, 255, 0.08); 
+    background: rgba(166, 96, 219, 0.15);
     margin-left: 4px;
     padding: 0px 8px; /* Internal padding for the container */
 }
@@ -61,12 +63,12 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-    color: #f9e2af;
-    background: rgba(255, 255, 255, 0.1);
+    color: #1d0f2c;
+    background: #ca7aff;
 }
 
 #workspaces button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(166, 96, 219, 0.25);
     color: #ffffff;
 }
 
@@ -78,38 +80,71 @@ window#waybar.hidden {
 
 /* === Right Modules === */
 #battery {
-    color: #0B0F14;
-    background: linear-gradient(to right, #B48EFC, #cd8bf3);
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
     padding: 4px 16px;
 }
 
 #battery.charging {
-    background: #a6e3a1;
+    color: #e0b0ff;
+    background: rgba(166, 96, 219, 0.15);
 }
 
 #battery.warning {
-    background: #fab387;
+    color: #a660db;
+    background: rgba(166, 96, 219, 0.15);
 }
 
 #battery.critical {
-    background: #f38ba8;
+    color: #8249ad;
+    background: rgba(166, 96, 219, 0.15);
 }
 
 #pulseaudio {
-    color: #89dceb;
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
     padding: 4px 16px;
 }
 
 #network {
-    color: #a6e3a1;
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
+    padding: 4px 16px;
+}
+
+#bluetooth {
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
     padding: 4px 16px;
 }
 
 #custom-power {
-    color: #f38ba8;
-    padding: 4px 12px 4px 8px; /* Optical adjustment */
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
+    padding: 0 4px 0px 6px;
     margin-right: 4px;
-    font-size: 16px;
+    border-radius: 8px;
+}
+
+#power-profiles-daemon {
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
+    padding: 4px 16px;
+}
+
+#power-profiles-daemon.power-saver {
+    color: #8249ad;
+    background: rgba(166, 96, 219, 0.15);
+}
+
+#power-profiles-daemon.balanced {
+    color: #a660db;
+    background: rgba(166, 96, 219, 0.15);
+}
+
+#power-profiles-daemon.performance {
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
 }
 
 /* Hover Effects */
@@ -119,8 +154,9 @@ window#waybar.hidden {
 #network:hover,
 #battery:hover,
 #pulseaudio:hover,
-#custom-power:hover {
-    background: rgba(255, 255, 255, 0.15);
+#custom-power:hover,
+#power-profiles-daemon:hover {
+    background: rgba(166, 96, 219, 0.3);
 }
 /* Tray */
 #tray {
@@ -129,7 +165,8 @@ window#waybar.hidden {
 
 
 #custom-notification {
-    color: #f38ba8;
+    color: #ca7aff;
+    background: rgba(166, 96, 219, 0.15);
     padding: 0 4px 0px 6px;
     margin-right: 4px;
     border-radius: 8px;
