@@ -34,6 +34,7 @@ ln -sf "$THEME_PATH/rofi-config.rasi" "$HOME/dotfiles/rofi/config.rasi"
 ln -sf "$THEME_PATH/fastfetch-config.jsonc" "$HOME/dotfiles/fastfetch/config.jsonc"
 ln -sf "$THEME_PATH/kitty.conf" "$HOME/dotfiles/kitty/kitty.conf"
 ln -sf "$THEME_PATH/wlogout-style.css" "$HOME/dotfiles/wlogout/style.css"
+ln -sf "$THEME_PATH/fuzzel-themed.ini" "$HOME/dotfiles/fuzzel/fuzzel.ini"
 
 echo "$next_theme" > "$THEME_FILE"
 

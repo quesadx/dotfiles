@@ -4,8 +4,8 @@
         "type": "builtin",
         "source": "arch_small",
         "color": {
-            "1": "white",
-            "2": "white"
+            "1": "#FC8820",
+            "2": "#FEFDFA"
         }
     },
     "display": {
