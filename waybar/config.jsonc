@@ -33,8 +33,11 @@
         "on-click-right": "swaync-client -d -sw"
     },
     "custom/themeswitcher": {
-        "format": "THEME",
-        "on-click":  "~/dotfiles/themes/switch-theme.sh"
+        "format": "    {}",
+        "exec": "~/dotfiles/scripts/get-theme.sh",
+        "on-click": "~/dotfiles/scripts/switch-theme.sh",
+        "return-type": "text",
+        "interval": 5000
     },
     "tray": {
         "icon-size": 18,

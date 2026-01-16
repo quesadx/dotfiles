@@ -37,6 +37,7 @@ ln -sf "$THEME_PATH/wlogout-style.css" "$HOME/dotfiles/wlogout/style.css"
 ln -sf "$THEME_PATH/fuzzel-themed.ini" "$HOME/dotfiles/fuzzel/fuzzel.ini"
 
 echo "$next_theme" > "$THEME_FILE"
+echo "$next_theme" # for waybar (it grabs the last stdout)
 
 hyprctl reload >/dev/null 2>&1 || true
 pkill waybar >/dev/null 2>&1 || true

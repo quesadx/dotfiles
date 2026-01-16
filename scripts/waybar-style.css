@@ -35,6 +35,7 @@ window#waybar.hidden {
 #custom-notification,
 #tray,
 #custom-power,
+#custom-themeswitcher,
 #power-profiles-daemon {
     background: rgba(58, 42, 255, 0.15);
     margin: 4px 4px 7px 4px;
@@ -71,6 +72,12 @@ window#waybar.hidden {
 #workspaces button:hover {
     background: rgba(58, 42, 255, 0.25);
     color: #E0E0E0;
+}
+
+#custom-themeswitcher {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 4px 16px;
 }
 
 /* === Center Clock === */
