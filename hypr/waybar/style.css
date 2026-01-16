@@ -59,8 +59,11 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-    color: #B48EFC;
+    color: #f9e2af;
     background: rgba(255, 255, 255, 0.1);
+    background: #B48EFC;
+    background: #ffa034;
+
 }
 
 #workspaces button:hover {
@@ -77,7 +80,7 @@ window#waybar.hidden {
 /* === Right Modules === */
 #battery {
     color: #0B0F14;
-    background: linear-gradient(to right, #B48EFC, #5e5ce6);
+    background: linear-gradient(to right, #B48EFC, #cd8bf3);
     padding: 4px 16px;
 }
 
