@@ -12,8 +12,7 @@ dunst                # Notification daemon
 swww                 # Wallpaper daemon
 
 ### Application Launchers & Menus
-rofi-wayland         # Application launcher / Dmenu replacement
-# Note: Config references 'hyprlauncher' but it was not found in path.
+fuzzer
 
 ### Terminal & Shell
 kitty                # Terminal emulator
