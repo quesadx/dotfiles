@@ -39,7 +39,7 @@
         "spacing": 10
     },
     "hyprland/workspaces": {
-        "format": " ",
+        "format": "{name}",
         "on-click": "activate",
         "sort-by-number": true,
         "active-only": false

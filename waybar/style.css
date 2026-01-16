@@ -55,16 +55,20 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-    padding: 0 8px; /* Spacing between dots */
-    min-width: 0;
+    padding: 0 5px; /* Symmetric padding */
+    min-width: 16px; /* Ensure enough width for icon */
     color: rgba(254, 253, 250, 0.3);
-    border-radius: 8px;
-    margin: 4px 0;
+    border-radius: 99px; /* Pill/Circle shape */
+    margin: 4px 2px;
+    transition: all 0.3s ease-in-out; /* Smooth transition, no bounce */
+    font-size: 12px; /* Slightly smaller font for better fit */
 }
 
 #workspaces button.active {
     color: #090217;
     background: #FC8820;
+    min-width: 32px; /* Expand on active for clear indication */
+    padding: 0 8px; /* Extra padding active */
 }
 
 #workspaces button:hover {
