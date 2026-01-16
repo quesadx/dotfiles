@@ -1,0 +1,19 @@
+:root {
+  /* Orange theme variables (RGB components for use by system CSS) */
+  --noti-bg: 48, 1, 55;
+  --noti-bg-alpha: 0.85;
+  --noti-border-color: rgba(255,255,255,0.08);
+  --text-color: rgb(254,253,250);
+  --bg-selected: rgb(252, 136, 32);
+  --notification-icon-size: 64px;
+  --border-radius: 12px;
+}
+
+@define-color noti-bg rgba(48, 1, 55, 0.85);
+@define-color text-color rgb(254,253,250);
+@define-color bg-selected rgb(252, 136, 32);
+
+/* small overrides */
+.notification-row .notification-background .notification {
+  border-radius: var(--border-radius);
+}
