@@ -8,7 +8,7 @@
         }
     },
     "display": {
-        "separator": "  ➜  ",
+        "separator": "  ",
         "key": {
             "width": 15
         }
@@ -19,42 +19,42 @@
         {
             "type": "os",
             "key": "OS",
-            "keyColor": "blue"
+            "keyColor": "white"
         },
         {
             "type": "kernel",
             "key": "Kernel",
-            "keyColor": "magenta"
+            "keyColor": "white"
         },
         {
             "type": "packages",
             "key": "Packages",
-            "keyColor": "green"
+            "keyColor": "white"
         },
         {
             "type": "wm",
             "key": "WM",
-            "keyColor": "yellow"
+            "keyColor": "white"
         },
         {
             "type": "shell",
             "key": "Shell",
-            "keyColor": "cyan"
+            "keyColor": "white"
         },
         {
             "type": "terminal",
             "key": "Terminal",
-            "keyColor": "red"
+            "keyColor": "white"
         },
         {
             "type": "cpu",
             "key": "CPU",
-            "keyColor": "blue"
+            "keyColor": "white"
         },
         {
             "type": "memory",
             "key": "RAM",
-            "keyColor": "magenta"
+            "keyColor": "white"
         },
         "break",
         "colors"
