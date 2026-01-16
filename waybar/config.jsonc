@@ -7,7 +7,8 @@
     "height": 40,
     
     "modules-left": [
-	"custom/power",
+	    "custom/power",
+        "custom/themeswitcher",
         "hyprland/workspaces"
     ],
     "modules-center": [
@@ -16,11 +17,11 @@
     "modules-right": [
         "tray",
         "network",
-	"bluetooth",
+	    "bluetooth",
         "pulseaudio",
         "power-profiles-daemon",
-	"battery",
-	"custom/notification"
+	    "battery",
+	    "custom/notification"
     ],
 
     // === Modules ===
@@ -30,6 +31,9 @@
         "format": " ",
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw"
+    },
+    "custom/themeswitcher": {
+        "format": "THEME"
     },
     "tray": {
         "icon-size": 18,
