@@ -38,7 +38,7 @@ window {
     y-offset:     0px;
 
     enabled: true;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 3px;
     border-color: @bg-selected;
     background-color: @bg-base;
@@ -59,7 +59,7 @@ inputbar {
     spacing: 12px;
     margin: 0px;
     padding: 14px 18px;
-    border-radius: 8px;
+    border-radius: 4px;
     background-color: @bg-input;
     text-color: @fg-text;
     children: [ "prompt", "entry" ];
@@ -104,7 +104,7 @@ element {
     margin: 0px;
     padding: 12px 16px;
     border: 0px;
-    border-radius: 8px;
+    border-radius: 4px;
     background-color: transparent;
     text-color: @fg-text;
     cursor: pointer;
