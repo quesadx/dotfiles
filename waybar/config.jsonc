@@ -16,6 +16,7 @@
         "clock"
     ],
     "modules-right": [
+        "custom/notification",
         "network",
         "pulseaudio",
         "battery",
@@ -23,6 +24,13 @@
     ],
 
     // === Modules ===
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw"
+    },
 
     "hyprland/workspaces": {
         "format": " ",

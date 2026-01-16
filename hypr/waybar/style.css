@@ -31,6 +31,7 @@ window#waybar.hidden {
 #network,
 #battery,
 #pulseaudio,
+#custom-notification,
 #custom-power {
     background: rgba(255, 255, 255, 0.08);
     /* Standard Padding: 4px top/bottom, 12px left/right */
@@ -122,4 +123,11 @@ window#waybar.hidden {
 #pulseaudio:hover,
 #custom-power:hover {
     background: rgba(255, 255, 255, 0.15);
+}
+
+#custom-notification {
+    color: #f38ba8;
+    padding: 0 16px;
+    margin-right: 4px;
+    border-radius: 12px;
 }
