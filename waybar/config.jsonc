@@ -16,6 +16,7 @@
         "clock"
     ],
     "modules-right": [
+        "tray",
         "custom/notification",
         "network",
         "pulseaudio",
@@ -31,7 +32,10 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw"
     },
-
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
     "hyprland/workspaces": {
         "format": " ",
         "on-click": "activate",
