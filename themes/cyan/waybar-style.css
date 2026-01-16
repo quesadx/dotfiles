@@ -1,0 +1,184 @@
+/* ============================================================================
+   WAYBAR STYLES - Cyan Neon Theme
+   ============================================================================ */
+
+* {
+    font-family: "Symbols Nerd Font", "SF Pro Display", "Inter", "JetBrains Mono", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 0;
+}
+
+window#waybar {
+    background: radial-gradient(circle, #100030 0%, #000020 100%);
+    border-bottom: 3px solid #200060;
+    color: #E0E0E0;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* === Modules General === */
+.modules-left, .modules-center, .modules-right {
+    background: transparent;
+    padding: 0 4px;
+}
+
+#custom-launcher,
+#workspaces,
+#clock,
+#network,
+#bluetooth,
+#battery,
+#pulseaudio,
+#custom-notification,
+#tray,
+#custom-power,
+#custom-themeswitcher,
+#power-profiles-daemon {
+    background: rgba(58, 42, 255, 0.15);
+    margin: 4px 4px 7px 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* === Workspaces === */
+#workspaces {
+    background: rgba(58, 42, 255, 0.15);
+    margin-left: 4px;
+    padding: 0px 8px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    min-width: 16px;
+    color: rgba(224, 224, 224, 0.3);
+    border-radius: 99px;
+    margin: 4px 2px;
+    transition: all 0.3s ease-in-out;
+    font-size: 12px;
+}
+
+#workspaces button.active {
+    color: #000020;
+    background: #40DFFF;
+    min-width: 32px;
+    padding: 0 8px;
+}
+
+#workspaces button:hover {
+    background: rgba(58, 42, 255, 0.25);
+    color: #E0E0E0;
+}
+
+#custom-themeswitcher {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 4px 16px;
+}
+
+/* === Center Clock === */
+#clock {
+    font-weight: 800;
+    padding: 4px 20px;
+}
+
+/* === Right Modules === */
+#battery {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 4px 16px;
+}
+
+#battery.charging {
+    color: #40DFFF;
+    background: rgba(58, 42, 255, 0.15);
+}
+
+#battery.warning {
+    color: #40DFFF;
+    background: rgba(58, 42, 255, 0.15);
+}
+
+#battery.critical {
+    color: #3A2AFF;
+    background: rgba(58, 42, 255, 0.15);
+}
+
+#pulseaudio {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 4px 16px;
+}
+
+#network {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 4px 16px;
+}
+
+#bluetooth {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 4px 16px;
+}
+
+#custom-power {
+    color: #3A2AFF;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 0 4px 0px 6px;
+    margin-right: 4px;
+    border-radius: 8px;
+}
+
+#power-profiles-daemon {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 4px 16px;
+}
+
+#power-profiles-daemon.power-saver {
+    color: #C0E0E0;
+    background: rgba(58, 42, 255, 0.15);
+}
+
+#power-profiles-daemon.balanced {
+    color: #40DFFF;
+    background: rgba(58, 42, 255, 0.15);
+}
+
+#power-profiles-daemon.performance {
+    color: #3A2AFF;
+    background: rgba(58, 42, 255, 0.15);
+}
+
+/* Hover Effects */
+#custom-launcher:hover,
+#workspaces:hover,
+#clock:hover,
+#network:hover,
+#battery:hover,
+#pulseaudio:hover,
+#custom-power:hover,
+#power-profiles-daemon:hover {
+    background: rgba(58, 42, 255, 0.25);
+}
+
+/* Tray */
+#tray {
+    padding: 0 16px;
+    background: rgba(58, 42, 255, 0.25);
+    border: 1px solid #200060;
+}
+
+#custom-notification {
+    color: #40DFFF;
+    background: rgba(58, 42, 255, 0.15);
+    padding: 0 8px 0px 10px;
+    margin-right: 4px;
+    border-radius: 4px;
+    font-size: 16px;
+}
