@@ -127,7 +127,7 @@ window#waybar.hidden {
 
 #custom-notification {
     color: #f38ba8;
-    padding: 0 16px;
+    padding: 0 4px 0px 6px;
     margin-right: 4px;
     border-radius: 12px;
 }
