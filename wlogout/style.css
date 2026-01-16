@@ -5,11 +5,11 @@
 }
 
 window {
-    background-color: rgba(20, 24, 32, 0.90);
+    background-color: rgba(9, 2, 23, 0.90);
 }
 
 button {
-    color: #E6EAF0;
+    color: #FEFDFA;
     background-color: rgba(255, 255, 255, 0.08);
     border-style: solid;
     border-width:3px;
@@ -23,7 +23,7 @@ button {
 
 button:focus, button:active, button:hover {
     background-color: rgba(255, 255, 255, 0.15);
-    border: 3px solid #B48EFC;
+    border: 3px solid #FC8820;
     outline-style: none; 
 }
 

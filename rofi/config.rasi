@@ -12,13 +12,13 @@ configuration {
 
 * {
     /* Palette */
-    bg-base:      rgba(20, 24, 32, 0.90);
+    bg-base:      rgba(9, 2, 23, 0.90);
     bg-input:     rgba(255, 255, 255, 0.08);
-    bg-selected:  #B48EFC;
+    bg-selected:  #FC8820;
     
-    fg-text:      #E6EAF0;
-    fg-dim:       #A0A6B0;
-    fg-selected:  #0B0F14;
+    fg-text:      #FEFDFA;
+    fg-dim:       #FDDF9A;
+    fg-selected:  #090217;
     
     /* Global */
     background-color: transparent;
@@ -121,7 +121,7 @@ element alternate.normal {
 }
 
 element selected.normal {
-    background-image: linear-gradient(to right, #B48EFC, #f38ba8);
+    background-image: linear-gradient(to right, #FC8820, #E5124A);
     text-color: @fg-selected;
 }
 
