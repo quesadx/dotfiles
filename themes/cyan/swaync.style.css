@@ -1,19 +1,182 @@
-:root {
-  /* Cyan theme variables (RGB components for use by system CSS) */
-  --noti-bg: 15, 39, 71;
-  --noti-bg-alpha: 0.85;
-  --noti-border-color: rgba(255,255,255,0.08);
-  --text-color: rgb(254,253,250);
-  --bg-selected: rgb(0, 163, 255);
-  --notification-icon-size: 64px;
-  --border-radius: 12px;
+/* Cyan Theme for SwayNC */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
 }
 
-@define-color noti-bg rgba(15, 39, 71, 0.85);
-@define-color text-color rgb(254,253,250);
-@define-color bg-selected rgb(0, 163, 255);
+.control-center {
+  background: rgba(16, 0, 48, 0.95);
+  border: 2px solid rgba(64, 223, 255, 0.5);
+  border-radius: 16px;
+  color: rgb(224, 224, 224);
+}
 
-/* small overrides */
-.notification-row .notification-background .notification {
-  border-radius: var(--border-radius);
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  opacity: 0.7;
+}
+
+.notification-row {
+  outline: none;
+  margin: 8px;
+  padding: 0;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+  background: rgba(64, 223, 255, 0.2);
+  border-radius: 12px;
+}
+
+.notification {
+  background: rgba(16, 0, 48, 0.85);
+  border: 1px solid rgba(64, 223, 255, 0.3);
+  border-radius: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.notification-default-action {
+  margin: 0;
+  padding: 0;
+  border-radius: 12px;
+}
+
+.notification-default-action:hover {
+  background: rgba(64, 223, 255, 0.15);
+}
+
+.summary {
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(64, 223, 255);
+}
+
+.time {
+  font-size: 12px;
+  font-weight: normal;
+  color: rgba(224, 224, 224, 0.6);
+}
+
+.body {
+  font-size: 14px;
+  color: rgb(224, 224, 224);
+}
+
+.control-center-clear-all {
+  background: rgba(64, 223, 255, 0.8);
+  color: rgb(224, 224, 224);
+  border: none;
+  border-radius: 8px;
+  margin: 8px;
+}
+
+.control-center-clear-all:hover {
+  background: rgb(64, 223, 255);
+}
+
+.notification-action {
+  background: rgba(64, 223, 255, 0.6);
+  color: rgb(224, 224, 224);
+  border: none;
+  border-radius: 8px;
+  margin: 4px;
+}
+
+.notification-action:hover {
+  background: rgb(64, 223, 255);
+}
+
+.close-button {
+  background: rgba(58, 42, 255, 0.7);
+  color: rgb(224, 224, 224);
+  border: none;
+  border-radius: 50%;
+  margin: 8px;
+}
+
+.close-button:hover {
+  background: rgb(58, 42, 255);
+}
+
+.widget-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(64, 223, 255);
+  margin: 12px;
+}
+
+.widget-title > button {
+  background: rgba(64, 223, 255, 0.6);
+  color: rgb(224, 224, 224);
+  border: none;
+  border-radius: 8px;
+}
+
+.widget-title > button:hover {
+  background: rgb(64, 223, 255);
+}
+
+.widget-dnd {
+  background: rgba(16, 0, 48, 0.8);
+  border: 1px solid rgba(64, 223, 255, 0.3);
+  border-radius: 12px;
+  margin: 8px;
+  padding: 12px;
+}
+
+.widget-dnd > switch {
+  background: rgba(32, 0, 96, 0.8);
+  border: 1px solid rgba(64, 223, 255, 0.3);
+  border-radius: 20px;
+}
+
+.widget-dnd > switch:checked {
+  background: rgb(64, 223, 255);
+}
+
+.widget-volume,
+.widget-backlight {
+  background: rgba(16, 0, 48, 0.8);
+  border: 1px solid rgba(64, 223, 255, 0.3);
+  border-radius: 12px;
+  margin: 8px;
+  padding: 12px;
+}
+
+.widget-volume > box > button,
+.widget-backlight > box > button {
+  background: transparent;
+  border: none;
+}
+
+.widget-volume scale trough,
+.widget-backlight scale trough {
+  background: rgba(32, 0, 96, 0.6);
+  border-radius: 8px;
+  min-height: 8px;
+}
+
+.widget-volume scale highlight,
+.widget-backlight scale highlight {
+  background: rgb(64, 223, 255);
+  border-radius: 8px;
+}
+
+.widget-inhibitors {
+  background: rgba(16, 0, 48, 0.8);
+  border: 1px solid rgba(64, 223, 255, 0.3);
+  border-radius: 12px;
+  margin: 8px;
+  padding: 12px;
 }
