@@ -28,10 +28,7 @@
         "format": " ",
         "on-click": "activate",
         "sort-by-number": true,
-        "active-only": false,
-        "persistent-workspaces": {
-            "*": 4
-        }
+        "active-only": false
     },
 
     "clock": {
