@@ -1,11 +1,31 @@
 #!/bin/bash
 
-# Usage: ./switch-theme.sh <theme-name>
-# AThemes: orange, cyan
+# Usage: ./switch-theme.sh
 
-THEME="${1:-orange}"
-THEME_PATH="$HOME/dotfiles/themes/$THEME"
+THEMES=("orange" "cyan")
+THEME_FILE="$HOME/dotfiles/themes/current-theme.txt"
 
+# Read current theme from file, default to "orange" if empty/missing
+current_theme=$(cat "$THEME_FILE" 2>/dev/null)
+if [ -z "$current_theme" ]; then
+    current_theme="orange"
+fi
+
+# Find index of the current theme
+idx=0
+for i in "${!THEMES[@]}"; do
+    if [ "${THEMES[$i]}" = "$current_theme" ]; then
+        idx=$i
+        break
+    fi
+done
+
+# Compute next index and theme (wrap with modulo to stay in bounds)
+len=${#THEMES[@]}
+next_index=$(( (idx + 1) % len ))
+next_theme=${THEMES[$next_index]}
+
+THEME_PATH="$HOME/dotfiles/themes/$next_theme"
 [ ! -d "$THEME_PATH" ] && exit 0
 
 ln -sf "$THEME_PATH/look_and_feel.conf" "$HOME/dotfiles/hypr/look_and_feel.conf"
@@ -15,7 +35,8 @@ ln -sf "$THEME_PATH/fastfetch-config.jsonc" "$HOME/dotfiles/fastfetch/config.jso
 ln -sf "$THEME_PATH/kitty.conf" "$HOME/dotfiles/kitty/kitty.conf"
 ln -sf "$THEME_PATH/wlogout-style.css" "$HOME/dotfiles/wlogout/style.css"
 
-hyprctl reload 2>/dev/null || true
-pkill waybar 2>/dev/null || true
-sleep 0.3
+echo "$next_theme" > "$THEME_FILE"
+
+hyprctl reload >/dev/null 2>&1 || true
+pkill waybar >/dev/null 2>&1 || true
 waybar &
