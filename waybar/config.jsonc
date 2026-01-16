@@ -1,253 +1,77 @@
 // ============================================================================
 // WAYBAR CONFIGURATION
 // ============================================================================
-
 {
-    // === Bar Settings ===
-    "position": "bottom",
+    "layer": "top",
+    "position": "top",
     "height": 40,
-    "spacing": 6,
-    "on-sigusr1": "hide",
-    "on-sigusr2": "show",
-
-    // === Module Layout ===
+    "margin-top": 8,
+    "margin-left": 8,
+    "margin-right": 8,
+    
     "modules-left": [
-        "clock",
-        "hyprland/workspaces",
-        "wlr/taskbar"
+        "hyprland/workspaces"
     ],
-    "modules-center": [],
+    "modules-center": [
+        "clock"
+    ],
     "modules-right": [
-        "idle_inhibitor",
-        "pulseaudio",
-        "backlight",
-        "bluetooth",
         "network",
-        "cpu",
-        "memory",
-        "temperature",
-        "power-profiles-daemon",
         "battery",
-        "tray"
+        "pulseaudio",
+        "custom/power"
     ],
 
-    // === Workspace Module ===
+    // === Modules ===
+
     "hyprland/workspaces": {
-        "format": " {name} ",
+        "format": " ",
         "on-click": "activate",
-        "sort-by-number": true
-    },
-
-    // === Taskbar Module ===
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "icon-size": 24,
-        "tooltip-format": "{title}",
-        "on-click": "activate",
-        "on-click-middle": "close",
-        "ignore-list": [
-           "wofi"
-        ],
-        "max-length": 30
-    },
-
-    // === Keyboard State Module ===
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
+        "sort-by-number": true,
+        "active-only": false,
+        "persistent-workspaces": {
+            "*": 4
         }
     },
 
-    // === Sway Modules ===
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
-
-    // === Media Module ===
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
-    },
-
-    // === Idle Inhibitor Module ===
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "IDLE-OFF",
-            "deactivated": "IDLE-ON"
-        },
-        "tooltip": true,
-        "tooltip-format-activated": "Idle Mode: Disabled",
-        "tooltip-format-deactivated": "Idle Mode: Enabled"
-    },
-
-    // === System Tray Module ===
-    "tray": {
-        "spacing": 10
-    },
-
-    // === Clock Module ===
     "clock": {
-        "format": "{:%H:%M}",
-        "format-alt": "{:%Y-%m-%d}",
-        "tooltip-format": "<big>{:%B %d, %Y}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": "{:%H:%M - %a %d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
 
-    // === CPU Module ===
-    "cpu": {
-        "format": "CPU {usage}%",
-        "interval": 2,
-        "tooltip": false,
-	"on-click": "kitty btop"
+    "network": {
+        "format-wifi": "{icon}    {essid}",
+        "format-ethernet": "  Wired",
+        "format-disconnected": "⚠  Disconnected",
+        "format-icons": ["", "", ""],
+        "tooltip-format": "{essid} ({signalStrength}%)",
+        "on-click": "kitty nmtui"
     },
 
-    // === Memory Module ===
-    "memory": {
-        "format": "RAM {}%",
-        "tooltip-format": "Used: {used:0.1f}G / {total:0.1f}G",
-	"on-click": "kitty btop"
-    },
-
-    // === Temperature Module ===
-    "temperature": {
-        "critical-threshold": 80,
-        "format": "TMP {temperatureC}°C",
-        "format-critical": "TMP {temperatureC}°C ",
-	"on-click": "kitty btop",
-        "tooltip": false
-    },
-
-    // === Backlight Module ===
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "BRI {percent}%",
-        "on-scroll-up": "brightnessctl set 5%+",
-        "on-scroll-down": "brightnessctl set 5%-",
-        "tooltip": false
-    },
-
-    // === Battery Module ===
     "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
-        "format": "BAT {capacity}%",
-        "format-charging": "CHG {capacity}%",
-        "format-plugged": "PWR {capacity}%",
-        "format-full": "FULL",
+        "format": "{capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
         "tooltip-format": "{timeTo}",
-	"on-click": "kitty battop"
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
+        "on-click": "kitty battop"
     },
 
-    // === Power Profiles Module ===
-    "power-profiles-daemon": {
-      "format": "PWR {icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "DEF",
-        "performance": "PERF",
-        "balanced": "BAL",
-        "power-saver": "SAV"
-      }
-    },
-
-    // === Network Module ===
-    "network": {
-        "format-wifi": "NET {essid}",
-        "format-ethernet": "NET Wired",
-        "format-disconnected": "NET Disconnected",
-        "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\nSignal: {signalStrength}%",
-        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
-        "on-click": "kitty nmtui",
-        "max-length": 50
-    },
-
-    // === Bluetooth Module ===
-    "bluetooth": {
-        "format": "BT-ON",
-        "format-disabled": "BT-OFF",
-        "format-off": "BT-OFF",
-        "format-connected": "BT-ON",
-        "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "kitty bluetui"
-    },
-
-    // === Audio Module ===
     "pulseaudio": {
-        "format": "VOL {volume}%",
-        "format-muted": "VOL Muted",
-        "format-source": "MIC {volume}%",
-        "format-source-muted": "MIC Muted",
-        "on-click": "kitty pulsemixer",
-        "tooltip-format": "Volume: {volume}%"
+        "format": "{icon}   {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
     },
 
-    // === Custom Modules ===
-    "custom/separator": {
-        "format": "|",
-        "tooltip": false
-    },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
-    },
     "custom/power": {
-        "format": "⏻ ",
-        "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml",
-        "menu-actions": {
-            "shutdown": "shutdown",
-            "reboot": "reboot",
-            "suspend": "systemctl suspend",
-            "hibernate": "systemctl hibernate"
-        }
+        "format": "",
+        "on-click": "wlogout",
+        "tooltip": false
     }
 }

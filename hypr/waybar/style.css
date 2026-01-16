@@ -1,93 +1,122 @@
 /* ============================================================================
-   WAYBAR STYLES
+   WAYBAR STYLES - STANDARDIZED (4px Grid)
    ============================================================================ */
 
 * {
-    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-family: "Symbols Nerd Font", "SF Pro Display", "Inter", "JetBrains Mono", sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.6);
-    color: #ffffff;
+    background: rgba(15, 18, 25, 0.85);
+    border-radius: 16px; /* 4 * 4 */
+    color: #E6EAF0;
 }
 
-#clock, #battery, #cpu, #memory, #temperature,
-#backlight, #network, #bluetooth, #pulseaudio, #custom-separator,
-#tray, #idle_inhibitor, #power-profiles-daemon,
-#workspaces, #taskbar {
-    padding: 0 6px;
-    color: #ffffff;
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* === Modules General === */
+.modules-left, .modules-center, .modules-right {
     background: transparent;
+    padding: 0 4px;
 }
 
-#custom-separator {
-    color: #ffffff;
-    padding: 0 5px;
+#custom-launcher,
+#workspaces,
+#clock,
+#network,
+#battery,
+#pulseaudio,
+#custom-power {
+    background: rgba(255, 255, 255, 0.08);
+    /* Standard Padding: 4px top/bottom, 12px left/right */
+    /* Standard Margin: 4px top/bottom, 4px left/right */
+    margin: 4px 4px;
+    /* Standard Radius: 12px or 999px for pill */
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    min-height: 24px; /* Ensure consistent height */
+    min-width: 24px;
 }
 
 /* === Workspaces === */
-#workspaces button {
-    color: #ffffff;
-    padding: 0 5px;
-    transition: all 0.2s ease;
+#workspaces {
+    background: rgba(255, 255, 255, 0.08); 
+    margin-left: 4px;
+    padding: 0px 8px; /* Internal padding for the container */
 }
 
-#workspaces button:hover {
-    background: #ffffff;
-    color: #000000;
+#workspaces button {
+    padding: 0 8px; /* Spacing between dots */
+    min-width: 0;
+    color: rgba(230, 234, 240, 0.3);
+    border-radius: 999px;
+    margin: 4px 0;
 }
 
 #workspaces button.active {
-    background: #ffffff;
-    color: #000000;
+    color: #B48EFC;
+    background: rgba(255, 255, 255, 0.1);
 }
 
-/* === Taskbar === */
-#taskbar button {
-    padding: 0 5px;
-    margin: 0 2px;
-    border: none;
-    background: transparent;
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
 
-#taskbar button:hover {
-    background: #222222;
-    border-radius: 4px;
+/* === Center Clock === */
+#clock {
+    font-weight: 800;
+    padding: 4px 20px;
 }
 
-#taskbar button.active {
-    background: rgba(255, 255, 255, 0.15); 
-    border-radius: 4px;
+/* === Right Modules === */
+#battery {
+    color: #0B0F14;
+    background: #B48EFC;
+    padding: 4px 16px;
 }
 
-/* === Status Colors === */
-#battery.warning, #idle_inhibitor.activated {
-    color: #ffaa00;
+#battery.charging {
+    background: #a6e3a1;
 }
 
-#battery.critical:not(.charging),
-#network.disconnected,
-#temperature.critical {
-    color: #ff4444;
+#battery.warning {
+    background: #fab387;
 }
 
-#pulseaudio.muted {
-    color: #666666;
+#battery.critical {
+    background: #f38ba8;
 }
 
-#bluetooth.off, #bluetooth.disabled {
-    color: #666666;
+#pulseaudio {
+    color: #89dceb;
+    padding: 4px 16px;
 }
 
-#battery.critical:not(.charging) {
-    animation: blink 1s ease-in-out infinite;
+#network {
+    color: #89b4fa;
+    padding: 4px 16px;
 }
 
-@keyframes blink {
-    to { opacity: 0.5; }
+#custom-power {
+    color: #f38ba8;
+    padding: 4px 12px 4px 8px; /* Optical adjustment */
+    margin-right: 4px;
+    font-size: 16px;
+}
+
+/* Hover Effects */
+#custom-launcher:hover,
+#workspaces:hover,
+#clock:hover,
+#network:hover,
+#battery:hover,
+#pulseaudio:hover,
+#custom-power:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
