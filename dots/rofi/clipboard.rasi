@@ -1,0 +1,44 @@
+/* ============================================================================
+   ROFI CLIPBOARD - List View Override
+   ============================================================================ */
+
+/* Import main config */
+@import "config.rasi"
+
+/* === Window Overrides === */
+window {
+    width: 600px;
+    height: 600px;
+    padding: 10px;
+}
+
+/* === List View Overrides === */
+listview {
+    columns: 1;
+    lines: 10;
+    layout: vertical;
+    fixed-height: false;
+    spacing: 5px;
+}
+
+/* === Element Overrides === */
+element {
+    orientation: horizontal;
+    padding: 8px 10px;
+    spacing: 10px;
+}
+
+element-icon {
+    size: 24px;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+element-text {
+    horizontal-align: 0;
+    vertical-align: 0.5;
+}
+
+entry {
+    placeholder: "Search Clipboard...";
+}
