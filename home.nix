@@ -9,13 +9,10 @@
   home.stateVersion = "23.11"; 
 
   home.packages = with pkgs; [
-    htop
     btop
-    fetchutils
     ripgrep
-    fzf
-    tmux
-    neovim
+    zoxide
+    fastfetch
   ];
 
   # SSH Agent automático
