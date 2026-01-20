@@ -2,7 +2,7 @@
   users.users.quesadx = {
     isNormalUser = true;
     description = "Matteo Quesada";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "render" ];
   };
 
   # Paquetes mínimos del SISTEMA (no de usuario)

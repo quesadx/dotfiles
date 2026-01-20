@@ -1,7 +1,12 @@
 { pkgs, ... }: {
   programs.git = {
-      enable = true;
-      userName = "Matteo Vargas Quesada";
-      userEmail = "matteo.vargas.quesada@est.una.ac.cr";
+    enable = true;
+    # En lugar de userName y userEmail directamente:
+    settings = {
+      user = {
+        name = "Matteo Quesada";
+        email = "matteo.vargas.quesada@est.una.ac.cr";
+      };
+    };
   };
 }
