@@ -1,0 +1,3 @@
+--target=$HOME
+--dir=/home/quesadx/dotfiles
+--verbose=2

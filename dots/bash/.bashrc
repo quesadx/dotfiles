@@ -1,1 +1,0 @@
-/home/quesadx/dotfiles/.bashrc
