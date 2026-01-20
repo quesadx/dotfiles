@@ -5,6 +5,12 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch --flake ~/nixos-config";
       conf = "cd ~/nixos-config && nvim home.nix";
+
+      # Git shortcuts
+      gs = "git status";
+      ga = "git add .";
+      gc = "git commit -m";
+      gp = "git push";
     };
   };
 }
