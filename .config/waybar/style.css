@@ -11,7 +11,7 @@
 
 window#waybar {
     background: radial-gradient(circle, #300137 0%, #090217 100%);
-    border-bottom: 3px solid #5C0143;
+    border-top: 3px solid #5C0143;
     color: #FEFDFA;
 }
 

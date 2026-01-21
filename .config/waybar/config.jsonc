@@ -2,8 +2,8 @@
 // WAYBAR CONFIGURATION
 // ============================================================================
 {
-    "layer": "top",
-    "position": "top",
+    "layer": "bottom",
+    "position": "bottom",
     "height": 40,
     
     "modules-left": [
