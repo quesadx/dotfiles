@@ -7,8 +7,7 @@
     "height": 40,
     
     "modules-left": [
-	    "custom/power",
-        "custom/themeswitcher",
+        "custom/power",
         "hyprland/workspaces"
     ],
     "modules-center": [
@@ -31,13 +30,6 @@
         "format": " ",
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw"
-    },
-    "custom/themeswitcher": {
-        "format": "    {}",
-        "exec": "~/.local/bin/get-theme.sh",
-        "on-click": "~/.local/bin/switch-theme.sh",
-        "return-type": "text",
-        "interval": 5000
     },
     "tray": {
         "icon-size": 18,
