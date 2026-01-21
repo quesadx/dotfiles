@@ -34,8 +34,8 @@
     },
     "custom/themeswitcher": {
         "format": "    {}",
-        "exec": "~/dotfiles/scripts/get-theme.sh",
-        "on-click": "~/dotfiles/scripts/switch-theme.sh",
+        "exec": "~/.local/bin/get-theme.sh",
+        "on-click": "~/.local/bin/switch-theme.sh",
         "return-type": "text",
         "interval": 5000
     },

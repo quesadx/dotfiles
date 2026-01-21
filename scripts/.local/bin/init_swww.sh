@@ -7,15 +7,22 @@ if ! pgrep -x "swww-daemon" > /dev/null; then
 fi
 
 # Directory containing wallpapers
-WALLPAPERS_DIR="$HOME/.config/hypr/wallpapers"
-STATE_FILE="$HOME/.config/hypr/wallpapers/.current_wallpaper"
+WALLPAPERS_DIR="$HOME/.local/share/wallpapers"
+STATE_FILE="$HOME/.cache/current_wallpaper"
 
-# Get list of wallpapers (sorted)
-# Read into array properly handling spaces/newlines
-mapfile -d '' WALLPAPERS < <(find "$WALLPAPERS_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" -o -name "*.webp" \) -print0 | sort -z)
+# Get list of wallpapers using glob expansion (handles spaces)
+shopt -s nullglob
+WALLPAPERS=()
+for ext in png jpg jpeg gif webp; do
+    WALLPAPERS+=("$WALLPAPERS_DIR"/*."$ext")
+done
+
+# Sort the array
+IFS=$'\n' WALLPAPERS=($(sort <<<"${WALLPAPERS[*]}"))
+unset IFS
 
 if [ ${#WALLPAPERS[@]} -eq 0 ]; then
-    pgrep -x notify-send >/dev/null && notify-send "Wallpaper Error" "No wallpapers found under $WALLPAPERS_DIR"
+    notify-send "Wallpaper Error" "No wallpapers found under $WALLPAPERS_DIR" 2>/dev/null
     exit 1
 fi
 
@@ -54,5 +61,5 @@ swww img "$TARGET_WALL" \
     --transition-pos 0.5,0.5 \
     --transition-fps 60 \
     --transition-step 90 \
-    --transition-duration 2
+    --transition-duration 1.5
 
