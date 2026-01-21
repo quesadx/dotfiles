@@ -16,6 +16,7 @@ packages=(
     "scripts"
     "themes"
     "wallpapers"
+    "home"
 )
 
 for pkg in "${packages[@]}"; do

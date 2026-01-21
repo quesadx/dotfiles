@@ -15,11 +15,19 @@ packages=(
     "scripts"
     "themes"
     "wallpapers"
+    "home"
 )
 
 
 # Stow each package
 for pkg in "${packages[@]}"; do
+    if [ "$pkg" = "home" ] && [ -f "$HOME/.bashrc" ] && [ ! -L "$HOME/.bashrc" ]; then
+        timestamp=$(date +%Y%m%d%H%M%S)
+        backup="$HOME/.bashrc.backup.$timestamp"
+        echo "Found existing ~/.bashrc — backing up to $backup"
+        mv "$HOME/.bashrc" "$backup"
+    fi
+
     if [ -d "$pkg" ]; then
         stow -R "$pkg"
     else
