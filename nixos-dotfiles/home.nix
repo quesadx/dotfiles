@@ -26,14 +26,14 @@
 
   # Vinculación de archivos de configuración
   xdg.configFile = {
-    "hypr".source = ./dots/hypr;
-    "kitty".source = ./dots/kitty;
-    "waybar".source = ./dots/waybar;
-    "swaync".source = ./dots/swaync;
-    "fuzzel".source = ./dots/fuzzel;
-    "wlogout".source = ./dots/wlogout;
-    "fastfetch".source = ./dots/fastfetch;
-    "scripts".source = ./dots/scripts;
+    "hypr".source = ../.config/hypr;
+    "kitty".source = ../.config/kitty;
+    "waybar".source = ../.config/waybar;
+    "swaync".source = ../.config/swaync;
+    "fuzzel".source = ../.config/fuzzel;
+    "wlogout".source = ../.config/wlogout;
+    "fastfetch".source = ../.config/fastfetch;
+   # "scripts".source = ../.config/scripts;
   };
 
   # SSH Agent automático

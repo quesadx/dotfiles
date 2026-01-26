@@ -5,3 +5,4 @@ private.conf
 .env
 hypr/wallpapers/.current_wallpaper
 themes/current-wallpaper.txt
+nixos-dotfiles/hardware-configuration.nix
