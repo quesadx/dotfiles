@@ -3,12 +3,12 @@
 // ============================================================================
 {
     "layer": "top",
-    "position": "top",
-    "height": 40,
+    "position": "bottom",
+    "height": 43,
     
     "modules-left": [
 	    "custom/power",
-        "custom/themeswitcher",
+       // "custom/themeswitcher",
         "hyprland/workspaces"
     ],
     "modules-center": [
@@ -32,13 +32,13 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw"
     },
-    "custom/themeswitcher": {
-        "format": "    {}",
-        "exec": "~/.local/bin/get-theme.sh",
-        "on-click": "~/.local/bin/switch-theme.sh",
-        "return-type": "text",
-        "interval": 5000
-    },
+   // "custom/themeswitcher": {
+     //   "format": "    {}",
+       // "exec": "~/.local/bin/get-theme.sh",
+       // "on-click": "~/.local/bin/switch-theme.sh",
+       // "return-type": "text",
+       // "interval": 5000
+    //},
     "tray": {
         "icon-size": 18,
         "spacing": 10,
