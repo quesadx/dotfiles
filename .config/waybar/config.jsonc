@@ -1,7 +1,9 @@
 {
     "layer": "top",
-    "position": "top",
-    "height": 20, 
+    "position": "left",
+    "width": 10,
+    "margin-top": 2,
+    "margin-bottom": 2,
     "spacing": 0,
 
     "modules-left": [
@@ -15,6 +17,7 @@
     ],
 
     "hyprland/workspaces": {
+	"rotate": 90,
         "format": "", 
         "on-click": "activate",
 	"persistent-workspaces": {
@@ -28,6 +31,7 @@
 	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "power-profiles-daemon": {
+	"rotate": 90,
         "format": "{icon} {profile}",
         "tooltip-format": "Power Profile: {profile}\nDriver: {driver}",
         "tooltip": true,
