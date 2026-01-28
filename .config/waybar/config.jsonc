@@ -10,7 +10,9 @@
     "modules-center": [
         "hyprland/workspaces"
     ],
-    "modules-right": [],
+    "modules-right": [
+        "power-profiles-daemon"
+    ],
 
     "hyprland/workspaces": {
         "format": "", 
@@ -24,5 +26,16 @@
     "clock": {
         "format": "{:%H:%M}",
 	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    }    
+    },
+    "power-profiles-daemon": {
+        "format": "{icon} {profile}",
+        "tooltip-format": "Power Profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "NULL",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    }
 }
