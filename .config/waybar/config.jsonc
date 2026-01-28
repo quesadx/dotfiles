@@ -7,12 +7,13 @@
     "spacing": 0,
 
     "modules-left": [
-        "clock"
+	"tray"
     ],
     "modules-center": [
         "hyprland/workspaces"
     ],
     "modules-right": [
+	"clock",
         "power-profiles-daemon"
     ],
 
@@ -27,7 +28,7 @@
         "show-special": false
     },
     "clock": {
-        "format": "{:%H:%M}",
+        "format": "{:%H:%M\n ───}",
 	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "power-profiles-daemon": {

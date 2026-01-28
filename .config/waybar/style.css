@@ -22,8 +22,8 @@ window#waybar {
 
 #workspaces button {
     padding: 0;
-    background-color: rgba(62, 68, 81, 0.3);
-    border-radius: 8px;
+    background-color: rgba(62, 68, 81, 0.6);
+    border-radius: 6px;
     min-width: 0px;
     min-height: 8px;
     margin: 6px 16px; 
@@ -34,9 +34,9 @@ window#waybar {
 #workspaces button.active,
 #workspaces button.focused {
     background-color: #61afef;
-    margin: 6px 8px;
+    margin: 6px 10px;
     min-width: 0px; 
-    min-height: 16px;
+    min-height: 18px;
 }
 
 #workspaces button:hover {
