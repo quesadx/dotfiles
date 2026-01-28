@@ -1,9 +1,9 @@
 {
     "layer": "top",
     "position": "left",
-    "width": 10,
-    "margin-top": 2,
-    "margin-bottom": 2,
+    "width": 40,
+    "margin-top": 200,
+    "margin-bottom": 200,
     "spacing": 0,
 
     "modules-left": [
@@ -28,7 +28,7 @@
         "show-special": false
     },
     "clock": {
-        "format": "{:%H:%M\n ───}",
+        "format": "{:%H\n%M\n──}",
 	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "power-profiles-daemon": {

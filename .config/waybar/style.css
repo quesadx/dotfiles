@@ -16,26 +16,39 @@ window#waybar {
     border-radius: 0px 6px 6px 0px; 
 }
 
+#tray {
+    margin-top: 16px;
+}
+
 #workspaces {
     margin: 0 0px;
 }
 
+#workspaces {
+    /* Lock the container so it doesn't wobble */
+    margin: 0;
+    padding: 0;
+    min-width: 40px; 
+}
+
 #workspaces button {
     padding: 0;
-    background-color: rgba(62, 68, 81, 0.6);
+    background-color: rgba(62, 68, 81, 0.7);
     border-radius: 6px;
-    min-width: 14px;
-    min-height: 18px;
-    margin: 6px 10px;
+    
+    min-width: 20px; 
+    min-height: 16px;
+    
     font-size: 0;
-    transition: transform 0.18s ease-in-out, background-color 0.18s ease-in-out;
+    margin: 6px 16px;
+    transition: all 0.3s ease-in-out;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
     background-color: #61afef;
-    box-shadow: 0 0 8px rgba(97,175,239,0.18);
-    /* visual emphasis without changing layout: use box-shadow only */
+    margin: 6px 8px;
+    min-width: 16px; 
 }
 
 #workspaces button:hover {
@@ -56,6 +69,7 @@ window#waybar {
 #power-profiles-daemon {
     margin-bottom: 16px;
     margin-top: 5px;
+    margin-right: 3px;
     font-weight: bold;
 }
 
