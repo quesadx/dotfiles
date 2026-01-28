@@ -1,0 +1,28 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 20, 
+    "spacing": 0,
+
+    "modules-left": [
+        "clock"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [],
+
+    "hyprland/workspaces": {
+        "format": "", 
+        "on-click": "activate",
+	"persistent-workspaces": {
+            "*": 9 
+        },
+        "all-outputs": true,
+        "show-special": false
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    }    
+}
