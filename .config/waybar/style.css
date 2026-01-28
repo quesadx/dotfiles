@@ -24,19 +24,18 @@ window#waybar {
     padding: 0;
     background-color: rgba(62, 68, 81, 0.6);
     border-radius: 6px;
-    min-width: 0px;
-    min-height: 8px;
-    margin: 6px 16px; 
+    min-width: 14px;
+    min-height: 18px;
+    margin: 6px 10px;
     font-size: 0;
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.18s ease-in-out, background-color 0.18s ease-in-out;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
     background-color: #61afef;
-    margin: 6px 10px;
-    min-width: 0px; 
-    min-height: 18px;
+    box-shadow: 0 0 8px rgba(97,175,239,0.18);
+    /* visual emphasis without changing layout: use box-shadow only */
 }
 
 #workspaces button:hover {
@@ -56,5 +55,18 @@ window#waybar {
 
 #power-profiles-daemon {
     margin-bottom: 16px;
+    margin-top: 5px;
     font-weight: bold;
+}
+
+#power-profiles-daemon.performance {
+    color: #e06c75;
+}
+
+#power-profiles-daemon.power-saver {
+    color: #98c379;
+}
+
+#power-profiles-daemon.balanced {
+    color: #e5c07b;
 }
