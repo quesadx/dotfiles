@@ -42,10 +42,10 @@
 
     "buttons-grid#power": {
       "actions": [
-        { "label": "󰌾 Lock", "command": "swaylock-corrupter" },
         { "label": "󰍃 Log Out", "command": "hyprctl dispatch exit" },
+	{ "label": "󰤄 Suspend", "command": "systemctl suspend" }, 
         { "label": "󰜉 Reboot", "command": "systemctl reboot" },
-        { "label": "󰐥 Power Off", "command": "systemctl poweroff" }
+        { "label": "󰐥 Shutdown", "command": "systemctl poweroff" }
       ]
     }
   }
