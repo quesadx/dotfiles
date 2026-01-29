@@ -1,0 +1,138 @@
+* {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.control-center {
+  background: #282c34;
+  color: #abb2bf;
+  border: 2px solid #d19a66;
+  border-radius: 4px;
+}
+
+.widget-title {
+  color: #abb2bf;
+  margin: 10px;
+}
+
+.widget-label {
+  margin: 10px;
+}
+
+button {
+  background: #282c34;
+  color: #abb2bf;
+  border: 2px solid #e06c75;
+  border-radius: 4px;
+  padding: 6px;
+}
+
+button:hover {
+  background: #e06c75;
+  color: #282c34;
+}
+
+.notification {
+  background: #282c34;
+  border: 2px solid #e06c75;
+  border-radius: 4px;
+  margin: 6px 0;
+}
+
+.notification-content {
+  color: #abb2bf;
+}
+
+.summary {
+  color: #d19a66; /* Make the title Green to match border */
+}
+
+.time {
+  color: #5c6370;
+}
+
+.notification-action {
+  background: #282c34;
+  border: 2px solid #d19a66;
+  border-radius: 4px;
+  color: #abb2bf;
+}
+
+.notification-action:hover {
+  background: #d19a66;
+  color: #282c34;
+}
+
+.widget-volume, 
+.widget-backlight {
+  background: #282c34;
+  margin: 5px 10px;
+  border-radius: 4px;
+}
+
+.widget-volume > box > label,
+.widget-backlight > box > label {
+  color: #d19a66; /* Green Icon */
+  font-size: 18px;
+}
+
+trough {
+  background: #3e4452;
+  border-radius: 4px;
+  border: none;
+}
+
+/* The Filled Part */
+highlight {
+  background: #d19a66;
+  border-radius: 4px;
+}
+
+slider {
+  background: #abb2bf;
+  border-radius: 4px;
+}
+
+.widget-mpris {
+  background: #282c34;
+  border: 2px solid #d19a66;
+  border-radius: 4px;
+  margin: 10px;
+  padding: 5px;
+}
+
+.widget-mpris-title {
+  color: #d19a66;
+  font-weight: bold;
+}
+
+.widget-mpris-subtitle {
+  color: #abb2bf;
+}
+
+.widget-buttons-grid {
+  padding-left: 40px;
+  margin: 4px;
+  font-size: 24px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: #282c34;
+  border: 2px solid #d19a66;
+  border-radius: 4px;
+  color: #abb2bf;
+  margin: 12px; 
+}
+
+/* Hover effect for grid buttons */
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: #d19a66;
+  color: #282c34;
+}
+
+.widget-buttons-grid#power > flowbox > flowboxchild > button:hover {
+  background: #e06c75; /* The 'match' color from your config */
+  border-color: #e06c75;
+  color: #282c34;
+}
