@@ -2,14 +2,14 @@
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "cssPriority": "user",
 
-  "control-center-width": 325,
-  "notification-window-width": 450,
+  "control-center-width": 300,
+  "notification-window-width": 325,
 
   "widgets": [
     "title",
-    "buttons-grid#connectivity",
     "volume",
     "backlight",
+    "buttons-grid#connectivity",
     "mpris",
     "notifications",
     "dnd",
@@ -30,24 +30,23 @@
       "image-radius": 10,
       "blacklist": ["kew", "firefox", "spotify"]
     },
-    "volume": { "label": "󰕾" },
-    "backlight": { "label": "󰃟" },
+    "volume": { "label": " 󰕾 Volume" },
+    "backlight": { "label": " 󰃟 Brightness" },
 
     "buttons-grid#connectivity": {
       "actions": [
-        { "label": "󰖩", "command": "kitty nmtui" },
-        { "label": "󰂯", "command": "kitty bluetui" },
-	{ "label": "󰕾", "command": "kitty pulsemixer" },
-        { "label": "󰆴", "command": "swaync-client -C" }
+        { "label": "󰖩 Network", "command": "kitty nmtui" },
+        { "label": "󰂯 Bluetooth", "command": "kitty bluetui" },
+	      { "label": "󰕾 Audio", "command": "kitty pulsemixer" }
       ]
     },
 
     "buttons-grid#power": {
       "actions": [
-        { "label": "󰌾", "command": "swaylock-corrupter" },
-        { "label": "󰍃", "command": "hyprctl dispatch exit" },
-        { "label": "󰜉", "command": "systemctl reboot" },
-        { "label": "󰐥", "command": "systemctl poweroff" }
+        { "label": "󰌾 Lock", "command": "swaylock-corrupter" },
+        { "label": "󰍃 Logout", "command": "hyprctl dispatch exit" },
+        { "label": "󰜉 Reboot", "command": "systemctl reboot" },
+        { "label": "󰐥 Poweroff", "command": "systemctl poweroff" }
       ]
     }
   }

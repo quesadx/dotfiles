@@ -9,6 +9,7 @@
   background: #282c34;
   color: #abb2bf;
   border-left: 1px solid #3e4452;
+  border-radius: 0px;
   padding: 10px;
 }
 
@@ -63,7 +64,7 @@
   background: #21252b;
   padding: 8px;
   border-radius: 6px;
-  margin: 6px 0;
+  margin: 6px 10px;
 }
 
 .widget-volume > box > label,
@@ -127,12 +128,12 @@ slider {
   border: 1px solid #3e4452;
   border-radius: 6px;
   color: #abb2bf;
-  padding: 10px;
+  padding: 20px 40px;
   min-width: 100%;
 }
 
 /* Hover */
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+.widget-button  -grid > flowbox > flowboxchild > button:hover {
   background: #d19a66;
   color: #282c34;
 }
