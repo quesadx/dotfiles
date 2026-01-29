@@ -1,42 +1,33 @@
 * {
   font-family: "JetBrainsMono Nerd Font", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
 }
 
+/* Main container */
 .control-center {
   background: #282c34;
   color: #abb2bf;
-  border: 2px solid #d19a66;
-  border-radius: 4px;
+  border-left: 1px solid #3e4452;
+  padding: 10px;
 }
 
+/* Section titles */
 .widget-title {
-  color: #abb2bf;
-  margin: 10px;
+  color: #d19a66;
+  margin: 6px 0 4px 0;
 }
 
+/* Generic labels */
 .widget-label {
-  margin: 10px;
+  margin: 4px 0;
 }
 
-button {
-  background: #282c34;
-  color: #abb2bf;
-  border: 2px solid #e06c75;
-  border-radius: 4px;
-  padding: 6px;
-}
-
-button:hover {
-  background: #e06c75;
-  color: #282c34;
-}
-
+/* Notifications */
 .notification {
-  background: #282c34;
-  border: 2px solid #e06c75;
-  border-radius: 4px;
+  background: #21252b;
+  border-radius: 6px;
+  padding: 8px 10px;
   margin: 6px 0;
 }
 
@@ -45,94 +36,110 @@ button:hover {
 }
 
 .summary {
-  color: #d19a66; /* Make the title Green to match border */
+  color: #d19a66;
+  font-weight: 600;
 }
 
 .time {
   color: #5c6370;
 }
 
+/* Notification actions */
 .notification-action {
   background: #282c34;
-  border: 2px solid #d19a66;
+  border: 1px solid #3e4452;
   border-radius: 4px;
   color: #abb2bf;
+  padding: 4px 6px;
 }
 
 .notification-action:hover {
-  background: #d19a66;
-  color: #282c34;
+  background: #3e4452;
 }
 
-.widget-volume, 
+/* Volume / backlight widgets */
+.widget-volume,
 .widget-backlight {
-  background: #282c34;
-  margin: 5px 10px;
-  border-radius: 4px;
+  background: #21252b;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 6px 0;
 }
 
 .widget-volume > box > label,
 .widget-backlight > box > label {
-  color: #d19a66; /* Green Icon */
-  font-size: 18px;
+  color: #d19a66;
+  font-size: 16px;
 }
 
+/* Sliders */
 trough {
   background: #3e4452;
-  border-radius: 4px;
-  border: none;
+  border-radius: 999px;
+  min-height: 6px;
 }
 
-/* The Filled Part */
 highlight {
   background: #d19a66;
-  border-radius: 4px;
+  border-radius: 999px;
 }
 
 slider {
   background: #abb2bf;
-  border-radius: 4px;
+  border-radius: 50%;
 }
 
+/* MPRIS */
 .widget-mpris {
-  background: #282c34;
-  border: 2px solid #d19a66;
-  border-radius: 4px;
-  margin: 10px;
-  padding: 5px;
+  background: #21252b;
+  border-radius: 6px;
+  padding: 8px;
+  margin: 6px 0;
 }
 
 .widget-mpris-title {
   color: #d19a66;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .widget-mpris-subtitle {
   color: #abb2bf;
 }
 
+/* Buttons grid container */
 .widget-buttons-grid {
-  padding-left: 40px;
-  margin: 4px;
-  font-size: 24px;
+  padding: 0;
+  margin-top: 6px;
 }
 
+/* Force buttons to fit width */
+.widget-buttons-grid > flowbox {
+  padding: 0;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild {
+  padding: 2px;
+}
+
+/* Full-width buttons */
 .widget-buttons-grid > flowbox > flowboxchild > button {
-  background: #282c34;
-  border: 2px solid #d19a66;
-  border-radius: 4px;
+  background: #21252b;
+  border: 1px solid #3e4452;
+  border-radius: 6px;
   color: #abb2bf;
-  margin: 12px; 
+  padding: 10px;
+  min-width: 100%;
 }
 
-/* Hover effect for grid buttons */
+/* Hover */
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
   background: #d19a66;
   color: #282c34;
 }
 
+/* Power buttons accent */
 .widget-buttons-grid#power > flowbox > flowboxchild > button:hover {
-  background: #e06c75; /* The 'match' color from your config */
+  background: #e06c75;
   border-color: #e06c75;
   color: #282c34;
 }

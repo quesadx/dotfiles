@@ -8,76 +8,83 @@
 }
 
 window#waybar {
-    background-color: #2c313c;
+    background-color: #282c34;
     color: #abb2bf;
-    border-right: 2px solid #3e4451;
+
+    /* Structural separation, not emphasis */
+    border-right: 1px solid #3e4451;
 }
 
-#tray {
-    margin-top: 16px;
-}
-
-#workspaces {
-    margin: 0 0px;
-}
+/* ---- Workspaces ---- */
 
 #workspaces {
-    /* Lock the container so it doesn't wobble */
     margin: 0;
     padding: 0;
-    min-width: 40px; 
+    min-width: 40px;
 }
 
 #workspaces button {
-    padding: 0;
-    background-color: rgba(62, 68, 81, 0.7);
+    background-color: #21252b;
     border-radius: 6px;
-    
-    min-width: 20px; 
+
+    min-width: 20px;
     min-height: 16px;
-    
+
     font-size: 0;
-    margin: 6px 16px;
+    margin: 6px 14px;
+
     transition: all 0.2s ease-in-out;
 }
 
+/* Active = navigation focus → BLUE */
 #workspaces button.active,
 #workspaces button.focused {
     background-color: #61afef;
     margin: 6px 8px;
-    min-width: 16px; 
+    min-width: 16px;
 }
 
+/* Hover = hint, not noise */
 #workspaces button:hover {
-    background-color: rgba(97, 175, 239, 0.12);
+    background-color: rgba(97, 175, 239, 0.18);
 }
 
+/* Urgent = RED */
 #workspaces button.urgent {
     background-color: #e06c75;
 }
 
-#clock {
+/* ---- Tray ---- */
+
+#tray {
     margin-top: 16px;
-    margin-left: 4px;
-    margin-right: 6px;
-    font-weight: bold;
+    color: #abb2bf;
 }
 
+/* ---- Clock ---- */
+/* Neutral information, no accent */
+#clock {
+    margin: 16px 6px 0 4px;
+    font-weight: 600;
+    color: #abb2bf;
+}
+
+/* ---- Power Profiles ---- */
+/* This component owns the color semantics */
+
 #power-profiles-daemon {
-    margin-bottom: 16px;
-    margin-top: 5px;
-    margin-right: 3px;
-    font-weight: bold;
+    margin: 5px 3px 16px 0;
+    font-weight: 600;
 }
 
 #power-profiles-daemon.performance {
-    color: #e06c75;
-}
-
-#power-profiles-daemon.power-saver {
-    color: #98c379;
+    color: #e06c75;   /* RED */
 }
 
 #power-profiles-daemon.balanced {
-    color: #e5c07b;
+    color: #e5c07b;   /* YELLOW */
+}
+
+#power-profiles-daemon.power-saver {
+    color: #98c379;   /* GREEN */
 }
