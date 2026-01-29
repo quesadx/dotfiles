@@ -4,7 +4,7 @@
         "type": "builtin",
         "source": "arch_small",
         "color": {
-            "1": "#FC8820",
+            "1": "#e06c75",
             "2": "#FEFDFA"
         }
     },
