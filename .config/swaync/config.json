@@ -1,0 +1,71 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "cssPriority": "user",
+
+  /* Solo mantenemos esto para controlar el ancho */
+  "control-center-width": 450,
+  "notification-window-width": 450,
+
+  /* LISTA DE WIDGETS (Esto SÍ es obligatorio para mantener tu orden) */
+  "widgets": [
+    "title",
+    "buttons-grid#connectivity",
+    "volume",
+    "backlight",
+    "buttons-grid#media",
+    "mpris",
+    "notifications",
+    "dnd",
+    "buttons-grid#power"
+  ],
+
+  /* CONFIGURACIÓN DE LOS BOTONES (Esto es obligatorio porque son custom) */
+  "widget-config": {
+    "title": {
+      "text": "Notificaciones",
+      "clear-all-button": true,
+      "button-text": "󰆴 Borrar"
+    },
+    "dnd": {
+      "text": "No molestar"
+    },
+    "mpris": {
+      "image-size": 90,
+      "image-radius": 10,
+      "blacklist": ["kew", "firefox", "spotify"]
+    },
+    "volume": { "label": "󰕾" },
+    "backlight": { "label": "󰃟" },
+
+    /* GRUPO 1: CONECTIVIDAD */
+    "buttons-grid#connectivity": {
+      "actions": [
+        { "label": "󰖩", "command": "iwgtk" },
+        { "label": "󰂯", "command": "blueman-manager" },
+        { "label": "", "command": "kooha" },
+        { "label": "󰆴", "command": "swaync-client -C" }
+      ]
+    },
+
+    /* GRUPO 2: MULTIMEDIA */
+    "buttons-grid#media": {
+      "actions": [
+        { "label": "󰕾", "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle", "type": "toggle" },
+        { "label": "󰍬", "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle", "type": "toggle" },
+        { "label": "𜰎", "command": "playerctl previous" },
+        { "label": "", "command": "playerctl play-pause" },
+        { "label": "𜰏", "command": "playerctl next" }
+      ]
+    },
+
+    /* GRUPO 3: POWER */
+    "buttons-grid#power": {
+      "actions": [
+        { "label": "󰌾", "command": "swaylock-corrupter" },
+        { "label": "󰍃", "command": "hyprctl dispatch exit" },
+        { "label": "󰜉", "command": "systemctl reboot" },
+        { "label": "󰐥", "command": "systemctl poweroff" }
+      ]
+    }
+  }
+}
