@@ -1,42 +1,28 @@
 * {
     font-family: "JetBrains Mono", FontAwesome, sans-serif;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    margin: 0;
-    min-width: 0;
+    padding: 0px;
 }
 
 window#waybar {
     background-color: #282c34;
     color: #abb2bf;
-
-    /* Structural separation, not emphasis */
     border-right: 1px solid #3e4451;
 }
 
-/* ---- Workspaces ---- */
-
 #workspaces {
-    margin: 0;
-    padding: 0;
     min-width: 40px;
 }
 
 #workspaces button {
     background-color: #21252b;
     border-radius: 6px;
-
     min-width: 20px;
     min-height: 16px;
-
     font-size: 0;
     margin: 6px 14px;
-
     transition: all 0.2s ease-in-out;
 }
 
-/* Active = navigation focus → BLUE */
 #workspaces button.active,
 #workspaces button.focused {
     background-color: #61afef;
@@ -44,47 +30,38 @@ window#waybar {
     min-width: 16px;
 }
 
-/* Hover = hint, not noise */
 #workspaces button:hover {
     background-color: rgba(97, 175, 239, 0.18);
 }
 
-/* Urgent = RED */
 #workspaces button.urgent {
     background-color: #e06c75;
 }
-
-/* ---- Tray ---- */
 
 #tray {
     margin-top: 16px;
     color: #abb2bf;
 }
 
-/* ---- Clock ---- */
-/* Neutral information, no accent */
 #clock {
-    margin: 16px 6px 0 4px;
+    margin: 16px 6px 0px 4px;
     font-weight: 600;
     color: #abb2bf;
 }
 
-/* ---- Power Profiles ---- */
-/* This component owns the color semantics */
-
 #power-profiles-daemon {
-    margin: 5px 3px 16px 0;
+    margin: 5px 3px 16px 0px;
     font-weight: 600;
 }
 
 #power-profiles-daemon.performance {
-    color: #e06c75;   /* RED */
+    color: #e06c75;
 }
 
 #power-profiles-daemon.balanced {
-    color: #e5c07b;   /* YELLOW */
+    color: #e5c07b;
 }
 
 #power-profiles-daemon.power-saver {
-    color: #98c379;   /* GREEN */
+    color: #98c379;
 }

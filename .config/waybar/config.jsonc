@@ -1,8 +1,6 @@
 {
     "layer": "top",
     "position": "left",
-    "width": 40,
-    "spacing": 0,
 
     "modules-left": [
 	"tray"
@@ -37,7 +35,7 @@
         "tooltip-format": "Power Profile: {profile}\nDriver: {driver}",
         "tooltip": true,
         "format-icons": {
-            "default": "NULL",
+            "default": "No power-profile-daemon detected",
             "performance": "",
             "balanced": "",
             "power-saver": ""
