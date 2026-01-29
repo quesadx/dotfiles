@@ -2,8 +2,6 @@
     "layer": "top",
     "position": "left",
     "width": 40,
-    "margin-top": 200,
-    "margin-bottom": 200,
     "spacing": 0,
 
     "modules-left": [
@@ -25,7 +23,9 @@
             "*": 9 
         },
         "all-outputs": true,
-        "show-special": false
+        "show-special": false,
+        "on-scroll-down": "hyprctl dispatch workspace r+1",
+        "on-scroll-up": "hyprctl dispatch workspace r-1"
     },
     "clock": {
         "format": "{:%H\n%M\n──}",

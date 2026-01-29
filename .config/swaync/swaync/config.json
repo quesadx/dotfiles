@@ -1,0 +1,148 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "control-center-margin-top": 10,
+  "control-center-margin-bottom": 10,
+  "control-center-margin-right": 10,
+  "notification-icon-size": 64,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
+  "timeout": 10,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "fit-to-screen": false,
+  "control-center-width": 450,
+  "control-center-height": 1033,
+  "notification-window-width": 450,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+  "text-empty": "Sin notificaciones",
+
+  /* ------------------------------------------------ */
+  /* ORDEN DE LOS WIDGETS */
+  /* ------------------------------------------------ */
+  "widgets": [
+    "title",
+    "buttons-grid#connectivity", /* Fila 1: WiFi, BT, Tools */
+    "volume",
+    "backlight",
+    "buttons-grid#media",        /* Fila 2: Audio Controls */
+    "mpris",
+    "notifications",
+    "dnd",
+    "buttons-grid#power"         /* Fila 3: Power (Al final) */
+  ],
+
+  "widget-config": {
+    "title": {
+      "text": "Notificaciones",
+      "clear-all-button": true,
+      "button-text": "󰆴 Borrar"
+    },
+    "dnd": {
+      "text": "No molestar"
+    },
+    "label": {
+      "max-lines": 1,
+      "text": "Notification Center"
+    },
+    "mpris": {
+      "image-size": 90,
+      "image-radius": 10,
+      "blacklist": [
+        "kew",
+        "firefox",
+        "spotify"
+      ]
+    },
+    "volume": {
+      "label": "󰕾"
+    },
+    "backlight": {
+      "label": "󰃟"
+    },
+
+    /* ------------------------------------------------ */
+    /* GRUPO 1: CONECTIVIDAD Y HERRAMIENTAS */
+    /* ------------------------------------------------ */
+    "buttons-grid#connectivity": {
+      "actions": [
+        {
+          "label": "󰖩",
+          "command": "iwgtk"
+        },
+        {
+          "label": "󰂯",
+          "command": "blueman-manager"
+        },
+        {
+          "label": "",
+          "command": "kooha"
+        },
+        {
+          "label": "󰆴",
+          "command": "swaync-client -C"
+        }
+      ]
+    },
+
+    /* ------------------------------------------------ */
+    /* GRUPO 2: MULTIMEDIA Y AUDIO */
+    /* ------------------------------------------------ */
+    "buttons-grid#media": {
+      "actions": [
+        {
+          "label": "󰕾",
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+          "type": "toggle"
+        },
+        {
+          "label": "󰍬",
+          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+          "type": "toggle"
+        },
+        {
+          "label": "𜰎",
+          "command": "playerctl previous"
+        },
+        {
+          "label": "",
+          "command": "playerctl play-pause"
+        },
+        {
+          "label": "𜰏",
+          "command": "playerctl next"
+        }
+      ]
+    },
+
+    /* ------------------------------------------------ */
+    /* GRUPO 3: POWER MENU */
+    /* ------------------------------------------------ */
+    "buttons-grid#power": {
+      "actions": [
+        {
+          "label": "󰌾",
+          "command": "swaylock-corrupter"
+        },
+        {
+          "label": "󰍃",
+          "command": "hyprctl dispatch exit" 
+        },
+        {
+          "label": "󰜉",
+          "command": "systemctl reboot"
+        },
+        {
+          "label": "󰐥",
+          "command": "systemctl poweroff"
+        }
+      ]
+    }
+  }
+}

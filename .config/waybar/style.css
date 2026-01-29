@@ -11,9 +11,6 @@ window#waybar {
     background-color: #2c313c;
     color: #abb2bf;
     border-right: 2px solid #3e4451;
-    border-top: 2px solid #3e4451;
-    border-bottom: 2px solid #3e4451;
-    border-radius: 0px 6px 6px 0px; 
 }
 
 #tray {
@@ -41,7 +38,7 @@ window#waybar {
     
     font-size: 0;
     margin: 6px 16px;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active,
