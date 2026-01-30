@@ -39,12 +39,3 @@ Apply the NixOS configuration:
 ```bash
 sudo nixos-rebuild switch --flake .#hostname
 ```
-
-## Theme Switching
-
-Switch themes with:
-```bash
-switch-theme.sh
-```
-
-Automatically updates colors across all applications and reloads the desktop environment.
