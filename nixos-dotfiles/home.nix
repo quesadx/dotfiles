@@ -15,7 +15,7 @@
     btop ripgrep zoxide fastfetch
     kitty waybar swaynotificationcenter
     grim slurp wl-clipboard cliphist
-    stow fuzzel pulsemixer
+    stow fuzzel pulsemixer chromium
   ];
 
 ###########################
