@@ -1,0 +1,44 @@
+{
+    "layer": "top",
+    "position": "left",
+
+    "modules-left": [
+	"tray"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+	"clock",
+        "power-profiles-daemon"
+    ],
+
+    "hyprland/workspaces": {
+	"rotate": 90,
+        "format": "", 
+        "on-click": "activate",
+	"persistent-workspaces": {
+            "*": 9 
+        },
+        "all-outputs": true,
+        "show-special": false,
+        "on-scroll-down": "hyprctl dispatch workspace r+1",
+        "on-scroll-up": "hyprctl dispatch workspace r-1"
+    },
+    "clock": {
+        "format": "{:%H\n%M\n──}",
+	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "power-profiles-daemon": {
+	"rotate": 90,
+        "format": "{icon} {profile}",
+        "tooltip-format": "Power Profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "No power-profile-daemon detected",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    }
+}

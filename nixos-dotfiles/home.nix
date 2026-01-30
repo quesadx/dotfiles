@@ -1,44 +1,85 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }: {
 
-{
+############
+### USER ###
+############
+
   home.username = "quesadx";
   home.homeDirectory = "/home/quesadx";
 
-  imports = [ ./modules/git.nix ./modules/bash.nix ];
-
-  home.stateVersion = "23.11"; 
+#################################
+### PACKAGES | LO RICO VA ACA ###
+#################################
 
   home.packages = with pkgs; [
-    btop
-    ripgrep
-    zoxide
-    fastfetch
-
-    # Hyprland-specific stuff
-    kitty
-    waybar
-    swaynotificationcenter
-    fuzzel
-    wlogout
-    # Hyprland misc tools
-    grim slurp wl-clipboard
+    btop ripgrep zoxide fastfetch
+    kitty waybar swaynotificationcenter
+    grim slurp wl-clipboard cliphist
+    stow fuzzel pulsemixer
   ];
 
-  # Vinculación de archivos de configuración
+###########################
+### CONFIGURATION FILES ###
+###########################
+
   xdg.configFile = {
     "hypr".source = ../.config/hypr;
     "kitty".source = ../.config/kitty;
     "waybar".source = ../.config/waybar;
     "swaync".source = ../.config/swaync;
     "fuzzel".source = ../.config/fuzzel;
-    "wlogout".source = ../.config/wlogout;
     "fastfetch".source = ../.config/fastfetch;
-   # "scripts".source = ../.config/scripts;
   };
 
-  # SSH Agent automático
+############
+### BASH ###
+############
+
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      ll = "ls -l";
+      gs = "git status";
+      ga = "git add .";
+      gc = "git commit -m";
+      gp = "git push";
+    };
+  };
+
+###########
+### GIT ###
+###########
+
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Matteo Quesada";
+        email = "matteo.vargas.quesada@est.una.ac.cr";
+      };
+    };
+  };
+
+###########
+### SSH ###
+###########
+
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+  };
   services.ssh-agent.enable = true;
 
-  # Deja que Home Manager se instale solo
+####################
+### HOME MANAGER ###
+####################
+
   programs.home-manager.enable = true;
+
+##################################
+### HOME MANAGER STATE VERSION ###
+##################################
+
+  home.stateVersion = "25.11";
+
 }

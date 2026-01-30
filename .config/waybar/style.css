@@ -1,184 +1,67 @@
-/* ============================================================================
-   WAYBAR STYLES - Dark Orange Theme
-   ============================================================================ */
-
 * {
-    font-family: "Symbols Nerd Font", "SF Pro Display", "Inter", "JetBrains Mono", sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    min-height: 0;
+    font-family: "JetBrains Mono", FontAwesome, sans-serif;
+    padding: 0px;
 }
 
 window#waybar {
-    background: radial-gradient(circle, #300137 0%, #090217 100%);
-    border-top: 3px solid #5C0143;
-    color: #FEFDFA;
+    background-color: #282c34;
+    color: #abb2bf;
+    border-right: 1px solid #3e4451;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-/* === Modules General === */
-.modules-left, .modules-center, .modules-right {
-    background: transparent;
-    padding: 0 4px;
-}
-
-#custom-launcher,
-#workspaces,
-#clock,
-#network,
-#bluetooth,
-#battery,
-#pulseaudio,
-#custom-notification,
-#tray,
-#custom-power,
-#custom-themeswitcher,
-#power-profiles-daemon {
-    background: rgba(143, 5, 77, 0.15);
-    margin: 4px 4px 7px 4px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    min-height: 24px;
-    min-width: 24px;
-}
-
-/* === Workspaces === */
 #workspaces {
-    background: rgba(143, 5, 77, 0.15);
-    margin-left: 4px;
-    padding: 0px 8px;
+    min-width: 40px;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    min-width: 16px;
-    color: rgba(254, 253, 250, 0.3);
-    border-radius: 99px;
-    margin: 4px 2px;
-    transition: all 0.3s ease-in-out;
-    font-size: 12px;
+    background-color: #21252b;
+    border-radius: 6px;
+    min-width: 20px;
+    min-height: 16px;
+    font-size: 0;
+    margin: 6px 14px;
+    transition: all 0.2s ease-in-out;
 }
 
-#workspaces button.active {
-    color: #090217;
-    background: #FC8820;
-    min-width: 32px;
-    padding: 0 8px;
+#workspaces button.active,
+#workspaces button.focused {
+    background-color: #61afef;
+    margin: 6px 8px;
+    min-width: 16px;
 }
 
 #workspaces button:hover {
-    background: rgba(143, 5, 77, 0.25);
-    color: #FEFDFA;
+    background-color: rgba(97, 175, 239, 0.18);
 }
 
-#custom-themeswitcher {
-    color: #FDDF9A;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 4px 16px;
+#workspaces button.urgent {
+    background-color: #e06c75;
 }
 
-/* === Center Clock === */
+#tray {
+    margin-top: 16px;
+    color: #abb2bf;
+}
+
 #clock {
-    font-weight: 800;
-    padding: 4px 20px;
-}
-
-/* === Right Modules === */
-#battery {
-    color: #FDDF9A;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 4px 16px;
-}
-
-#battery.charging {
-    color: #FC8820;
-    background: rgba(143, 5, 77, 0.15);
-}
-
-#battery.warning {
-    color: #FC8820;
-    background: rgba(143, 5, 77, 0.15);
-}
-
-#battery.critical {
-    color: #E5124A;
-    background: rgba(143, 5, 77, 0.15);
-}
-
-#pulseaudio {
-    color: #FDDF9A;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 4px 16px;
-}
-
-#network {
-    color: #FDDF9A;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 4px 16px;
-}
-
-#bluetooth {
-    color: #FDDF9A;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 4px 16px;
-}
-
-#custom-power {
-    color: #E5124A;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 0 4px 0px 6px;
-    margin-right: 4px;
-    border-radius: 8px;
+    margin: 16px 6px 0px 4px;
+    font-weight: 600;
+    color: #abb2bf;
 }
 
 #power-profiles-daemon {
-    color: #FDDF9A;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 4px 16px;
-}
-
-#power-profiles-daemon.power-saver {
-    color: #FDDF9A;
-    background: rgba(143, 5, 77, 0.15);
-}
-
-#power-profiles-daemon.balanced {
-    color: #FC8820;
-    background: rgba(143, 5, 77, 0.15);
+    margin: 5px 3px 16px 0px;
+    font-weight: 600;
 }
 
 #power-profiles-daemon.performance {
-    color: #E5124A;
-    background: rgba(143, 5, 77, 0.15);
+    color: #e06c75;
 }
 
-/* Hover Effects */
-#custom-launcher:hover,
-#workspaces:hover,
-#clock:hover,
-#network:hover,
-#battery:hover,
-#pulseaudio:hover,
-#custom-power:hover,
-#power-profiles-daemon:hover {
-    background: rgba(143, 5, 77, 0.25);
+#power-profiles-daemon.balanced {
+    color: #e5c07b;
 }
 
-/* Tray */
-#tray {
-    padding: 0 16px;
-    background: rgba(143, 5, 77, 0.25);
-    border: 1px solid #5C0143;
-}
-
-#custom-notification {
-    color: #FC8820;
-    background: rgba(143, 5, 77, 0.15);
-    padding: 0 8px 0px 10px;
-    margin-right: 4px;
-    border-radius: 4px;
-    font-size: 16px;
+#power-profiles-daemon.power-saver {
+    color: #98c379;
 }

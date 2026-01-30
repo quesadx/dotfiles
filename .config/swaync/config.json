@@ -1,0 +1,52 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "cssPriority": "user",
+  "control-center-width": 300,
+  "notification-window-width": 325,
+
+  "widgets": [
+    "title",
+    "volume",
+    "backlight",
+    "buttons-grid#connectivity",
+    "mpris",
+    "notifications",
+    "dnd",
+    "buttons-grid#power"
+  ],
+
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "󰆴 Clear"
+    },
+    "dnd": {
+      "text": "Do-not-disturb"
+    },
+    "mpris": {
+      "image-size": 90,
+      "image-radius": 10,
+      "blacklist": ["kew", "firefox", "spotify"]
+    },
+    "volume": { "label": " 󰕾 " },
+    "backlight": { "label": " 󰃟 " },
+
+    "buttons-grid#connectivity": {
+      "actions": [
+        { "label": "󰖩 Network Settings", "command": "kitty nmtui" },
+        { "label": "󰂯 Bluetooth Settings", "command": "kitty bluetui" },
+	      { "label": "󰕾 Audio Settings", "command": "kitty pulsemixer" }
+      ]
+    },
+
+    "buttons-grid#power": {
+      "actions": [
+        { "label": "󰍃 Log Out", "command": "hyprctl dispatch exit" },
+	{ "label": "󰤄 Suspend", "command": "systemctl suspend" }, 
+        { "label": "󰜉 Reboot", "command": "systemctl reboot" },
+        { "label": "󰐥 Shutdown", "command": "systemctl poweroff" }
+      ]
+    }
+  }
+}
