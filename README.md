@@ -31,11 +31,7 @@ dotfiles/
 
 ### Using .config directly
 
-Simply copy the `.config` directory contents:
-```bash
-git clone https://github.com/quesadx/dotfiles.git
-cp -r dotfiles/.config/* ~/.config/
-```
+Simply use stow -t .config or link with ln -s.
 
 ### Using NixOS
 
@@ -52,7 +48,3 @@ switch-theme.sh
 ```
 
 Automatically updates colors across all applications and reloads the desktop environment.
-
-## License
-
-Free to use and modify.
