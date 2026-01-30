@@ -15,7 +15,7 @@
     btop ripgrep zoxide fastfetch
     kitty waybar swaynotificationcenter
     grim slurp wl-clipboard cliphist
-    stow fuzzel pulsemixer chromium
+    stow fuzzel pulsemixer
     swaybg
   ];
 
@@ -30,6 +30,20 @@
     "swaync".source = ../.config/swaync;
     "fuzzel".source = ../.config/fuzzel;
     "fastfetch".source = ../.config/fastfetch;
+  };
+
+################
+### CHROMIUM ###
+################
+
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      # Bitwarden
+      { id = "nngceckbapebfimnlniiiahkandclblb"; }
+      # uBlock Origin Lite
+      { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; }
+    ];
   };
 
 ############
