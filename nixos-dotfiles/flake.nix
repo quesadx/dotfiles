@@ -1,19 +1,23 @@
 {
-  description = "My first NixOS Flakes config";
+  description = "Hyprland on NixOS";
 
-  # Repos
+######################
+### INPUTS / REPOS ###
+######################
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     
-    # Home manager input
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
-  # 2. Outputs: Lo que produce el Flake (tu sistema)
+###############
+### OUTPUTS ###
+###############
+
   outputs = { self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
 
@@ -21,21 +25,14 @@
         system = "x86_64-linux";
 	  modules = [
           ./configuration.nix
-          # ./hardware-configuration.nix 
 
-	  # Mierda de home-manager
 	  home-manager.nixosModules.home-manager {
 	    home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
 	    home-manager.users.quesadx = import ./home.nix;
 	  }
-
         ];
-
       };
-
     };
-
   };
-
 }
