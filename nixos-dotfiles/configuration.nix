@@ -16,6 +16,11 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
+#############
+### POWER ###
+#############
+services.power-profiles-daemon.enable = true;
+
 #####################
 ### LOCALE & TIME ###
 #####################
