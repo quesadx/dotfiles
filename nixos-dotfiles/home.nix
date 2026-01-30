@@ -16,6 +16,7 @@
     kitty waybar swaynotificationcenter
     grim slurp wl-clipboard cliphist
     stow fuzzel pulsemixer chromium
+    swaybg
   ];
 
 ###########################
