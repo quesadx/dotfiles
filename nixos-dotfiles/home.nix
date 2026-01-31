@@ -44,7 +44,6 @@
       isDefault = true;
       
       settings = {
-        # "browser.startup.homepage" = "https://google.com";
         "browser.search.region" = "CR";
         "browser.search.isUS" = false;
         "distribution.id" = "nixos";
@@ -61,11 +60,6 @@
         # Bitwarden
         "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        # Dark Reader
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
           installation_mode = "force_installed";
         };
       };
@@ -107,8 +101,14 @@
       ga = "git add .";
       gc = "git commit -m";
       gp = "git push";
+      nrt = "cd ~/dotfiles/nixos-dotfiles && sudo nixos-rebuild test --flake .#nixos";
       nrs = "cd ~/dotfiles && git add . && cd nixos-dotfiles && sudo nixos-rebuild switch --flake .#nixos";
     };
+    profileExtra = ''
+      if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+        exec start-hyprland
+      fi
+    '';
   };
 
 ###########
