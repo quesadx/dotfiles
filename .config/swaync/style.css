@@ -125,7 +125,6 @@ slider {
 /* Full-width buttons */
 .widget-buttons-grid > flowbox > flowboxchild > button {
   background: #21252b;
-  border: 1px solid #3e4452;
   border-radius: 6px;
   color: #abb2bf;
   padding: 20px 40px;
