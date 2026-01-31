@@ -63,7 +63,7 @@ services.power-profiles-daemon.enable = true;
 #######################
 
   environment.systemPackages = with pkgs; [
-    vim wget git curl
+    vim wget git curl bibata-cursors
   ];
 
 ####################
@@ -102,6 +102,8 @@ services.power-profiles-daemon.enable = true;
     nerd-fonts.jetbrains-mono
     noto-fonts
     noto-fonts-color-emoji
+    jetbrains-mono
+    font-awesome
   ];
 
 #############

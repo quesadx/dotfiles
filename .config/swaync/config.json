@@ -35,7 +35,7 @@
     "buttons-grid#connectivity": {
       "actions": [
         { "label": "󰖩 Network Settings", "command": "kitty nmtui" },
-        { "label": "󰂯 Bluetooth Settings", "command": "kitty bluetui" },
+        { "label": "󰂯 Bluetooth Settings", "command": "kitty bluetuith" },
 	      { "label": "󰕾 Audio Settings", "command": "kitty pulsemixer" }
       ]
     },
@@ -43,7 +43,7 @@
     "buttons-grid#power": {
       "actions": [
         { "label": "󰍃 Log Out", "command": "hyprctl dispatch exit" },
-	{ "label": "󰤄 Suspend", "command": "systemctl suspend" }, 
+	{ "label": "󰤄 Suspend", "command": "systemctl suspend" },
         { "label": "󰜉 Reboot", "command": "systemctl reboot" },
         { "label": "󰐥 Shutdown", "command": "systemctl poweroff" }
       ]

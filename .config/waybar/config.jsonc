@@ -37,7 +37,7 @@
         "format-icons": {
             "default": "No power-profile-daemon detected",
             "performance": "",
-            "balanced": "",
+            "balanced": " ",
             "power-saver": ""
         }
     }

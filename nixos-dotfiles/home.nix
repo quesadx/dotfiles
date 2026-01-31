@@ -7,16 +7,18 @@
   home.username = "quesadx";
   home.homeDirectory = "/home/quesadx";
 
-#################################
-### PACKAGES | LO RICO VA ACA ###
-#################################
+#####################################
+### PACKAGES | INSTALAR COSAS ACÁ ###
+#####################################
 
   home.packages = with pkgs; [
-    btop ripgrep zoxide fastfetch
+    zoxide fastfetch
     kitty waybar swaynotificationcenter
     grim slurp wl-clipboard cliphist
     stow fuzzel pulsemixer
-    swaybg
+    swaybg bluetuith hyprmon libnotify
+    kdePackages.dolphin chromium 
+    adwaita-icon-theme
   ];
 
 ###########################
@@ -32,18 +34,65 @@
     "fastfetch".source = ../.config/fastfetch;
   };
 
-################
-### CHROMIUM ###
-################
+###############
+### FIREFOX ###
+###############
 
-  programs.chromium = {
+  programs.firefox = {
     enable = true;
-    extensions = [
-      # Bitwarden
-      { id = "nngceckbapebfimnlniiiahkandclblb"; }
-      # uBlock Origin Lite
-      { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; }
-    ];
+    profiles.quesadx = {
+      isDefault = true;
+      
+      settings = {
+        # "browser.startup.homepage" = "https://google.com";
+        "browser.search.region" = "CR";
+        "browser.search.isUS" = false;
+        "distribution.id" = "nixos";
+      };
+    };
+
+    policies = {
+      ExtensionSettings = {
+        # uBlock Origin
+        "uBlock0@raymondhill.net" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        # Bitwarden
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        # Dark Reader
+        "addon@darkreader.org" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+          installation_mode = "force_installed";
+        };
+      };
+    };
+  };
+
+#####################
+### CURSOR BIBATA ###
+#####################
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.phinger-cursors;
+    name = "phinger-cursors-light";
+    size = 24;
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
+    theme = {
+      package = pkgs.adw-gtk3;
+      name = "adw-gtk3";
+    };
   };
 
 ############
@@ -58,6 +107,7 @@
       ga = "git add .";
       gc = "git commit -m";
       gp = "git push";
+      nrs = "cd ~/dotfiles && git add . && cd nixos-dotfiles && sudo nixos-rebuild switch --flake .#nixos";
     };
   };
 
