@@ -41,6 +41,9 @@
 #############
 
 dconf.settings = {
+  
+  ### GNOME dconf SETTINGS ###
+
   # Atajos de ventana
   "org/gnome/desktop/wm/keybindings" = {
     close = [ "<Super>q" ];
@@ -76,6 +79,15 @@ dconf.settings = {
     exec = "firefox";
     name = "Firefox";
   };
+  
+  ### VIRTUALIZATION dconf SETTINGS ###
+  
+  "org/virt-manager/virt-manager/connections" = {
+    autoconnect = ["qemu:///system"];
+    uris = ["qemu:///system"];
+  };
+  
+  
 };
 
 ############
