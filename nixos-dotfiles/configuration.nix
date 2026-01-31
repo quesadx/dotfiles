@@ -55,7 +55,7 @@
   users.users.quesadx = {
     isNormalUser = true;
     description = "Matteo Quesada";
-    extraGroups = [ "networkmanager" "wheel" "video" "render" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "render" "libvirtd" ];
   };
 
 #######################
@@ -63,8 +63,15 @@
 #######################
 
   environment.systemPackages = with pkgs; [
-    vim wget git curl
+    vim wget git curl firefox
+    qemu_full virt-manager
   ];
+  
+######################
+### VIRTUALIZATION ###
+######################
+
+virtualisation.libvirtd.enable = true;
 
 ####################
 ### NIX SETTINGS ###
@@ -89,16 +96,13 @@
 ### GNOME ###
 #############
 
+  services.flatpak.enable = true;
+
   hardware.graphics.enable = true;
-  # Display/session management layer (actually wayland tho)
   services.xserver.enable = true;
-  # GDM = GNOME Display Manager (Wayland-native login screen)
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;  # Explicitly prefer Wayland (default)
-  # GNOME desktop environment (runs on Wayland by default)
-  services.xserver.desktopManager.gnome.enable = true;
-  # Required for GNOME settings/extensions to persist
-  programs.dconf.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;  # Explicitly prefer Wayland (default)
+  services.desktopManager.gnome.enable = true;
 
 #############
 ### FONTS ###
