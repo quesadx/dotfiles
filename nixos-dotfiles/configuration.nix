@@ -19,7 +19,7 @@
 #############
 ### POWER ###
 #############
-services.power-profiles-daemon.enable = true;
+  services.power-profiles-daemon.enable = true;
 
 #####################
 ### LOCALE & TIME ###
@@ -85,16 +85,20 @@ services.power-profiles-daemon.enable = true;
 
   services.openssh.enable = true;
 
-################
-### HYPRLAND ###
-################
+#############
+### GNOME ###
+#############
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-  # services.displayManager.ly.enable = true;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
+  # Display/session management layer (actually wayland tho)
+  services.xserver.enable = true;
+  # GDM = GNOME Display Manager (Wayland-native login screen)
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;  # Explicitly prefer Wayland (default)
+  # GNOME desktop environment (runs on Wayland by default)
+  services.xserver.desktopManager.gnome.enable = true;
+  # Required for GNOME settings/extensions to persist
+  programs.dconf.enable = true;
 
 #############
 ### FONTS ###
