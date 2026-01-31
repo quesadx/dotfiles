@@ -11,23 +11,26 @@ window#waybar {
 
 #workspaces {
     min-width: 10px;
+    background-color: #2f343d;
+    border-radius: 4px;
+    margin: 0px 6px;
 }
 
 #workspaces button {
-    background-color: #21252b;
-    border-radius: 6px;
-    min-width: 10px;
+    min-width: 14px;
     min-height: 8px;
-    font-size: 0;
-    margin: 6px 14px;
+    color: #aab2bf;
+    margin: 6px 6px;
+    font-size: 12;
+    border-radius: 4px;
     transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
     background-color: #61afef;
-    margin: 6px 8px;
-    min-width: 16px;
+    min-width: 15px;
+    color: #21252b;
 }
 
 #workspaces button:hover {

@@ -15,7 +15,7 @@
 
     "hyprland/workspaces": {
 	"rotate": 90,
-        "format": "", 
+        "format": "{name}", 
         "on-click": "activate",
 	"persistent-workspaces": {
             "*": 9 
