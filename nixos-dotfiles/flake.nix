@@ -1,5 +1,5 @@
 {
-  description = "Hyprland on NixOS";
+  description = "Sway on NixOS";
 
 ######################
 ### INPUTS / REPOS ###

@@ -64,6 +64,7 @@ services.power-profiles-daemon.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim wget git curl
+    swaylock swayidle waybar foot kitty
   ];
 
 ####################
@@ -85,16 +86,15 @@ services.power-profiles-daemon.enable = true;
 
   services.openssh.enable = true;
 
-################
-### HYPRLAND ###
-################
+############
+### SWAY ###
+############
 
-  programs.hyprland = {
+  programs.sway = {
     enable = true;
     xwayland.enable = true;
+    wrapperFeatures.gtk = true;
   };
-  # services.displayManager.ly.enable = true;
-  hardware.opengl.enable = true;
 
 #############
 ### FONTS ###

@@ -24,12 +24,6 @@
 ###########################
 
   xdg.configFile = {
-    "hypr".source = ../.config/hypr;
-    "kitty".source = ../.config/kitty;
-    "waybar".source = ../.config/waybar;
-    "swaync".source = ../.config/swaync;
-    "fuzzel".source = ../.config/fuzzel;
-    "fastfetch".source = ../.config/fastfetch;
   };
 
 ################
