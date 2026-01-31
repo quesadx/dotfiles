@@ -10,14 +10,14 @@ window#waybar {
 }
 
 #workspaces {
-    min-width: 40px;
+    min-width: 10px;
 }
 
 #workspaces button {
     background-color: #21252b;
     border-radius: 6px;
-    min-width: 20px;
-    min-height: 16px;
+    min-width: 10px;
+    min-height: 8px;
     font-size: 0;
     margin: 6px 14px;
     transition: all 0.2s ease-in-out;
