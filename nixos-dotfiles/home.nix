@@ -91,17 +91,10 @@
 
   programs.home-manager.enable = true;
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    plugins = [
-      pkgs.hyprlandPlugins.hyprexpo
-    ];
-  };
-
 ##################################
 ### HOME MANAGER STATE VERSION ###
 ##################################
 
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 
 }

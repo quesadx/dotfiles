@@ -93,8 +93,7 @@ services.power-profiles-daemon.enable = true;
     enable = true;
     xwayland.enable = true;
   };
-  # services.displayManager.ly.enable = true;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
 #############
 ### FONTS ###
