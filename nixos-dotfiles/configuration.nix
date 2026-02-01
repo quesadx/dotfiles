@@ -4,7 +4,7 @@ let
   # User Configuration
   userName = "quesadx";
   userDescription = "Matteo Quesada";
-  userGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" ];
+  userGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" "docker" ];
 
   # Locale Settings
   timeZone = "America/Costa_Rica";
@@ -118,6 +118,11 @@ in {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+  };
+
+  # Docker Virtualization
+  virtualisation.docker = {
+    enable = true;
   };
 
   # Fonts

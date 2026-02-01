@@ -28,49 +28,42 @@ let
   # User Packages
   userPackages = with pkgs; [
     # System utilities
-    zoxide
-    fastfetch
-    stow
-    libnotify
+    zoxide fastfetch stow libnotify
     
     # Hyprland components
-    kitty
-    waybar
-    swaynotificationcenter
-    fuzzel
-    swaybg
+    kitty waybar swaynotificationcenter fuzzel swaybg
 
     # File utilities
-    imv
-    zathura
-    mpv
-    onlyoffice-desktopeditors
-    unzip
-    unrar
-    p7zip
+    imv zathura mpv onlyoffice-desktopeditors unzip unrar p7zip
     
     # Screenshot & clipboard
-    grim
-    slurp
-    wl-clipboard
-    cliphist
+    grim slurp wl-clipboard cliphist
     
     # Audio & Bluetooth
-    pulsemixer
-    bluetuith
-    bluez
+    pulsemixer bluetuith bluez
     
     # Applications
-    thunar
-    chromium
-    spotify
+    thunar chromium spotify
     
     # Development
-    github-copilot-cli
-    vscode
+    github-copilot-cli vscode dbeaver-bin
+    # Java development
+    maven netbeans javaPackages.openjfx21
+    gtk3
+    glib
+    libXxf86vm
+    libXrandr
+    libXi
+    libXrender
+    libXcursor
+    libXinerama
+    libXfixes
+    libglvnd
 
     # Theming
     adwaita-icon-theme
+
+    # External software
     flatpak
     
     # Monitoring
@@ -97,8 +90,9 @@ let
     "fuzzel".source = ../.config/fuzzel;
     "fastfetch".source = ../.config/fastfetch;
   };
+in 
 
-in {
+{
   # Home Manager Settings
   home = {
     username = username;
@@ -112,6 +106,22 @@ in {
       package = pkgs.phinger-cursors;
       name = "phinger-cursors-light";
       size = 24;
+    };
+
+    # Environment Variables for JavaFX
+    sessionVariables = {
+      LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [
+        pkgs.libXxf86vm
+        pkgs.libXrandr
+        pkgs.libXi
+        pkgs.libXrender
+        pkgs.libXcursor
+        pkgs.libXinerama
+        pkgs.libXfixes
+        pkgs.libglvnd
+        pkgs.gtk3
+        pkgs.glib
+      ]}";
     };
   };
 
@@ -171,6 +181,13 @@ in {
       };
       policies.ExtensionSettings = firefoxExtensions;
     };
+
+    # Java (jdk-21)
+    java = {
+      enable = true;
+      package = pkgs.jdk21;
+    };
+
   };
 
   # Services

@@ -4,52 +4,52 @@
 }
 
 window#waybar {
-    background-color: #272822;
-    color: #F8F8F2;
-    border-right: 1px solid #49483E;
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    border-right: 1px solid #45475a;
 }
 
 #workspaces {
     min-width: 10px;
-    background-color: #3E3D32;
-    border-radius: 4px;
+    background-color: #313244;
+    border-radius: 0px;
     margin: 0px 6px;
 }
 
 #workspaces button {
     min-width: 14px;
     min-height: 8px;
-    color: #F8F8F2;
+    color: #cdd6f4;
     margin: 6px 6px;
     font-size: 12;
-    border-radius: 4px;
+    border-radius: 0px;
     transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-    background-color: #A6E22E;
+    background-color: #5277C3;
     min-width: 15px;
-    color: #272822;
+    color: #1e1e2e;
 }
 
 #workspaces button:hover {
-    background-color: rgba(166, 226, 46, 0.18);
+    background-color: rgba(82, 119, 195, 0.18);
 }
 
 #workspaces button.urgent {
-    background-color: #F92672;
+    background-color: #f38ba8;
 }
 
 #tray {
     margin-top: 16px;
-    color: #F8F8F2;
+    color: #cdd6f4;
 }
 
 #clock {
     margin: 16px 6px 0px 4px;
     font-weight: 600;
-    color: #F8F8F2;
+    color: #cdd6f4;
 }
 
 #power-profiles-daemon {
@@ -58,13 +58,13 @@ window#waybar {
 }
 
 #power-profiles-daemon.performance {
-    color: #F92672;
+    color: #f38ba8;
 }
 
 #power-profiles-daemon.balanced {
-    color: #E6DB74;
+    color: #f9e2af;
 }
 
 #power-profiles-daemon.power-saver {
-    color: #A6E22E;
+    color: #a6e3a1;
 }
