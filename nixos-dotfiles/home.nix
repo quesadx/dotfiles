@@ -47,8 +47,10 @@ let
     
     # Development
     github-copilot-cli vscode dbeaver-bin
-    # Java development
-    maven netbeans javaPackages.openjfx21
+      # Java
+      maven netbeans javaPackages.openjfx21
+      # C++
+      cmake jetbrains.clion gcc
 
     # Theming
     adwaita-icon-theme
