@@ -15,48 +15,48 @@
     "modules": [
         {
             "type": "title",
-            "keyColor": "white"
+            "keyColor": "green"
         },
         "separator",
         {
             "type": "os",
             "key": "OS",
-            "keyColor": "white"
+            "keyColor": "cyan"
         },
         {
             "type": "kernel",
             "key": "Kernel",
-            "keyColor": "white"
+            "keyColor": "yellow"
         },
         {
             "type": "packages",
             "key": "Packages",
-            "keyColor": "white"
+            "keyColor": "blue"
         },
         {
             "type": "wm",
             "key": "WM",
-            "keyColor": "white"
+            "keyColor": "magenta"
         },
         {
             "type": "shell",
             "key": "Shell",
-            "keyColor": "white"
+            "keyColor": "green"
         },
         {
             "type": "terminal",
             "key": "Terminal",
-            "keyColor": "white"
+            "keyColor": "cyan"
         },
         {
             "type": "cpu",
             "key": "CPU",
-            "keyColor": "white"
+            "keyColor": "yellow"
         },
         {
             "type": "memory",
             "key": "RAM",
-            "keyColor": "white"
+            "keyColor": "blue"
         },
         "break",
         "colors"
