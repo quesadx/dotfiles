@@ -4,7 +4,7 @@ let
   # User Configuration
   userName = "quesadx";
   userDescription = "Matteo Quesada";
-  userGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" "docker" ];
+  userGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" "docker" "kvm" "libvirtd" ];
 
   # Locale Settings
   timeZone = "America/Costa_Rica";
@@ -17,6 +17,12 @@ let
     wget
     git
     curl
+    qemu_full
+    virtio-win
+    virt-manager
+    bluez
+    pulsemixer
+    networkmanagerapplet
   ];
 
   # Font Packages
@@ -112,6 +118,15 @@ in {
       pulse.enable = true;
       wireplumber.enable = true;
     };
+    flatpak.enable = true;
+  };
+
+  security.polkit.enable = true;
+
+  # Virtualization
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
   };
 
   # Hyprland
@@ -120,13 +135,9 @@ in {
     xwayland.enable = true;
   };
 
-  # Docker Virtualization
-  virtualisation.docker = {
-    enable = true;
-  };
-
   # Fonts
   fonts.packages = systemFonts;
 
   system.stateVersion = "25.11";
+
 }

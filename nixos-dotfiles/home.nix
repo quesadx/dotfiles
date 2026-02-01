@@ -39,24 +39,21 @@ let
     # Screenshot & clipboard
     grim slurp wl-clipboard cliphist
     
-    # Audio & Bluetooth
-    pulsemixer bluetuith bluez
+    # Bluetooth
+    bluetuith
     
     # Applications
-    thunar chromium spotify
+    thunar chromium spotify obsidian
     
     # Development
     github-copilot-cli vscode dbeaver-bin
       # Java
-      maven netbeans javaPackages.openjfx21
+      netbeans javaPackages.openjfx21 maven
       # C++
-      cmake jetbrains.clion gcc
+      jetbrains.clion gcc cmake
 
     # Theming
     adwaita-icon-theme
-
-    # External software
-    flatpak
     
     # Monitoring
     hyprmon
@@ -168,4 +165,5 @@ in
 
   # Services
   services.ssh-agent.enable = true;
+
 }
