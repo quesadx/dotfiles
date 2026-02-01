@@ -19,7 +19,7 @@
     swaybg bluetuith hyprmon libnotify
     thunar chromium bluez
     adwaita-icon-theme flatpak
-    spotify copilot-cli
+    spotify github-copilot-cli
   ];
 
 ###########################
