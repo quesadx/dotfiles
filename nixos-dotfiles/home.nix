@@ -1,32 +1,95 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
 
-############
-### USER ###
-############
+let
+  # User Information
+  username = "quesadx";
+  homeDir = "/home/quesadx";
+  
+  # Git Configuration
+  gitUser = {
+    name = "Matteo Quesada";
+    email = "matteo.vargas.quesada@est.una.ac.cr";
+  };
 
-  home.username = "quesadx";
-  home.homeDirectory = "/home/quesadx";
+  # Firefox Extensions
+  firefoxExtensions = {
+    # uBlock Origin
+    "uBlock0@raymondhill.net" = {
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+      installation_mode = "force_installed";
+    };
+    # Bitwarden
+    "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+      installation_mode = "force_installed";
+    };
+  };
 
-#####################################
-### PACKAGES | INSTALAR COSAS ACÁ ###
-#####################################
+  # User Packages
+  userPackages = with pkgs; [
+    # System utilities
+    zoxide
+    fastfetch
+    stow
+    libnotify
+    
+    # Hyprland components
+    kitty
+    waybar
+    swaynotificationcenter
+    fuzzel
+    swaybg
 
-  home.packages = with pkgs; [
-    zoxide fastfetch
-    kitty waybar swaynotificationcenter
-    grim slurp wl-clipboard cliphist
-    stow fuzzel pulsemixer
-    swaybg bluetuith hyprmon libnotify
-    thunar chromium bluez
-    adwaita-icon-theme flatpak
-    spotify github-copilot-cli
+    # File utilities
+    imv
+    zathura
+    mpv
+    onlyoffice-desktopeditors
+    unzip
+    unrar
+    p7zip
+    
+    # Screenshot & clipboard
+    grim
+    slurp
+    wl-clipboard
+    cliphist
+    
+    # Audio & Bluetooth
+    pulsemixer
+    bluetuith
+    bluez
+    
+    # Applications
+    thunar
+    chromium
+    spotify
+    
+    # Development
+    github-copilot-cli
+    vscode
+
+    # Theming
+    adwaita-icon-theme
+    flatpak
+    
+    # Monitoring
+    hyprmon
   ];
 
-###########################
-### CONFIGURATION FILES ###
-###########################
+  # Shell Aliases
+  bashAliases = {
+    ll = "ls -l";
+    gs = "git status";
+    ga = "git add .";
+    gc = "git commit -m";
+    gp = "git push";
+    nrt = "cd ~/dotfiles/nixos-dotfiles && sudo nixos-rebuild test --flake .#nixos";
+    nrs = "cd ~/dotfiles && git add . && cd nixos-dotfiles && sudo nixos-rebuild switch --flake .#nixos";
+  };
 
-  xdg.configFile = {
+  # Dotfiles Configuration Paths
+  configSources = {
     "hypr".source = ../.config/hypr;
     "kitty".source = ../.config/kitty;
     "waybar".source = ../.config/waybar;
@@ -35,49 +98,27 @@
     "fastfetch".source = ../.config/fastfetch;
   };
 
-###############
-### FIREFOX ###
-###############
-
-  programs.firefox = {
-    enable = true;
-    profiles.quesadx = {
-      isDefault = true;
-      
-      settings = {
-        "browser.search.region" = "CR";
-        "browser.search.isUS" = false;
-        "distribution.id" = "nixos";
-      };
-    };
-
-    policies = {
-      ExtensionSettings = {
-        # uBlock Origin
-        "uBlock0@raymondhill.net" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        # Bitwarden
-        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          installation_mode = "force_installed";
-        };
-      };
+in {
+  # Home Manager Settings
+  home = {
+    username = username;
+    homeDirectory = homeDir;
+    packages = userPackages;
+    stateVersion = "26.05";
+    
+    # Cursor Theme
+    pointerCursor = {
+      gtk.enable = true;
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-light";
+      size = 24;
     };
   };
 
-#####################
-### CURSOR BIBATA ###
-#####################
+  # Symlink Configuration Files
+  xdg.configFile = configSources;
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.phinger-cursors;
-    name = "phinger-cursors-light";
-    size = 24;
-  };
-
+  # GTK Theme
   gtk = {
     enable = true;
     iconTheme = {
@@ -90,62 +131,48 @@
     };
   };
 
-############
-### BASH ###
-############
+  # Programs Configuration
+  programs = {
+    home-manager.enable = true;
 
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      gs = "git status";
-      ga = "git add .";
-      gc = "git commit -m";
-      gp = "git push";
-      nrt = "cd ~/dotfiles/nixos-dotfiles && sudo nixos-rebuild test --flake .#nixos";
-      nrs = "cd ~/dotfiles && git add . && cd nixos-dotfiles && sudo nixos-rebuild switch --flake .#nixos";
+    # Bash Shell
+    bash = {
+      enable = true;
+      shellAliases = bashAliases;
+      profileExtra = ''
+        if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+          exec start-hyprland
+        fi
+      '';
     };
-    profileExtra = ''
-      if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-        exec start-hyprland
-      fi
-    '';
-  };
 
-###########
-### GIT ###
-###########
+    # Git
+    git = {
+      enable = true;
+      settings.user = gitUser;
+    };
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Matteo Quesada";
-        email = "matteo.vargas.quesada@est.una.ac.cr";
+    # SSH
+    ssh = {
+      enable = true;
+      addKeysToAgent = "yes";
+    };
+
+    # Firefox
+    firefox = {
+      enable = true;
+      profiles.${username} = {
+        isDefault = true;
+        settings = {
+          "browser.search.region" = "CR";
+          "browser.search.isUS" = false;
+          "distribution.id" = "nixos";
+        };
       };
+      policies.ExtensionSettings = firefoxExtensions;
     };
   };
 
-###########
-### SSH ###
-###########
-
-  programs.ssh = {
-    enable = true;
-    addKeysToAgent = "yes";
-  };
+  # Services
   services.ssh-agent.enable = true;
-
-####################
-### HOME MANAGER ###
-####################
-
-  programs.home-manager.enable = true;
-
-##################################
-### HOME MANAGER STATE VERSION ###
-##################################
-
-  home.stateVersion = "26.05";
-
 }

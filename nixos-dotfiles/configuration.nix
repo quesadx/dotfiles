@@ -1,107 +1,26 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
 
-  imports = [ ./hardware-configuration.nix ];
+let
+  # User Configuration
+  userName = "quesadx";
+  userDescription = "Matteo Quesada";
+  userGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" ];
 
-############
-### BOOT ###
-############
+  # Locale Settings
+  timeZone = "America/Costa_Rica";
+  locale = "en_US.UTF-8";
+  regionalLocale = "es_CR.UTF-8";
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-##################
-### NETWORKING ###
-##################
-
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-
-#############
-### POWER ###
-#############
-services.power-profiles-daemon.enable = true;
-
-#####################
-### LOCALE & TIME ###
-#####################
-
-  time.timeZone = "America/Costa_Rica";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "es_CR.UTF-8";
-    LC_IDENTIFICATION = "es_CR.UTF-8";
-    LC_MEASUREMENT = "es_CR.UTF-8";
-    LC_MONETARY = "es_CR.UTF-8";
-    LC_NAME = "es_CR.UTF-8";
-    LC_NUMERIC = "es_CR.UTF-8";
-    LC_PAPER = "es_CR.UTF-8";
-    LC_TELEPHONE = "es_CR.UTF-8";
-    LC_TIME = "es_CR.UTF-8";
-  };
-
-################
-### KEYBOARD ###
-################
-
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-#############
-### USERS ###
-#############
-
-  users.users.quesadx = {
-    isNormalUser = true;
-    description = "Matteo Quesada";
-    extraGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" ];
-  };
-
-#######################
-### SYSTEM PACKAGES ###
-#######################
-
-  environment.systemPackages = with pkgs; [
-    vim wget git curl
+  # System Packages
+  corePackages = with pkgs; [
+    vim
+    wget
+    git
+    curl
   ];
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
-####################
-### NIX SETTINGS ###
-####################
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-  nix.settings.auto-optimise-store = true;
-
-###########
-### SSH ###
-###########
-
-  services.openssh.enable = true;
-
-################
-### HYPRLAND ###
-################
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-  hardware.graphics.enable = true;
-
-#############
-### FONTS ###
-#############
-  fonts.packages = with pkgs; [
+  # Font Packages
+  systemFonts = with pkgs; [
     nerd-fonts.jetbrains-mono
     noto-fonts
     noto-fonts-color-emoji
@@ -109,15 +28,100 @@ services.power-profiles-daemon.enable = true;
     font-awesome
   ];
 
-#############
-### AUDIO ###
-#############
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
+in {
+  imports = [ ./hardware-configuration.nix ];
+
+  # Boot Configuration
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
+
+  # Networking
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+  };
+
+  # Power Management
+  services.power-profiles-daemon.enable = true;
+
+  # Locale & Time
+  time.timeZone = timeZone;
+  i18n = {
+    defaultLocale = locale;
+    extraLocaleSettings = {
+      LC_ADDRESS = regionalLocale;
+      LC_IDENTIFICATION = regionalLocale;
+      LC_MEASUREMENT = regionalLocale;
+      LC_MONETARY = regionalLocale;
+      LC_NAME = regionalLocale;
+      LC_NUMERIC = regionalLocale;
+      LC_PAPER = regionalLocale;
+      LC_TELEPHONE = regionalLocale;
+      LC_TIME = regionalLocale;
+    };
+  };
+
+  # Keyboard Layout
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # User Account
+  users.users.${userName} = {
+    isNormalUser = true;
+    description = userDescription;
+    extraGroups = userGroups;
+  };
+
+  # System Packages
+  environment.systemPackages = corePackages;
+
+  # Hardware
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    graphics.enable = true;
+  };
+
+  # Nix Settings
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
+  # Services
+  services = {
+    openssh.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
+  };
+
+  # Hyprland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # Fonts
+  fonts.packages = systemFonts;
 
   system.stateVersion = "25.11";
 }

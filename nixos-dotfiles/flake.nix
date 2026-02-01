@@ -1,10 +1,7 @@
 {
   description = "Hyprland on NixOS";
 
-######################
-### INPUTS / REPOS ###
-######################
-
+  # Input Sources
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     
@@ -14,25 +11,26 @@
     };
   };
 
-###############
-### OUTPUTS ###
-###############
-
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-	  modules = [
+  # System Configuration
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      hostname = "nixos";
+      username = "quesadx";
+    in {
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          # System configuration
           ./configuration.nix
 
-	  home-manager.nixosModules.home-manager {
-	    home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-	    home-manager.users.quesadx = import ./home.nix;
-	  }
+          # Home Manager integration
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./home.nix;
+          }
         ];
       };
     };
-  };
 }
