@@ -185,7 +185,7 @@ in
     # Java (jdk-21)
     java = {
       enable = true;
-      package = pkgs.jdk21;
+      package = pkgs.jdk21.override { enableJavaFX = true; };
     };
 
   };
