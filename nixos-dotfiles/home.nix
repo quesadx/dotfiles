@@ -17,8 +17,9 @@
     grim slurp wl-clipboard cliphist
     stow fuzzel pulsemixer
     swaybg bluetuith hyprmon libnotify
-    kdePackages.dolphin chromium 
-    adwaita-icon-theme
+    thunar chromium bluez
+    adwaita-icon-theme flatpak
+    spotify copilot-cli
   ];
 
 ###########################

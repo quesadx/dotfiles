@@ -55,7 +55,7 @@ services.power-profiles-daemon.enable = true;
   users.users.quesadx = {
     isNormalUser = true;
     description = "Matteo Quesada";
-    extraGroups = [ "networkmanager" "wheel" "video" "render" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" ];
   };
 
 #######################
@@ -63,8 +63,11 @@ services.power-profiles-daemon.enable = true;
 #######################
 
   environment.systemPackages = with pkgs; [
-    vim wget git curl bibata-cursors
+    vim wget git curl
   ];
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
 ####################
 ### NIX SETTINGS ###
@@ -113,6 +116,7 @@ services.power-profiles-daemon.enable = true;
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   system.stateVersion = "25.11";
