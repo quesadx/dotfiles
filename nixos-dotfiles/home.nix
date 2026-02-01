@@ -49,16 +49,6 @@ let
     github-copilot-cli vscode dbeaver-bin
     # Java development
     maven netbeans javaPackages.openjfx21
-    gtk3
-    glib
-    libXxf86vm
-    libXrandr
-    libXi
-    libXrender
-    libXcursor
-    libXinerama
-    libXfixes
-    libglvnd
 
     # Theming
     adwaita-icon-theme
@@ -106,22 +96,6 @@ in
       package = pkgs.phinger-cursors;
       name = "phinger-cursors-light";
       size = 24;
-    };
-
-    # Environment Variables for JavaFX
-    sessionVariables = {
-      LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [
-        pkgs.libXxf86vm
-        pkgs.libXrandr
-        pkgs.libXi
-        pkgs.libXrender
-        pkgs.libXcursor
-        pkgs.libXinerama
-        pkgs.libXfixes
-        pkgs.libglvnd
-        pkgs.gtk3
-        pkgs.glib
-      ]}";
     };
   };
 
