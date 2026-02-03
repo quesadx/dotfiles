@@ -18,7 +18,7 @@
         "format": "{name}", 
         "on-click": "activate",
 	"persistent-workspaces": {
-            "*": 9 
+            "*": 5 
         },
         "all-outputs": true,
         "show-special": false,
