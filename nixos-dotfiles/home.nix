@@ -36,6 +36,7 @@ let
   # PACKAGE SELECTION BY CATEGORY
   ############################################################
   userPackages = with pkgs; [
+    # System & Desktop Environment
     fastfetch          # System information fetcher (modern neofetch alternative)
     libnotify          # Desktop notification library
     kitty              # GPU-accelerated terminal emulator
@@ -48,25 +49,38 @@ let
     slurp              # Interactive selection tool for screenshots
     wl-clipboard       # Clipboard utilities (wl-copy/wl-paste)
     cliphist           # Clipboard history manager
+    adwaita-icon-theme # Standard GNOME icon theme
+    
+    # Media & Documents
     imv                # Image viewer for Wayland/X11
     zathura            # Minimal document viewer (PDF, ePub, etc.)
     mpv                # Media player
     onlyoffice-desktopeditors  # Office suite alternative
+    
+    # Utilities
     unzip unrar p7zip  # Archive extraction tools
     bluetuith          # Bluetooth management TUI
     thunar             # Lightweight file manager
+    
+    # Applications
     chromium           # Web browser (alternative to Firefox)
     spotify            # Music streaming client
     obsidian           # Markdown-based knowledge base
     github-copilot-cli # AI pair programmer CLI
+    
+    # Development: IDEs & Editors (keep these)
     vscode             # Visual Studio Code
     dbeaver-bin        # Universal database tool
     netbeans           # Java IDE
-    javaPackages.openjfx21  # JavaFX runtime for JDK 21
-    maven              # Build automation tool
     jetbrains.clion    # C/C++ IDE
-    gcc cmake          # C/C++ toolchain
-    adwaita-icon-theme # Standard GNOME icon theme
+    
+    # Development: Nix tooling
+    direnv             # Auto-load development environments per directory
+    nix-direnv         # Better nix integration for direnv
+    
+    # NOTE: Development toolchains (maven, gcc, cmake, jdk) are now
+    # installed per-project via nix develop shells in ~/dotfiles/dev-templates/
+    # This keeps your system clean and projects isolated.
   ];
 
 
@@ -185,6 +199,16 @@ in {
         init.defaultBranch = "main";
         pull.rebase = true;
       };
+    };
+
+
+    ########################################################################
+    # DIRENV: Auto-load development environments
+    ########################################################################
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
     };
 
 

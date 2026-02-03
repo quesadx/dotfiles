@@ -82,6 +82,7 @@ in {
   ############################################################
   networking = {
     hostName = "nixos";                  # System hostname
+
     networkmanager.enable = true;        # Enable NetworkManager daemon
     firewall.enable = true;              # Uncomment to enable firewall
   };
@@ -190,6 +191,17 @@ in {
     security.polkit.enable = true;
 
   ############################################################
+  # NIX DYNAMIC LINKER (FOR DYNAMICALLY LINKED EXECTUABLES)
+  ############################################################
+  programs.nix-ld.enable = true;
+  # Minimal libraries for Rust binaries
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib       # Provides libgcc_s.so
+    zlib                   # Very common dependency
+  ];
+
+
+  ############################################################
   # PACKAGE MANAGEMENT & SYSTEM PACKAGES
   ############################################################
   environment.systemPackages = corePackages;
@@ -232,8 +244,6 @@ in {
   ############################################################
   # SECURITY HARDENING (OPTIONAL ENHANCEMENTS)
   ############################################################
-  # Consider adding these for improved security:
-  #
   security.sudo.wheelNeedsPassword = false;  # Allow wheel group passwordless sudo
   
 }

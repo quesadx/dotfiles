@@ -30,8 +30,7 @@
 	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "power-profiles-daemon": {
-	"rotate": 90,
-        "format": "{icon} {profile}",
+        "format": "{icon}",
         "tooltip-format": "Power Profile: {profile}\nDriver: {driver}",
         "tooltip": true,
         "format-icons": {
@@ -40,5 +39,7 @@
             "balanced": " ",
             "power-saver": ""
         }
-    }
+    },
+    "on-sigusr1": "hide",
+    "on-sigusr2": "show"
 }
