@@ -157,13 +157,16 @@ in {
       current-workspace-only = "all";
     };
     "org/gnome/shell/extensions/hidetopbar" = {
+      hot-corner = true;
       enable-active-window = false;
+      animation-time-overview = 0.2;
+      animation-time-autohide = 0.2;
     };
     "org/gnome/shell/extensions/net/gfxmonk/impatience" = {
       speed-factor = 1.1;
     };
 
-    # GNOME shortcuts
+    # GNOME general settings
     # Can be found using 'dconf watch /org/gnome/'
     "org/gnome/settings-daemon/plugins/media-keys" = {
       home = [ "<Super>e" ];
@@ -174,6 +177,10 @@ in {
       maximize = [ "<Super>F" ];
       minimize = [ "<Super>D" ];
       close = [ "<Super>Q" ];
+    };
+    # Power button behavior
+     "org/gnome/settings-daemon/plugins/power" = {
+      power-button-action = "nothing";
     };
 
     # Custom shortcuts
@@ -189,6 +196,15 @@ in {
       binding = "<Super>t";
       command = "kgx";
       name = "gnome-console";
+    };
+
+    # GNOME misc setting
+    "org/gnome/desktop/peripherals/mouse" = {
+      accel-profile = "flat";
+      speed = 0.21;
+    };
+    "org/gnome/desktop/sound" = {
+      event-sounds = false;
     };
   };
   ############################################################
