@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   ############################################################
@@ -163,7 +163,7 @@ in {
       animation-time-autohide = 0.2;
     };
     "org/gnome/shell/extensions/net/gfxmonk/impatience" = {
-      speed-factor = 1.1;
+      speed-factor = 1.2;
     };
 
     # GNOME general settings
@@ -182,6 +182,13 @@ in {
      "org/gnome/settings-daemon/plugins/power" = {
       power-button-action = "nothing";
     };
+    # Input layout
+    "org/gnome/desktop/input-sources" = {
+        show-all-sources = true;
+        sources = [ # Needs 'lib' to build GVariant tuples
+          (lib.gvariant.mkTuple ["xkb" "us+altgr-intl"])
+        ];
+      };
 
     # Custom shortcuts
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -258,8 +265,11 @@ in {
     ########################################################################
     ssh = {
       enable = true;
-      addKeysToAgent = "yes";  # Automatically add keys to ssh-agent
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        addKeysToAgent = "yes";
     };
+};
 
 
     ########################################################################
