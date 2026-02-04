@@ -135,12 +135,7 @@ in {
   ############################################################
   # INPUT DEVICES & KEYBOARD LAYOUT
   ############################################################
-  services.xserver = {
-    xkb = {
-      layout = "us";                       # US English keyboard layout
-      variant = "alt-intl";                # International variant
-    };
-  };
+  # GNOME handles this shi
 
 
   ############################################################

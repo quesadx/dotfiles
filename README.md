@@ -1,31 +1,13 @@
-# dotfiles
+# dotfiles repo
 
-Minimal configuration files for my Linux setup.
+Minimal configuration files for my Linux setup. Mainy focused on NixOS.
 
 ## Environment
 
-- **OS:** CachyOS / NixOS
-- **WM:** Hyprland (Wayland)
-- **Bar:** Waybar
-- **Shell:** Bash / Fish
-- **Terminal:** Kitty
-- **Launcher:** Fuzzel / Rofi
-- **Notifications:** SwayNC
-- **Editor:** Neovim
-
-## Structure
-
-```text
-dotfiles/
-├── .config/          # Application configs (universal)
-│   ├── hypr/
-│   ├── waybar/
-│   ├── kitty/
-│   ├── nvim/
-│   └── ...
-├── nixos/            # NixOS system configurations
-└── scripts/          # Utility scripts
-```
+- **OS:** NixOS / CachyOS (VM & fallback hardware)
+- **DE:** GNOME (Wayland)
+- **Shell:** Zsh / Bash (as fallback)
+- **Terminal:** gnome-console (kgx)
 
 ## Installation
 
