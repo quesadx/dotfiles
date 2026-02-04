@@ -135,14 +135,14 @@ in {
   dconf.enable = true;
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
-      xkb-options = [ "ctrl:nocaps" ];
+      # xkb-options = [ "ctrl:nocaps" ]; emacs pinky btw
     };
     "org/gnome/shell" = {
       enabled-extensions = gnome-extensions-enabled;
     };
 
     # GNOME Extensions Settings
-    # Can be found using 'conf watch /org/gnome/shell/extensions/'
+    # Can be found using 'dconf watch /org/gnome/shell/extensions/'
     "org/gnome/shell/extensions/alphabetical-app-grid" = {
       folder-order-position = "start";
     };
@@ -164,7 +164,32 @@ in {
     };
 
     # GNOME shortcuts
-    
+    # Can be found using 'dconf watch /org/gnome/'
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      home = [ "<Super>e" ];
+      www = [ "<Super>b" ];
+      control-center = [ "<Super>i" ];
+    };
+    "org/gnome/desktop/wm/keybindings" = {
+      maximize = [ "<Super>F" ];
+      minimize = [ "<Super>D" ];
+      close = [ "<Super>Q" ];
+    };
+
+    # Custom shortcuts
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      # 1. Register the custom shortcut path
+      # These MUST have the leading and trailing slashes as strings
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
+    # 2. Define the shortcut details
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Super>t";
+      command = "kgx";
+      name = "gnome-console";
+    };
   };
   ############################################################
   # CONFIGURATION FILE MANAGEMENT
