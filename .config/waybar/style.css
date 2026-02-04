@@ -12,7 +12,7 @@ window#waybar {
 #workspaces {
     min-width: 10px;
     background-color: #313244;
-    border-radius: 0px;
+    border-radius: 4px;
     margin: 0px 6px;
 }
 
@@ -22,7 +22,7 @@ window#waybar {
     color: #cdd6f4;
     margin: 6px 6px;
     font-size: 12;
-    border-radius: 0px;
+    border-radius: 4px;
     transition: all 0.2s ease-in-out;
 }
 
