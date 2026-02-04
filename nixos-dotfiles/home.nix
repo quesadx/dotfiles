@@ -36,51 +36,57 @@ let
   # PACKAGE SELECTION BY CATEGORY
   ############################################################
   userPackages = with pkgs; [
-    # System & Desktop Environment
-    fastfetch          # System information fetcher (modern neofetch alternative)
-    libnotify          # Desktop notification library
-    kitty              # GPU-accelerated terminal emulator
-    waybar             # Highly customizable Wayland status bar
-    swaynotificationcenter  # Notification daemon for Wayland
-    fuzzel             # Application launcher (similar to dmenu/rofi)
-    swaybg             # Wallpaper setter for Wayland
-    hyprmon            # System monitor widget for Hyprland
-    grim               # Screenshot utility for Wayland
-    slurp              # Interactive selection tool for screenshots
-    wl-clipboard       # Clipboard utilities (wl-copy/wl-paste)
-    cliphist           # Clipboard history manager
-    adwaita-icon-theme # Standard GNOME icon theme
-    
-    # Media & Documents
-    imv                # Image viewer for Wayland/X11
-    zathura            # Minimal document viewer (PDF, ePub, etc.)
-    mpv                # Media player
-    onlyoffice-desktopeditors  # Office suite alternative
-    
-    # Utilities
-    unzip unrar p7zip  # Archive extraction tools
-    bluetuith          # Bluetooth management TUI
-    thunar             # Lightweight file manager
-    
+    # System & Desktop
+    fastfetch
+    adwaita-icon-theme
+
+    # File Management
+    nautilus
+    file-roller
+    unzip unrar p7zip
+
+    # Media
+    showtime
+    gnome-photos
+    gnome-music
+    spotify
+
+    # Documents & Utilities
+    papers
+    onlyoffice-desktopeditors
+    gnome-calculator
+    gnome-text-editor
+    gnome-font-viewer
+    gnome-console
+
     # Applications
-    chromium           # Web browser (alternative to Firefox)
-    spotify            # Music streaming client
-    obsidian           # Markdown-based knowledge base
-    github-copilot-cli # AI pair programmer CLI
-    
-    # Development: IDEs & Editors (keep these)
-    vscode             # Visual Studio Code
-    dbeaver-bin        # Universal database tool
-    netbeans           # Java IDE
-    jetbrains.clion    # C/C++ IDE
-    
-    # Development: Nix tooling
-    direnv             # Auto-load development environments per directory
-    nix-direnv         # Better nix integration for direnv
-    
-    # NOTE: Development toolchains (maven, gcc, cmake, jdk) are now
-    # installed per-project via nix develop shells in ~/dotfiles/dev-templates/
-    # This keeps your system clean and projects isolated.
+    brave
+    obsidian
+    github-copilot-cli
+
+    # Development: IDEs & Tools
+    vscode
+    dbeaver-bin
+    netbeans
+    jetbrains.clion
+
+    # Development: Environment
+    direnv
+    nix-direnv
+  ];
+
+  gnome-extensions-enabled = [
+    "AlphabeticalAppGrid@stuarthayhurst"
+    "CoverflowAltTab@palatis.blogspot.com"
+    "appindicatorsupport@rgcjonas.gmail.com"
+    "auto-accent-colour@Wartybix"
+    "caffeine@patapon.info"
+    "clipboard-history@alexsaveau.dev"
+    "grand-theft-focus@zalckos.github.com"
+    "hidetopbar@mathieu.bidon.ca"
+    "impatience@gfxmonk.net"
+    "luminus-desktop@dikasp.gitlab"
+    "top-bar-organizer@julian.gse.jsts.xyz"
   ];
 
 
@@ -106,11 +112,6 @@ let
   # Symlink configuration directories from dotfiles repository
   # Paths are relative to the Home Manager module location
   configSources = {
-    "hypr".source = ../.config/hypr;    # Hyprland compositor config
-    "kitty".source = ../.config/kitty;    # Terminal emulator config
-    "waybar".source = ../.config/waybar;   # Status bar config
-    "swaync".source = ../.config/swaync;   # Notification daemon config
-    "fuzzel".source = ../.config/fuzzel;   # Application launcher config
     "fastfetch".source = ../.config/fastfetch;  # System info display config
   };
 
@@ -125,41 +126,46 @@ in {
     stateVersion = "26.05";
     # Installed packages for this user
     packages = userPackages;
-    # Cursor theme configuration (applies to GTK/Qt apps)
-    pointerCursor = {
-      gtk.enable = true;
-      package = pkgs.phinger-cursors;
-      name = "phinger-cursors-light";
-      size = 24;
-    };
   };
 
 
   ############################################################
   # DESKTOP ENVIRONMENT THEMING
   ############################################################
-  gtk = {
-    enable = true;
-    # Icon theme (used by GTK applications)
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+  dconf.enable = true;
+  dconf.settings = {
+    "org/gnome/desktop/input-sources" = {
+      xkb-options = [ "ctrl:nocaps" ];
     };
-    # GTK theme with libadwaita styling for modern appearance
-    theme = {
-      package = pkgs.adw-gtk3;
-      name = "adw-gtk3";
-    };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
+    "org/gnome/shell" = {
+      enabled-extensions = gnome-extensions-enabled;
     };
 
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
+    # GNOME Extensions Settings
+    # Can be found using 'conf watch /org/gnome/shell/extensions/'
+    "org/gnome/shell/extensions/alphabetical-app-grid" = {
+      folder-order-position = "start";
     };
+    "org/gnome/shell/extensions/appindicator" = {
+      legacy-tray-enabled = false;
+    };
+    "org/gnome/shell/extensions/caffeine" = {
+      restore-state = true;
+      enable-fullscreen = false;
+    };
+    "org/gnome/shell/extensions/coverflowalttab" = {
+      current-workspace-only = "all";
+    };
+    "org/gnome/shell/extensions/hidetopbar" = {
+      enable-active-window = false;
+    };
+    "org/gnome/shell/extensions/net/gfxmonk/impatience" = {
+      speed-factor = 1.1;
+    };
+
+    # GNOME shortcuts
+    
   };
-
-
   ############################################################
   # CONFIGURATION FILE MANAGEMENT
   ############################################################
@@ -179,13 +185,7 @@ in {
     ########################################################################
     bash = {
       enable = true;
-      shellAliases = bashAliases;
-      
-      profileExtra = ''
-        if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-          exec start-hyprland
-        fi
-      '';
+      shellAliases = bashAliases;      
     };
 
 
@@ -247,7 +247,6 @@ in {
       package = pkgs.jdk21.override { enableJavaFX = true; };  # JDK 21 with JavaFX
     };
   };
-
 
   ############################################################
   # USER SERVICES

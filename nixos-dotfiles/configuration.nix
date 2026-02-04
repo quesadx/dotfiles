@@ -40,9 +40,20 @@ let
     qemu_full               # Full QEMU virtualization suite
     virtio-win              # Windows virtio drivers for VMs
     virt-manager            # GUI for virtual machine management
-    bluez                   # Bluetooth protocol stack
-    pulsemixer              # CLI audio mixer for PipeWire/PulseAudio
-    networkmanagerapplet    # System tray applet for NetworkManager
+    
+    # GNOME Extensions (core?)
+    dconf-editor
+    gnomeExtensions.alphabetical-app-grid
+    gnomeExtensions.auto-accent-colour
+    gnomeExtensions.caffeine
+    gnomeExtensions.coverflow-alt-tab
+    gnomeExtensions.clipboard-history
+    gnomeExtensions.grand-theft-focus
+    gnomeExtensions.hide-top-bar
+    gnomeExtensions.impatience
+    gnomeExtensions.luminus-desktop
+    gnomeExtensions.top-bar-organizer
+    gnomeExtensions.appindicator
   ];
 
 
@@ -135,11 +146,15 @@ in {
   ############################################################
   # DESKTOP ENVIRONMENT & DISPLAY SERVER
   ############################################################
-  programs.hyprland = {
-    enable = true;                       # Enable Hyprland compositor
-    xwayland.enable = true;              # X11 compatibility layer for legacy apps
-  };
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
+  # To disable installing GNOME's suite of applications
+  # and only be left with GNOME shell.
+  services.gnome.core-apps.enable = false;
+  services.gnome.core-developer-tools.enable = false;
+  services.gnome.games.enable = false;
+  environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
 
   ############################################################
   # AUDIO & VIDEO SUBSYSTEMS
