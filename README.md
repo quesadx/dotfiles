@@ -4,7 +4,7 @@ Minimal configuration files for my Linux setup. Mainy focused on NixOS.
 
 ## Environment
 
-- **OS:** NixOS / CachyOS (VM & fallback hardware)
+- **OS:** NixOS
 - **DE:** GNOME (Wayland)
 - **Shell:** Zsh / Bash (as fallback)
 - **Terminal:** gnome-console (kgx)
