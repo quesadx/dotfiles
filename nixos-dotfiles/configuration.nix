@@ -41,19 +41,22 @@ let
     virtio-win              # Windows virtio drivers for VMs
     virt-manager            # GUI for virtual machine management
     
-    # GNOME Extensions (core?)
-    dconf-editor
-    gnomeExtensions.alphabetical-app-grid
-    gnomeExtensions.auto-accent-colour
-    gnomeExtensions.caffeine
-    gnomeExtensions.coverflow-alt-tab
-    gnomeExtensions.clipboard-history
-    gnomeExtensions.grand-theft-focus
-    gnomeExtensions.hide-top-bar
-    gnomeExtensions.impatience
-    gnomeExtensions.luminus-desktop
-    gnomeExtensions.top-bar-organizer
-    gnomeExtensions.appindicator
+    # KDE
+    kdePackages.discover # Optional: Install if you use Flatpak or fwupd firmware update sevice
+    kdePackages.kcalc # Calculator
+    kdePackages.kcharselect # Tool to select and copy special characters from all installed fonts
+    kdePackages.kclock # Clock app
+    kdePackages.kcolorchooser # A small utility to select a color
+    kdePackages.kolourpaint # Easy-to-use paint program
+    kdePackages.ksystemlog # KDE SystemLog Application
+    kdePackages.sddm-kcm # Configuration module for SDDM
+    kdiff3 # Compares and merges 2 or 3 files or directories
+    kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
+    kdePackages.partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
+    # Non-KDE graphical packages
+    hardinfo2 # System information and benchmarks for Linux systems
+    wayland-utils # Wayland utilities
+    wl-clipboard # Command-line copy/paste utilities for Wayland
   ];
 
 
@@ -141,15 +144,7 @@ in {
   ############################################################
   # DESKTOP ENVIRONMENT & DISPLAY SERVER
   ############################################################
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
 
-  # To disable installing GNOME's suite of applications
-  # and only be left with GNOME shell.
-  services.gnome.core-apps.enable = false;
-  services.gnome.core-developer-tools.enable = false;
-  services.gnome.games.enable = false;
-  environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
 
   ############################################################
   # AUDIO & VIDEO SUBSYSTEMS
@@ -196,6 +191,10 @@ in {
     openssh.enable = true;
     # Flatpak application support
     flatpak.enable = true;
+
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;     # SDDM display manager for KDE Plasma
+    displayManager.sddm.wayland.enable = true;
   };
     # Polkit for privilege authorization dialogs
     security.polkit.enable = true;
@@ -235,6 +234,18 @@ in {
   };
   # Allow installation of unfree (proprietary) packages
   nixpkgs.config.allowUnfree = true;
+
+  environment.plasma6.excludePackages = with pkgs; [
+    kdePackages.elisa # Simple music player aiming to provide a nice experience for its users
+    kdePackages.kdepim-runtime # Akonadi agents and resources
+    kdePackages.kmahjongg # KMahjongg is a tile matching game for one or two players
+    kdePackages.kmines # KMines is the classic Minesweeper game
+    kdePackages.konversation # User-friendly and fully-featured IRC client
+    kdePackages.kpat # KPatience offers a selection of solitaire card games
+    kdePackages.ksudoku # KSudoku is a logic-based symbol placement puzzle
+    kdePackages.ktorrent # Powerful BitTorrent client
+    mpv
+  ];
 
 
   ############################################################
