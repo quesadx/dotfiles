@@ -49,7 +49,6 @@ let
     showtime
     gnome-photos
     gnome-music
-    spotify
 
     # Documents & Utilities
     papers
@@ -64,10 +63,10 @@ let
     obsidian
     github-copilot-cli
     thunderbird
+    spotify
 
     # Development: IDEs & Tools
     vscode
-    dbeaver-bin
     jetbrains.clion
 
     # Development: Environment
