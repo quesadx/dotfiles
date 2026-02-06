@@ -60,14 +60,14 @@ let
     gnome-console
 
     # Applications
-    brave
+    google-chrome
     obsidian
     github-copilot-cli
+    thunderbird
 
     # Development: IDEs & Tools
     vscode
     dbeaver-bin
-    netbeans
     jetbrains.clion
 
     # Development: Environment
