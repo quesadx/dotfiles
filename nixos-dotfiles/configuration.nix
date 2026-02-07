@@ -139,19 +139,6 @@ in {
 
 
   ############################################################
-  # DESKTOP ENVIRONMENT & DISPLAY SERVER
-  ############################################################
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # To disable installing GNOME's suite of applications
-  # and only be left with GNOME shell.
-  services.gnome.core-apps.enable = false;
-  services.gnome.core-developer-tools.enable = false;
-  services.gnome.games.enable = false;
-  environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
-
-  ############################################################
   # AUDIO & VIDEO SUBSYSTEMS
   ############################################################
   services.pipewire = {
@@ -196,6 +183,17 @@ in {
     openssh.enable = true;
     # Flatpak application support
     flatpak.enable = true;
+
+    ###########################
+    # Display manager & GNOME #
+    ###########################
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    # To disable installing GNOME's suite of applications
+    # and only be left with GNOME shell.
+    gnome.core-apps.enable = false;
+    gnome.core-developer-tools.enable = false;
+    gnome.games.enable = false;
   };
     # Polkit for privilege authorization dialogs
     security.polkit.enable = true;
@@ -215,6 +213,7 @@ in {
   # PACKAGE MANAGEMENT & SYSTEM PACKAGES
   ############################################################
   environment.systemPackages = corePackages;
+  environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
 
 
   ############################################################

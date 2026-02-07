@@ -64,6 +64,7 @@ let
     github-copilot-cli
     thunderbird
     spotify
+    rnote
 
     # Development: IDEs & Tools
     vscode
