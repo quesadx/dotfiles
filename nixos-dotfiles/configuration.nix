@@ -54,6 +54,8 @@ let
     gnomeExtensions.luminus-desktop
     gnomeExtensions.top-bar-organizer
     gnomeExtensions.appindicator
+
+    waypipe
   ];
 
 
@@ -207,6 +209,7 @@ in {
     stdenv.cc.cc.lib       # Provides libgcc_s.so
     zlib                   # Very common dependency
   ];
+
 
 
   ############################################################
