@@ -1,123 +1,72 @@
 { config, pkgs, ... }:
 
 let
-  ############################################################
-  # USER ACCOUNT CONFIGURATION
-  ############################################################
   userName = "quesadx";
   userDescription = "Matteo Quesada";
-  # System groups for hardware access and privileges
-  userGroups = [
-    "networkmanager"  # Network management
-    "wheel"           # sudo privileges
-    "video"           # GPU access
-    "render"          # Hardware rendering
-    "audio"           # Audio devices
-    "scanner"         # Scanner access
-    "lp"              # Printing subsystem
-    "docker"          # Docker container management
-    "kvm"             # Kernel-based Virtual Machine
-    "libvirtd"        # Libvirt virtualization daemon
-  ];
-
-
-  ############################################################
-  # LOCALIZATION & REGIONAL SETTINGS
-  ############################################################
   timeZone = "America/Costa_Rica";
   locale = "en_US.UTF-8";
   regionalLocale = "es_CR.UTF-8";
-
-
-  ############################################################
-  # SYSTEM PACKAGE SELECTION
-  ############################################################
-  corePackages = with pkgs; [
-    vim                     # Text editor
-    wget                    # Download utility
-    git                     # Version control
-    curl                    # Data transfer tool
-    qemu_full               # Full QEMU virtualization suite
-    virtio-win              # Windows virtio drivers for VMs
-    virt-manager            # GUI for virtual machine management
-    
-    # GNOME Extensions (core?)
-    dconf-editor
-    gnomeExtensions.alphabetical-app-grid
-    gnomeExtensions.auto-accent-colour
-    gnomeExtensions.caffeine
-    gnomeExtensions.coverflow-alt-tab
-    gnomeExtensions.clipboard-history
-    gnomeExtensions.grand-theft-focus
-    gnomeExtensions.hide-top-bar
-    gnomeExtensions.impatience
-    gnomeExtensions.luminus-desktop
-    gnomeExtensions.top-bar-organizer
-    gnomeExtensions.appindicator
+  userGroups = [
+    "networkmanager" "wheel" "video" "render" "audio" "scanner" "docker" "kvm" "libvirtd"
   ];
 
+  corePackages = with pkgs; [
+    vim
+    wget
+    git
+    curl
+    qemu_full               
+    virtio-win              
+    virt-manager            
+  ];
 
-  ############################################################
-  # FONT CONFIGURATION
-  ############################################################
+  gnomeExtensions = with pkgs.gnomeExtensions; [
+    alphabetical-app-grid
+    auto-accent-colour
+    caffeine
+    coverflow-alt-tab
+    clipboard-history
+    grand-theft-focus
+    hide-top-bar
+    impatience
+    luminus-desktop
+    top-bar-organizer
+    appindicator
+  ];
+
   systemFonts = with pkgs; [
-    nerd-fonts.jetbrains-mono   # Programming font with glyphs/icons
-    noto-fonts                  # Google's universal font family
-    noto-fonts-color-emoji      # Color emoji support
-    jetbrains-mono              # Official JetBrains Mono font
-    font-awesome                # Icon font set
+    nerd-fonts.jetbrains-mono   
+    noto-fonts
+    noto-fonts-color-emoji
+    jetbrains-mono
+    font-awesome                 
   ];
 
 in {
-
-
-  ############################################################
-  # IMPORTS & HARDWARE DETECTION <><><><><>><><><><><><><><><>
-  ############################################################
   imports = [ ./hardware-configuration.nix ];
 
-
-  ############################################################
-  # BOOTLOADER & SYSTEM INITIALIZATION
-  ############################################################
   boot = {
     loader = {
-      systemd-boot.enable = true;         # Use systemd-boot instead of GRUB
-      efi.canTouchEfiVariables = true;    # Allow EFI variable modification
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
   };
 
-
-  ############################################################
-  # NETWORKING CONFIGURATION
-  ############################################################
   networking = {
-    hostName = "nixos";                  # System hostname
-
-    networkmanager.enable = true;        # Enable NetworkManager daemon
-    firewall.enable = true;              # Uncomment to enable firewall
+    hostName = "nixos";
+    networkmanager.enable = true;
+    firewall.enable = true;
   };
 
-
-  ############################################################
-  # USER ACCOUNTS & AUTHENTICATION
-  ############################################################
   users.users.${userName} = {
-    isNormalUser = true;                 # Regular user (not root)
-    description = userDescription;       # Full name/GECOS field
-    extraGroups = userGroups;            # Hardware/peripheral access groups
+    isNormalUser = true; # (non-root)
+    description = userDescription;
+    extraGroups = userGroups;
   };
 
-
-  ############################################################
-  # LOCALIZATION & INTERNATIONALIZATION
-  ############################################################
   time.timeZone = timeZone;
-
-  
   i18n = {
     defaultLocale = locale;
-    # Regional formatting for Costa Rica (dates, currency, measurements)
     extraLocaleSettings = {
       LC_ADDRESS = regionalLocale;
       LC_IDENTIFICATION = regionalLocale;
@@ -131,129 +80,69 @@ in {
     };
   };
 
-
-  ############################################################
-  # INPUT DEVICES & KEYBOARD LAYOUT
-  ############################################################
-  # GNOME handles this shi
-
-
-  ############################################################
-  # AUDIO & VIDEO SUBSYSTEMS
-  ############################################################
-  services.pipewire = {
-    enable = true;                        # Modern audio/video server (replaces PulseAudio)
-    alsa.enable = true;                   # ALSA compatibility
-    alsa.support32Bit = true;             # 32-bit ALSA support (for Steam/gaming)
-    pulse.enable = true;                  # PulseAudio compatibility layer
-    wireplumber.enable = true;            # Session manager for PipeWire
-  };
-
-
-  ############################################################
-  # HARDWARE SUPPORT
-  ############################################################
   hardware = {
-    # Bluetooth stack configuration
     bluetooth = {
       enable = true;
-      powerOnBoot = true;                  # Auto-enable Bluetooth on boot
+      powerOnBoot = true;
     };
-    # Graphics drivers and acceleration
-    graphics.enable = true;                # Enable OpenGL/Vulkan drivers
+    graphics.enable = true;
   };
 
-
-  ############################################################
-  # VIRTUALIZATION & CONTAINERIZATION
-  ############################################################
   virtualisation = {
-    docker.enable = true;                # Docker container runtime
-    libvirtd.enable = true;              # Libvirt virtualization API
+    docker.enable = true;
+    libvirtd.enable = true;
   };
 
+  security = {
+    polkit.enable = true;
+    sudo.wheelNeedsPassword = false; 
+  };
 
-  ############################################################
-  # SYSTEM SERVICES
-  ############################################################
   services = {
-    # Power management profiles (performance/balanced/power-saver)
     power-profiles-daemon.enable = true;
-    # SSH server for remote access
-    openssh.enable = true;
-    # Flatpak application support
-    flatpak.enable = true;
 
-    ###########################
-    # Display manager & GNOME #
-    ###########################
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    # To disable installing GNOME's suite of applications
-    # and only be left with GNOME shell.
     gnome.core-apps.enable = false;
     gnome.core-developer-tools.enable = false;
     gnome.games.enable = false;
-  };
-    # Polkit for privilege authorization dialogs
-    security.polkit.enable = true;
 
-  ############################################################
-  # NIX DYNAMIC LINKER (FOR DYNAMICALLY LINKED EXECTUABLES)
-  ############################################################
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
+
+    flatpak.enable = true;
+    openssh.enable = true;
+  };
+
   programs.nix-ld.enable = true;
-  # Minimal libraries for Rust binaries
   programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib       # Provides libgcc_s.so
-    zlib                   # Very common dependency
+    stdenv.cc.cc.lib
+    zlib
   ];
 
-
-
-  ############################################################
-  # PACKAGE MANAGEMENT & SYSTEM PACKAGES
-  ############################################################
-  environment.systemPackages = corePackages;
+  environment.systemPackages = corePackages ++ gnomeExtensions;
   environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
 
-
-  ############################################################
-  # NIX PACKAGE MANAGER CONFIGURATION
-  ############################################################
+  nixpkgs.config.allowUnfree = true;
   nix = {
-    # Enable modern Nix features
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;       # Automatic store optimization (disk space savings)
+      auto-optimise-store = true;
     };
-    # Automatic garbage collection to reclaim disk space
     gc = {
-      automatic = true;                    # Run GC automatically
-      dates = "weekly";                    # Schedule: weekly
-      options = "--delete-older-than 7d";  # Keep only last 7 days of old generations
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 5d";
     };
   };
-  # Allow installation of unfree (proprietary) packages
-  nixpkgs.config.allowUnfree = true;
 
-
-  ############################################################
-  # FONT RENDERING
-  ############################################################
   fonts.packages = systemFonts;
 
-
-  ############################################################
-  # SYSTEM STATE VERSION (CRITICAL)
-  ############################################################
-  # WARNING: Changing this value can break your system!
-  # Represents the NixOS version your configuration was initially created for.
   system.stateVersion = "25.11";
 
-
-  ############################################################
-  # SECURITY HARDENING (OPTIONAL ENHANCEMENTS)
-  ############################################################
-  security.sudo.wheelNeedsPassword = false;  # Allow wheel group passwordless sudo
-  
 }
