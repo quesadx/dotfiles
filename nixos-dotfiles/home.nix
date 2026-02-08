@@ -1,13 +1,11 @@
 { config, pkgs, lib, ... }:
 
 let
-  # Basic identity
   username = "quesadx";
   homeDir = "/home/quesadx";
 
   gitUser = { name = "Matteo Quesada"; email = "matteo.vargas.quesada@est.una.ac.cr"; };
 
-  # Firefox extensions enforced via enterprise policy
   firefoxExtensions = {
     "uBlock0@raymondhill.net" = {
       install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
@@ -34,7 +32,9 @@ let
     nrs = "cd ~/dotfiles && git add . && cd nixos-dotfiles && sudo nixos-rebuild switch --flake .#nixos";
   };
 
-  configSources = { "fastfetch".source = ../.config/fastfetch; };
+  configSources = {
+    "fastfetch".source = ../.config/fastfetch;
+  };
 
 in {
   home = {
@@ -48,16 +48,54 @@ in {
 
   programs = {
     home-manager.enable = true;
-    bash = { enable = true; shellAliases = bashAliases; };
-    git = { enable = true; settings = { user = gitUser; init.defaultBranch = "main"; pull.rebase = true; }; };
-    direnv = { enable = true; enableBashIntegration = true; nix-direnv.enable = true; };
-    ssh = { enable = true; enableDefaultConfig = false; matchBlocks."*" = { addKeysToAgent = "yes"; }; };
+
+    bash = {
+      enable = true;
+      shellAliases = bashAliases;
+    };
+
+    git = {
+      enable = true;
+      settings = {
+        user = gitUser;
+        init.defaultBranch = "main";
+        pull.rebase = true;
+      };
+    };
+
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+    };
+
+    ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        addKeysToAgent = "yes";
+      };
+    };
+
     firefox = {
       enable = true;
-      profiles.${username} = { isDefault = true; settings = { "browser.search.region" = "CR"; "browser.search.isUS" = false; "distribution.id" = "nixos"; }; };
+      profiles.${username} = {
+        isDefault = true;
+        settings = {
+          "browser.search.region" = "CR";
+          "browser.search.isUS" = false;
+          "distribution.id" = "nixos";
+        };
+      };
       policies.ExtensionSettings = firefoxExtensions;
     };
-    java = { enable = true; package = pkgs.jdk21.override { enableJavaFX = true; }; };
+
+    # java = {
+      # enable = true;
+      # package = pkgs.jdk21.override {
+        # enableJavaFX = true;
+      # };
+    # };
   };
 
   services.ssh-agent.enable = true;

@@ -35,26 +35,14 @@ in {
     LC_ADDRESS = regionalLocale; LC_IDENTIFICATION = regionalLocale; LC_MEASUREMENT = regionalLocale; LC_MONETARY = regionalLocale;
     LC_NAME = regionalLocale; LC_NUMERIC = regionalLocale; LC_PAPER = regionalLocale; LC_TELEPHONE = regionalLocale; LC_TIME = regionalLocale; }; };
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
+  services.pipewire = { enable = true; alsa.enable = true; alsa.support32Bit = true; pulse.enable = true; wireplumber.enable = true; };
+
+  hardware.bluetooth = { enable = true; powerOnBoot = true; };
   hardware.graphics.enable = true;
 
-  virtualisation = {
-    docker.enable = true;
-    libvirtd.enable = true;
-  };
+  virtualisation = { docker.enable = true; libvirtd.enable = true; };
 
   services = {
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
-    };
-
     power-profiles-daemon.enable = true;
     openssh.enable = true;
     flatpak.enable = true;
@@ -65,36 +53,15 @@ in {
   security.polkit.enable = true;
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib
-    zlib
-  ];
+  programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc.lib zlib ];
 
   environment.systemPackages = corePackages;
 
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    auto-optimise-store = true;
-  };
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 5d";
-  };
+  nix.settings = { experimental-features = [ "nix-command" "flakes" ]; auto-optimise-store = true; };
+  nix.gc = { automatic = true; dates = "weekly"; options = "--delete-older-than 7d"; };
   nixpkgs.config.allowUnfree = true;
 
-  environment.plasma6.excludePackages = with pkgs; [
-    kdePackages.elisa
-    kdePackages.kdepim-runtime
-    kdePackages.kmahjongg
-    kdePackages.kmines
-    kdePackages.konversation
-    kdePackages.kpat
-    kdePackages.ksudoku
-    kdePackages.ktorrent
-    mpv
-  ];
+  environment.plasma6.excludePackages = with pkgs; [ kdePackages.elisa kdePackages.kdepim-runtime kdePackages.kmahjongg kdePackages.kmines kdePackages.konversation kdePackages.kpat kdePackages.ksudoku kdePackages.ktorrent mpv ];
 
   fonts.packages = systemFonts;
   system.stateVersion = "25.11";
