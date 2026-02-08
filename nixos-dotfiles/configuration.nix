@@ -1,270 +1,69 @@
 { config, pkgs, ... }:
 
 let
-  ############################################################
-  # USER ACCOUNT CONFIGURATION
-  ############################################################
   userName = "quesadx";
   userDescription = "Matteo Quesada";
-  # System groups for hardware access and privileges
-  userGroups = [
-    "networkmanager"  # Network management
-    "wheel"           # sudo privileges
-    "video"           # GPU access
-    "render"          # Hardware rendering
-    "audio"           # Audio devices
-    "scanner"         # Scanner access
-    "lp"              # Printing subsystem
-    "docker"          # Docker container management
-    "kvm"             # Kernel-based Virtual Machine
-    "libvirtd"        # Libvirt virtualization daemon
-  ];
+  userGroups = [ "networkmanager" "wheel" "video" "render" "audio" "scanner" "lp" "docker" "kvm" "libvirtd" ];
 
-
-  ############################################################
-  # LOCALIZATION & REGIONAL SETTINGS
-  ############################################################
   timeZone = "America/Costa_Rica";
   locale = "en_US.UTF-8";
   regionalLocale = "es_CR.UTF-8";
 
-
-  ############################################################
-  # SYSTEM PACKAGE SELECTION
-  ############################################################
   corePackages = with pkgs; [
-    vim                     # Text editor
-    wget                    # Download utility
-    git                     # Version control
-    curl                    # Data transfer tool
-    qemu_full               # Full QEMU virtualization suite
-    virtio-win              # Windows virtio drivers for VMs
-    virt-manager            # GUI for virtual machine management
-    
-    # KDE
-    kdePackages.discover # Optional: Install if you use Flatpak or fwupd firmware update sevice
-    kdePackages.kcalc # Calculator
-    kdePackages.kcharselect # Tool to select and copy special characters from all installed fonts
-    kdePackages.kclock # Clock app
-    kdePackages.kcolorchooser # A small utility to select a color
-    kdePackages.kolourpaint # Easy-to-use paint program
-    kdePackages.ksystemlog # KDE SystemLog Application
-    kdePackages.sddm-kcm # Configuration module for SDDM
-    kdiff3 # Compares and merges 2 or 3 files or directories
-    kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
-    kdePackages.partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
-    # Non-KDE graphical packages
-    hardinfo2 # System information and benchmarks for Linux systems
-    wayland-utils # Wayland utilities
-    wl-clipboard # Command-line copy/paste utilities for Wayland
+    vim wget git curl qemu_full virtio-win virt-manager
+    kdePackages.discover kdePackages.kcalc kdePackages.kcharselect kdePackages.kclock kdePackages.kcolorchooser
+    kdePackages.kolourpaint kdePackages.ksystemlog kdePackages.sddm-kcm kdiff3 kdePackages.isoimagewriter kdePackages.partitionmanager
+    hardinfo2 wayland-utils wl-clipboard
   ];
 
-
-  ############################################################
-  # FONT CONFIGURATION
-  ############################################################
-  systemFonts = with pkgs; [
-    nerd-fonts.jetbrains-mono   # Programming font with glyphs/icons
-    noto-fonts                  # Google's universal font family
-    noto-fonts-color-emoji      # Color emoji support
-    jetbrains-mono              # Official JetBrains Mono font
-    font-awesome                # Icon font set
-  ];
+  systemFonts = with pkgs; [ nerd-fonts.jetbrains-mono noto-fonts noto-fonts-color-emoji jetbrains-mono font-awesome ];
 
 in {
-
-
-  ############################################################
-  # IMPORTS & HARDWARE DETECTION <><><><><>><><><><><><><><><>
-  ############################################################
   imports = [ ./hardware-configuration.nix ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  ############################################################
-  # BOOTLOADER & SYSTEM INITIALIZATION
-  ############################################################
-  boot = {
-    loader = {
-      systemd-boot.enable = true;         # Use systemd-boot instead of GRUB
-      efi.canTouchEfiVariables = true;    # Allow EFI variable modification
-    };
-  };
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
 
+  users.users.${userName} = { isNormalUser = true; description = userDescription; extraGroups = userGroups; };
 
-  ############################################################
-  # NETWORKING CONFIGURATION
-  ############################################################
-  networking = {
-    hostName = "nixos";                  # System hostname
-
-    networkmanager.enable = true;        # Enable NetworkManager daemon
-    firewall.enable = true;              # Uncomment to enable firewall
-  };
-
-
-  ############################################################
-  # USER ACCOUNTS & AUTHENTICATION
-  ############################################################
-  users.users.${userName} = {
-    isNormalUser = true;                 # Regular user (not root)
-    description = userDescription;       # Full name/GECOS field
-    extraGroups = userGroups;            # Hardware/peripheral access groups
-  };
-
-
-  ############################################################
-  # LOCALIZATION & INTERNATIONALIZATION
-  ############################################################
   time.timeZone = timeZone;
+  i18n = { defaultLocale = locale; extraLocaleSettings = {
+    LC_ADDRESS = regionalLocale; LC_IDENTIFICATION = regionalLocale; LC_MEASUREMENT = regionalLocale; LC_MONETARY = regionalLocale;
+    LC_NAME = regionalLocale; LC_NUMERIC = regionalLocale; LC_PAPER = regionalLocale; LC_TELEPHONE = regionalLocale; LC_TIME = regionalLocale; }; };
 
-  
-  i18n = {
-    defaultLocale = locale;
-    # Regional formatting for Costa Rica (dates, currency, measurements)
-    extraLocaleSettings = {
-      LC_ADDRESS = regionalLocale;
-      LC_IDENTIFICATION = regionalLocale;
-      LC_MEASUREMENT = regionalLocale;
-      LC_MONETARY = regionalLocale;
-      LC_NAME = regionalLocale;
-      LC_NUMERIC = regionalLocale;
-      LC_PAPER = regionalLocale;
-      LC_TELEPHONE = regionalLocale;
-      LC_TIME = regionalLocale;
-    };
-  };
+  services.pipewire = { enable = true; alsa.enable = true; alsa.support32Bit = true; pulse.enable = true; wireplumber.enable = true; };
 
+  hardware.bluetooth = { enable = true; powerOnBoot = true; };
+  hardware.graphics.enable = true;
 
-  ############################################################
-  # INPUT DEVICES & KEYBOARD LAYOUT
-  ############################################################
-  # GNOME handles this shi
+  virtualisation = { docker.enable = true; libvirtd.enable = true; };
 
-
-  ############################################################
-  # DESKTOP ENVIRONMENT & DISPLAY SERVER
-  ############################################################
-
-
-  ############################################################
-  # AUDIO & VIDEO SUBSYSTEMS
-  ############################################################
-  services.pipewire = {
-    enable = true;                        # Modern audio/video server (replaces PulseAudio)
-    alsa.enable = true;                   # ALSA compatibility
-    alsa.support32Bit = true;             # 32-bit ALSA support (for Steam/gaming)
-    pulse.enable = true;                  # PulseAudio compatibility layer
-    wireplumber.enable = true;            # Session manager for PipeWire
-  };
-
-
-  ############################################################
-  # HARDWARE SUPPORT
-  ############################################################
-  hardware = {
-    # Bluetooth stack configuration
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;                  # Auto-enable Bluetooth on boot
-    };
-    # Graphics drivers and acceleration
-    graphics.enable = true;                # Enable OpenGL/Vulkan drivers
-  };
-
-
-  ############################################################
-  # VIRTUALIZATION & CONTAINERIZATION
-  ############################################################
-  virtualisation = {
-    docker.enable = true;                # Docker container runtime
-    libvirtd.enable = true;              # Libvirt virtualization API
-  };
-
-
-  ############################################################
-  # SYSTEM SERVICES
-  ############################################################
   services = {
-    # Power management profiles (performance/balanced/power-saver)
     power-profiles-daemon.enable = true;
-    # SSH server for remote access
     openssh.enable = true;
-    # Flatpak application support
     flatpak.enable = true;
-
     desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;     # SDDM display manager for KDE Plasma
+    displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
   };
-    # Polkit for privilege authorization dialogs
-    security.polkit.enable = true;
+  security.polkit.enable = true;
 
-  ############################################################
-  # NIX DYNAMIC LINKER (FOR DYNAMICALLY LINKED EXECTUABLES)
-  ############################################################
   programs.nix-ld.enable = true;
-  # Minimal libraries for Rust binaries
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib       # Provides libgcc_s.so
-    zlib                   # Very common dependency
-  ];
+  programs.nix-ld.libraries = with pkgs; [ stdenv.cc.cc.lib zlib ];
 
-
-  ############################################################
-  # PACKAGE MANAGEMENT & SYSTEM PACKAGES
-  ############################################################
   environment.systemPackages = corePackages;
 
-
-  ############################################################
-  # NIX PACKAGE MANAGER CONFIGURATION
-  ############################################################
-  nix = {
-    # Enable modern Nix features
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;       # Automatic store optimization (disk space savings)
-    };
-    # Automatic garbage collection to reclaim disk space
-    gc = {
-      automatic = true;                    # Run GC automatically
-      dates = "weekly";                    # Schedule: weekly
-      options = "--delete-older-than 7d";  # Keep only last 7 days of old generations
-    };
-  };
-  # Allow installation of unfree (proprietary) packages
+  nix.settings = { experimental-features = [ "nix-command" "flakes" ]; auto-optimise-store = true; };
+  nix.gc = { automatic = true; dates = "weekly"; options = "--delete-older-than 7d"; };
   nixpkgs.config.allowUnfree = true;
 
-  environment.plasma6.excludePackages = with pkgs; [
-    kdePackages.elisa # Simple music player aiming to provide a nice experience for its users
-    kdePackages.kdepim-runtime # Akonadi agents and resources
-    kdePackages.kmahjongg # KMahjongg is a tile matching game for one or two players
-    kdePackages.kmines # KMines is the classic Minesweeper game
-    kdePackages.konversation # User-friendly and fully-featured IRC client
-    kdePackages.kpat # KPatience offers a selection of solitaire card games
-    kdePackages.ksudoku # KSudoku is a logic-based symbol placement puzzle
-    kdePackages.ktorrent # Powerful BitTorrent client
-    mpv
-  ];
+  environment.plasma6.excludePackages = with pkgs; [ kdePackages.elisa kdePackages.kdepim-runtime kdePackages.kmahjongg kdePackages.kmines kdePackages.konversation kdePackages.kpat kdePackages.ksudoku kdePackages.ktorrent mpv ];
 
-
-  ############################################################
-  # FONT RENDERING
-  ############################################################
   fonts.packages = systemFonts;
-
-
-  ############################################################
-  # SYSTEM STATE VERSION (CRITICAL)
-  ############################################################
-  # WARNING: Changing this value can break your system!
-  # Represents the NixOS version your configuration was initially created for.
   system.stateVersion = "25.11";
-
-
-  ############################################################
-  # SECURITY HARDENING (OPTIONAL ENHANCEMENTS)
-  ############################################################
-  security.sudo.wheelNeedsPassword = false;  # Allow wheel group passwordless sudo
-  
+  security.sudo.wheelNeedsPassword = false;
 }

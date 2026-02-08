@@ -1,0 +1,29 @@
+autoreload: true
+
+# Touchpad settings to make multi-finger gestures feel smoother
+touchpad:
+  speed:
+    # How many input events are sampled to determine "fast" vs "slow" gestures.
+    events: 5
+    # Lower this value to make swipes trigger more easily.
+    swipe_threshold: 12
+
+  gestures:
+    # Three-finger swipe up -> GNOME overview
+    - type: swipe
+      fingers: 3
+      direction: up
+      # Block events while the gesture is active so the pointer doesn't move.
+      block_events: true
+      actions:
+        - on: end
+          # Toggle GNOME overview via gdbus (works on GNOME Shell Wayland)
+          command: "gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Eval 'Main.overview.toggle();'"
+
+# Example: three-finger swipe left/right could change workspace
+#    - type: swipe
+#      fingers: 3
+#      direction: left_right
+#      actions:
+#        - on: end
+#          command: "gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/Shell --method org.gnome.Shell.Eval 'global.workspace_manager.get_active_workspace().activate(global.workspace_manager.get_active_workspace_index()+1);'"
