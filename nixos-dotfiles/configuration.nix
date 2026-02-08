@@ -54,8 +54,6 @@ let
     gnomeExtensions.luminus-desktop
     gnomeExtensions.top-bar-organizer
     gnomeExtensions.appindicator
-
-    waypipe
   ];
 
 
