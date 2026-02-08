@@ -97,6 +97,6 @@ in {
   ];
 
   fonts.packages = systemFonts;
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
   security.sudo.wheelNeedsPassword = false;
 }
