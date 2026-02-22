@@ -55,7 +55,10 @@ in {
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    firewall.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 24800 ]; # 24800 -> input-leap
+    };
   };
 
   users.users.${userName} = {
