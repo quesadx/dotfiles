@@ -17,7 +17,9 @@ let
     curl
     qemu_full               
     virtio-win              
-    virt-manager            
+    virt-manager
+    fuse
+    fuse3
   ];
 
   gnomeExtensions = with pkgs.gnomeExtensions; [

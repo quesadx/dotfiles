@@ -25,7 +25,7 @@ let
     fastfetch papers showtime rnote dconf-editor
     onlyoffice-desktopeditors google-chrome thunderbird spotify obsidian github-copilot-cli
     vscode jetbrains.clion direnv nix-direnv
-    input-leap
+    input-leap distrobox
   ];
 
   gnome-extensions-enabled = [
