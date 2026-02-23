@@ -18,8 +18,7 @@ let
     qemu_full               
     virtio-win              
     virt-manager
-    fuse
-    fuse3
+    steam-run
   ];
 
   gnomeExtensions = with pkgs.gnomeExtensions; [
@@ -119,16 +118,14 @@ in {
       pulse.enable = true;
       wireplumber.enable = true;
     };
+    
+    udev.extraRules = ''
+     ACTION=="add", ENV{ID_INPUT_TOUCHSCREEN}=="1", ATTRS{name}=="ELAN901C:00 04F3:2CBF", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+   '';
 
     flatpak.enable = true;
     openssh.enable = true;
   };
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib
-    zlib
-  ];
 
   environment.systemPackages = corePackages ++ gnomeExtensions;
   environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
