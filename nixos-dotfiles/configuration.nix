@@ -56,10 +56,10 @@ in {
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [ 24800 ]; # 24800 -> input-leap
-    };
+    #firewall = {
+      #enable = true;
+      #allowedTCPPorts = [ 24800 ]; # 24800 -> input-leap
+    #};
   };
 
   users.users.${userName} = {
@@ -94,6 +94,15 @@ in {
 
   virtualisation = {
     docker.enable = true;
+    docker.daemon.settings = {
+      bip = "172.16.0.1/24";
+      "default-address-pool" = [
+         {
+         base = "172.16.1.0/24";
+         size = 24;
+         }
+      ];
+    };
     libvirtd.enable = true;
   };
 
