@@ -29,7 +29,6 @@ let
     clipboard-history
     grand-theft-focus
     hide-top-bar
-    impatience
     luminus-desktop
     top-bar-organizer
     appindicator

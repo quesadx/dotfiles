@@ -3,29 +3,51 @@
 let
   username = "quesadx";
   homeDir = "/home/quesadx";
+
   gitUser = {
     name = "Matteo Quesada";
     email = "matteo.vargas.quesada@est.una.ac.cr";
   };
 
-  firefoxExtensions = {
-    "uBlock0@raymondhill.net" = { # uBlock Origin
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-      installation_mode = "force_installed";
-    };
-    "{446900e4-71c2-419f-a6a7-df9c091e268b}" = { # Bitwarden
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-      installation_mode = "force_installed";
-    };
+  bashAliases = {
+    ll = "ls -l";
+    ls = "ls -a --color=auto";
+    gs = "git status";
+    ga = "git add .";
+    gc = "git commit -m";
+    gp = "git push";
+    nrt = "cd ~/dotfiles/nixos-dotfiles && sudo nixos-rebuild test --flake .#nixos";
+    nrs = "cd ~/dotfiles && git add . && cd nixos-dotfiles && sudo nixos-rebuild switch --flake .#nixos";
   };
 
   userPackages = with pkgs; [
-    file-roller unzip unrar p7zip
-    gnome-photos gnome-music gnome-calculator gnome-text-editor gnome-font-viewer gnome-console nautilus adwaita-icon-theme
-    fastfetch papers showtime rnote dconf-editor
-    onlyoffice-desktopeditors google-chrome thunderbird spotify obsidian github-copilot-cli
-    vscode jetbrains.clion direnv nix-direnv
-    input-leap distrobox
+    file-roller
+    unzip
+    unrar
+    p7zip
+    gnome-photos
+    gnome-music
+    gnome-calculator
+    gnome-text-editor
+    gnome-font-viewer
+    gnome-console
+    nautilus
+    adwaita-icon-theme
+    fastfetch
+    papers
+    showtime
+    rnote
+    dconf-editor
+    onlyoffice-desktopeditors
+    google-chrome
+    thunderbird
+    spotify
+    obsidian
+    jetbrains.clion
+    direnv
+    nix-direnv
+    input-leap
+    distrobox
   ];
 
   gnome-extensions-enabled = [
@@ -37,22 +59,37 @@ let
     "clipboard-history@alexsaveau.dev"
     "grand-theft-focus@zalckos.github.com"
     "hidetopbar@mathieu.bidon.ca"
-    "impatience@gfxmonk.net"
     "luminus-desktop@dikasp.gitlab"
     "top-bar-organizer@julian.gse.jsts.xyz"
   ];
 
-  bashAliases = {
-    ll = "ls -l";
-    ls = "ls -a --color=auto";
-    # Git shortcuts
-    gs = "git status";
-    ga = "git add .";
-    gc = "git commit -m";
-    gp = "git push";
-    # NixOS rebuild shortcuts
-    nrt = "cd ~/dotfiles/nixos-dotfiles && sudo nixos-rebuild test --flake .#nixos";
-    nrs = "cd ~/dotfiles && git add . && cd nixos-dotfiles && sudo nixos-rebuild switch --flake .#nixos";
+  vscode-extensions-enabled = with pkgs.vscode-extensions; [
+    esbenp.prettier-vscode
+    ms-python.python
+    ms-vscode.live-server
+    vscjava.vscode-java-pack
+    eamodio.gitlens
+    pkief.material-icon-theme
+    ecmel.vscode-html-css
+    christian-kohler.path-intellisense
+    bbenoist.nix
+    humao.rest-client
+    mikestead.dotenv
+    sonarsource.sonarlint-vscode
+    christian-kohler.npm-intellisense
+    yoavbls.pretty-ts-errors
+    usernamehw.errorlens
+  ];
+
+  firefoxExtensions = {
+    "uBlock0@raymondhill.net" = {
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+      installation_mode = "force_installed";
+    };
+    "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+      install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+      installation_mode = "force_installed";
+    };
   };
 
   configSources = {
@@ -60,7 +97,6 @@ let
   };
 
 in {
-
   home = {
     username = username;
     homeDirectory = homeDir;
@@ -77,7 +113,7 @@ in {
 
     bash = {
       enable = true;
-      shellAliases = bashAliases;      
+      shellAliases = bashAliases;
     };
 
     git = {
@@ -103,6 +139,11 @@ in {
       };
     };
 
+    vscode = {
+      enable = true;
+      profiles.default.extensions = vscode-extensions-enabled;
+    };
+
     firefox = {
       enable = true;
       profiles.${username} = {
@@ -115,23 +156,14 @@ in {
       };
       policies.ExtensionSettings = firefoxExtensions;
     };
-
-    # java = {
-      # enable = true;
-      # package = pkgs.jdk21.override { enableJavaFX = true; };
-    # };
   };
-
+  
   dconf = {
     enable = true;
     settings = {
-      "org/gnome/desktop/input-sources" = {
-        # xkb-options = [ "ctrl:nocaps" ]; emacs pinky btw
-      };
       "org/gnome/shell" = {
         enabled-extensions = gnome-extensions-enabled;
       };
-
       "org/gnome/shell/extensions/alphabetical-app-grid" = {
         folder-order-position = "start";
       };
@@ -151,15 +183,9 @@ in {
         animation-time-overview = 0.2;
         animation-time-autohide = 0.2;
       };
-      "org/gnome/shell/extensions/net/gfxmonk/impatience" = {
-        speed-factor = 1.2;
-      };
-
-      # GNOME general settings. Can be found using 'dconf watch /org/gnome/'
-      "org/gnome/settings-daemon/plugins/media-keys" = {
-        home = [ "<Super>e" ];
-        www = [ "<Super>b" ];
-        control-center = [ "<Super>i" ];
+      "org/gnome/desktop/input-sources" = {
+        show-all-sources = true;
+        sources = [ (lib.gvariant.mkTuple [ "xkb" "us+altgr-intl" ]) ];
       };
       "org/gnome/desktop/wm/keybindings" = {
         maximize = [ "<Super>F" ];
@@ -169,13 +195,10 @@ in {
       "org/gnome/settings-daemon/plugins/power" = {
         power-button-action = "nothing";
       };
-      "org/gnome/desktop/input-sources" = {
-          show-all-sources = true;
-          sources = [ # Needs 'lib' to build GVariant tuples
-            (lib.gvariant.mkTuple ["xkb" "us+altgr-intl"])
-          ];
-        };
       "org/gnome/settings-daemon/plugins/media-keys" = {
+        home = [ "<Super>e" ];
+        www = [ "<Super>b" ];
+        control-center = [ "<Super>i" ];
         custom-keybindings = [
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         ];
@@ -196,5 +219,4 @@ in {
   };
 
   services.ssh-agent.enable = true;
-
 }
