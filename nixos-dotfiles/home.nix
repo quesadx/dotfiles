@@ -141,7 +141,21 @@ in {
 
     vscode = {
       enable = true;
+      # mutableExtensions = true; # Meh
       profiles.default.extensions = vscode-extensions-enabled;
+      profiles.default.userSettings = {
+        "workbench.activityBar.location" = "top";
+        "workbench.sideBar.location" = "right";
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "workbench.colorTheme" = "Monokai";
+        "files.autoSave" = "onFocusChange";
+        "editor.minimap.autohide" = "mouseover";
+        "window.commandCenter" = false; 
+        "workbench.iconTheme" = "material-icon-theme";
+        "workbench.editor.scrollToSwitchTabs" = true;
+        "workbench.editor.wrapTabs" = true;
+        "workbench.panel.alignment" = "justify"; # Does nothing :/
+      };
     };
 
     firefox = {

@@ -57,6 +57,7 @@ in {
     networkmanager.enable = true;
     firewall = {
       enable = true;
+      trustedInterfaces = ["virbr0"];
       allowedTCPPorts = [ 24800 ]; # 24800 -> input-leap
     };
   };
@@ -103,7 +104,22 @@ in {
       ];
     };
     libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
   };
+  # Default network script stuff
+  systemd.services.libvirt-default-network = {
+    description = "Start libvirt default network";
+    after = ["libvirtd.service"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.libvirt}/bin/virsh net-start default";
+      ExecStop = "${pkgs.libvirt}/bin/virsh net-destroy default";
+      User = "root";
+    };
+  };
+
 
   security = {
     polkit.enable = true;
