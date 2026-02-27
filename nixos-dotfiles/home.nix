@@ -21,6 +21,8 @@ let
   };
 
   userPackages = with pkgs; [
+    direnv
+    nix-direnv
     file-roller
     unzip
     unrar
@@ -33,6 +35,8 @@ let
     gnome-console
     nautilus
     adwaita-icon-theme
+    glib
+    adwaita-icon-theme 
     fastfetch
     papers
     showtime
@@ -43,11 +47,10 @@ let
     thunderbird
     spotify
     obsidian
-    jetbrains.clion
-    direnv
-    nix-direnv
     input-leap
     distrobox
+    dbeaver-bin
+    pgmodeler
   ];
 
   gnome-extensions-enabled = [
@@ -79,6 +82,7 @@ let
     christian-kohler.npm-intellisense
     yoavbls.pretty-ts-errors
     usernamehw.errorlens
+    james-yu.latex-workshop
   ];
 
   firefoxExtensions = {

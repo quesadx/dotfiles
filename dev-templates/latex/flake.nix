@@ -1,5 +1,5 @@
 {
-  description = "Latex development environment";
+  description = "LaTeX development environment";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -12,12 +12,11 @@
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          texliveBasic
-          texstudio
+          texlive.combined.scheme-medium
         ];
 
         shellHook = ''
-          echo "Latex Development Environment"
+          echo "LaTeX Development Environment ready!"
         '';
       };
     };
