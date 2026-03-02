@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   username = "quesadx";
@@ -36,7 +41,9 @@ let
     nautilus
     adwaita-icon-theme
     glib
-    adwaita-icon-theme 
+    gtk3
+    dbvisualizer
+    jdk21
     fastfetch
     papers
     showtime
@@ -44,13 +51,12 @@ let
     dconf-editor
     onlyoffice-desktopeditors
     google-chrome
-    thunderbird
     spotify
     obsidian
     input-leap
     distrobox
     dbeaver-bin
-    pgmodeler
+    mysql-workbench
   ];
 
   gnome-extensions-enabled = [
@@ -100,7 +106,8 @@ let
     "fastfetch".source = ../.config/fastfetch;
   };
 
-in {
+in
+{
   home = {
     username = username;
     homeDirectory = homeDir;
@@ -143,6 +150,35 @@ in {
       };
     };
 
+    taskwarrior = {
+      enable = true;
+    };
+
+    khal = {
+      enable = true;
+    };
+
+    helix = {
+      enable = true;
+      settings = {
+        theme = "monokai";
+      };
+      extraPackages = with pkgs; [
+        nixd
+        nixfmt
+        # Add other LSPs here (e.g., pyright, gopls, rust-analyzer)
+      ];
+      languages = {
+        language = [
+          {
+            name = "nix";
+            auto-format = true;
+            formatter.command = "nixfmt";
+          }
+        ];
+      };
+    };
+
     vscode = {
       enable = true;
       # mutableExtensions = true; # Meh
@@ -154,7 +190,7 @@ in {
         "workbench.colorTheme" = "Monokai";
         "files.autoSave" = "onFocusChange";
         "editor.minimap.autohide" = "mouseover";
-        "window.commandCenter" = false; 
+        "window.commandCenter" = false;
         "workbench.iconTheme" = "material-icon-theme";
         "workbench.editor.scrollToSwitchTabs" = true;
         "workbench.editor.wrapTabs" = true;
@@ -175,7 +211,7 @@ in {
       policies.ExtensionSettings = firefoxExtensions;
     };
   };
-  
+
   dconf = {
     enable = true;
     settings = {
@@ -203,7 +239,12 @@ in {
       };
       "org/gnome/desktop/input-sources" = {
         show-all-sources = true;
-        sources = [ (lib.gvariant.mkTuple [ "xkb" "us+altgr-intl" ]) ];
+        sources = [
+          (lib.gvariant.mkTuple [
+            "xkb"
+            "us+altgr-intl"
+          ])
+        ];
       };
       "org/gnome/desktop/wm/keybindings" = {
         maximize = [ "<Super>F" ];

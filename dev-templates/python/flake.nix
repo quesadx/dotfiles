@@ -12,25 +12,21 @@
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          python312
-          python312Packages.pip
-          python312Packages.virtualenv
+          python314
+          python314Packages.pip
+          python314Packages.virtualenv
           
           # Common packages
-          python312Packages.pytest
-          python312Packages.black
-          python312Packages.flake8
+          python314Packages.pytest
+          python314Packages.black
+          python314Packages.flake8
           
           # LSP
           python312Packages.python-lsp-server
         ];
 
         shellHook = ''
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "🐍 Python Development Environment"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          echo "Python: $(python --version)"
-          echo ""
+          echo "Python Development Environment"
           
           # Create and activate venv
           if [ ! -d .venv ]; then
@@ -45,10 +41,6 @@
             echo "Installing dependencies from requirements.txt..."
             pip install -r requirements.txt
           fi
-          
-          echo ""
-          echo "Virtual environment activated!"
-          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         '';
       };
     };
