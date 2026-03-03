@@ -73,22 +73,7 @@ let
   ];
 
   vscode-extensions-enabled = with pkgs.vscode-extensions; [
-    esbenp.prettier-vscode
-    ms-python.python
-    ms-vscode.live-server
-    vscjava.vscode-java-pack
-    eamodio.gitlens
-    pkief.material-icon-theme
-    ecmel.vscode-html-css
-    christian-kohler.path-intellisense
-    bbenoist.nix
-    humao.rest-client
-    mikestead.dotenv
-    sonarsource.sonarlint-vscode
-    christian-kohler.npm-intellisense
-    yoavbls.pretty-ts-errors
-    usernamehw.errorlens
-    james-yu.latex-workshop
+
   ];
 
   firefoxExtensions = {
