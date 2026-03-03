@@ -121,9 +121,14 @@ in
     sudo.wheelNeedsPassword = false;
   };
 
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+
   services = {
     power-profiles-daemon.enable = true;
-    services.gnome.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = true;
 
     pipewire = {
       enable = true;

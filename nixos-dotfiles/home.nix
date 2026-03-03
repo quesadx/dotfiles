@@ -26,6 +26,19 @@ let
   };
 
   userPackages = with pkgs; [
+
+    waybar
+    fuzzel
+    kanshi
+    nwg-displays
+    swaynotificationcenter
+    swaybg
+    swayidle
+    wl-clipboard
+    libnotify
+    wob
+    foot
+
     direnv
     nix-direnv
     file-roller
@@ -84,6 +97,7 @@ let
 
   configSources = {
     "fastfetch".source = ../.config/fastfetch;
+    "waybar".source = ../.config/waybar;
   };
 
 in
@@ -96,6 +110,32 @@ in
   };
 
   xdg.configFile = configSources;
+
+  wayland.windowManager.sway = {
+    enable = true;
+    config = {
+      terminal = "foot";
+      modifier = "Mod4";
+      menu = "fuzzel";
+
+      bars = [ ];
+
+      gaps = {
+        inner = 10;
+        outer = 5;
+      };
+      window = {
+        border = 2;
+        titlebar = false; # This removes the bulky title bars
+      };
+
+      startup = [
+        { command = "waybar"; }
+        { command = "swaybg -i ~/dotfiles/wallpapers/od_nixos.png -m fill"; }
+      ];
+
+    };
+  };
 
   programs = {
     home-manager.enable = true;
