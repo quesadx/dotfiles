@@ -66,7 +66,6 @@ This is the primary configuration surface.
 
 Responsible for:
 
-* Sway configuration
 * Wayland environment variables
 * Status bar (waybar)
 * Terminal

@@ -1,70 +1,64 @@
+/* gruvbox dark */
 * {
-    font-family: "JetBrains Mono", FontAwesome, sans-serif;
-    padding: 0px;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
 }
 
 window#waybar {
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-    border-right: 1px solid #45475a;
+    background-color: #282828;
+    color: #ebdbb2;
+    border-bottom: 2px solid #3c3836;
 }
 
 #workspaces {
-    min-width: 10px;
-    background-color: #313244;
-    border-radius: 4px;
-    margin: 0px 6px;
+    margin: 0 4px;
 }
 
 #workspaces button {
-    min-width: 14px;
-    min-height: 8px;
-    color: #cdd6f4;
-    margin: 6px 6px;
-    font-size: 12;
-    border-radius: 4px;
-    transition: all 0.2s ease-in-out;
+    color: #928374;
+    padding: 0 10px;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    transition: all 0.15s ease;
 }
 
-#workspaces button.active,
 #workspaces button.focused {
-    background-color: #5277C3;
-    min-width: 15px;
-    color: #1e1e2e;
+    color: #ebdbb2;
+    border-bottom: 2px solid #d79921;
 }
 
 #workspaces button:hover {
-    background-color: rgba(82, 119, 195, 0.18);
+    color: #ebdbb2;
+    background: #3c3836;
 }
 
 #workspaces button.urgent {
-    background-color: #f38ba8;
-}
-
-#tray {
-    margin-top: 16px;
-    color: #cdd6f4;
+    color: #fb4934;
+    border-bottom: 2px solid #cc241d;
 }
 
 #clock {
-    margin: 16px 6px 0px 4px;
-    font-weight: 600;
-    color: #cdd6f4;
+    color: #fabd2f;
+    font-weight: bold;
+    padding: 0 12px;
 }
 
 #power-profiles-daemon {
-    margin: 5px 3px 16px 0px;
-    font-weight: 600;
+    color: #928374;
+    padding: 0 12px;
 }
 
 #power-profiles-daemon.performance {
-    color: #f38ba8;
+    color: #fb4934;
 }
 
 #power-profiles-daemon.balanced {
-    color: #f9e2af;
+    color: #b8bb26;
 }
 
 #power-profiles-daemon.power-saver {
-    color: #a6e3a1;
+    color: #83a598;
 }

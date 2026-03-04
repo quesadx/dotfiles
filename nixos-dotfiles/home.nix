@@ -26,7 +26,6 @@ let
   };
 
   userPackages = with pkgs; [
-
     waybar
     fuzzel
     kanshi
@@ -36,9 +35,7 @@ let
     swayidle
     wl-clipboard
     libnotify
-    wob
     foot
-
     direnv
     nix-direnv
     file-roller
@@ -59,6 +56,7 @@ let
     obsidian
     dbeaver-bin
     mysql-workbench
+    mongodb-compass
   ];
 
   vscode-extensions-enabled = with pkgs.vscode-extensions; [
@@ -97,6 +95,7 @@ let
 
   configSources = {
     "fastfetch".source = ../.config/fastfetch;
+    "fuzzel".source = ../.config/fuzzel;
     "waybar".source = ../.config/waybar;
   };
 
@@ -110,31 +109,11 @@ in
   };
 
   xdg.configFile = configSources;
-
   wayland.windowManager.sway = {
     enable = true;
-    config = {
-      terminal = "foot";
-      modifier = "Mod4";
-      menu = "fuzzel";
-
-      bars = [ ];
-
-      gaps = {
-        inner = 10;
-        outer = 5;
-      };
-      window = {
-        border = 2;
-        titlebar = false; # This removes the bulky title bars
-      };
-
-      startup = [
-        { command = "waybar"; }
-        { command = "swaybg -i ~/dotfiles/wallpapers/od_nixos.png -m fill"; }
-      ];
-
-    };
+    config = null; # disable default generated config (prevents default bar at bottom)
+    swaynag.enable = false;
+    extraConfig = builtins.readFile ../.config/sway/config;
   };
 
   programs = {
@@ -196,6 +175,15 @@ in
             formatter.command = "nixfmt";
           }
         ];
+      };
+    };
+
+    foot = {
+      enable = true;
+      settings = {
+        main = {
+          font = "JetBrains Mono:size=12";
+        };
       };
     };
 

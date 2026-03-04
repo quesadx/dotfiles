@@ -1,45 +1,34 @@
 {
     "layer": "top",
-    "position": "left",
+    "position": "top",
+    "height": 28,
+    "spacing": 0,
 
-    "modules-left": [
-	"tray"
-    ],
-    "modules-center": [
-        "hyprland/workspaces"
-    ],
-    "modules-right": [
-	"clock",
-        "power-profiles-daemon"
-    ],
+    "modules-left":   ["sway/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right":  ["power-profiles-daemon"],
 
-    "hyprland/workspaces": {
-	"rotate": 90,
-        "format": "{name}", 
+    "sway/workspaces": {
+        "format": "{name}",
         "on-click": "activate",
-	"persistent-workspaces": {
-            "*": 5 
-        },
+        "persistent-workspaces": { "*": 5 },
         "all-outputs": true,
-        "show-special": false,
-        "on-scroll-down": "hyprctl dispatch workspace r+1",
-        "on-scroll-up": "hyprctl dispatch workspace r-1"
+        "show-special": false
     },
     "clock": {
-        "format": "{:%H\n%M\n──}",
-	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": " {:%H:%M}",
+        "format-alt": " {:%a %d %b}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "power-profiles-daemon": {
         "format": "{icon}",
-        "tooltip-format": "Power Profile: {profile}\nDriver: {driver}",
+        "tooltip-format": "Profile: {profile} · Driver: {driver}",
         "tooltip": true,
         "format-icons": {
-            "default": "No power-profile-daemon detected",
-            "performance": "",
-            "balanced": " ",
-            "power-saver": ""
+            "default": "?",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
         }
-    },
-    "on-sigusr1": "hide",
-    "on-sigusr2": "show"
+    }
 }
