@@ -16,7 +16,7 @@ let
     "docker"
     "kvm"
     "libvirtd"
-    "vboxusers"
+    #"vboxusers"
   ];
 
   corePackages = with pkgs; [
@@ -34,7 +34,10 @@ let
     alphabetical-app-grid
     auto-accent-colour
     caffeine
+    # coverflow-alt-tab
     clipboard-history
+    # grand-theft-focus
+    # hide-top-bar
     luminus-desktop
     top-bar-organizer
     appindicator
@@ -109,16 +112,12 @@ in
         }
       ];
     };
-    virtualbox = {
-      host = {
-        enable = true;
-        enableExtensionPack = true;
-      };
-      guest = {
-        enable = true;
-        dragAndDrop = true;
-      };
-    };
+    #virtualbox = {
+    #host = {
+    #enable = true;
+    #enableExtensionPack = true;
+    #};
+    #};
     libvirtd.enable = true;
     spiceUSBRedirection.enable = true;
   };

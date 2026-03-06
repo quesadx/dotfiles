@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   username = "quesadx";
@@ -37,32 +42,34 @@ let
     adwaita-icon-theme
     glib
     gtk3
-    dbvisualizer
-    jdk21
+    # dbvisualizer
+    # jdk21
     fastfetch
     papers
     showtime
     rnote
     dconf-editor
     onlyoffice-desktopeditors
-    google-chrome
+    # google-chrome
     spotify
     obsidian
     input-leap
-    distrobox
+    # distrobox
     dbeaver-bin
     mysql-workbench
+    # displaycal
+    alacritty
   ];
 
   gnome-extensions-enabled = [
     "AlphabeticalAppGrid@stuarthayhurst"
-    "CoverflowAltTab@palatis.blogspot.com"
+    # "CoverflowAltTab@palatis.blogspot.com"
     "appindicatorsupport@rgcjonas.gmail.com"
     "auto-accent-colour@Wartybix"
     "caffeine@patapon.info"
     "clipboard-history@alexsaveau.dev"
-    "grand-theft-focus@zalckos.github.com"
-    "hidetopbar@mathieu.bidon.ca"
+    # "grand-theft-focus@zalckos.github.com"
+    # "hidetopbar@mathieu.bidon.ca"
     "luminus-desktop@dikasp.gitlab"
     "top-bar-organizer@julian.gse.jsts.xyz"
   ];
@@ -227,15 +234,15 @@ in
         restore-state = true;
         enable-fullscreen = false;
       };
-      "org/gnome/shell/extensions/coverflowalttab" = {
-        current-workspace-only = "all";
-      };
-      "org/gnome/shell/extensions/hidetopbar" = {
-        hot-corner = true;
-        enable-active-window = false;
-        animation-time-overview = 0.2;
-        animation-time-autohide = 0.2;
-      };
+      #"org/gnome/shell/extensions/coverflowalttab" = {
+      #current-workspace-only = "all";
+      #};
+      #"org/gnome/shell/extensions/hidetopbar" = {
+      #hot-corner = true;
+      #enable-active-window = false;
+      #animation-time-overview = 0.2;
+      #animation-time-autohide = 0.2;
+      #};
       "org/gnome/desktop/input-sources" = {
         show-all-sources = true;
         sources = [
@@ -268,7 +275,7 @@ in
       };
       "org/gnome/desktop/peripherals/mouse" = {
         accel-profile = "flat";
-        speed = 0.21;
+        # speed = 0.21;
       };
       "org/gnome/desktop/sound" = {
         event-sounds = false;
