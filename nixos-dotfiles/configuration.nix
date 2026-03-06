@@ -87,7 +87,6 @@ in
       powerOnBoot = true;
     };
     graphics.enable = true;
-    opentabletdriver.enable = true;
   };
 
   virtualisation = {

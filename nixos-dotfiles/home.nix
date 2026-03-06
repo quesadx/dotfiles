@@ -29,7 +29,6 @@ let
     # Wayland / Desktop
     waybar
     fuzzel
-    nwg-displays
     swaybg
     swayidle
     swaynotificationcenter
@@ -241,5 +240,40 @@ in
 
   services = {
     ssh-agent.enable = true;
+
+    kanshi = {
+      enable = true;
+      profiles = {
+        laptop = {
+          outputs = [
+            { criteria = "eDP-1"; status = "enable"; position = "0,0"; }
+          ];
+        };
+        portable = {
+          outputs = [
+            { criteria = "DP-2"; position = "0,0"; status = "enable"; }
+            { criteria = "eDP-1"; position = "1920,0"; status = "enable"; }
+          ];
+        };
+        docked = {
+          outputs = [
+            # DP-2 to the left of eDP-1
+            { criteria = "DP-2"; position = "0,1080"; status = "enable"; }
+            { criteria = "eDP-1"; position = "1920,1080"; status = "enable"; }
+            # HDMI is on top of eDP-1
+            { criteria = "HDMI-A-1"; position = "1920,0"; status = "enable"; }
+          ];
+        };
+        tutoring = {
+          outputs = [
+            # HDMI is mirror of eDP1 (same position)
+            { criteria = "eDP-1"; position = "1920,0"; status = "enable"; }
+            { criteria = "HDMI-A-1"; position = "1920,0"; status = "enable"; }
+            # DP-2 to the left
+            { criteria = "DP-2"; position = "0,0"; status = "enable"; }
+          ];
+        };
+      };
+    };
   };
 }
