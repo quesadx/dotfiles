@@ -16,6 +16,7 @@ let
     "docker"
     "kvm"
     "libvirtd"
+    "vboxusers"
   ];
 
   corePackages = with pkgs; [
@@ -33,20 +34,16 @@ let
     alphabetical-app-grid
     auto-accent-colour
     caffeine
-    coverflow-alt-tab
     clipboard-history
-    grand-theft-focus
-    hide-top-bar
     luminus-desktop
     top-bar-organizer
     appindicator
   ];
 
   systemFonts = with pkgs; [
-    nerd-fonts.jetbrains-mono
+    ibm-plex
     noto-fonts
     noto-fonts-color-emoji
-    jetbrains-mono
     font-awesome
   ];
 
@@ -111,6 +108,16 @@ in
           size = 24;
         }
       ];
+    };
+    virtualbox = {
+      host = {
+        enable = true;
+        enableExtensionPack = true;
+      };
+      guest = {
+        enable = true;
+        dragAndDrop = true;
+      };
     };
     libvirtd.enable = true;
     spiceUSBRedirection.enable = true;
@@ -177,7 +184,7 @@ in
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 5d";
+      options = "--delete-older-than 3d";
     };
   };
 
