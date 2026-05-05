@@ -16,7 +16,6 @@
         ];
 
         shellHook = ''
-          export JAVA_HOME="${jdk}"
         '';
       };
     };
