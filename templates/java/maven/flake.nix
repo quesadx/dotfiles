@@ -1,5 +1,5 @@
 {
-  description = "Java template: jdk17";
+  description = "Java template: Maven + JavaFX";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -9,10 +9,13 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      jdk = pkgs.jdk21.override { enableJavaFX = true; };
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          jdk17
+          jdk
+          maven
+          javaPackages.openjfx21
         ];
 
         shellHook = ''

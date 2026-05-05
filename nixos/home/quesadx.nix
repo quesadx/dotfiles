@@ -286,6 +286,7 @@ in
     "git.autofetch" = true;
     "chat.viewSessions.orientation" = "stacked";
     "editor.fontFamily" = "'IBM Plex Mono', monospace";
+    "sqldeveloper.telemetry.enabled" = false;
   };
 
   # ─── BROWSER: FIREFOX ──────────────────────────────────────────────────────
