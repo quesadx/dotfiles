@@ -67,7 +67,6 @@ let
     wireshark
     postman
     zed-editor
-    claude-code
     direnv
     nix-direnv
     fastfetch
@@ -76,6 +75,7 @@ let
     calcurse
     arduino-ide
     github-copilot-cli
+    openclaw
     showtime
   ];
 

@@ -11,7 +11,10 @@
     flakeTarget = "thinkpad";
     hostname = "thinkpad-x13";
     hardwareConfig = ./hardware/hardware-configuration.thinkpad.nix;
-    hardwareModules = [ nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel ];
+    hardwareModules = [
+      nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel
+      ./modules/hosts/host-thinkpad.nix
+      ];
   };
 
   "macbook-pro" = {

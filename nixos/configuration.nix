@@ -199,6 +199,10 @@ in
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 30d";
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "openclaw-2026.4.11"
+  ];
+
   # ---------- SYSTEM ----------
   fonts.packages = systemFonts; # Install system fonts
   system.stateVersion = "26.05"; # NixOS version (don't change lightly)
