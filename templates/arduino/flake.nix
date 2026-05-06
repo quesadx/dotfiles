@@ -1,5 +1,5 @@
 {
-  description = "Web template: React + Vite";
+  description = "Arduino Development Environment";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -12,9 +12,10 @@
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          nodejs
-          pnpm
-          typescript
+          arduino-ide
+          avrdude
+          gcc-arm-embedded
+          platformio
         ];
       };
     };

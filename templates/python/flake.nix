@@ -18,7 +18,7 @@
           python314Packages.pytest
           python314Packages.black
           python314Packages.flake8
-          python312Packages.python-lsp-server
+          python314Packages.python-lsp-server
         ];
       };
     };

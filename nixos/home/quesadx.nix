@@ -53,30 +53,22 @@ let
     gnome-text-editor
     gnome-console
     gnome-font-viewer
+    showtime
     nautilus
+    papers
     loupe
     adwaita-icon-theme
     glib
     gtk3
     onlyoffice-desktopeditors
-    papers
     dconf-editor
-    dbeaver-bin
-    mysql-workbench
-    mongodb-compass
-    wireshark
-    postman
-    zed-editor
     direnv
     nix-direnv
     fastfetch
     wl-clipboard
     xournalpp
     calcurse
-    arduino-ide
-    github-copilot-cli
     openclaw
-    showtime
   ];
 
   # ─── VS CODE EXTENSIONS ────────────────────────────────────────────────────
@@ -169,7 +161,7 @@ in
   programs.fresh-editor.enable = true;
 
   # ─── EDITOR: HELIX ────────────────────────────────────────────────────────
-  programs.helix.enable = true;
+  programs.helix.enable = false;
   programs.helix.settings.theme = "base16_default";
   programs.helix.settings.editor = {
     lsp.display-messages = true;

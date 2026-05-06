@@ -16,8 +16,7 @@ let
     userDescription
     timeZone
     locale
-    regionalLocale
-    ;
+    regionalLocale;
 
   # ─── USER GROUPS ──────────────────────────────────────────────────────────
   userGroups = [
@@ -37,20 +36,19 @@ let
 
   # ─── CORE PACKAGES ────────────────────────────────────────────────────────
   corePackages = with pkgs; [
-    bottom
+    htop
     vim
     wget
-    curl # CLI tools
+    curl
     jq
     yq-go
     ripgrep
     fd
     tree
-    lsof
     pciutils
     usbutils
-    steam-run # VM management and Steam runtime
-    tldr # Community-driven man pages
+    steam-run
+    tldr
     libsecret # For GNOME Keyring integration
     dnsmasq
     file-roller
@@ -90,9 +88,6 @@ in
   zramSwap.memoryPercent = 25; # Use 25% of RAM for swap
   zramSwap.algorithm = "lz4";
   systemd.oomd.enable = true;
-
-  boot.tmp.useTmpfs = true;
-  boot.tmp.tmpfsSize = "30%";
 
   # ─── NETWORKING ───────────────────────────────────────────────────────────
   networking = {
@@ -137,9 +132,6 @@ in
   hardware.bluetooth.powerOnBoot = if isLaptop then false else true;
   hardware.graphics.enable = true;
 
-  # ─── LAPTOP POWER MANAGEMENT ─────────────────────────────────────────────
-  services.thermald.enable = isLaptop;
-
   # ─── VIRTUALIZATION ───────────────────────────────────────────────────────
   virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = {
@@ -151,8 +143,8 @@ in
       }
     ];
   };
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
+  # virtualisation.libvirtd.enable = true;
+  # programs.virt-manager.enable = true;
   # [ Note ]: Gotta run these commands to set up libvirt default network:
   # sudo virsh net-start default
   # sudo virsh net-autostart default
@@ -168,12 +160,16 @@ in
   services.power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
 
   # ─── CORE SERVICES ───────────────────────────────────────────────────────
-  services.fwupd.enable = true;
+  # Firmware updates: disable for cleaner boot, uncomment if needed
+  # services.fwupd.enable = true;
+
   services.flatpak.enable = true;
   services.openssh.enable = false;
   services.gnome.gnome-keyring.enable = true;
 
-  services.ollama.enable = true;
+  # LLM inference service: disable by default to reduce overhead
+  # Enable with: sudo nixos-rebuild switch --flake .#<host> && systemctl start ollama
+  # services.ollama.enable = true;
 
   # ─── AUDIO (PipeWire) ─────────────────────────────────────────────────────
   services.pipewire.enable = true;

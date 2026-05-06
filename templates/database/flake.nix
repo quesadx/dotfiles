@@ -1,5 +1,5 @@
 {
-  description = "Web template: React + Vite";
+  description = "Database Development Tools: PostgreSQL, MySQL clients";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -12,9 +12,10 @@
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          nodejs
-          pnpm
-          typescript
+          postgresql
+          mariadb.client
+          sqlite
+          sqlitebrowser
         ];
       };
     };

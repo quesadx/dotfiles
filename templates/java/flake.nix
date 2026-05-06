@@ -14,9 +14,6 @@
         buildInputs = with pkgs; [
           jdk17
         ];
-
-        shellHook = ''
-        '';
       };
     };
 }

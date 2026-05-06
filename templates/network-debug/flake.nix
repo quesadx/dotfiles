@@ -1,5 +1,5 @@
 {
-  description = "Web template: React + Vite";
+  description = "Network Debugging Tools: Wireshark, tcpdump, mitmproxy";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -12,9 +12,11 @@
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          nodejs
-          pnpm
-          typescript
+          wireshark
+          tcpdump
+          mitmproxy
+          nmap
+          curl
         ];
       };
     };
