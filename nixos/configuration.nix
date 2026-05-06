@@ -36,7 +36,7 @@ let
 
   # ─── CORE PACKAGES ────────────────────────────────────────────────────────
   corePackages = with pkgs; [
-    htop
+    btop
     vim
     wget
     curl
