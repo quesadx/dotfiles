@@ -37,8 +37,8 @@
       min_fan1_speed = 1200;
       max_fan1_speed = 6000;
       low_temp = 55;
-      high_temp = 70;
-      max_temp = 90;
+      high_temp = 75;
+      max_temp = 92;
     };
   };
 
