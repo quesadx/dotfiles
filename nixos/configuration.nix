@@ -195,7 +195,7 @@ in
   nix.gc.options = "--delete-older-than 30d";
 
   nixpkgs.config.permittedInsecurePackages = [
-    "openclaw-2026.4.11"
+    # "openclaw-2026.4.11"
   ];
 
   # ---------- SYSTEM ----------
