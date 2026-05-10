@@ -46,6 +46,7 @@ let
 
   # ─── USER PACKAGES ────────────────────────────────────────────────────────
   userPackages = with pkgs; [
+    gnome-tweaks
     gnome-software
     gnome-music
     gnome-calendar
@@ -68,7 +69,8 @@ let
     wl-clipboard
     xournalpp
     calcurse
-    openclaw
+    opencode
+    steam
   ];
 
   # ─── VS CODE EXTENSIONS ────────────────────────────────────────────────────
