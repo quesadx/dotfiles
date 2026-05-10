@@ -2,21 +2,24 @@
 
 ## Quick Context
 - Repo type: personal flake-based NixOS + Home Manager dotfiles.
-- **Multi-host setup**: Supports desktop and thinkpad from same repo.
+- **Multi-host setup**: Supports desktop, thinkpad, and macbook-pro from same repo.
 - Desktop target: GNOME.
 - Source of truth: this repo only.
-- See `MULTI_HOST_SETUP.md` for detailed usage instructions.
+- See `new-host-setup.md` for detailed usage instructions.
 
 ## High-Signal File Map
 - `flake.nix`: flake inputs/outputs, host wiring.
-- `configuration.nix`: system-level host config.
-- `home/quesadx.nix`: user-level Home Manager config.
-- `hosts.nix`: per-host names, hardware config paths, and host-specific modules.
+- `configuration.nix`: system-level host config (host-neutral).
+- `home/quesadx.nix`: user-level Home Manager config (host-neutral).
+- `hosts.nix`: per-host names, hardware config paths, desktop modules, host-specific modules.
 - `modules/system/desktop-gnome.nix`: GNOME system module.
-- `modules/home/desktop-gnome-user.nix`: GNOME user module.
-- `modules/hosts/host-macbook-pro.nix`: MacBook Pro host-specific overrides.
-- `hardware/hardware-configuration.desktop.nix`: desktop hardware configuration.
-- `hardware/hardware-configuration.thinkpad.nix`: ThinkPad hardware configuration.
+- `modules/home/desktop-gnome.nix`: GNOME user module.
+- `modules/hosts/macbook-pro/default.nix`: MacBook Pro power, sleep, thermal.
+- `modules/hosts/macbook-pro/audio.nix`: MacBook Pro Cirrus audio fix.
+- `modules/hosts/thinkpad.nix`: ThinkPad touchscreen udev rule.
+- `hardware/desktop.nix`: desktop hardware configuration.
+- `hardware/thinkpad.nix`: ThinkPad hardware configuration.
+- `hardware/macbook-pro.nix`: MacBook Pro hardware configuration.
 
 ## Non-Negotiables
 - Keep everything declarative and reproducible.

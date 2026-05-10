@@ -1,7 +1,6 @@
 {
-  description = "GNOME on NixOS";
+  description = "Multi-host NixOS fleet";
 
-  # ─── INPUTS ───────────────────────────────────────────────────────────────
   # External dependencies and package sources
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -10,10 +9,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
   };
 
-  # ─── OUTPUTS ──────────────────────────────────────────────────────────────
   # System configuration using flake inputs
   outputs =
     {
@@ -40,17 +37,18 @@
             modules = [
               ./configuration.nix
               hosts.${name}.hardwareConfig
-            ] ++ hosts.${name}.hardwareModules ++ [
+            ] ++ hosts.${name}.hardwareModules ++ (hosts.${name}.desktopModules or []) ++ [
               home-manager.nixosModules.home-manager
               {
-                # User environment
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.extraSpecialArgs = {
                   inherit shared;
                   host = hosts.${name};
                 };
-                home-manager.users.${shared.username} = import ./home/${shared.username}.nix;
+                home-manager.users.${shared.username} = {
+                  imports = [ ./home/${shared.username}.nix ] ++ (hosts.${name}.homeModules or []);
+                };
               }
             ];
           };

@@ -3,7 +3,7 @@
 ## NixOS host rebuild
 
 ```bash
-cd ~/linux-dotfiles/nixos-dotfiles
+cd ~/linux-dotfiles/nixos
 sudo nixos-rebuild switch --flake .#desktop
 ```
 
@@ -11,7 +11,7 @@ Replace `desktop` with `thinkpad` or `macbook-pro` as needed.
 
 ## Home Manager config sources
 
-`nixos-dotfiles/home/quesadx.nix` links selected folders from this repo into `~/.config`.
+`home/quesadx.nix` links selected folders from this repo into `~/.config`.
 Current active source:
 
 - `config/active/fastfetch` -> `~/.config/fastfetch`

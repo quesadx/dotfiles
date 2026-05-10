@@ -1,7 +1,12 @@
+# ─── MACBOOK PRO 14,1 CIRRUS AUDIO FIX ────────────────────────────────────
+# Builds a patched snd-hda-cirrus kernel module from davidjo/snd_hda_macbookpro.
+# Enables internal microphone routing via mbp131 model fixup.
+# Only evaluated when loaded for the macbook-pro host.
+
 { config, host, pkgs, lib, ... }:
 
 let
-  isMacbookPro141 = host.hostname == "macbook-pro";
+  isMacbookPro141 = host.flakeTarget == "macbook-pro";
   driverVersion = "ca3ff74436029a960d85018459e79dd97e08dfbe";
 
   sndHdaCirrus =

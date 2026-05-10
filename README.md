@@ -4,7 +4,7 @@ Minimal configuration files for my Linux setup. Mainly focused on NixOS.
 
 ## Structure
 
-- `nixos-dotfiles/`: multi-host NixOS + Home Manager configuration.
+- `nixos/`: multi-host NixOS + Home Manager configuration.
 - `config/active/`: active app config folders (linked into `~/.config` by Home Manager where needed).
 - `config/archive/`: archived experimental configs (Sway/Hypr stack).
 - `local/`: files intended for `~/.local` (`bin` scripts and `share/wallpapers`).
@@ -31,7 +31,7 @@ ln -s ~/linux-dotfiles/local/bin/* ~/.local/bin/
 
 ### Using NixOS
 
-The NixOS flake is contained in `nixos-dotfiles/`.
+The NixOS flake is contained in `nixos/`.
 
 Apply the NixOS configuration from that directory:
 ```bash

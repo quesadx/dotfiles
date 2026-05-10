@@ -32,7 +32,6 @@ let
   ];
 
   isLaptop = host.flakeTarget == "thinkpad" || host.flakeTarget == "macbook-pro";
-  isThinkpad = host.flakeTarget == "thinkpad";
 
   # ─── CORE PACKAGES ────────────────────────────────────────────────────────
   corePackages = with pkgs; [
@@ -70,11 +69,8 @@ in
 
 # ─── SYSTEM CONFIGURATION ────────────────────────────────────────────────
 {
-  imports = [
-    host.hardwareConfig
-    ./modules/system/desktop-gnome.nix
-    ./modules/system/macbook-pro-cirrus-audio.nix
-  ];
+  # Desktop modules and host-specific modules are loaded via hosts.nix → flake.nix.
+  # No host-specific or desktop-specific imports belong here.
 
   # ─── BOOT & KERNEL ────────────────────────────────────────────────────────
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -183,8 +179,6 @@ in
   services.pipewire.pulse.enable = true;
   services.pipewire.wireplumber.enable = true;
 
-  # ─── HARDWARE-SPECIFIC UDEV RULES ───────────────────────────────────────
-
   # ─── ENVIRONMENT ────────────────────────────────────────────────────────
   environment.systemPackages = corePackages;
   nixpkgs.config.allowUnfree = true;
@@ -207,5 +201,4 @@ in
   # ---------- SYSTEM ----------
   fonts.packages = systemFonts; # Install system fonts
   system.stateVersion = "26.05"; # NixOS version (don't change lightly)
-
 }

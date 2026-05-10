@@ -40,7 +40,7 @@ let
 
     dotfiles = "cd ~/linux-dotfiles";
 
-    # calcurse aliass to read from /home/quesadx/obsidian-vault/calcurse/
+    # calcurse alias to read from /home/quesadx/obsidian-vault/calcurse/
     calcurse = "calcurse -D /home/${username}/obsidian-vault/08-calcurse/";
   };
 
@@ -114,9 +114,8 @@ in
 # ─── HOME MANAGER CONFIGURATION ────────────────────────────────────────────
 
 {
-  imports = [
-    ../modules/home/desktop-gnome-user.nix
-  ];
+  # Desktop-specific user settings (e.g. GNOME dconf) are loaded via
+  # hosts.nix → homeModules → flake.nix. No DE imports belong here.
 
   # ─── HOME MANAGER METADATA ─────────────────────────────────────────────────
   programs.home-manager.enable = true;
