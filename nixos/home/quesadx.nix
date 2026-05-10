@@ -69,7 +69,6 @@ let
     wl-clipboard
     xournalpp
     calcurse
-    opencode
     steam
   ];
 
