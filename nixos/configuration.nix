@@ -78,6 +78,8 @@ in
 
   # ─── BOOT & KERNEL ────────────────────────────────────────────────────────
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  services.dbus.implementation = "broker";
+  services.irqbalance.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 4;
@@ -130,7 +132,10 @@ in
   # ─── HARDWARE ─────────────────────────────────────────────────────────────
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = if isLaptop then false else true;
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   # ─── VIRTUALIZATION ───────────────────────────────────────────────────────
   virtualisation.docker.enable = true;
