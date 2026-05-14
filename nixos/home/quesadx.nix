@@ -68,7 +68,6 @@ let
     fastfetch
     wl-clipboard
     xournalpp
-    calcurse
     steam
   ];
 
@@ -106,7 +105,7 @@ let
 
   # ─── CONFIG FILE SOURCES ───────────────────────────────────────────────────
   configSources = {
-    "fastfetch".source = ../../config/active/fastfetch;
+    # "fastfetch".source = ../../config/active/fastfetch;
   };
 
 in

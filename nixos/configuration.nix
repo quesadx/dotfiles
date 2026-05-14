@@ -75,7 +75,7 @@ in
   services.irqbalance.enable = true;
 
   boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 4;
+  boot.loader.timeout = 0; # No timeout, boot immediately
   boot.loader.efi.canTouchEfiVariables = true;
 
   # ─── MEMORY & SWAP ────────────────────────────────────────────────────────
