@@ -4,7 +4,9 @@
     flakeTarget = "desktop";
     hostname = "desktop";
     hardwareConfig = ./hardware/desktop.nix;
-    hardwareModules = [];
+    hardwareModules = [
+      ./modules/hosts/desktop.nix
+    ];
     desktopModules = [ ./modules/system/desktop-gnome.nix ];
     homeModules = [ ./modules/home/desktop-gnome-user.nix ];
   };

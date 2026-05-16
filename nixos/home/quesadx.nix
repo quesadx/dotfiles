@@ -68,7 +68,6 @@ let
     fastfetch
     wl-clipboard
     xournalpp
-    steam
   ];
 
   # ─── VS CODE EXTENSIONS ────────────────────────────────────────────────────
