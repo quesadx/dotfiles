@@ -59,19 +59,12 @@
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
 
       # ─── CPU TURBO BOOST ───────────────────────────────────────────────────
       # Keep turbo boost enabled for better performance
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
-
-      # ─── DISK POWER MANAGEMENT ─────────────────────────────────────────────
-      # Minimize disk parking for better responsiveness
-      DISK_APM_LEVEL_ON_AC = 254;
-      DISK_APM_LEVEL_ON_BAT = 254;
-      DISK_SPINDOWN_TIMEOUT_ON_AC = 0;
-      DISK_SPINDOWN_TIMEOUT_ON_BAT = 0;
 
       # ─── WIFI & BLUETOOTH ──────────────────────────────────────────────────
       # Keep Wi-Fi and Bluetooth on for consistent connectivity
@@ -82,7 +75,7 @@
 
       # ─── USB POWER MANAGEMENT ──────────────────────────────────────────────
       # Keep USB power management disabled for device compatibility
-      USB_AUTOSUSPEND = 0;
+      # USB_AUTOSUSPEND = 0;
 
       # ─── POWER SAVE ───────────────────────────────────────────────────────
       # Minimal power saving to maintain performance
