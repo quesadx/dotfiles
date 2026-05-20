@@ -25,10 +25,10 @@
   # ─── SLEEP: SOLO HIBERNATE, SUSPEND DESHABILITADO ─────────────────────────
   systemd.sleep.settings.Sleep = {
     AllowSuspend = false;
-    AllowHybridSleep = false;        # ← era AllowHibridSleep
+    AllowHybridSleep = false;
     AllowSuspendThenHibernate = false;
     AllowHibernation = true;
-    HibernateMode = "shutdown";
+    HibernateMode = "platform";
   };
 
   # ─── LID → HIBERNATE ──────────────────────────────────────────────────────
