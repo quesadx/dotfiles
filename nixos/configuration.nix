@@ -70,7 +70,7 @@ in
   # No host-specific or desktop-specific imports belong here.
 
   # ─── BOOT & KERNEL ────────────────────────────────────────────────────────
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = if isLaptop then pkgs.linuxPackages else pkgs.linuxPackages_zen;
   services.dbus.implementation = "broker";
   services.irqbalance.enable = true;
 

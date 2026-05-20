@@ -1,5 +1,8 @@
 { pkgs, lib, ... }:
 {
+
+  boot.initrd.systemd.enable = true;
+  
   boot.initrd.kernelModules = [
     "coretemp"
     "applesmc"
@@ -21,11 +24,11 @@
 
   # ─── SLEEP: SOLO HIBERNATE, SUSPEND DESHABILITADO ─────────────────────────
   systemd.sleep.settings.Sleep = {
-    AllowSuspend = false;               # suspend está roto en este hardware
-    AllowHibridSleep = false;
+    AllowSuspend = false;
+    AllowHybridSleep = false;        # ← era AllowHibridSleep
     AllowSuspendThenHibernate = false;
-    AllowHibernation = true;            # ← habilitamos esto
-    HibernateMode = "shutdown";         # boot limpio, no resume de S4
+    AllowHibernation = true;
+    HibernateMode = "shutdown";
   };
 
   # ─── LID → HIBERNATE ──────────────────────────────────────────────────────
@@ -38,22 +41,37 @@
   # ─── DESCARGAR MÓDULOS PROBLEMÁTICOS ANTES DE HIBERNAR ────────────────────
   # applespi / intel-lpss se cuelgan en resume; se descargan antes y recargan después
   systemd.services."systemd-hibernate" = {
-    serviceConfig.ExecStartPre = [
-      ''${pkgs.bash}/bin/bash -c "
-        ${pkgs.kmod}/bin/modprobe -r applespi spi_pxa2xx_platform spi_pxa2xx_core \
+    serviceConfig = {
+      ExecStartPre = pkgs.writeShellScript "hibernate-pre" ''
+        modprobe -r applespi spi_pxa2xx_platform spi_pxa2xx_core \
           brcmfmac_wcc brcmfmac brcmutil hci_uart 2>/dev/null || true
         sync
-      "''
-    ];scm-history-item:/home/quesadx/linux-dotfiles?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22745bf9f919fcffa6901aa3bc552067b9361e55f1%22%2C%22historyItemParentId%22%3A%2259436fe830fbf20b6c817fd241b06d899742c5cf%22%2C%22historyItemDisplayId%22%3A%22745bf9f%22%7D
-    serviceConfig.ExecStartPost = [
-      ''${pkgs.bash}/bin/bash -c "
+      '';
+      ExecStartPost = pkgs.writeShellScript "hibernate-post" ''
         sleep 1
-        ${pkgs.kmod}/bin/modprobe applespi 2>/dev/null || true
-        ${pkgs.kmod}/bin/modprobe brcmfmac 2>/dev/null || true
-        ${pkgs.kmod}/bin/modprobe hci_uart 2>/dev/null || true
-      "''
-    ];
+        modprobe applespi 2>/dev/null || true
+        modprobe brcmfmac 2>/dev/null || true
+        modprobe hci_uart 2>/dev/null || true
+      '';
+    };
   };
+
+  systemd.services."macbook-wifi-resume" = {
+  description = "Reload brcmfmac after hibernate resume";
+  after = [ "hibernate.target" ];
+  wantedBy = [ "hibernate.target" ];
+  serviceConfig = {
+    Type = "oneshot";
+    ExecStart = pkgs.writeShellScript "wifi-resume" ''
+      sleep 2
+      ${pkgs.kmod}/bin/modprobe -r brcmfmac_wcc 2>/dev/null || true
+      ${pkgs.kmod}/bin/modprobe -r brcmfmac 2>/dev/null || true
+      ${pkgs.kmod}/bin/modprobe -r brcmutil 2>/dev/null || true
+      sleep 1
+      ${pkgs.kmod}/bin/modprobe brcmfmac
+    '';
+  };
+};
 
   # ─── WAKEUP: DESHABILITAR USB PARA EVITAR WAKE INMEDIATO ──────────────────
   # El subsistema USB puede despertar el Mac inmediatamente después de hibernar

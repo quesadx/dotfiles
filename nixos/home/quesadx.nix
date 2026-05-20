@@ -153,7 +153,7 @@ in
   # ─── SSH CONFIGURATION ─────────────────────────────────────────────────────
   programs.ssh.enable = true;
   programs.ssh.enableDefaultConfig = false;
-  programs.ssh.matchBlocks."*".addKeysToAgent = "yes";
+  programs.ssh.settings."*".addKeysToAgent = "yes";
 
   # ─── EDITOR: FRESH ────────────────────────────────────────────────────────
   programs.fresh-editor.enable = true;
