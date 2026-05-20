@@ -1,36 +1,67 @@
-{ ... }:
-
+{ pkgs, lib, ... }:
 {
   boot.initrd.kernelModules = [
     "coretemp"
     "applesmc"
   ];
+
   boot.kernelParams = [
-    # Deep sleep is unstable on this host; prefer suspend-to-idle for reliable wake.
+    # S3 deep sleep crashea en Apple EFI; s2idle es el único modo funcional
+    # pero también es inestable — se usa solo como paso intermedio a hibernate
     "mem_sleep_default=s2idle"
-    # Override aggressive Kaby Lake defaults from nixos-hardware for resume stability.
     "i915.enable_psr=0"
-    # Disable NVMe APST to avoid controller power-state resume failures.
     "nvme_core.default_ps_max_latency_us=0"
   ];
-  boot.resumeDevice = "/dev/disk/by-uuid/c0e5d438-f519-4894-872c-d6471ea518da";
 
+  # ─── RESUME DESDE HIBERNACIÓN ─────────────────────────────────────────────
+  boot.resumeDevice = "/dev/disk/by-uuid/c0e5d438-f519-4894-872c-d6471ea518da";
+  # Si usas swapfile (no partición swap), también necesitas:
+  # boot.kernelParams = [ ... "resume_offset=XXXXXXX" ];
+  # Obtén el offset con: filefrag -v /ruta/swapfile | awk 'NR==4{print $4}' | tr -d '.'
+
+  # ─── SLEEP: SOLO HIBERNATE, SUSPEND DESHABILITADO ─────────────────────────
   systemd.sleep.settings.Sleep = {
-    MemorySleepMode = "s2idle";
-    AllowSuspend = false;
-    AllowHybridSleep = false;
+    AllowSuspend = false;               # suspend está roto en este hardware
+    AllowHibridSleep = false;
     AllowSuspendThenHibernate = false;
-    HibernateMode = "shutdown";
+    AllowHibernation = true;            # ← habilitamos esto
+    HibernateMode = "shutdown";         # boot limpio, no resume de S4
   };
 
-  # Work around systemd sleep regressions that can leave sessions unusable
-  # after resume (broken login/authentication and missing GNOME shell state).
-  systemd.services."systemd-suspend".environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-  systemd.services."systemd-hibernate".environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-  systemd.services."systemd-hybrid-sleep".environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-  systemd.services."systemd-suspend-then-hibernate".environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS =
-    "false";
+  # ─── LID → HIBERNATE ──────────────────────────────────────────────────────
+  services.logind.settings.Login = {
+    HandleLidSwitch = "hibernate";
+    HandleLidSwitchExternalPower = "hibernate";
+    HandleSuspendKey = "hibernate";     # botón de suspend también → hibernate
+  };
 
+  # ─── DESCARGAR MÓDULOS PROBLEMÁTICOS ANTES DE HIBERNAR ────────────────────
+  # applespi / intel-lpss se cuelgan en resume; se descargan antes y recargan después
+  systemd.services."systemd-hibernate" = {
+    serviceConfig.ExecStartPre = [
+      ''${pkgs.bash}/bin/bash -c "
+        ${pkgs.kmod}/bin/modprobe -r applespi spi_pxa2xx_platform spi_pxa2xx_core \
+          brcmfmac_wcc brcmfmac brcmutil hci_uart 2>/dev/null || true
+        sync
+      "''
+    ];scm-history-item:/home/quesadx/linux-dotfiles?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22745bf9f919fcffa6901aa3bc552067b9361e55f1%22%2C%22historyItemParentId%22%3A%2259436fe830fbf20b6c817fd241b06d899742c5cf%22%2C%22historyItemDisplayId%22%3A%22745bf9f%22%7D
+    serviceConfig.ExecStartPost = [
+      ''${pkgs.bash}/bin/bash -c "
+        sleep 1
+        ${pkgs.kmod}/bin/modprobe applespi 2>/dev/null || true
+        ${pkgs.kmod}/bin/modprobe brcmfmac 2>/dev/null || true
+        ${pkgs.kmod}/bin/modprobe hci_uart 2>/dev/null || true
+      "''
+    ];
+  };
+
+  # ─── WAKEUP: DESHABILITAR USB PARA EVITAR WAKE INMEDIATO ──────────────────
+  # El subsistema USB puede despertar el Mac inmediatamente después de hibernar
+  services.udev.extraRules = ''
+    SUBSYSTEM=="pci", KERNEL=="0000:00:14.0", ATTR{power/wakeup}="disabled"
+  '';
+
+  # ─── FAN CONTROL ──────────────────────────────────────────────────────────
   services.mbpfan = {
     enable = true;
     settings.general = {
@@ -42,43 +73,20 @@
     };
   };
 
-  services.logind.settings.Login = {
-    HandleLidSwitch = "nothing";
-    HandleLidSwitchExternalPower = "nothing";
-  };
-
-  # ─── POWER MANAGEMENT WITH TLP ─────────────────────────────────────────────
-  # Use TLP instead of power-profiles-daemon for optimized MacBook performance.
-  # Balanced/low-power modes cause noticeable slowdowns, so we configure TLP with
-  # a performance-oriented profile.
+  # ─── TLP ──────────────────────────────────────────────────────────────────
   services.tlp = {
     enable = true;
     settings = {
-      # ─── CPU SCALING ───────────────────────────────────────────────────────
-      # Use performance governor for responsive system behavior
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-
-      # ─── CPU TURBO BOOST ───────────────────────────────────────────────────
-      # Keep turbo boost enabled for better performance
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
-
-      # ─── WIFI & BLUETOOTH ──────────────────────────────────────────────────
-      # Keep Wi-Fi and Bluetooth on for consistent connectivity
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";
       BLUETOOTH_PWR_ON_AC = "on";
       BLUETOOTH_PWR_ON_BAT = "on";
-
-      # ─── USB POWER MANAGEMENT ──────────────────────────────────────────────
-      # Keep USB power management disabled for device compatibility
-      # USB_AUTOSUSPEND = 0;
-
-      # ─── POWER SAVE ───────────────────────────────────────────────────────
-      # Minimal power saving to maintain performance
       SCHED_POWERSAVE_ON_AC = 0;
       SCHED_POWERSAVE_ON_BAT = 1;
     };
