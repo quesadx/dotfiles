@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     steam
+    mangohud
   ];
 
   services.lact.enable = true; # Used for having a GUI on GPU stuff
