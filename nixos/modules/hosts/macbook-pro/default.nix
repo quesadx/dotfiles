@@ -9,6 +9,7 @@
   ];
 
   boot.kernelParams = [
+    "resume=/dev/disk/by-label/swap"
     "mem_sleep_default=s2idle"
     "i915.enable_psr=0"
     "nvme_core.default_ps_max_latency_us=0"
@@ -29,11 +30,8 @@
     ${pkgs.kmod}/bin/modprobe brcmfmac
   '';
 
-  # ─── RESUME DESDE HIBERNACIÓN ─────────────────────────────────────────────
-  boot.resumeDevice = "/dev/disk/by-uuid/c0e5d438-f519-4894-872c-d6471ea518da";
-  # Si usas swapfile (no partición swap), también necesitas:
-  # boot.kernelParams = [ ... "resume_offset=XXXXXXX" ];
-  # Obtén el offset con: filefrag -v /ruta/swapfile | awk 'NR==4{print $4}' | tr -d '.'
+  # ─── HIBERNATION WORKAROUND ──────────────────────────────────────────────
+  boot.resumeDevice = "/dev/disk/by-label/swap";
 
   systemd.sleep.settings.Sleep = {
     AllowSuspend = false;
@@ -78,13 +76,13 @@
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
       CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 0;
+      CPU_BOOST_ON_BAT = 1;
       WIFI_PWR_ON_AC = "off";
       WIFI_PWR_ON_BAT = "off";
       BLUETOOTH_PWR_ON_AC = "on";
       BLUETOOTH_PWR_ON_BAT = "on";
       SCHED_POWERSAVE_ON_AC = 0;
-      SCHED_POWERSAVE_ON_BAT = 1;
+      SCHED_POWERSAVE_ON_BAT = 0;
     };
   };
 }
