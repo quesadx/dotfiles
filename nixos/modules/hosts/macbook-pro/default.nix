@@ -2,15 +2,13 @@
 {
 
   boot.initrd.systemd.enable = true;
-  
+
   boot.initrd.kernelModules = [
     "coretemp"
     "applesmc"
   ];
 
   boot.kernelParams = [
-    # S3 deep sleep crashea en Apple EFI; s2idle es el único modo funcional
-    # pero también es inestable — se usa solo como paso intermedio a hibernate
     "mem_sleep_default=s2idle"
     "i915.enable_psr=0"
     "nvme_core.default_ps_max_latency_us=0"
@@ -20,13 +18,13 @@
     "btusb"
   ];
 
-    powerManagement.powerDownCommands = ''
+  powerManagement.powerDownCommands = ''
     ${pkgs.kmod}/bin/modprobe -r brcmfmac_wcc || true
     ${pkgs.kmod}/bin/modprobe -r brcmfmac || true
     ${pkgs.kmod}/bin/modprobe -r brcmutil || true
   '';
 
-    powerManagement.resumeCommands = ''
+  powerManagement.resumeCommands = ''
     sleep 3
     ${pkgs.kmod}/bin/modprobe brcmfmac
   '';
@@ -37,7 +35,6 @@
   # boot.kernelParams = [ ... "resume_offset=XXXXXXX" ];
   # Obtén el offset con: filefrag -v /ruta/swapfile | awk 'NR==4{print $4}' | tr -d '.'
 
-  # ─── SLEEP: SOLO HIBERNATE, SUSPEND DESHABILITADO ─────────────────────────
   systemd.sleep.settings.Sleep = {
     AllowSuspend = false;
     AllowHybridSleep = false;
@@ -51,7 +48,7 @@
   services.logind.settings.Login = {
     HandleLidSwitch = "hibernate";
     HandleLidSwitchExternalPower = "hibernate";
-    HandleSuspendKey = "hibernate";     # botón de suspend también → hibernate
+    HandleSuspendKey = "hibernate";
   };
 
   # ─── WAKEUP: DESHABILITAR USB PARA EVITAR WAKE INMEDIATO ──────────────────
