@@ -16,6 +16,21 @@
     "nvme_core.default_ps_max_latency_us=0"
   ];
 
+  boot.blacklistedKernelModules = [
+    "btusb"
+  ];
+
+    powerManagement.powerDownCommands = ''
+    ${pkgs.kmod}/bin/modprobe -r brcmfmac_wcc || true
+    ${pkgs.kmod}/bin/modprobe -r brcmfmac || true
+    ${pkgs.kmod}/bin/modprobe -r brcmutil || true
+  '';
+
+    powerManagement.resumeCommands = ''
+    sleep 3
+    ${pkgs.kmod}/bin/modprobe brcmfmac
+  '';
+
   # ─── RESUME DESDE HIBERNACIÓN ─────────────────────────────────────────────
   boot.resumeDevice = "/dev/disk/by-uuid/c0e5d438-f519-4894-872c-d6471ea518da";
   # Si usas swapfile (no partición swap), también necesitas:
@@ -28,7 +43,8 @@
     AllowHybridSleep = false;
     AllowSuspendThenHibernate = false;
     AllowHibernation = true;
-    HibernateMode = "platform";
+
+    HibernateMode = "shutdown";
   };
 
   # ─── LID → HIBERNATE ──────────────────────────────────────────────────────
@@ -37,41 +53,6 @@
     HandleLidSwitchExternalPower = "hibernate";
     HandleSuspendKey = "hibernate";     # botón de suspend también → hibernate
   };
-
-  # ─── DESCARGAR MÓDULOS PROBLEMÁTICOS ANTES DE HIBERNAR ────────────────────
-  # applespi / intel-lpss se cuelgan en resume; se descargan antes y recargan después
-  systemd.services."systemd-hibernate" = {
-    serviceConfig = {
-      ExecStartPre = pkgs.writeShellScript "hibernate-pre" ''
-        modprobe -r applespi spi_pxa2xx_platform spi_pxa2xx_core \
-          brcmfmac_wcc brcmfmac brcmutil hci_uart 2>/dev/null || true
-        sync
-      '';
-      ExecStartPost = pkgs.writeShellScript "hibernate-post" ''
-        sleep 1
-        modprobe applespi 2>/dev/null || true
-        modprobe brcmfmac 2>/dev/null || true
-        modprobe hci_uart 2>/dev/null || true
-      '';
-    };
-  };
-
-  systemd.services."macbook-wifi-resume" = {
-  description = "Reload brcmfmac after hibernate resume";
-  after = [ "hibernate.target" ];
-  wantedBy = [ "hibernate.target" ];
-  serviceConfig = {
-    Type = "oneshot";
-    ExecStart = pkgs.writeShellScript "wifi-resume" ''
-      sleep 2
-      ${pkgs.kmod}/bin/modprobe -r brcmfmac_wcc 2>/dev/null || true
-      ${pkgs.kmod}/bin/modprobe -r brcmfmac 2>/dev/null || true
-      ${pkgs.kmod}/bin/modprobe -r brcmutil 2>/dev/null || true
-      sleep 1
-      ${pkgs.kmod}/bin/modprobe brcmfmac
-    '';
-  };
-};
 
   # ─── WAKEUP: DESHABILITAR USB PARA EVITAR WAKE INMEDIATO ──────────────────
   # El subsistema USB puede despertar el Mac inmediatamente después de hibernar
