@@ -102,6 +102,20 @@ let
     };
   };
 
+  # ─── CHROME EXTENSIONS ────────────────────────────────────────────────────
+  chromeExtensions = {
+    # uBlock Origin for Chromium
+    "cjpalhdlnbpafiamejdnhcphjbkeiagm" = {
+      installation_mode = "force_installed";
+      update_url = "https://clients2.google.com/service/update2/crx";
+    };
+    # Bitwarden
+    "nngceckbapebfimnlniiiahkandclblb" = {
+      installation_mode = "force_installed";
+      update_url = "https://clients2.google.com/service/update2/crx";
+    };
+  };
+
   # ─── CONFIG FILE SOURCES ───────────────────────────────────────────────────
   configSources = {
     # "fastfetch".source = ../../config/active/fastfetch;
@@ -278,16 +292,12 @@ in
     "editor.fontFamily" = "'IBM Plex Mono', monospace";
     "sqldeveloper.telemetry.enabled" = false;
   };
-
-  # ─── BROWSER: FIREFOX ──────────────────────────────────────────────────────
-  programs.firefox.enable = true;
-  programs.firefox.profiles.${username} = {
-    isDefault = true;
-    settings = {
-      "browser.search.region" = "CR";
-      "browser.search.isUS" = false;
-      "distribution.id" = "nixos";
-    };
-  };
-  programs.firefox.policies.ExtensionSettings = firefoxExtensions;
+  # ─── CHROMIUM ────────────────────────────────────────────────────────────────
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # uBlock Origin Lite
+      { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
+    ];
+};
 }
