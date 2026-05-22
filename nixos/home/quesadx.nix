@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   shared,
   host,
   ...
@@ -90,32 +88,6 @@ let
     pkief.material-icon-theme
   ];
 
-  # ─── FIREFOX EXTENSIONS ────────────────────────────────────────────────────
-  firefoxExtensions = {
-    "uBlock0@raymondhill.net" = {
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-      installation_mode = "force_installed";
-    };
-    "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-      install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-      installation_mode = "force_installed";
-    };
-  };
-
-  # ─── CHROME EXTENSIONS ────────────────────────────────────────────────────
-  chromeExtensions = {
-    # uBlock Origin for Chromium
-    "cjpalhdlnbpafiamejdnhcphjbkeiagm" = {
-      installation_mode = "force_installed";
-      update_url = "https://clients2.google.com/service/update2/crx";
-    };
-    # Bitwarden
-    "nngceckbapebfimnlniiiahkandclblb" = {
-      installation_mode = "force_installed";
-      update_url = "https://clients2.google.com/service/update2/crx";
-    };
-  };
-
   # ─── CONFIG FILE SOURCES ───────────────────────────────────────────────────
   configSources = {
     # "fastfetch".source = ../../config/active/fastfetch;
@@ -169,107 +141,24 @@ in
   programs.ssh.enableDefaultConfig = false;
   programs.ssh.settings."*".addKeysToAgent = "yes";
 
-  # ─── EDITOR: FRESH ────────────────────────────────────────────────────────
-  programs.fresh-editor.enable = true;
-
   # ─── EDITOR: ZED ──────────────────────────────────────────────────────────
   programs.zed-editor.enable = true;
-  programs.zed-editor.extensions = [ "java" "dockerfile" "sql" "opencode" "nix" "prisma" "docker-compose" "ini" "pylsp" "xml" ];
-
-  # ─── EDITOR: HELIX ────────────────────────────────────────────────────────
-  programs.helix.enable = false;
-  programs.helix.settings.theme = "base16_default";
-  programs.helix.settings.editor = {
-    lsp.display-messages = true;
-    lsp.display-inlay-hints = true;
-    auto-info = false;
-    completion-timeout = 50;
-  };
-
-  programs.helix.extraPackages = with pkgs; [
-    nixd
-    nixfmt
-    typescript-language-server
-    vscode-json-languageserver
-    marksman
-    jdt-language-server
-    clang-tools
-    bash-language-server
-    xclip
+  programs.zed-editor.extensions = [
+    "java"
+    "dockerfile"
+    "sql"
+    "opencode"
+    "nix"
+    "prisma"
+    "docker-compose"
+    "ini"
+    "pylsp"
+    "xml"
   ];
-
-  # Helix TypeScript language server config
-  programs.helix.languages.language-server.typescript-language-server.config = {
-    typescript.inlayHints = {
-      includeInlayEnumMemberValueHints = true;
-      includeInlayFunctionLikeReturnTypeHints = true;
-      includeInlayFunctionParameterTypeHints = true;
-      includeInlayParameterNameHints = "all";
-      includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-      includeInlayPropertyDeclarationTypeHints = true;
-      includeInlayVariableTypeHints = true;
-    };
-    javascript.inlayHints = {
-      includeInlayEnumMemberValueHints = true;
-      includeInlayFunctionLikeReturnTypeHints = true;
-      includeInlayFunctionParameterTypeHints = true;
-      includeInlayParameterNameHints = "all";
-      includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-      includeInlayPropertyDeclarationTypeHints = true;
-      includeInlayVariableTypeHints = true;
-    };
-  };
-
-  # Helix language-specific configurations
-  programs.helix.languages.language = [
-    {
-      name = "nix";
-      auto-format = true;
-      formatter.command = "nixfmt";
-      language-servers = [ "nixd" ];
-    }
-    {
-      name = "typescript";
-      auto-format = true;
-      language-servers = [ "typescript-language-server" ];
-    }
-    {
-      name = "javascript";
-      auto-format = true;
-      language-servers = [ "typescript-language-server" ];
-    }
-    {
-      name = "json";
-      auto-format = true;
-      language-servers = [ "vscode-json-languageserver" ];
-    }
-    {
-      name = "markdown";
-      language-servers = [ "marksman" ];
-    }
-    {
-      name = "java";
-      language-servers = [ "jdt-language-server" ];
-    }
-    {
-      name = "c";
-      auto-format = true;
-      language-servers = [ "clangd" ];
-    }
-    {
-      name = "cpp";
-      auto-format = true;
-      language-servers = [ "clangd" ];
-    }
-    {
-      name = "python";
-      auto-format = true;
-      language-servers = [ "pylsp" ];
-    }
-    {
-      name = "bash";
-      language-servers = [ "bash-language-server" ];
-    }
+  programs.zed-editor.extraPackages = with pkgs; [
+    nil
+    nixd
+    opencode
   ];
 
   # ─── EDITOR: VS CODE ───────────────────────────────────────────────────────
