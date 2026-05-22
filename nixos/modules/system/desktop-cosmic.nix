@@ -2,7 +2,7 @@
 # System-level configuration for COSMIC Desktop Environment
 # COSMIC is System76's modern desktop environment built with Rust
 
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   # ─── COSMIC SERVICES ──────────────────────────────────────────────────────

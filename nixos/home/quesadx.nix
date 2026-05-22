@@ -30,6 +30,7 @@ in
   programs.home-manager.enable = true;
   home.username = shared.username;
   home.homeDirectory = "/home/${shared.username}";
+  home.stateVersion = "26.05";
   home.packages = with pkgs; [
     gnome-tweaks
     gnome-software
@@ -53,11 +54,11 @@ in
     fastfetch
     wl-clipboard
     xournalpp
+    rnote
   ];
   home.sessionVariables = {
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
-  home.stateVersion = "26.05";
 
   # --- Services ---
   services.ssh-agent.enable = true;
@@ -163,4 +164,6 @@ in
     "editor.fontFamily" = "'IBM Plex Mono', monospace";
     "sqldeveloper.telemetry.enabled" = false;
   };
+
+
 }
