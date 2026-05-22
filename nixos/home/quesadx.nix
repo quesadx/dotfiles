@@ -172,6 +172,10 @@ in
   # ─── EDITOR: FRESH ────────────────────────────────────────────────────────
   programs.fresh-editor.enable = true;
 
+  # ─── EDITOR: ZED ──────────────────────────────────────────────────────────
+  programs.zed-editor.enable = true;
+  programs.zed-editor.extensions = [ "java" "dockerfile" "sql" "opencode" "nix" "prisma" "docker-compose" "ini" "pylsp" "xml" ];
+
   # ─── EDITOR: HELIX ────────────────────────────────────────────────────────
   programs.helix.enable = false;
   programs.helix.settings.theme = "base16_default";
@@ -299,5 +303,5 @@ in
       { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # uBlock Origin Lite
       { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
     ];
-};
+  };
 }
