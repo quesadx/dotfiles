@@ -27,7 +27,7 @@ let
   };
 in
 {
-  # --- Home manager core stuff ---
+  # --- Home manager ---
   programs.home-manager.enable = true;
   home.username = shared.username;
   home.homeDirectory = "/home/${shared.username}";
@@ -102,39 +102,40 @@ in
   };
 
   # ─── Zed ---
-  programs.zed-editor.enable = true;
-  programs.zed-editor.enableMcpIntegration = true;
-  programs.zed-editor.userSettings = {
-    auto_save = "on_focus_change";
-    theme = {
-      mode = "system"; # or "light" / "dark"
-      light = "Zedokai Light";
-      dark = "Zedokai Dark";
+  programs.zed-editor = {
+    enable = true;
+    enableMcpIntegration = true;
+    userSettings = {
+      auto_save = "on_focus_change";
+      theme = {
+        mode = "system";
+        light = "Zedokai Light";
+        dark = "Zedokai Dark";
+      };
     };
+    extensions = [
+      "github-copilot-cli"
+      "claude-acp"
+      "gemini"
+      "qwen-code"
+      "java"
+      "dockerfile"
+      "sql"
+      "nix"
+      "prisma"
+      "docker-compose"
+      "opencode"
+      "ini"
+      "pylsp"
+      "xml"
+      "zedokai"
+      "codebook"
+      "colored-zed-icons-theme"
+    ];
+    extraPackages = with pkgs; [
+      nixd
+    ];
   };
-  programs.zed-editor.extensions = [
-    "java"
-    "dockerfile"
-    "sql"
-    "gemini"
-    "opencode"
-    "nix"
-    "prisma"
-    "docker-compose"
-    "github-copilot-cli"
-    "qwen-code"
-    "claude-acp"
-    "opencode"
-    "ini"
-    "pylsp"
-    "xml"
-    "zedokai"
-    "codebook"
-    "colored-zed-icons-theme"
-  ];
-  programs.zed-editor.extraPackages = with pkgs; [
-    nixd
-  ];
 
   # --- VSCode ---
   programs.vscode.enable = true;
