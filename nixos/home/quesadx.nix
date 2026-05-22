@@ -27,6 +27,7 @@ let
   };
 in
 {
+  # --- Home manager core stuff ---
   programs.home-manager.enable = true;
   home.username = shared.username;
   home.homeDirectory = "/home/${shared.username}";
@@ -116,6 +117,7 @@ in
     "ini"
     "pylsp"
     "xml"
+    "zedokai"
   ];
   programs.zed-editor.extraPackages = with pkgs; [
     nil
