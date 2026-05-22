@@ -107,6 +107,7 @@ in
     auto_save = "on_focus_change";
   };
   programs.zed-editor.extensions = [
+    "colored-zed-icons-theme"
     "java"
     "dockerfile"
     "sql"
@@ -166,6 +167,4 @@ in
     "editor.fontFamily" = "'IBM Plex Mono', monospace";
     "sqldeveloper.telemetry.enabled" = false;
   };
-
-
 }
