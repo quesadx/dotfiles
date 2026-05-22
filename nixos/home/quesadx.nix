@@ -103,27 +103,37 @@ in
 
   # ─── Zed ---
   programs.zed-editor.enable = true;
+  programs.zed-editor.enableMcpIntegration = true;
   programs.zed-editor.userSettings = {
     auto_save = "on_focus_change";
+    theme = {
+      mode = "system"; # or "light" / "dark"
+      light = "Zedokai Light";
+      dark = "Zedokai Dark";
+    };
   };
   programs.zed-editor.extensions = [
-    "colored-zed-icons-theme"
     "java"
     "dockerfile"
     "sql"
+    "gemini"
     "opencode"
     "nix"
     "prisma"
     "docker-compose"
+    "github-copilot-cli"
+    "qwen-code"
+    "claude-acp"
+    "opencode"
     "ini"
     "pylsp"
     "xml"
     "zedokai"
+    "codebook"
+    "colored-zed-icons-theme"
   ];
   programs.zed-editor.extraPackages = with pkgs; [
-    nil
     nixd
-    opencode
   ];
 
   # --- VSCode ---

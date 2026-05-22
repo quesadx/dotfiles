@@ -72,6 +72,16 @@ in
     unrar
     p7zip
   ];
+  programs.nix-ld = {
+    enable = true;
+
+    libraries = with pkgs; [
+      stdenv.cc.cc
+      gcc.cc.lib
+      zlib
+      openssl
+    ];
+  };
 
   # --- Networking ---
   networking = {
@@ -96,6 +106,7 @@ in
   security.polkit.enable = true;
   security.rtkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # --- Services ---
   services.power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
