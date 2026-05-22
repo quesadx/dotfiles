@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -6,6 +6,6 @@
     mangohud
   ];
 
-  services.lact.enable = true; # Used for having a GUI on GPU stuff
-  programs.gamemode.enable = true; # Used for gaming performance improvements
+  services.lact.enable = true;
+  programs.gamemode.enable = true;
 }

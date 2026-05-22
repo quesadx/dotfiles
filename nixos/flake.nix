@@ -1,7 +1,6 @@
 {
   description = "Multi-host NixOS fleet";
 
-  # External dependencies and package sources
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -11,10 +10,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  # System configuration using flake inputs
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
       nixos-hardware,
@@ -26,7 +23,8 @@
       hostNames = builtins.attrNames hosts;
     in
     {
-      nixosConfigurations = builtins.listToAttrs (map (name: {
+      nixosConfigurations = builtins.listToAttrs (
+        map (name: {
           name = name;
           value = nixpkgs.lib.nixosSystem {
             inherit (shared) system;
@@ -37,7 +35,10 @@
             modules = [
               ./configuration.nix
               hosts.${name}.hardwareConfig
-            ] ++ hosts.${name}.hardwareModules ++ (hosts.${name}.desktopModules or []) ++ [
+            ]
+            ++ hosts.${name}.hardwareModules
+            ++ (hosts.${name}.desktopModules or [ ])
+            ++ [
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
@@ -47,12 +48,12 @@
                   host = hosts.${name};
                 };
                 home-manager.users.${shared.username} = {
-                  imports = [ ./home/${shared.username}.nix ] ++ (hosts.${name}.homeModules or []);
+                  imports = [ ./home/${shared.username}.nix ] ++ (hosts.${name}.homeModules or [ ]);
                 };
               }
             ];
           };
-        }
-      ) hostNames);
+        }) hostNames
+      );
     };
 }

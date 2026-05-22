@@ -6,19 +6,18 @@
 }:
 
 let
-
   bashAliases = {
     ll = "ls -l";
     ls = "ls -a --color=auto";
-    # Git aliases
+
     gs = "git status";
     ga = "git add .";
     gc = "git commit -m";
     gp = "git push";
-    # NixOS rebuild aliases (uses current host)
+
     nrt = "cd ~/linux-dotfiles/nixos && sudo nixos-rebuild test --flake .#${host.flakeTarget}";
     nrs = "cd ~/linux-dotfiles && git add . && cd nixos && sudo nixos-rebuild switch --flake .#${host.flakeTarget}";
-    # Docker Compose aliases
+
     dcu = "docker compose up";
     dcud = "docker compose up -d";
     dcd = "docker compose down";
@@ -26,9 +25,7 @@ let
 
     dotfiles = "cd ~/linux-dotfiles";
   };
-
 in
-
 {
   programs.home-manager.enable = true;
   home.username = shared.username;
@@ -93,7 +90,7 @@ in
   programs.ssh.enableDefaultConfig = false;
   programs.ssh.settings."*".addKeysToAgent = "yes";
 
-  # ─── CHROMIUM ────────────────────────────────────────────────────────────────
+  # --- Chromium ---
   programs.chromium = {
     enable = true;
     extensions = [
@@ -104,6 +101,9 @@ in
 
   # ─── Zed ---
   programs.zed-editor.enable = true;
+  programs.zed-editor.userSettings = {
+    auto_save = "on_focus_change";
+  };
   programs.zed-editor.extensions = [
     "java"
     "dockerfile"

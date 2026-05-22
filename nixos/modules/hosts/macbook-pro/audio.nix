@@ -3,7 +3,13 @@
 # Enables internal microphone routing via mbp131 model fixup.
 # Only evaluated when loaded for the macbook-pro host.
 
-{ config, host, pkgs, lib, ... }:
+{
+  config,
+  host,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   isMacbookPro141 = host.flakeTarget == "macbook-pro";
@@ -33,9 +39,7 @@ let
 
         makeFlags =
           (lib.filter (
-            flag:
-              !(lib.hasPrefix "O=" flag)
-              && !(lib.hasPrefix "--eval=" flag)
+            flag: !(lib.hasPrefix "O=" flag) && !(lib.hasPrefix "--eval=" flag)
           ) config.boot.kernelPackages.kernel.makeFlags)
           ++ [
             "INSTALL_MOD_PATH=${placeholder "out"}"

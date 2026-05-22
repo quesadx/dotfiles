@@ -1,37 +1,29 @@
 {
-  config,
   pkgs,
   shared,
   host,
   ...
 }:
 
-# ─── VARIABLES & HELPERS ───────────────────────────────────────────────────
 let
-  inherit (shared)
-    username
-    userDescription
-    timeZone
-    locale
-    regionalLocale;
-
-  # ─── USER GROUPS ──────────────────────────────────────────────────────────
-  userGroups = [
-    "networkmanager" # Networking
-    "wheel" # Sudo access
-    "video"
-    "render" # GPU access
-    "audio" # Audio access
-    "docker"
-    "kvm" # Virtualization
-    "dialout"
-    "libvirtd"
-  ];
-
   isLaptop = host.flakeTarget == "thinkpad" || host.flakeTarget == "macbook-pro";
+in
+{
 
-  # ─── CORE PACKAGES ────────────────────────────────────────────────────────
-  corePackages = with pkgs; [
+  # --- Boot ---
+  boot.kernelPackages = if isLaptop then pkgs.linuxPackages else pkgs.linuxPackages_zen;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 0;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # --- Memory & Swap ---
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 25;
+  zramSwap.algorithm = "lz4";
+  systemd.oomd.enable = true;
+
+  # --- System packages ---
+  environment.systemPackages = with pkgs; [
     btop
     vim
     wget
@@ -45,7 +37,7 @@ let
     usbutils
     steam-run
     tldr
-    libsecret # For GNOME Keyring integration
+    libsecret
     dnsmasq
     file-roller
     unzip
@@ -53,76 +45,56 @@ let
     p7zip
   ];
 
-  # ─── SYSTEM FONTS ────────────────────────────────────────────────────────
-  systemFonts = with pkgs; [
-    ibm-plex # Professional sans-serif
+  # --- Fonts ---
+  fonts.packages = with pkgs; [
+    ibm-plex
     noto-fonts
-    noto-fonts-color-emoji # Unicode coverage
-    font-awesome # Icon font
-    nerd-fonts.jetbrains-mono # Monospace with ligatures
+    noto-fonts-color-emoji
+    font-awesome
   ];
 
-in
-
-# ─── SYSTEM CONFIGURATION ────────────────────────────────────────────────
-{
-  # Desktop modules and host-specific modules are loaded via hosts.nix → flake.nix.
-  # No host-specific or desktop-specific imports belong here.
-
-  # ─── BOOT & KERNEL ────────────────────────────────────────────────────────
-  boot.kernelPackages = if isLaptop then pkgs.linuxPackages else pkgs.linuxPackages_zen;
-  services.dbus.implementation = "broker";
-  services.irqbalance.enable = true;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 0; # No timeout, boot immediately
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # ─── MEMORY & SWAP ────────────────────────────────────────────────────────
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 25; # Use 25% of RAM for swap
-  zramSwap.algorithm = "lz4";
-  systemd.oomd.enable = true;
-
-  # ─── NETWORKING ───────────────────────────────────────────────────────────
+  # --- Networking ---
   networking = {
     hostName = host.hostname;
     networkmanager.enable = true;
   };
-
-  systemd.services.NetworkManager-wait-online.enable = false;
-
-  # Firewall configuration
   networking.firewall.enable = true;
-  networking.firewall.trustedInterfaces = [ "virbr0" ]; # KVM bridge
-  networking.firewall.allowedTCPPorts = [ 24800 ]; # Synergy port
 
-  # ─── USERS & GROUPS ───────────────────────────────────────────────────────
-  users.users.${username} = {
+  # --- User & Groups
+  users.users.${shared.username} = {
     isNormalUser = true;
-    description = userDescription;
-    extraGroups = userGroups;
+    description = shared.userDescription;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "render"
+      "audio"
+      "docker"
+      "kvm"
+      "libvirtd"
+      "dialout"
+    ];
   };
 
-  # ─── LOCALIZATION ────────────────────────────────────────────────────────
-  time.timeZone = timeZone;
-
+  # --- Locale ---
+  time.timeZone = shared.timeZone;
   i18n = {
-    defaultLocale = locale;
+    defaultLocale = shared.locale;
     extraLocaleSettings = {
-      LC_ADDRESS = regionalLocale;
-      LC_IDENTIFICATION = regionalLocale;
-      LC_MEASUREMENT = regionalLocale;
-      LC_MONETARY = regionalLocale;
-      LC_NAME = regionalLocale;
-      LC_NUMERIC = regionalLocale;
-      LC_PAPER = regionalLocale;
-      LC_TELEPHONE = regionalLocale;
-      LC_TIME = regionalLocale;
+      LC_ADDRESS = shared.regionalLocale;
+      LC_IDENTIFICATION = shared.regionalLocale;
+      LC_MEASUREMENT = shared.regionalLocale;
+      LC_MONETARY = shared.regionalLocale;
+      LC_NAME = shared.regionalLocale;
+      LC_NUMERIC = shared.regionalLocale;
+      LC_PAPER = shared.regionalLocale;
+      LC_TELEPHONE = shared.regionalLocale;
+      LC_TIME = shared.regionalLocale;
     };
   };
 
-  # ─── HARDWARE ─────────────────────────────────────────────────────────────
+  # --- Hardware ---
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = if isLaptop then false else true;
   hardware.graphics = {
@@ -130,7 +102,7 @@ in
     enable32Bit = true;
   };
 
-  # ─── VIRTUALIZATION ───────────────────────────────────────────────────────
+  # --- Virtualization ---
   virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = {
     bip = "192.168.30.1/24";
@@ -147,55 +119,38 @@ in
   # sudo virsh net-start default
   # sudo virsh net-autostart default
 
-  # ─── SECURITY ────────────────────────────────────────────────────────────
+  # --- Security ---
   security.polkit.enable = true;
   security.rtkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-  # ─── POWER SERVICES ──────────────────────────────────────────────────────
-  # Enable power-profiles-daemon on non-MacBook systems.
-  # MacBook uses TLP for better performance control.
   services.power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
 
-  # ─── CORE SERVICES ───────────────────────────────────────────────────────
-  # Firmware updates: disable for cleaner boot, uncomment if needed
-  # services.fwupd.enable = true;
-
+  services.gnome.gnome-keyring.enable = true;
   services.flatpak.enable = true;
   services.openssh.enable = false;
-  services.gnome.gnome-keyring.enable = true;
 
-  # LLM inference service: disable by default to reduce overhead
-  # Enable with: sudo nixos-rebuild switch --flake .#<host> && systemctl start ollama
-  # services.ollama.enable = true;
+  services.dbus.implementation = "broker";
+  services.irqbalance.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
-  # ─── AUDIO (PipeWire) ─────────────────────────────────────────────────────
   services.pipewire.enable = true;
   services.pipewire.alsa.enable = true;
   services.pipewire.alsa.support32Bit = true;
   services.pipewire.pulse.enable = true;
   services.pipewire.wireplumber.enable = true;
 
-  # ─── ENVIRONMENT ────────────────────────────────────────────────────────
-  environment.systemPackages = corePackages;
-  nixpkgs.config.allowUnfree = true;
-
-  # ─── NIX SETTINGS ────────────────────────────────────────────────────────
+  # --- Nix & nixpkgs ---
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
-  nix.gc.automatic = true; # Automatic garbage collection
+  nix.gc.automatic = true;
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 30d";
+  nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.permittedInsecurePackages = [
-    # "openclaw-2026.4.11"
-  ];
-
-  # ---------- SYSTEM ----------
-  fonts.packages = systemFonts; # Install system fonts
-  system.stateVersion = "26.05"; # NixOS version (don't change lightly)
+  system.stateVersion = "26.05";
 }
