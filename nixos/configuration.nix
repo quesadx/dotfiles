@@ -64,6 +64,7 @@ in
     pciutils
     usbutils
     steam-run
+    appimage-run
     tldr
     libsecret
     dnsmasq
