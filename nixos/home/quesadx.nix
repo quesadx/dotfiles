@@ -143,7 +143,7 @@ in
     esbenp.prettier-vscode
     ecmel.vscode-html-css
     humao.rest-client
-    ms-python.python
+    # ms-python.python
     vscjava.vscode-java-pack
     james-yu.latex-workshop
     bbenoist.nix
