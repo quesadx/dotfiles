@@ -78,6 +78,7 @@ in
     unrar
     p7zip
   ];
+
   programs.nix-ld = {
     enable = true;
 
@@ -134,6 +135,7 @@ in
     oomd.enable = true;
   };
 
+  # --- User services ---
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -175,9 +177,11 @@ in
     ];
     optimise.automatic = true;
     optimise.dates = [ "03:45" ];
-    gc.automatic = true;
-    gc.dates = "weekly";
-    gc.options = "--delete-older-than 30d";
+    gc = { # garbage collection
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
