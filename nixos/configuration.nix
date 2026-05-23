@@ -11,26 +11,31 @@ in
 {
 
   # --- Boot ---
-  boot.kernelPackages = if isLaptop then pkgs.linuxPackages else pkgs.linuxPackages_zen;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 0;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    kernelPackages = if isLaptop then pkgs.linuxPackages else pkgs.linuxPackages_zen;
+    loader.systemd-boot.enable = true;
+    loader.timeout = 0;
+    loader.efi.canTouchEfiVariables = true;
+  };
 
   # --- System state version ---
   system.stateVersion = "26.05";
 
   # --- Memory & Swap ---
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 25;
-  zramSwap.algorithm = "lz4";
-  systemd.oomd.enable = true;
+  zramSwap = {
+    enable = true;
+    memoryPercent = 25;
+    algorithm = "lz4";
+  };
 
   # --- Hardware ---
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = if isLaptop then false else true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = if isLaptop then false else true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
 
   # --- User & Groups
@@ -88,43 +93,54 @@ in
   networking = {
     hostName = host.hostname;
     networkmanager.enable = true;
+    firewall.enable = true;
   };
-  networking.firewall.enable = true;
 
   # --- Virtualization ---
-  virtualisation.docker.enable = true;
-  virtualisation.docker.daemon.settings = {
-    bip = "192.168.30.1/24";
-    "default-address-pools" = [
-      {
-        base = "10.10.0.0/16";
-        size = 24;
-      }
-    ];
+  virtualisation = {
+    docker.enable = true;
+    docker.daemon.settings = {
+      bip = "192.168.30.1/24";
+      "default-address-pools" = [
+        {
+          base = "10.10.0.0/16";
+          size = 24;
+        }
+      ];
+    };
   };
 
   # --- Security ---
-  security.polkit.enable = true;
-  security.rtkit.enable = true;
-  security.sudo.wheelNeedsPassword = false;
-  security.pam.services.login.enableGnomeKeyring = true;
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+    sudo.wheelNeedsPassword = false;
+    pam.services.login.enableGnomeKeyring = true;
+  };
 
   # --- Services ---
-  services.power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
+  services = {
+    power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
+    gnome.gnome-keyring.enable = true;
+    flatpak.enable = true;
+    openssh.enable = false;
+    dbus.implementation = "broker";
+    irqbalance.enable = true;
+  };
 
-  services.gnome.gnome-keyring.enable = true;
-  services.flatpak.enable = true;
-  services.openssh.enable = false;
+  # --- systemd stuff ---
+  systemd = {
+    services.NetworkManager-wait-online.enable = false;
+    oomd.enable = true;
+  };
 
-  services.dbus.implementation = "broker";
-  services.irqbalance.enable = true;
-  systemd.services.NetworkManager-wait-online.enable = false;
-
-  services.pipewire.enable = true;
-  services.pipewire.alsa.enable = true;
-  services.pipewire.alsa.support32Bit = true;
-  services.pipewire.pulse.enable = true;
-  services.pipewire.wireplumber.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  };
 
   # --- Fonts ---
   fonts.packages = with pkgs; [
@@ -152,14 +168,17 @@ in
   };
 
   # --- Nix & nixpkgs ---
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.optimise.automatic = true;
-  nix.optimise.dates = [ "03:45" ];
-  nix.gc.automatic = true;
-  nix.gc.dates = "weekly";
-  nix.gc.options = "--delete-older-than 30d";
+  nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    optimise.automatic = true;
+    optimise.dates = [ "03:45" ];
+    gc.automatic = true;
+    gc.dates = "weekly";
+    gc.options = "--delete-older-than 30d";
+  };
+
   nixpkgs.config.allowUnfree = true;
 }
