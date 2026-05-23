@@ -2,7 +2,7 @@
 # Home Manager configuration for GNOME Desktop Environment
 # Can be replaced with alternative desktop environments (KDE, etc.)
 
-{ config, pkgs, lib, ... }:
+{ ... }:
 
 {
   # ─── GNOME SETTINGS MANAGEMENT ────────────────────────────────────────────
@@ -11,15 +11,15 @@
   dconf.settings = {
     # ─── GNOME SHELL EXTENSIONS ───────────────────────────────────────────
     "org/gnome/shell".enabled-extensions = [
-      "appindicatorsupport@rgcjonas.gmail.com"                                      # System tray
-      "caffeine@patapon.info"                                                       # Prevent screen lock
-      "luminus-desktop@dikasp.gitlab"                                               # Status bar tweaks
-      "touchpad-gesture-customization@coooolapps.com"                               # Touchpad gestures
+      "appindicatorsupport@rgcjonas.gmail.com" # System tray
+      "caffeine@patapon.info" # Prevent screen lock
+      "luminus-desktop@dikasp.gitlab" # Status bar tweaks
+      "touchpad-gesture-customization@coooolapps.com" # Touchpad gestures
       # "dash-to-dock@micxgx.gmail.com"                                               # Dock customization
     ];
 
     "org/gnome/mutter" = {
-      experimental-features = [ "scale-monitor-framebuffer" ];
+      # experimental-features = [ "scale-monitor-framebuffer" ];
     };
 
     # ─── EXTENSION: AppIndicator (System Tray) ────────────────────────────
@@ -34,7 +34,7 @@
     # ─── INPUT SOURCES (Keyboard Layouts) ──────────────────────────────────
     "org/gnome/desktop/input-sources" = {
       show-all-sources = true;
-      xkb-options = [ "compose:rwin" ];  # Right Super -> Compose
+      xkb-options = [ "compose:rwin" ]; # Right Super -> Compose
     };
 
     # ─── WINDOW MANAGER KEYBINDINGS ───────────────────────────────────────
@@ -86,7 +86,6 @@
       autohide-in-fullscreen = true;
       running-indicator-style = "DOTS";
     };
-
 
     # ─── MOUSE & ACCESSIBILITY ────────────────────────────────────────────
     "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
