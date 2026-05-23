@@ -60,7 +60,7 @@ in
   };
 
   # --- Services ---
-  services.ssh-agent.enable = true;
+  services.ssh-agent.enable = false;
 
   # --- zsh & bash ---
   programs.starship.enable = true;
@@ -97,7 +97,7 @@ in
 
   # --- SSH ---
   programs.ssh = {
-    enable = true;
+    enable = false;
     enableDefaultConfig = false;
     settings."*".addKeysToAgent = "yes";
   };
