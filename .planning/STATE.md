@@ -4,4 +4,4 @@
 
 | Date | Task | Summary |
 |------|------|---------|
-| 2026-06-02 | structure-cleanup | Removed empty dirs, fixed darwin host bug, removed hosts/nixos adapter |
+| 2026-06-02 | structure-cleanup | Removed nixos/ subtree, unified module tree, single flake, fixed darwin host bug |

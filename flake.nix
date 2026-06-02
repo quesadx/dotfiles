@@ -22,8 +22,8 @@
       ...
     }:
     let
-      shared = import ./nixos/lib/shared.nix;
-      linuxHosts = import ./nixos/hosts.nix { inherit nixos-hardware; };
+      shared = import ./lib/shared.nix;
+      linuxHosts = import ./hosts.nix { inherit nixos-hardware; };
       linuxHostNames = builtins.attrNames linuxHosts;
 
       linuxHostSystem = hostName:
@@ -50,7 +50,7 @@
               };
 
               home-manager.users.${shared.username} = {
-                imports = [ ./nixos/home/quesadx.nix ] ++ (host.homeModules or [ ]);
+                imports = [ ./home/linux/default.nix ] ++ (host.homeModules or [ ]);
               };
             }
           ];
