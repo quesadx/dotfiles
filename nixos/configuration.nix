@@ -9,6 +9,9 @@ let
   isLaptop = host.flakeTarget == "thinkpad" || host.flakeTarget == "macbook-pro";
 in
 {
+    imports = [
+      ../modules/shared/nix.nix
+    ];
 
   # --- Boot ---
   boot = {
@@ -168,21 +171,4 @@ in
       LC_TIME = shared.regionalLocale;
     };
   };
-
-  # --- Nix & nixpkgs ---
-  nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    optimise.automatic = true;
-    optimise.dates = [ "03:45" ];
-    gc = { # garbage collection
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-  };
-
-  nixpkgs.config.allowUnfree = true;
 }

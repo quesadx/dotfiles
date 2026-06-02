@@ -1,22 +1,30 @@
 # Deployment Notes
 
-## NixOS host rebuild
+## Root Flake
+
+The root `flake.nix` now exposes both NixOS and nix-darwin outputs.
+
+## NixOS Host Rebuild
 
 ```bash
-cd ~/linux-dotfiles/nixos
 sudo nixos-rebuild switch --flake .#desktop
+sudo nixos-rebuild switch --flake .#thinkpad
+sudo nixos-rebuild switch --flake .#macbook-pro
 ```
 
-Replace `desktop` with `thinkpad` or `macbook-pro` as needed.
+## macOS Host Rebuild
 
-## Home Manager config sources
+```bash
+darwin-rebuild switch --flake .#macbook-air
+```
 
-`home/quesadx.nix` links selected folders from this repo into `~/.config`.
-Current active source:
+## Home Manager Layout
 
-- `config/active/fastfetch` -> `~/.config/fastfetch`
+- `home/shared/default.nix`: portable shell, git, editor, and tooling settings.
+- `home/linux/default.nix`: Linux-only packages and GNOME integration.
+- `home/darwin/default.nix`: macOS-only Home Manager settings.
 
-## Manual linking (optional)
+## Manual Linking
 
 If you want to link files manually without Nix:
 
@@ -27,7 +35,7 @@ ln -s ~/linux-dotfiles/local/bin/* ~/.local/bin/
 ln -s ~/linux-dotfiles/local/share/wallpapers/* ~/.local/share/wallpapers/
 ```
 
-## Template usage
+## Template Usage
 
 Copy a template from `templates/` into your project root as `flake.nix`, then run:
 

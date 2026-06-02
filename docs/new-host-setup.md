@@ -77,6 +77,19 @@ Then rebuild:
 sudo nixos-rebuild switch --flake .#macbook-pro
 ```
 
+## Adding a New Darwin Host
+
+1. Create a host module under `hosts/darwin/<host>/default.nix`.
+2. Set the hostname to match the flake output name exactly.
+3. Use `aarch64-darwin` for Apple Silicon machines.
+4. Add the host to the root flake as `darwinConfigurations.<host>`.
+
+Example rebuild command:
+
+```bash
+darwin-rebuild switch --flake .#macbook-air
+```
+
 ## Adding a New Host
 
 1. Add entry to `hosts.nix`:

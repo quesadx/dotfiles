@@ -1,40 +1,53 @@
 # dotfiles repo
 
-Minimal configuration files for my Linux setup. Mainly focused on NixOS.
+Multi-platform dotfiles for Linux and macOS.
 
 ## Structure
 
-- `nixos/`: multi-host NixOS + Home Manager configuration.
-- `config/active/`: active app config folders (linked into `~/.config` by Home Manager where needed).
+- `flake.nix`: root flake with NixOS and nix-darwin outputs.
+- `nixos/`: legacy Linux-only NixOS entrypoint kept separate.
+- `hosts/nixos/`: root flake wrapper around the existing NixOS host registry.
+- `hosts/darwin/macbook-air/`: nix-darwin host definition for the M1 MacBook Air.
+- `home/shared/`: portable Home Manager config for shell, git, editors, and tooling.
+- `home/linux/`: Linux-only Home Manager layer for GNOME, Chromium, and NixOS rebuild aliases.
+- `home/darwin/`: macOS-only Home Manager layer for shell integration and Git credentials.
+- `modules/shared/`: cross-platform Nix settings shared by NixOS and nix-darwin.
+- `modules/linux/`: Linux system wrapper.
+- `modules/darwin/`: nix-darwin system configuration.
+- `config/active/`: active app config folders linked into `~/.config` when needed.
 - `config/archive/`: archived experimental configs (Sway/Hypr stack).
 - `local/`: files intended for `~/.local` (`bin` scripts and `share/wallpapers`).
 - `templates/`: reusable `flake.nix` templates for dev environments.
 - `wallpapers/`: extra wallpaper assets.
 
-## Environment
+## Rebuild Commands
 
-- **OS:** NixOS
-- **DE:** GNOME (Wayland)
-- **Shell:** Zsh / Bash (as fallback)
-- **Terminal:** gnome-console (kgx)
+NixOS hosts from the root flake:
 
-## Installation
+```bash
+sudo nixos-rebuild switch --flake .#desktop
+sudo nixos-rebuild switch --flake .#thinkpad
+sudo nixos-rebuild switch --flake .#macbook-pro
+```
 
-### Using config and local folders directly
+macOS host from the root flake:
 
-Link the folders you want into your home directory, for example:
+```bash
+darwin-rebuild switch --flake .#macbook-air
+```
+
+## Flake Maintenance
+
+```bash
+nix flake check
+nix flake update
+```
+
+## Direct Config Files
+
+If you want to link the folders manually without Nix, for example:
 
 ```bash
 ln -s ~/linux-dotfiles/config/active/fastfetch ~/.config/fastfetch
 ln -s ~/linux-dotfiles/local/bin/* ~/.local/bin/
-```
-
-### Using NixOS
-
-The NixOS flake is contained in `nixos/`.
-
-Apply the NixOS configuration from that directory:
-```bash
-cd nixos
-sudo nixos-rebuild switch --flake .#hostname # thinkpad | macbook-pro | desktop
 ```
