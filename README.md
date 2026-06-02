@@ -33,6 +33,10 @@ sudo nixos-rebuild switch --flake .#macbook-pro
 macOS host from the root flake:
 
 ```bash
+nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake .#macbook-air
+``
+
+```bash
 darwin-rebuild switch --flake .#macbook-air
 ```
 
