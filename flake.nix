@@ -23,7 +23,7 @@
     }:
     let
       shared = import ./nixos/lib/shared.nix;
-      linuxHosts = import ./hosts/nixos { inherit nixos-hardware; };
+      linuxHosts = import ./nixos/hosts.nix { inherit nixos-hardware; };
       linuxHostNames = builtins.attrNames linuxHosts;
 
       linuxHostSystem = hostName:
@@ -66,11 +66,17 @@
           modules = linuxBaseModules ++ linuxHostModules ++ linuxDesktopModules ++ linuxHomeManagerModules;
         };
 
+      darwinHost = {
+        flakeTarget = "macbook-air";
+        hostname = "macbook-air";
+      };
+
       darwinSystem = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
 
         specialArgs = {
           inherit shared;
+          host = darwinHost;
         };
 
         modules = [
@@ -83,6 +89,7 @@
 
             home-manager.extraSpecialArgs = {
               inherit shared;
+              host = darwinHost;
             };
 
             home-manager.users.${shared.username} = {
