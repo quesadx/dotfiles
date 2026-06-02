@@ -21,10 +21,11 @@ in
     stateVersion = "26.05";
     sessionVariables = {
       SHELL = "${pkgs.zsh}/bin/zsh";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
     };
-    packages = with pkgs; [ fastfetch ];
+    packages = with pkgs; [
+      fastfetch
+      ghostty-bin
+    ];
   };
 
   services.ssh-agent.enable = false;
