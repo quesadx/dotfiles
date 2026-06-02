@@ -12,9 +12,9 @@ This setup supports managing multiple NixOS machines from a single repository.
 | Base system | `configuration.nix` | kernel, networking, users, fonts, PipeWire, Docker, Nix — host-neutral |
 | Hardware | `hardware/<host>.nix` | Generated filesystem/mounts, CPU, initrd — per machine |
 | Host-specific | `hosts/<host>/` | Per-machine overrides (sleep, power, audio, udev) |
-| Desktop (system) | `modules/system/desktop-<de>.nix` | NixOS DE services (GDM, GNOME, COSMIC, Sway) |
-| Desktop (user) | `modules/home/desktop-<de>.nix` | Home Manager DE settings (dconf, keybindings) |
-| User base | `home/quesadx.nix` | Shared shell, git, editors, packages — all hosts |
+| Desktop (system) | `modules/desktop/<de>.nix` | NixOS DE services (GDM, GNOME, COSMIC, Sway) |
+| Desktop (user) | `modules/user/<de>.nix` | Home Manager DE settings (dconf, keybindings) |
+| User base | `home/linux/default.nix` | Shared shell, git, editors, packages — all hosts |
 | Host registry | `hosts.nix` | Maps each host to its modules |
 | Orchestrator | `flake.nix` | Reads registry, builds `nixosConfigurations` |
 
@@ -22,7 +22,7 @@ This setup supports managing multiple NixOS machines from a single repository.
 
 - **Desktop selection per host**: each host entry declares `desktopModules` and `homeModules` explicitly. Omit both for headless/server hosts.
 - **Host-specific modules isolated**: MacBook Pro has its own directory (`hosts/macbook-pro/`) with separate power/thermal and audio modules.
-- **No DE imports in shared config**: `configuration.nix` and `home/quesadx.nix` contain no desktop-specific imports.
+- **No DE imports in shared config**: `configuration.nix` and `home/linux/default.nix` contain no desktop-specific imports.
 - **Hardware configs renamed**: `hardware/<host>.nix` (dropped `hardware-configuration.` prefix).
 - **`hosts.nix` is single source of truth**: all per-host variation declared in one place.
 
@@ -50,7 +50,7 @@ Generate hardware config on the ThinkPad:
 ```bash
 sudo nixos-generate-config --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix \
-   ~/linux-dotfiles/nixos/hardware/thinkpad.nix
+   ~/dotfiles/hardware/thinkpad.nix
 git add hardware/thinkpad.nix && git commit -m "Add ThinkPad hardware config"
 ```
 
@@ -67,7 +67,7 @@ Generate hardware config on the MacBook Pro:
 ```bash
 sudo nixos-generate-config --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix \
-   ~/linux-dotfiles/nixos/hardware/macbook-pro.nix
+   ~/dotfiles/hardware/macbook-pro.nix
 git add hardware/macbook-pro.nix && git commit -m "Add MacBook Pro hardware config"
 ```
 
@@ -100,8 +100,8 @@ darwin-rebuild switch --flake .#macbook-air
      hostname = "my-machine";  # $HOSTNAME on the machine
      hardwareConfig = ./hardware/my-machine.nix;
      hardwareModules = [];  # nixos-hardware modules if applicable
-     desktopModules = [ ./modules/system/desktop-gnome.nix ];  # omit for headless
-     homeModules = [ ./modules/home/desktop-gnome.nix ];       # omit for headless
+      desktopModules = [ ./modules/desktop/gnome.nix ];  # omit for headless
+      homeModules = [ ./modules/user/gnome.nix ];         # omit for headless
    };
    ```
 
@@ -110,7 +110,7 @@ darwin-rebuild switch --flake .#macbook-air
    ```bash
    # Run on the target machine
    sudo nixos-generate-config --root /mnt
-   cp /mnt/etc/nixos/hardware-configuration.nix ~/linux-dotfiles/nixos/hardware/my-machine.nix
+   cp /mnt/etc/nixos/hardware-configuration.nix ~/dotfiles/hardware/my-machine.nix
    ```
 
 3. (Optional) Create `hosts/my-machine/default.nix` for host-specific overrides and add to `hardwareModules`.

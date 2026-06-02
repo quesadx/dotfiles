@@ -11,7 +11,7 @@ let
     dcud = "docker compose up -d";
     dcd = "docker compose down";
     dcdv = "docker compose down -v";
-    dotfiles = "cd ~/linux-dotfiles";
+    dotfiles = "cd ~/dotfiles";
   };
 in
 {

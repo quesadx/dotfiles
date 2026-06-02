@@ -8,7 +8,7 @@
       ./hosts/desktop.nix
     ];
     desktopModules = [ ./modules/desktop/gnome.nix ];
-    homeModules = [ ./modules/home/gnome.nix ];
+    homeModules = [ ./modules/user/gnome.nix ];
   };
 
   thinkpad = {
@@ -20,7 +20,7 @@
       ./hosts/thinkpad.nix
     ];
     desktopModules = [ ./modules/desktop/gnome.nix ];
-    homeModules = [ ./modules/home/gnome.nix ];
+    homeModules = [ ./modules/user/gnome.nix ];
   };
 
   "macbook-pro" = {
@@ -33,6 +33,6 @@
       ./hosts/macbook-pro/audio.nix
     ];
     desktopModules = [ ./modules/desktop/gnome.nix ];
-    homeModules = [ ./modules/home/gnome.nix ];
+    homeModules = [ ./modules/user/gnome.nix ];
   };
 }

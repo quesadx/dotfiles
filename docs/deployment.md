@@ -30,9 +30,9 @@ If you want to link files manually without Nix:
 
 ```bash
 mkdir -p ~/.config ~/.local/bin ~/.local/share/wallpapers
-ln -s ~/linux-dotfiles/config/active/fastfetch ~/.config/fastfetch
-ln -s ~/linux-dotfiles/local/bin/* ~/.local/bin/
-ln -s ~/linux-dotfiles/local/share/wallpapers/* ~/.local/share/wallpapers/
+ln -s ~/dotfiles/config/active/fastfetch ~/.config/fastfetch
+ln -s ~/dotfiles/local/bin/* ~/.local/bin/
+ln -s ~/dotfiles/local/share/wallpapers/* ~/.local/share/wallpapers/
 ```
 
 ## Template Usage
