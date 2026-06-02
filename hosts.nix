@@ -5,7 +5,7 @@
     hostname = "desktop";
     hardwareConfig = ./hardware/desktop.nix;
     hardwareModules = [
-      ./modules/hosts/desktop.nix
+      ./hosts/desktop.nix
     ];
     desktopModules = [ ./modules/desktop/gnome.nix ];
     homeModules = [ ./modules/home/gnome.nix ];
@@ -17,7 +17,7 @@
     hardwareConfig = ./hardware/thinkpad.nix;
     hardwareModules = [
       nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel
-      ./modules/hosts/thinkpad.nix
+      ./hosts/thinkpad.nix
     ];
     desktopModules = [ ./modules/desktop/gnome.nix ];
     homeModules = [ ./modules/home/gnome.nix ];
@@ -29,8 +29,8 @@
     hardwareConfig = ./hardware/macbook-pro.nix;
     hardwareModules = [
       nixos-hardware.nixosModules.apple-macbook-pro-14-1
-      ./modules/hosts/macbook-pro/default.nix
-      ./modules/hosts/macbook-pro/audio.nix
+      ./hosts/macbook-pro/default.nix
+      ./hosts/macbook-pro/audio.nix
     ];
     desktopModules = [ ./modules/desktop/gnome.nix ];
     homeModules = [ ./modules/home/gnome.nix ];

@@ -11,7 +11,7 @@ This setup supports managing multiple NixOS machines from a single repository.
 | Constants | `lib/shared.nix` | username, timezone, locale — shared by all hosts |
 | Base system | `configuration.nix` | kernel, networking, users, fonts, PipeWire, Docker, Nix — host-neutral |
 | Hardware | `hardware/<host>.nix` | Generated filesystem/mounts, CPU, initrd — per machine |
-| Host-specific | `modules/hosts/<host>/` | Per-machine overrides (sleep, power, audio, udev) |
+| Host-specific | `hosts/<host>/` | Per-machine overrides (sleep, power, audio, udev) |
 | Desktop (system) | `modules/system/desktop-<de>.nix` | NixOS DE services (GDM, GNOME, COSMIC, Sway) |
 | Desktop (user) | `modules/home/desktop-<de>.nix` | Home Manager DE settings (dconf, keybindings) |
 | User base | `home/quesadx.nix` | Shared shell, git, editors, packages — all hosts |
@@ -21,7 +21,7 @@ This setup supports managing multiple NixOS machines from a single repository.
 ### Key design decisions
 
 - **Desktop selection per host**: each host entry declares `desktopModules` and `homeModules` explicitly. Omit both for headless/server hosts.
-- **Host-specific modules isolated**: MacBook Pro has its own directory (`modules/hosts/macbook-pro/`) with separate power/thermal and audio modules.
+- **Host-specific modules isolated**: MacBook Pro has its own directory (`hosts/macbook-pro/`) with separate power/thermal and audio modules.
 - **No DE imports in shared config**: `configuration.nix` and `home/quesadx.nix` contain no desktop-specific imports.
 - **Hardware configs renamed**: `hardware/<host>.nix` (dropped `hardware-configuration.` prefix).
 - **`hosts.nix` is single source of truth**: all per-host variation declared in one place.
@@ -113,7 +113,7 @@ darwin-rebuild switch --flake .#macbook-air
    cp /mnt/etc/nixos/hardware-configuration.nix ~/linux-dotfiles/nixos/hardware/my-machine.nix
    ```
 
-3. (Optional) Create `modules/hosts/my-machine/default.nix` for host-specific overrides and add to `hardwareModules`.
+3. (Optional) Create `hosts/my-machine/default.nix` for host-specific overrides and add to `hardwareModules`.
 
 4. Commit and rebuild:
 
@@ -133,7 +133,7 @@ nix flake show github:NixOS/nixos-hardware
 
 ## Host-Specific Configuration
 
-Instead of conditional logic in `configuration.nix`, add host-specific modules to `modules/hosts/<host>/` and list them in `hosts.nix` under `hardwareModules`. This keeps base config clean and host logic isolated.
+Instead of conditional logic in `configuration.nix`, add host-specific modules to `hosts/<host>/` and list them in `hosts.nix` under `hardwareModules`. This keeps base config clean and host logic isolated.
 
 ## Verify Setup
 
