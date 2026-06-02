@@ -79,10 +79,10 @@ sudo nixos-rebuild switch --flake .#macbook-pro
 
 ## Adding a New Darwin Host
 
-1. Create a host module under `hosts/darwin/<host>/default.nix`.
-2. Set the hostname to match the flake output name exactly.
-3. Use `aarch64-darwin` for Apple Silicon machines.
-4. Add the host to the root flake as `darwinConfigurations.<host>`.
+1. Add an entry to `hosts.nix` under the `darwin` section with `flakeTarget` and `hostname`.
+2. Create a host module under `hosts/darwin/<host>/default.nix` with system-level settings.
+3. Set the hostname to match the flake output name exactly.
+4. Use `aarch64-darwin` for Apple Silicon machines.
 
 Example rebuild command:
 
@@ -95,13 +95,13 @@ darwin-rebuild switch --flake .#macbook-air
 1. Add entry to `hosts.nix`:
 
    ```nix
-   my-machine = {
+   nixos.my-machine = {
      flakeTarget = "my-machine";
      hostname = "my-machine";  # $HOSTNAME on the machine
      hardwareConfig = ./hardware/my-machine.nix;
      hardwareModules = [];  # nixos-hardware modules if applicable
-      desktopModules = [ ./modules/desktop/gnome.nix ];  # omit for headless
-      homeModules = [ ./modules/user/gnome.nix ];         # omit for headless
+     desktopModules = [ ./modules/desktop/gnome.nix ];  # omit for headless
+     homeModules = [ ./modules/user/gnome.nix ];         # omit for headless
    };
    ```
 

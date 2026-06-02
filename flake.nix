@@ -23,8 +23,11 @@
     }:
     let
       shared = import ./lib/shared.nix;
-      linuxHosts = import ./hosts.nix { inherit nixos-hardware; };
+      allHosts = import ./hosts.nix { inherit nixos-hardware; };
+      linuxHosts = allHosts.nixos;
       linuxHostNames = builtins.attrNames linuxHosts;
+      darwinHosts = allHosts.darwin;
+      darwinHostNames = builtins.attrNames darwinHosts;
 
       linuxHostSystem = hostName:
         let
@@ -66,38 +69,37 @@
           modules = linuxBaseModules ++ linuxHostModules ++ linuxDesktopModules ++ linuxHomeManagerModules;
         };
 
-      darwinHost = {
-        flakeTarget = "macbook-air";
-        hostname = "macbook-air";
-      };
+      darwinSystem = hostName:
+        let
+          host = darwinHosts.${hostName};
+        in
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
 
-      darwinSystem = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
+          specialArgs = {
+            inherit shared;
+            inherit host;
+          };
 
-        specialArgs = {
-          inherit shared;
-          host = darwinHost;
+          modules = [
+            ./modules/darwin/default.nix
+            ./hosts/darwin/${hostName}/default.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = {
+                inherit shared;
+                inherit host;
+              };
+
+              home-manager.users.${shared.username} = {
+                imports = [ ./home/darwin/default.nix ];
+              };
+            }
+          ];
         };
-
-        modules = [
-          ./modules/darwin/default.nix
-          ./hosts/darwin/macbook-air/default.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.extraSpecialArgs = {
-              inherit shared;
-              host = darwinHost;
-            };
-
-            home-manager.users.${shared.username} = {
-              imports = [ ./home/darwin/default.nix ];
-            };
-          }
-        ];
-      };
     in
     {
       nixosConfigurations = builtins.listToAttrs (
@@ -107,6 +109,11 @@
         }) linuxHostNames
       );
 
-      darwinConfigurations.macbook-air = darwinSystem;
+      darwinConfigurations = builtins.listToAttrs (
+        map (hostName: {
+          name = hostName;
+          value = darwinSystem hostName;
+        }) darwinHostNames
+      );
     };
 }
