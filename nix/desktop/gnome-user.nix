@@ -66,17 +66,6 @@
       pinch-4-finger-gesture = "NONE";
     };
 
-    # --- Extension: Dash to Dock ---
-    "org/gnome/shell/extensions/dash-to-dock" = {
-      disable-overview-on-startup = true;
-      show-trash = false;
-      show-mounts = false;
-      intellihide-mode = "ALL_WINDOWS";
-      hide-tooltip = true;
-      autohide-in-fullscreen = true;
-      running-indicator-style = "DOTS";
-    };
-
     # --- Mouse & Accessibility ---
     "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
     "org/gnome/desktop/sound".event-sounds = false;
