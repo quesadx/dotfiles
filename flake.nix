@@ -34,7 +34,7 @@
           host = linuxHosts.${hostName};
 
           linuxBaseModules = [
-            ./configuration.nix
+            ./nix/configuration.nix
             host.hardwareConfig
           ];
 

@@ -15,7 +15,7 @@ in
 {
   imports = [
     ../shared/default.nix
-    ../../modules/user/gnome.nix
+    ../../nix/modules/user/gnome.nix
   ];
 
   home = {

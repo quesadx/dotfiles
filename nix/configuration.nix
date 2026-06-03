@@ -10,7 +10,7 @@ let
 in
 {
     imports = [
-      ./modules/shared/nix.nix
+      ../modules/shared/nix.nix
     ];
 
   # --- Boot ---
