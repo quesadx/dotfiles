@@ -6,9 +6,9 @@
 }:
 let
   shellAliases = {
-    ls = lib.mkForce "ls -a --color=auto";
-    nrt = "cd ~/dotfiles && sudo darwin-rebuild test --flake .#${host.flakeTarget}";
-    nrs = "cd ~/dotfiles && git add . && sudo darwin-rebuild switch --flake .#${host.flakeTarget}";
+    ls = lib.mkForce "ls -a -G";
+    nrt = "cd ~/dotfiles/nix && sudo darwin-rebuild test --flake .#${host.flakeTarget}";
+    nrs = "cd ~/dotfiles/nix && git add . && sudo darwin-rebuild switch --flake .#${host.flakeTarget}";
   };
 in
 {
