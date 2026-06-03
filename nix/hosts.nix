@@ -8,8 +8,8 @@
       hardwareModules = [
         ./hosts/desktop.nix
       ];
-      desktopModules = [ ./modules/desktop/gnome.nix ];
-      homeModules = [ ./modules/user/gnome.nix ];
+      desktopModules = [ ./desktop/gnome.nix ];
+      homeModules = [ ./desktop/gnome-user.nix ];
     };
 
     thinkpad = {
@@ -20,8 +20,8 @@
         nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel
         ./hosts/thinkpad.nix
       ];
-      desktopModules = [ ./modules/desktop/gnome.nix ];
-      homeModules = [ ./modules/user/gnome.nix ];
+      desktopModules = [ ./desktop/gnome.nix ];
+      homeModules = [ ./desktop/gnome-user.nix ];
     };
 
     "macbook-pro" = {
@@ -33,8 +33,8 @@
         ./hosts/macbook-pro/default.nix
         ./hosts/macbook-pro/audio.nix
       ];
-      desktopModules = [ ./modules/desktop/gnome.nix ];
-      homeModules = [ ./modules/user/gnome.nix ];
+      desktopModules = [ ./desktop/gnome.nix ];
+      homeModules = [ ./desktop/gnome-user.nix ];
     };
   };
 

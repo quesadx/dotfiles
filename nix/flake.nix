@@ -22,7 +22,7 @@
       ...
     }:
     let
-      shared = import ./lib/shared.nix;
+      shared = import ./shared.nix;
       allHosts = import ./hosts.nix { inherit nixos-hardware; };
       linuxHosts = allHosts.nixos;
       linuxHostNames = builtins.attrNames linuxHosts;
@@ -34,7 +34,7 @@
           host = linuxHosts.${hostName};
 
           linuxBaseModules = [
-            ./configuration.nix
+            ./nixos.nix
             host.hardwareConfig
           ];
 
@@ -53,7 +53,7 @@
               };
 
               home-manager.users.${shared.username} = {
-                imports = [ ./home/linux/default.nix ] ++ (host.homeModules or [ ]);
+                imports = [ ./home/linux.nix ] ++ (host.homeModules or [ ]);
               };
             }
           ];
@@ -82,7 +82,7 @@
           };
 
           modules = [
-            ./modules/darwin/default.nix
+            ./darwin.nix
             ./hosts/darwin.nix
             home-manager.darwinModules.home-manager
             {
@@ -95,7 +95,7 @@
               };
 
               home-manager.users.${shared.username} = {
-                imports = [ ./home/darwin/default.nix ];
+                imports = [ ./home/darwin.nix ] ++ (host.homeModules or [ ]);
               };
             }
           ];

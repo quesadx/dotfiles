@@ -41,7 +41,7 @@ in
     };
   };
 
-  # --- User & Groups
+  # --- User & Groups ---
   users.users.${shared.username} = {
     isNormalUser = true;
     description = shared.userDescription;

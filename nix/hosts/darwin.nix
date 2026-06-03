@@ -3,7 +3,7 @@
   networking.hostName = "macbook-air";
 
   system.primaryUser = shared.username;
-  system.stateVersion = 5;
+  system.stateVersion = 6;
 
   users.users.${shared.username} = {
     home = "/Users/${shared.username}";
