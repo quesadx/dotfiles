@@ -64,7 +64,6 @@ in
   programs.ssh = {
     enable = false;
     enableDefaultConfig = false;
-    settings."*".addKeysToAgent = "yes";
   };
 
   programs.zed-editor = {
