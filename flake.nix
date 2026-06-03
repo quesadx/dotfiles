@@ -83,7 +83,7 @@
 
           modules = [
             ./modules/darwin/default.nix
-            ./hosts/darwin/${hostName}/default.nix
+            ./hosts/darwin.nix
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
