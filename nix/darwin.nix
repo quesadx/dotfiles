@@ -60,7 +60,7 @@
 
   system.defaults = {
     dock = {
-      autohide = true;
+      autohide = false;
       minimize-to-application = true;
       show-recents = false;
       mru-spaces = false; # don't reorder spaces by recent use
