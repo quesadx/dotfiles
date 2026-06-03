@@ -118,7 +118,6 @@ in
   security = {
     polkit.enable = true;
     rtkit.enable = true;
-    sudo.wheelNeedsPassword = false;
     pam.services.login.enableGnomeKeyring = true;
   };
 
