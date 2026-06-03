@@ -1,6 +1,7 @@
 {
   shared,
   lib,
+  pkgs,
   host,
   ...
 }:
@@ -19,6 +20,9 @@ in
   home = {
     username = shared.username;
     homeDirectory = "/Users/${shared.username}";
+    packages = with pkgs; [
+      ghostty-bin
+    ];
   };
 
   programs.zsh.shellAliases = shellAliases;
