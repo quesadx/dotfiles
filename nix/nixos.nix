@@ -9,9 +9,9 @@ let
   isLaptop = host.flakeTarget == "thinkpad" || host.flakeTarget == "macbook-pro";
 in
 {
-    imports = [
-      ../modules/shared/nix.nix
-    ];
+  imports = [
+    ./nix-daemon.nix
+  ];
 
   # --- Boot ---
   boot = {

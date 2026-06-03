@@ -1,7 +1,7 @@
 { pkgs, shared, ... }:
 {
   imports = [
-    ../shared/nix.nix
+    ./nix-daemon.nix
   ];
 
   nix = {

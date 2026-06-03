@@ -13,7 +13,7 @@ let
 in
 {
   imports = [
-    ../shared/default.nix
+    ./shared.nix
   ];
 
   home = {

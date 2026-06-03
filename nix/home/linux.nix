@@ -14,8 +14,7 @@ let
 in
 {
   imports = [
-    ../shared/default.nix
-    ../../modules/user/gnome.nix
+    ./shared.nix
   ];
 
   home = {
