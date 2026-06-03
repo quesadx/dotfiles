@@ -71,7 +71,6 @@
 
     NSGlobalDomain = {
       NSWindowResizeTime = 0.001;
-      NSAutomaticWindowAnimationsEnabled = false;
       ApplePressAndHoldEnabled = false;
       InitialKeyRepeat = 15;
       KeyRepeat = 2;
@@ -109,11 +108,6 @@
 
     spaces.spans-displays = false; # separate spaces per display
 
-    universalaccess = {
-      reduceMotion = true; # kills most remaining animations
-      reduceTransparency = true; # removes blur/transparency effects — real perf win on 8GB
-    };
-
     loginwindow = {
       GuestEnabled = false;
       DisableConsoleAccess = true;
@@ -144,9 +138,6 @@
 
     # disable automatic termination of inactive apps
     defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-
-    # speed up mission control animations
-    defaults write com.apple.dock expose-animation-duration -float 0.1
 
     # disable smart quotes and dashes (destroys code pasting)
     defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
