@@ -1,57 +1,93 @@
-# dotfiles repo
+# dotfiles
 
-Multi-platform dotfiles for Linux and macOS.
+Multi-platform Nix configs for Linux (NixOS) and macOS (nix-darwin).
 
-## Structure
+One `flake.nix`, one `hosts.nix`, one module tree.
 
-- `flake.nix`: root flake with NixOS and nix-darwin outputs.
-- `configuration.nix`: base NixOS system configuration (kernel, networking, users, services).
-- `hosts.nix`: host registry mapping each NixOS machine to its hardware config and module stack.
-- `hardware/`: generated hardware configs per machine.
-- `hosts/`: per-host modules — `desktop.nix`, `thinkpad.nix`, `macbook-pro/`, and `darwin/macbook-air/`.
-- `lib/shared.nix`: shared constants (username, locale, timezone) used by all configurations.
-- `home/`: Home Manager configs — `shared/` (portable), `linux/` (Linux-only), `darwin/` (macOS-only).
-- `modules/`: NixOS and nix-darwin modules.
-  - `desktop/`: system-level desktop environment configs (gnome, sway, cosmic).
-  - `user/`: user-level desktop configs (dconf, GNOME extensions) loaded into home-manager.
-  - `darwin/`: nix-darwin system configuration.
-  - `shared/`: cross-platform Nix settings.
-- `config/active/`: active app config folders linked into `~/.config` when needed.
-- `config/archive/`: archived experimental configs (Sway/Hypr stack).
-- `local/`: files intended for `~/.local` (`bin` scripts and `share/wallpapers`).
-- `templates/`: reusable `flake.nix` templates for dev environments.
-- `wallpapers/`: extra wallpaper assets.
+## Fresh Install
 
-## Rebuild Commands
-
-NixOS hosts from the root flake:
+### macOS (Apple Silicon)
 
 ```bash
-sudo nixos-rebuild switch --flake .#desktop
-sudo nixos-rebuild switch --flake .#thinkpad
-sudo nixos-rebuild switch --flake .#macbook-pro
-```
+# 1. Install Nix
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
-macOS host from the root flake:
+# 2. Clone
+git clone git@github.com:quesadx/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 
-```bash
-nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake .#macbook-air
-``
+# 3. First build (darwin-rebuild doesn't exist yet)
+nix run nix-darwin -- switch --flake .#macbook-air
 
-```bash
+# 4. Reboot, then daily use
 darwin-rebuild switch --flake .#macbook-air
 ```
 
-## Flake Maintenance
+### NixOS
 
 ```bash
-nix flake check
-nix flake update
+# 1. Install NixOS normally (any DE or headless)
+
+# 2. Clone
+git clone git@github.com:quesadx/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+
+# 3. Generate hardware config for this machine
+sudo nixos-generate-config --root /mnt
+cp /mnt/etc/nixos/hardware-configuration.nix hardware/<hostname>.nix
+
+# 4. Register the host in hosts.nix (nixos.<hostname> = { ... })
+#    Then rebuild
+sudo nixos-rebuild switch --flake .#<hostname>
+```
+
+## Daily Use
+
+```bash
+# Linux
+sudo nixos-rebuild switch --flake .#desktop
+
+# macOS
+darwin-rebuild switch --flake .#macbook-air
+```
+
+After the first build, `nrt` (`nixos-rebuild test`) and `nrs` (`nixos-rebuild switch` with `git add .`) are available as shell aliases.
+
+## How It Works
+
+```
+hosts.nix                  One registry, all machines
+├── nixos.desktop          selects: hardware/desktop.nix
+├── nixos.thinkpad         + hosts/thinkpad.nix
+├── nixos.macbook-pro      + modules/desktop/gnome.nix
+└── darwin.macbook-air     + modules/user/gnome.nix
+
+modules/
+├── desktop/gnome.nix      system-level DE (GDM, GNOME services)
+├── user/gnome.nix          user-level DE  (dconf, extensions)
+├── hosts/                  per-machine tweaks (power, audio, udev)
+├── darwin/default.nix      darwin system config (homebrew, nix settings)
+└── shared/nix.nix          cross-platform (flakes, GC, unfree)
+
+home/                       home-manager profiles
+├── shared/                 shell, git, editors, direnv
+├── linux/                  linux extras (GNOME packages, chromium)
+└── darwin/                 macOS paths
+```
+
+Each host picks its stack in `hosts.nix`. No `if hostname ==` anywhere.
+
+## Maintenance
+
+```bash
+nix flake check            # validate everything
+nix flake update           # bump all inputs
+nix flake update nixpkgs   # bump just nixpkgs
 ```
 
 ## Direct Config Files
 
-If you want to link the folders manually without Nix, for example:
+Some configs live outside Nix (`config/active/`, `local/`):
 
 ```bash
 ln -s ~/dotfiles/config/active/fastfetch ~/.config/fastfetch
