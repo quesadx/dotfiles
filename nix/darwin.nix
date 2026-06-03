@@ -68,7 +68,6 @@
     };
 
     NSGlobalDomain = {
-      NSWindowResizeTime = 0.001;
       ApplePressAndHoldEnabled = false;
       InitialKeyRepeat = 15;
       KeyRepeat = 2;
