@@ -25,10 +25,13 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      cleanup = "zap";
       upgrade = true;
+      cleanup = "zap";
+
+      extraFlags = [
+        "--force"
+      ];
     };
-    brews = [ ];
     casks = [
       "ghostty"
     ];
