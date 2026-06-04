@@ -100,7 +100,7 @@
 
     trackpad = {
       Clicking = true;
-      TrackpadThreeFingerDrag = true;
+      TrackpadThreeFingerDrag = false;
     };
 
     spaces.spans-displays = false; # separate spaces per display
