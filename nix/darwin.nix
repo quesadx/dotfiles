@@ -31,7 +31,6 @@
     brews = [ ];
     casks = [
       "ghostty"
-      "raycast"
     ];
   };
 
