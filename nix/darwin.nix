@@ -122,10 +122,6 @@
     pmset -a tcpkeepalive 0
     pmset -a womp 0             # wake on network access
 
-    # disable spotlight indexing entirely — raycast doesn't need it
-    mdutil -i off / 2>/dev/null || true
-    mdutil -E / 2>/dev/null || true
-
     # disable crash reporter
     defaults write com.apple.CrashReporter DialogType none
 
