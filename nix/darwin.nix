@@ -58,6 +58,9 @@
     comma
     nixd
     nil
+
+    docker
+    colima
   ];
 
   system.defaults = {
