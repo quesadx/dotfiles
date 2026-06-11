@@ -14,7 +14,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       nix-darwin,
       home-manager,
@@ -29,13 +29,15 @@
       darwinHosts = allHosts.darwin;
       darwinHostNames = builtins.attrNames darwinHosts;
 
-      linuxHostSystem = hostName:
+      linuxHostSystem =
+        hostName:
         let
           host = linuxHosts.${hostName};
 
           linuxBaseModules = [
             ./nixos.nix
             host.hardwareConfig
+
           ];
 
           linuxHostModules = host.hardwareModules;
@@ -50,6 +52,7 @@
               home-manager.extraSpecialArgs = {
                 inherit shared;
                 inherit host;
+                inherit inputs;
               };
 
               home-manager.users.${shared.username} = {
@@ -64,12 +67,14 @@
           specialArgs = {
             inherit shared;
             inherit host;
+            inherit inputs;
           };
 
           modules = linuxBaseModules ++ linuxHostModules ++ linuxDesktopModules ++ linuxHomeManagerModules;
         };
 
-      darwinSystem = hostName:
+      darwinSystem =
+        hostName:
         let
           host = darwinHosts.${hostName};
         in
@@ -79,11 +84,13 @@
           specialArgs = {
             inherit shared;
             inherit host;
+            inherit inputs;
           };
 
           modules = [
             ./darwin.nix
             ./hosts/darwin.nix
+
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -92,6 +99,7 @@
               home-manager.extraSpecialArgs = {
                 inherit shared;
                 inherit host;
+                inherit inputs;
               };
 
               home-manager.users.${shared.username} = {
