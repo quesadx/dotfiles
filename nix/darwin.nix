@@ -32,9 +32,7 @@
         "--force"
       ];
     };
-    casks = [
-      "ghostty"
-    ];
+    casks = [ ];
   };
 
   environment.systemPackages = with pkgs; [

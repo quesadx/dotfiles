@@ -24,6 +24,7 @@
       ...
     }:
     let
+      lib = nixpkgs.lib;
       shared = import ./shared.nix;
       allHosts = import ./hosts.nix { inherit nixos-hardware; };
       linuxHosts = allHosts.nixos;
@@ -92,14 +93,16 @@
           };
 
           modules = [
+            ./darwin.nix
+            ./hosts/darwin.nix
+          ] ++ lib.optionals (host.nixpkgs or null != null) [
             {
               nixpkgs.pkgs = import pkgs {
                 system = host.system;
                 config.allowUnfree = true;
               };
+              nixpkgs.config = lib.mkForce { };
             }
-            ./darwin.nix
-            ./hosts/darwin.nix
           ] ++ (host.modules or [ ]) ++ [
             home-manager.darwinModules.home-manager
             {
