@@ -1,6 +1,6 @@
-{ pkgs, shared, ... }:
+{ pkgs, shared, host, ... }:
 {
-  networking.hostName = "macbook-air";
+  networking.hostName = host.hostname;
 
   system.primaryUser = shared.username;
   system.stateVersion = 6;

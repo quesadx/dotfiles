@@ -42,6 +42,12 @@
     "macbook-air" = {
       flakeTarget = "macbook-air";
       hostname = "macbook-air";
+      system = "aarch64-darwin";
+    };
+    "macbook-pro" = {
+      flakeTarget = "macbook-pro";
+      hostname = "macbook-pro";
+      system = "x86_64-darwin";
     };
   };
 }

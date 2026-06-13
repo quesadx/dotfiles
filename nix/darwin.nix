@@ -38,22 +38,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    fd
-    jq
-    wget
-    curl
-    starship
-    zoxide
-    fzf
-    ripgrep
-    bat
-    eza
-    delta
-    duf
-    htop
-    gh
-    gnupg
-    openssh
     nix-tree
     comma
     nixd
@@ -64,28 +48,6 @@
   ];
 
   system.defaults = {
-    dock = {
-      autohide = false;
-      minimize-to-application = true;
-      show-recents = false;
-      mru-spaces = false; # don't reorder spaces by recent use
-      expose-group-apps = true;
-    };
-
-    NSGlobalDomain = {
-      ApplePressAndHoldEnabled = false;
-      InitialKeyRepeat = 15;
-      KeyRepeat = 2;
-      NSDocumentSaveNewDocumentsToCloud = false;
-      NSNavPanelExpandedStateForSaveMode = true; # expanded save dialog by default
-      NSNavPanelExpandedStateForSaveMode2 = true;
-      PMPrintingExpandedStateForPrint = true; # expanded print dialog
-      PMPrintingExpandedStateForPrint2 = true;
-      AppleShowAllExtensions = true;
-      AppleICUForce24HourTime = true;
-      _HIHideMenuBar = false;
-    };
-
     finder = {
       AppleShowAllFiles = true;
       FXEnableExtensionChangeWarning = false;
@@ -97,27 +59,7 @@
       QuitMenuItem = true; # allow Finder to be quit
     };
 
-    screencapture = {
-      disable-shadow = true;
-      location = "~/Desktop/screenshots"; # or wherever you want
-      type = "png";
-    };
-
-    trackpad = {
-      Clicking = true;
-      TrackpadThreeFingerDrag = false;
-    };
-
-    spaces.spans-displays = false; # separate spaces per display
-
-    loginwindow = {
-      GuestEnabled = false;
-      DisableConsoleAccess = true;
-    };
-
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
-
-    ActivityMonitor.IconType = 5; # show CPU history in dock icon
   };
 
   system.activationScripts.postActivation.text = ''
@@ -145,5 +87,5 @@
     defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
   '';
 
-  environment.variables.EDITOR = "nvim";
+  environment.variables.EDITOR = "nano";
 }

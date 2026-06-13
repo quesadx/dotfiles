@@ -79,7 +79,7 @@
           host = darwinHosts.${hostName};
         in
         nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
+          system = host.system;
 
           specialArgs = {
             inherit shared;
