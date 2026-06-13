@@ -48,6 +48,10 @@
       flakeTarget = "macbook-pro";
       hostname = "macbook-pro";
       system = "x86_64-darwin";
+      modules = [
+        ./hosts/macbook-pro/darwin.nix
+      ];
+      nixpkgs = "nixpkgs-26_05";
     };
   };
 }

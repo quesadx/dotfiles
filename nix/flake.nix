@@ -11,6 +11,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    nixpkgs-26_05.url = "github:nixos/nixpkgs/nixos-26.05";
   };
 
   outputs =
@@ -77,6 +79,8 @@
         hostName:
         let
           host = darwinHosts.${hostName};
+          pkgsInputName = host.nixpkgs or "nixpkgs";
+          pkgs = inputs.${pkgsInputName};
         in
         nix-darwin.lib.darwinSystem {
           system = host.system;
@@ -88,9 +92,15 @@
           };
 
           modules = [
+            {
+              nixpkgs.pkgs = import pkgs {
+                system = host.system;
+                config.allowUnfree = true;
+              };
+            }
             ./darwin.nix
             ./hosts/darwin.nix
-
+          ] ++ (host.modules or [ ]) ++ [
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

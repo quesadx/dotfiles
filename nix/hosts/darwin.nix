@@ -5,8 +5,6 @@
   system.primaryUser = shared.username;
   system.stateVersion = 6;
 
-  ids.uids.nixbld = 300;
-
   users.users.${shared.username} = {
     home = "/Users/${shared.username}";
     description = shared.userDescription;
