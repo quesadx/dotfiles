@@ -51,7 +51,6 @@
       modules = [
         ./hosts/macbook-pro/darwin.nix
       ];
-      nixpkgs = "nixpkgs-26_05";
     };
   };
 }
