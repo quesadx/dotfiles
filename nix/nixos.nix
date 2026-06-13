@@ -98,6 +98,7 @@ in
     hostName = host.hostname;
     networkmanager.enable = true;
     firewall.enable = true;
+    firewall.allowedTCPPorts = [ 8080 ];
   };
 
   # --- Virtualization ---
