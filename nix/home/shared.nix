@@ -15,10 +15,6 @@ let
   };
 in
 {
-  imports = [
-    ../modules/opencode
-  ];
-
   programs.home-manager.enable = true;
 
   home = {

@@ -36,12 +36,11 @@
 
           linuxBaseModules = [
             ./nixos.nix
-            host.hardwareConfig
-
+            host.hardware
           ];
 
-          linuxHostModules = host.hardwareModules;
-          linuxDesktopModules = host.desktopModules or [ ];
+          linuxHostModules = host.hostModules;
+          linuxDesktopModules = host.desktop or [ ];
 
           linuxHomeManagerModules = [
             home-manager.nixosModules.home-manager
@@ -56,7 +55,7 @@
               };
 
               home-manager.users.${shared.username} = {
-                imports = [ ./home/linux.nix ] ++ (host.homeModules or [ ]);
+                imports = [ ./home/linux.nix ] ++ (host.home or [ ]);
               };
             }
           ];
@@ -89,8 +88,7 @@
 
           modules = [
             ./darwin.nix
-            ./hosts/darwin.nix
-          ] ++ (host.modules or [ ]) ++ [
+          ] ++ (host.hostModules or [ ]) ++ [
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -103,7 +101,7 @@
               };
 
               home-manager.users.${shared.username} = {
-                imports = [ ./home/darwin.nix ] ++ (host.homeModules or [ ]);
+                imports = [ ./home/darwin.nix ] ++ (host.home or [ ]);
               };
             }
           ];

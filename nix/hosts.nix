@@ -4,37 +4,36 @@
     desktop = {
       flakeTarget = "desktop";
       hostname = "desktop";
-      hardwareConfig = ./hardware/desktop.nix;
-      hardwareModules = [
+      hardware = ./hardware/desktop.nix;
+      hostModules = [
         ./hosts/desktop.nix
       ];
-      desktopModules = [ ./desktop/gnome.nix ];
-      homeModules = [ ./desktop/gnome-user.nix ];
+      desktop = [ ./desktop/gnome.nix ];
+      home = [ ./desktop/gnome-user.nix ];
     };
 
     thinkpad = {
       flakeTarget = "thinkpad";
       hostname = "thinkpad-x13";
-      hardwareConfig = ./hardware/thinkpad.nix;
-      hardwareModules = [
+      hardware = ./hardware/thinkpad.nix;
+      hostModules = [
         nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel
-        ./hosts/thinkpad.nix
       ];
-      desktopModules = [ ./desktop/gnome.nix ];
-      homeModules = [ ./desktop/gnome-user.nix ];
+      desktop = [ ./desktop/gnome.nix ];
+      home = [ ./desktop/gnome-user.nix ];
     };
 
     "macbook-pro" = {
       flakeTarget = "macbook-pro";
       hostname = "macbook-pro";
-      hardwareConfig = ./hardware/macbook-pro.nix;
-      hardwareModules = [
+      hardware = ./hardware/macbook-pro.nix;
+      hostModules = [
         nixos-hardware.nixosModules.apple-macbook-pro-14-1
         ./hosts/macbook-pro/default.nix
         ./hosts/macbook-pro/audio.nix
       ];
-      desktopModules = [ ./desktop/gnome.nix ];
-      homeModules = [ ./desktop/gnome-user.nix ];
+      desktop = [ ./desktop/gnome.nix ];
+      home = [ ./desktop/gnome-user.nix ];
     };
   };
 
@@ -48,7 +47,7 @@
       flakeTarget = "macbook-pro";
       hostname = "macbook-pro";
       system = "x86_64-darwin";
-      modules = [
+      hostModules = [
         ./hosts/macbook-pro/darwin.nix
       ];
     };

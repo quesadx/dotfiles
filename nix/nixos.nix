@@ -9,9 +9,22 @@ let
   isLaptop = host.flakeTarget == "thinkpad" || host.flakeTarget == "macbook-pro";
 in
 {
-  imports = [
-    ./nix-daemon.nix
-  ];
+  imports = [ ];
+
+  # --- Nix ---
+  nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    optimise.automatic = true;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
+  };
+
+  nixpkgs.config.allowUnfree = true;
 
   # --- Boot ---
   boot = {

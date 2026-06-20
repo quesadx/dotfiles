@@ -1,12 +1,15 @@
-{ pkgs, shared, ... }:
+{ pkgs, shared, host, ... }:
 {
-  imports = [
-    ./nix-daemon.nix
-  ];
+  imports = [ ];
 
+  # --- Nix ---
   nix = {
     enable = true;
     settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       trusted-users = [
         "root"
         shared.username
@@ -14,11 +17,28 @@
       cores = 0;
       auto-optimise-store = true;
     };
-    gc.interval = {
-      Weekday = 0;
-      Hour = 3;
-      Minute = 0;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+      interval = {
+        Weekday = 0;
+        Hour = 3;
+        Minute = 0;
+      };
     };
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
+  # --- Host ---
+  networking.hostName = host.hostname;
+  system.primaryUser = shared.username;
+  system.stateVersion = 6;
+
+  users.users.${shared.username} = {
+    home = "/Users/${shared.username}";
+    description = shared.userDescription;
+    shell = pkgs.zsh;
   };
 
   homebrew = {
