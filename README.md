@@ -1,42 +1,35 @@
 # dotfiles
 
-Multi-platform Nix configs for Linux (NixOS) and macOS (nix-darwin).
+Multi-platform Nix configs — NixOS (Linux) and nix-darwin (macOS).
 
-One `flake.nix`, one `hosts.nix`, one module tree.
+Flake at `nix/flake.nix`. Hosts registered in `nix/hosts.nix`. Everything else is per-platform modules.
+
+| Host | Platform | DE |
+|------|----------|----|
+| `desktop` | NixOS x86_64 | GNOME |
+| `thinkpad` | NixOS x86_64 | GNOME |
+| `macbook-pro` | NixOS x86_64 | GNOME |
+| `macbook-air` | darwin aarch64 | — |
+| `macbook-pro` | darwin x86_64 | — |
 
 ## Fresh Install
 
-### macOS (Apple Silicon)
-
 ```bash
-# 1. Install Nix
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-
-# 2. Clone
 git clone git@github.com:quesadx/dotfiles.git ~/dotfiles
-
-# 3. First build (darwin-rebuild doesn't exist yet)
-nix run nix-darwin -- switch --flake ~/dotfiles/nix#macbook-air
-
-# 4. Reboot, then daily use
-darwin-rebuild switch --flake ~/dotfiles/nix#macbook-air
+cd ~/dotfiles/nix
 ```
 
-### NixOS
-
+**NixOS** — generate hardware config, register in hosts.nix, rebuild:
 ```bash
-# 1. Install NixOS normally (any DE or headless)
-
-# 2. Clone
-git clone git@github.com:quesadx/dotfiles.git ~/dotfiles
-
-# 3. Generate hardware config for this machine
 sudo nixos-generate-config --root /mnt
-cp /mnt/etc/nixos/hardware-configuration.nix nix/hardware/<hostname>.nix
+cp /mnt/etc/nixos/hardware-configuration.nix hardware/<host>.nix
+sudo nixos-rebuild switch --flake .#<host>
+```
 
-# 4. Register the host in hosts.nix (nixos.<hostname> = { ... })
-#    Then rebuild
-sudo nixos-rebuild switch --flake ~/dotfiles/nix#<hostname>
+**macOS** — install Nix, first build with nix-darwin, then daily:
+```bash
+curl -sSf -L https://install.determinate.systems/nix | sh -s -- install
+nix run nix-darwin -- switch --flake .#<host>
 ```
 
 ## Daily Use
@@ -44,60 +37,62 @@ sudo nixos-rebuild switch --flake ~/dotfiles/nix#<hostname>
 ```bash
 cd ~/dotfiles/nix
 
-# Linux
-sudo nixos-rebuild switch --flake .#desktop
+nrs   # alias: nixos-rebuild test --flake .#<host>
+nrt   # alias: nixos-rebuild switch --flake .#<host> (with git add .)
 
-# macOS
+# Or manually:
+sudo nixos-rebuild switch --flake .#desktop
 darwin-rebuild switch --flake .#macbook-air
 ```
 
-After the first build, `nrt` (`nixos-rebuild test`) and `nrs` (`nixos-rebuild switch` with `git add .`) are available as shell aliases (run from `~/dotfiles/nix`).
+Shell aliases (`nrt`/`nrs`) are available after the first build.
 
 ## Structure
 
 ```
 nix/
-├── flake.nix          Entry point
-├── hosts.nix          Registry — all machines in one place
-├── shared.nix         Constants (username, locale)
-├── nixos.nix          Base NixOS system (kernel, users, services)
-├── darwin.nix         Base nix-darwin system (homebrew, defaults)
-├── hardware/          Auto-generated per-machine (from nixos-generate-config)
-├── hosts/             Per-machine tweaks (gaming, power, audio)
-├── desktop/           Desktop environment modules (gnome, cosmic, sway)
-├── home/              Home-manager profiles (shared, linux, darwin)
-└── templates/         Standalone dev shell flakes
+├── flake.nix              Entry point, 44 lines
+├── hosts.nix              Host registry — single source of truth
+├── shared.nix             Shared constants (user, locale)
+├── nixos.nix              NixOS base (kernel, users, services, home-manager)
+├── darwin.nix             nix-darwin base (homebrew, defaults, home-manager)
+├── hardware/              Auto-generated per-host (nixos-generate-config)
+├── hosts/                 Per-machine tweaks (gaming, power, audio)
+│   ├── desktop.nix
+│   └── macbook-pro/
+├── desktop/               Desktop environment modules
+│   ├── gnome.nix + gnome-user.nix
+│   ├── cosmic.nix + cosmic-user.nix
+│   └── sway.nix
+├── home/                  Home-manager profiles
+│   ├── shared.nix         Shell, git, editors, direnv
+│   ├── linux.nix          GNOME apps, chromium, rebuild aliases
+│   └── darwin.nix         ghostty, rebuild aliases
+└── templates/             Standalone dev shell flakes (python, cpp, web, …)
 
-config/active/         Dotfiles symlinked to ~/.config (fastfetch, foot, kitty, waybar)
-local/                 Scripts, binaries, wallpapers symlinked to ~/.local
+config/active/             Dotfiles symlinked to ~/.config
+local/                     Scripts, wallpapers symlinked to ~/.local
 ```
 
-Each host picks its stack in `hosts.nix`. No `if hostname ==` anywhere.
+No `if hostname == ...` anywhere. Each host declares its own stack in `hosts.nix`.
 
 ## Maintenance
 
 ```bash
-nix flake check            # validate everything
-nix flake update           # bump all inputs
-nix flake update nixpkgs   # bump just nixpkgs
+cd ~/dotfiles/nix
+nix flake check          # validate all hosts
+nix flake update         # bump all inputs
 ```
 
-## Direct Config Files
-
-Some configs live outside Nix (`config/active/`, `local/`):
+## Config & Templates
 
 ```bash
+# Link non-Nix configs manually
 ln -s ~/dotfiles/config/active/* ~/.config/
-ln -s ~/dotfiles/config/active/fastfetch/thinkpad.txt ~/.config/fastfetch/
 ln -s ~/dotfiles/local/bin/* ~/.local/bin/
 ln -s ~/dotfiles/local/share/wallpapers ~/.local/share/
-```
 
-## Flake Templates
-
-Standalone dev shell templates live in `nix/templates/`. Copy one into your project:
-
-```bash
-cp -r ~/dotfiles/nix/templates/python ~/my-project/flake.nix
-cd ~/my-project && nix develop
+# Use a dev shell template
+cp ~/dotfiles/nix/templates/python/flake.nix ./flake.nix
+nix develop
 ```
