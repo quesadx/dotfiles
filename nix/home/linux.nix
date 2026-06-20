@@ -21,18 +21,6 @@ in
     username = shared.username;
     homeDirectory = "/home/${shared.username}";
     packages = with pkgs; [
-      gnome-tweaks
-      gnome-software
-      gnome-music
-      gnome-calendar
-      gnome-calculator
-      gnome-text-editor
-      gnome-console
-      gnome-font-viewer
-      showtime
-      nautilus
-      papers
-      loupe
       adwaita-icon-theme
       glib
       gtk3
@@ -40,7 +28,6 @@ in
       dconf-editor
       wl-clipboard
       xournalpp
-      rnote
     ];
   };
 

@@ -19,8 +19,8 @@
       hostModules = [
         nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel
       ];
-      desktop = [ ./desktop/gnome.nix ];
-      home = [ ./desktop/gnome-user.nix ];
+      desktop = [ ./desktop/plasma.nix ];
+      home = [ ./desktop/plasma-user.nix ];
     };
 
     "macbook-pro" = {

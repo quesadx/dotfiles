@@ -15,6 +15,9 @@ let
   };
 in
 {
+  imports = [
+  ];
+
   programs.home-manager.enable = true;
 
   home = {
@@ -77,17 +80,12 @@ in
       };
     };
     extensions = [
-      "github-copilot-cli"
-      "claude-acp"
-      "gemini"
-      "qwen-code"
       "java"
       "dockerfile"
       "sql"
       "nix"
       "prisma"
       "docker-compose"
-      "opencode"
       "ini"
       "pylsp"
       "xml"
