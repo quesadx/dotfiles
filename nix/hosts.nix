@@ -8,8 +8,8 @@
       hostModules = [
         ./hosts/desktop.nix
       ];
-      desktop = [ ./desktop/gnome.nix ];
-      home = [ ./desktop/gnome-user.nix ];
+      desktop = [ ./desktop/plasma.nix ];
+      home = [ ./desktop/plasma-user.nix ];
     };
 
     thinkpad = {
@@ -32,8 +32,8 @@
         ./hosts/macbook-pro/default.nix
         ./hosts/macbook-pro/audio.nix
       ];
-      desktop = [ ./desktop/gnome.nix ];
-      home = [ ./desktop/gnome-user.nix ];
+      desktop = [ ./desktop/plasma.nix ];
+      home = [ ./desktop/plasma-user.nix ];
     };
   };
 
