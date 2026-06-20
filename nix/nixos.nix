@@ -29,7 +29,7 @@ in
 
   # --- Boot ---
   boot = {
-    kernelPackages = if isLaptop then pkgs.linuxPackages else pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_zen;
     loader.systemd-boot.enable = true;
     loader.timeout = 0;
     loader.efi.canTouchEfiVariables = true;
@@ -191,6 +191,6 @@ in
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit shared host inputs; };
   home-manager.users.${shared.username} = {
-    imports = [ ./home/linux.nix ] ++ (host.home or []);
+    imports = [ ./home/linux.nix ] ++ (host.home or [ ]);
   };
 }
