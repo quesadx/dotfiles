@@ -13,113 +13,43 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs =
-    inputs@{
-      nixpkgs,
-      nix-darwin,
-      home-manager,
-      nixos-hardware,
-      ...
-    }:
-    let
-      shared = import ./shared.nix;
-      allHosts = import ./hosts.nix { inherit nixos-hardware; };
-      linuxHosts = allHosts.nixos;
-      linuxHostNames = builtins.attrNames linuxHosts;
-      darwinHosts = allHosts.darwin;
-      darwinHostNames = builtins.attrNames darwinHosts;
+  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, nixos-hardware, ... }:
+  let
+    shared = import ./shared.nix;
+    allHosts = import ./hosts.nix { inherit nixos-hardware; };
 
-      linuxHostSystem =
-        hostName:
-        let
-          host = linuxHosts.${hostName};
+    mkSpecialArgs = host: { inherit shared host; inherit inputs; };
 
-          linuxBaseModules = [
-            ./nixos.nix
-            host.hardware
-          ];
-
-          linuxHostModules = host.hostModules;
-          linuxDesktopModules = host.desktop or [ ];
-
-          linuxHomeManagerModules = [
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.extraSpecialArgs = {
-                inherit shared;
-                inherit host;
-                inherit inputs;
-              };
-
-              home-manager.users.${shared.username} = {
-                imports = [ ./home/linux.nix ] ++ (host.home or [ ]);
-              };
-            }
-          ];
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit (shared) system;
-
-          specialArgs = {
-            inherit shared;
-            inherit host;
-            inherit inputs;
-          };
-
-          modules = linuxBaseModules ++ linuxHostModules ++ linuxDesktopModules ++ linuxHomeManagerModules;
-        };
-
-      darwinSystem =
-        hostName:
-        let
-          host = darwinHosts.${hostName};
-        in
-        nix-darwin.lib.darwinSystem {
-          system = host.system;
-
-          specialArgs = {
-            inherit shared;
-            inherit host;
-            inherit inputs;
-          };
-
-          modules = [
-            ./darwin.nix
-          ] ++ (host.hostModules or [ ]) ++ [
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.extraSpecialArgs = {
-                inherit shared;
-                inherit host;
-                inherit inputs;
-              };
-
-              home-manager.users.${shared.username} = {
-                imports = [ ./home/darwin.nix ] ++ (host.home or [ ]);
-              };
-            }
-          ];
-        };
-    in
-    {
-      nixosConfigurations = builtins.listToAttrs (
-        map (hostName: {
-          name = hostName;
-          value = linuxHostSystem hostName;
-        }) linuxHostNames
-      );
-
-      darwinConfigurations = builtins.listToAttrs (
-        map (hostName: {
-          name = hostName;
-          value = darwinSystem hostName;
-        }) darwinHostNames
-      );
+    mkHM = { homeFile, host }: {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = mkSpecialArgs host;
+      home-manager.users.${shared.username} = {
+        imports = [ homeFile ] ++ (host.home or []);
+      };
     };
+  in
+  {
+    nixosConfigurations = builtins.mapAttrs (_: host:
+      nixpkgs.lib.nixosSystem {
+        inherit (shared) system;
+        specialArgs = mkSpecialArgs host;
+        modules =
+          [ ./nixos.nix host.hardware ] ++ host.hostModules ++ (host.desktop or [])
+          ++ [ home-manager.nixosModules.home-manager
+               (mkHM { homeFile = ./home/linux.nix; inherit host; }) ];
+      }
+    ) allHosts.nixos;
+
+    darwinConfigurations = builtins.mapAttrs (_: host:
+      nix-darwin.lib.darwinSystem {
+        system = host.system;
+        specialArgs = mkSpecialArgs host;
+        modules =
+          [ ./darwin.nix ] ++ (host.hostModules or [])
+          ++ [ home-manager.darwinModules.home-manager
+               (mkHM { homeFile = ./home/darwin.nix; inherit host; }) ];
+      }
+    ) allHosts.darwin;
+  };
 }
