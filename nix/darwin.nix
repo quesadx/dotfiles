@@ -1,4 +1,4 @@
-{ pkgs, shared, host, ... }:
+{ pkgs, shared, host, inputs, ... }:
 {
   imports = [ ];
 
@@ -106,4 +106,12 @@
   '';
 
   environment.variables.EDITOR = "nano";
+
+  # --- Home Manager ---
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit shared host inputs; };
+  home-manager.users.${shared.username} = {
+    imports = [ ./home/darwin.nix ] ++ (host.home or []);
+  };
 }

@@ -2,6 +2,7 @@
   pkgs,
   shared,
   host,
+  inputs,
   ...
 }:
 
@@ -183,5 +184,13 @@ in
       LC_TELEPHONE = shared.regionalLocale;
       LC_TIME = shared.regionalLocale;
     };
+  };
+
+  # --- Home Manager ---
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit shared host inputs; };
+  home-manager.users.${shared.username} = {
+    imports = [ ./home/linux.nix ] ++ (host.home or []);
   };
 }

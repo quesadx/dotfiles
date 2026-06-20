@@ -19,15 +19,6 @@
     allHosts = import ./hosts.nix { inherit nixos-hardware; };
 
     mkSpecialArgs = host: { inherit shared host; inherit inputs; };
-
-    mkHM = { homeFile, host }: {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = mkSpecialArgs host;
-      home-manager.users.${shared.username} = {
-        imports = [ homeFile ] ++ (host.home or []);
-      };
-    };
   in
   {
     nixosConfigurations = builtins.mapAttrs (_: host:
@@ -36,8 +27,7 @@
         specialArgs = mkSpecialArgs host;
         modules =
           [ ./nixos.nix host.hardware ] ++ host.hostModules ++ (host.desktop or [])
-          ++ [ home-manager.nixosModules.home-manager
-               (mkHM { homeFile = ./home/linux.nix; inherit host; }) ];
+          ++ [ home-manager.nixosModules.home-manager ];
       }
     ) allHosts.nixos;
 
@@ -47,8 +37,7 @@
         specialArgs = mkSpecialArgs host;
         modules =
           [ ./darwin.nix ] ++ (host.hostModules or [])
-          ++ [ home-manager.darwinModules.home-manager
-               (mkHM { homeFile = ./home/darwin.nix; inherit host; }) ];
+          ++ [ home-manager.darwinModules.home-manager ];
       }
     ) allHosts.darwin;
   };
