@@ -164,8 +164,12 @@ in
   # --- Fonts ---
   fonts.packages = with pkgs; [
     ibm-plex
+
     noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     noto-fonts-color-emoji
+
     font-awesome
   ];
 
