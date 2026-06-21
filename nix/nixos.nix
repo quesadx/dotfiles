@@ -144,7 +144,7 @@ in
     power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
     gnome.gnome-keyring.enable = true;
     flatpak.enable = true;
-    openssh.enable = true;
+    openssh.enable = false;
     dbus.implementation = "broker";
     irqbalance.enable = true;
   };
