@@ -36,7 +36,7 @@ in
   };
 
   # --- System state version ---
-  system.stateVersion = "26.05";
+  system.stateVersion = "26.11";
 
   # --- Memory & Swap ---
   zramSwap = {
@@ -112,7 +112,10 @@ in
     hostName = host.hostname;
     networkmanager.enable = true;
     firewall.enable = true;
-    firewall.allowedTCPPorts = [ 8080 ];
+    firewall.allowedTCPPorts = [
+      8080
+      9999
+    ];
   };
 
   # --- Virtualization ---
@@ -141,7 +144,7 @@ in
     power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
     gnome.gnome-keyring.enable = true;
     flatpak.enable = true;
-    openssh.enable = false;
+    openssh.enable = true;
     dbus.implementation = "broker";
     irqbalance.enable = true;
   };
