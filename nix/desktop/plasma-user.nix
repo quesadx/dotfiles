@@ -13,6 +13,14 @@
   programs.plasma = {
     enable = true;
 
+    # --- Niche QOL details ---
+    configFile = {
+      kwinrc.Windows = {
+        ElectricBorderDelay = 0;
+        ElectricBorderCooldown = 0;
+      };
+    };
+
     # --- Mouse settings ---
     input = {
       mice = [
