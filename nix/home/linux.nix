@@ -28,7 +28,6 @@ in
       dconf-editor
       wl-clipboard
       xournalpp
-      kdePackages.kwallet
     ];
   };
 
@@ -40,7 +39,7 @@ in
     ];
   };
 
-  programs.git.settings.credential.helper = "kwallet";
+  programs.git.settings.credential.helper = "libsecret";
 
   programs.zsh.shellAliases = shellAliases;
   programs.bash.shellAliases = shellAliases;

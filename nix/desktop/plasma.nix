@@ -9,5 +9,8 @@
     konqueror
   ];
 
-  security.pam.services.sddm.enableKwallet = true;
+  security.pam.services.sddm = {
+    enableKwallet = true;
+    enableGnomeKeyring = true;
+  };
 }
