@@ -10,10 +10,14 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    plasma-manager.url = "github:nix-community/plasma-manager";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, nixos-hardware, ... }:
+  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, plasma-manager, nixos-hardware, ... }:
   let
     shared = import ./shared.nix;
     allHosts = import ./hosts.nix { inherit nixos-hardware; };

@@ -196,7 +196,11 @@ in
   # --- Home Manager ---
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit shared host inputs; };
+  home-manager.extraSpecialArgs = {
+    inherit shared host inputs;
+    inherit (inputs) plasma-manager;
+  };
+  home-manager.backupFileExtension = "hm-backup";
   home-manager.users.${shared.username} = {
     imports = [ ./home/linux.nix ] ++ (host.home or [ ]);
   };
