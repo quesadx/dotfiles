@@ -115,6 +115,7 @@ in
     firewall.allowedTCPPorts = [
       8080
       9999
+      24800
     ];
   };
 

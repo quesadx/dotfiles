@@ -28,6 +28,7 @@ in
       dconf-editor
       wl-clipboard
       xournalpp
+      deskflow
     ];
   };
 
