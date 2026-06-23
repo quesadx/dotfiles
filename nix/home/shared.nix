@@ -71,8 +71,12 @@ in
   programs.zed-editor = {
     enable = true;
     enableMcpIntegration = true;
+
     userSettings = {
       auto_save = "on_focus_change";
+      project_panel = {
+        flatten_directories = false;
+      };
       theme = {
         mode = "system";
         light = "Zedokai Light";
