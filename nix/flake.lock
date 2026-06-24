@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "kyanite": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773634487,
+        "narHash": "sha256-MfCuPQPKaVjSJgxgzp8ni0tIkxVllFqDcdz4tC8eSoo=",
+        "owner": "MurderFromMars",
+        "repo": "Kyanite",
+        "rev": "fe3539ee76e287ce790fff7868b3f499178bbf0b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MurderFromMars",
+        "repo": "Kyanite",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -114,6 +130,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "kyanite": "kyanite",
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",

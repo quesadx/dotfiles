@@ -14,10 +14,15 @@
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
+    kyanite = {
+      url = "github:MurderFromMars/Kyanite";
+      flake = false;
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, plasma-manager, nixos-hardware, ... }:
+  outputs = inputs@{ nixpkgs, nix-darwin, home-manager, plasma-manager, kyanite, nixos-hardware, ... }:
   let
     shared = import ./shared.nix;
     allHosts = import ./hosts.nix { inherit nixos-hardware; };

@@ -9,15 +9,21 @@
 
   dconf.enable = true;
 
+  home.file.".local/share/kwin/scripts/kyanite".source = inputs.kyanite;
+
   # --- plasma-manager ---
   programs.plasma = {
     enable = true;
 
     # --- Niche QOL details ---
     configFile = {
-      kwinrc.Windows = {
-        ElectricBorderDelay = 0;
-        ElectricBorderCooldown = 0;
+      kwinrc = {
+        Windows = {
+          ElectricBorderDelay = 0;
+          ElectricBorderCooldown = 0;
+        };
+
+        Plugins.kyaniteEnabled = true;
       };
     };
 
@@ -119,15 +125,13 @@
     kwin = {
       # --- Virtual desktop settings ---
       virtualDesktops = {
-        names = [
-          "main"
-          "code"
-          "term"
-          "docs"
-          "chat"
-          "scratch"
-        ];
+        number = 2;
         rows = 1;
+      };
+
+      effects.desktopSwitching = {
+        animation = "slide";
+        navigationWrapping = true;
       };
     };
 
