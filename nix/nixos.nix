@@ -27,6 +27,23 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  # --- Home Manager ---
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+
+    extraSpecialArgs = {
+      inherit shared host inputs;
+      inherit (inputs) plasma-manager;
+    };
+
+    backupFileExtension = "hm-backup";
+
+    users.${shared.username} = {
+      imports = [ ./home/linux.nix ] ++ (host.home or [ ]);
+    };
+  };
+
   # --- Boot ---
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
@@ -138,6 +155,7 @@ in
     polkit.enable = true;
     rtkit.enable = true;
     pam.services.login.enableGnomeKeyring = true;
+    sudo.wheelNeedsPassword = false;
   };
 
   # --- Services ---
@@ -192,17 +210,5 @@ in
       LC_TELEPHONE = shared.regionalLocale;
       LC_TIME = shared.regionalLocale;
     };
-  };
-
-  # --- Home Manager ---
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = {
-    inherit shared host inputs;
-    inherit (inputs) plasma-manager;
-  };
-  home-manager.backupFileExtension = "hm-backup";
-  home-manager.users.${shared.username} = {
-    imports = [ ./home/linux.nix ] ++ (host.home or [ ]);
   };
 }
