@@ -48,7 +48,7 @@ in
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     loader.systemd-boot.enable = true;
-    loader.timeout = 0;
+    loader.timeout = 4;
     loader.efi.canTouchEfiVariables = true;
   };
 

@@ -8,8 +8,8 @@
       hostModules = [
         ./hosts/desktop.nix
       ];
-      desktop = [ ./desktop/plasma.nix ];
-      home = [ ./desktop/plasma-user.nix ];
+      desktop = [ ./desktop/gnome.nix ];
+      home = [ ./desktop/gnome-user.nix ];
     };
 
     thinkpad = {
@@ -43,13 +43,10 @@
       hostname = "macbook-air";
       system = "aarch64-darwin";
     };
-    "macbook-pro" = {
-      flakeTarget = "macbook-pro";
-      hostname = "macbook-pro";
-      system = "x86_64-darwin";
-      hostModules = [
-        ./hosts/macbook-pro/darwin.nix
-      ];
+    "macbook-pro-m1" = {
+      flakeTarget = "macbook-pro-m1";
+      hostname = "macbook-pro-m1";
+      system = "aarch64-darwin";
     };
   };
 }
