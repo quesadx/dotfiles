@@ -23,5 +23,7 @@
     gnome-weather
     gnome-contacts
     epiphany
+    gnome-maps
+    gnome-gnome-connections
   ];
 }
