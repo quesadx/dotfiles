@@ -24,6 +24,6 @@
     gnome-contacts
     epiphany
     gnome-maps
-    gnome-gnome-connections
+    gnome-connections
   ];
 }
