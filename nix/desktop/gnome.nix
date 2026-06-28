@@ -20,5 +20,8 @@
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
     gnome-user-docs
+    gnome-weather
+    gnome-contacts
+    epiphany
   ];
 }
