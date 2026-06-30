@@ -1,4 +1,10 @@
-{ pkgs, shared, host, inputs, ... }:
+{
+  pkgs,
+  shared,
+  host,
+  inputs,
+  ...
+}:
 {
   imports = [ ];
 
@@ -41,8 +47,19 @@
     shell = pkgs.zsh;
   };
 
+  # > note:
+  # to manually trust stuff, do as such:
+  # /opt/homebrew/bin/brew trust theboredteam/boring-notch
   homebrew = {
     enable = true;
+
+    taps = [
+      {
+        name = "TheBoredTeam/boring-notch";
+        trusted = true;
+      }
+    ];
+
     onActivation = {
       autoUpdate = true;
       upgrade = true;
@@ -52,7 +69,11 @@
         "--force"
       ];
     };
-    casks = [ ];
+
+    casks = [
+      "spotify"
+      "boring-notch"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -80,31 +101,6 @@
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
   };
 
-  system.activationScripts.postActivation.text = ''
-    # power
-    pmset -a proximitywake 0
-    pmset -a powernap 0
-    pmset -a tcpkeepalive 0
-    pmset -a womp 0             # wake on network access
-
-    # disable crash reporter
-    defaults write com.apple.CrashReporter DialogType none
-
-    # disable telemetry / diagnostics submission
-    defaults write com.apple.SubmitDiagInfo AutoSubmit -bool false
-    defaults write com.apple.spindump DisableSpindump -bool true
-
-    # disable automatic termination of inactive apps
-    defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-
-    # disable smart quotes and dashes (destroys code pasting)
-    defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-    defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-    defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-    defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-    defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
-  '';
-
   environment.variables.EDITOR = "nano";
 
   # --- Home Manager ---
@@ -112,6 +108,6 @@
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit shared host inputs; };
   home-manager.users.${shared.username} = {
-    imports = [ ./home/darwin.nix ] ++ (host.home or []);
+    imports = [ ./home/darwin.nix ] ++ (host.home or [ ]);
   };
 }
