@@ -73,6 +73,8 @@
     casks = [
       "spotify"
       "boring-notch"
+      "obsidian"
+      "asitop"
     ];
   };
 
