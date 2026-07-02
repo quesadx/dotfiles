@@ -74,7 +74,6 @@
       "spotify"
       "boring-notch"
       "obsidian"
-      "asitop"
     ];
   };
 
