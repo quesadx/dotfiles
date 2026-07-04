@@ -41,6 +41,6 @@ sudo nixos-rebuild switch --flake .#thinkpad-x13-gen2
 sudo darwin-rebuild switch --flake .#macbook-air
 
 # or use aliases (available in shell):
-nrt   # test build
-nrs   # switch (git add + rebuild)
+rebuild-test   # test build
+rebuild        # switch (git add + rebuild)
 ```
