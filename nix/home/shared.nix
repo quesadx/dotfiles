@@ -122,6 +122,8 @@ in
         shardulm94.trailing-spaces
         prisma.prisma
         pkief.material-icon-theme
+        rust-lang.rust-analyzer
+        tauri-apps.tauri-vscode
       ];
       userSettings = {
         "workbench.activityBar.location" = "top";

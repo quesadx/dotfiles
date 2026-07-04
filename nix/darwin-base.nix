@@ -53,13 +53,6 @@
   homebrew = {
     enable = true;
 
-    taps = [
-      {
-        name = "TheBoredTeam/boring-notch";
-        trusted = true;
-      }
-    ];
-
     onActivation = {
       autoUpdate = true;
       upgrade = true;
@@ -72,8 +65,9 @@
 
     casks = [
       "spotify"
-      "boring-notch"
       "obsidian"
+      "discord"
+      "firefox@developer-edition"
     ];
   };
 

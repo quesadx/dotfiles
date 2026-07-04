@@ -24,8 +24,8 @@
 
   outputs = inputs@{ nixpkgs, nix-darwin, home-manager, plasma-manager, kyanite, nixos-hardware, ... }:
   let
-    shared = import ./shared.nix;
-    allHosts = import ./hosts.nix { inherit nixos-hardware; };
+    shared = import ./constants.nix;
+    allHosts = import ./hosts-registry.nix { inherit nixos-hardware; };
 
     mkSpecialArgs = host: { inherit shared host; inherit inputs; };
   in
@@ -35,7 +35,7 @@
         inherit (shared) system;
         specialArgs = mkSpecialArgs host;
         modules =
-          [ ./nixos.nix host.hardware ] ++ host.hostModules ++ (host.desktop or [])
+          [ ./nixos-base.nix host.hardware ] ++ host.hostModules ++ (host.desktop or [])
           ++ [ home-manager.nixosModules.home-manager ];
       }
     ) allHosts.nixos;
@@ -45,7 +45,7 @@
         system = host.system;
         specialArgs = mkSpecialArgs host;
         modules =
-          [ ./darwin.nix ] ++ (host.hostModules or [])
+          [ ./darwin-base.nix ] ++ (host.hostModules or [])
           ++ [ home-manager.darwinModules.home-manager ];
       }
     ) allHosts.darwin;

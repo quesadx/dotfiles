@@ -7,7 +7,7 @@
 }:
 
 let
-  isLaptop = host.flakeTarget == "thinkpad" || host.flakeTarget == "macbook-pro";
+  isLaptop = host.flakeTarget == "thinkpad-x13-gen2" || host.flakeTarget == "macbook-pro-2017";
 in
 {
   imports = [ ];
@@ -160,7 +160,7 @@ in
 
   # --- Services ---
   services = {
-    power-profiles-daemon.enable = host.flakeTarget != "macbook-pro";
+    power-profiles-daemon.enable = host.flakeTarget != "macbook-pro-2017";
     gnome.gnome-keyring.enable = true;
     flatpak.enable = true;
     openssh.enable = false;

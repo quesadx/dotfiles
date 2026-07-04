@@ -12,7 +12,7 @@
 }:
 
 let
-  isMacbookPro141 = host.flakeTarget == "macbook-pro";
+  isMacbookPro141 = host.flakeTarget == "macbook-pro-2017";
   driverVersion = "ca3ff74436029a960d85018459e79dd97e08dfbe";
 
   sndHdaCirrus =

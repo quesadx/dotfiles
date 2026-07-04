@@ -1,21 +1,21 @@
 { nixos-hardware }:
 {
   nixos = {
-    desktop = {
-      flakeTarget = "desktop";
-      hostname = "desktop";
-      hardware = ./hardware/desktop.nix;
+    "i5-9400-desktop" = {
+      flakeTarget = "i5-9400-desktop";
+      hostname = "i5-9400-desktop";
+      hardware = ./hardware/i5-9400-desktop.nix;
       hostModules = [
-        ./hosts/desktop.nix
+        ./host-specific/i5-9400-desktop.nix
       ];
       desktop = [ ./desktop/gnome.nix ];
       home = [ ./desktop/gnome-user.nix ];
     };
 
-    thinkpad = {
-      flakeTarget = "thinkpad";
-      hostname = "thinkpad-x13";
-      hardware = ./hardware/thinkpad.nix;
+    "thinkpad-x13-gen2" = {
+      flakeTarget = "thinkpad-x13-gen2";
+      hostname = "thinkpad-x13-gen2";
+      hardware = ./hardware/thinkpad-x13-gen2.nix;
       hostModules = [
         nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel
       ];
@@ -23,14 +23,14 @@
       home = [ ./desktop/plasma-user.nix ];
     };
 
-    "macbook-pro" = {
-      flakeTarget = "macbook-pro";
-      hostname = "macbook-pro";
-      hardware = ./hardware/macbook-pro.nix;
+    "macbook-pro-2017" = {
+      flakeTarget = "macbook-pro-2017";
+      hostname = "macbook-pro-2017";
+      hardware = ./hardware/macbook-pro-2017.nix;
       hostModules = [
         nixos-hardware.nixosModules.apple-macbook-pro-14-1
-        ./hosts/macbook-pro/default.nix
-        ./hosts/macbook-pro/audio.nix
+        ./host-specific/macbook-pro-2017/default.nix
+        ./host-specific/macbook-pro-2017/audio.nix
       ];
       desktop = [ ./desktop/plasma.nix ];
       home = [ ./desktop/plasma-user.nix ];
@@ -43,9 +43,9 @@
       hostname = "macbook-air";
       system = "aarch64-darwin";
     };
-    "macbook-pro-m1" = {
-      flakeTarget = "macbook-pro-m1";
-      hostname = "macbook-pro-m1";
+    "macbook-pro-m1-pro" = {
+      flakeTarget = "macbook-pro-m1-pro";
+      hostname = "macbook-pro-m1-pro";
       system = "aarch64-darwin";
     };
   };
