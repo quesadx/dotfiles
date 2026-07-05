@@ -27,6 +27,7 @@
     goverlay
     vkbasalt
     gamescope
+    gpu-screen-recorder-gtk
   ];
 
   programs.steam = {
