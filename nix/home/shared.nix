@@ -1,8 +1,12 @@
 { pkgs, ... }:
 let
   commonShellAliases = {
-    ll = "ls -l";
-    ls = "ls -a";
+    ll = "eza -la --icons --group-directories-first";
+    l = "eza -1 --icons --group-directories-first";
+    lt = "eza -la --icons --group-directories-first --tree --level=2";
+    cat = "bat --paging=never --style=plain";
+    grep = "rg";
+    find = "fd";
     gs = "git status";
     ga = "git add .";
     gc = "git commit -m";
@@ -29,6 +33,12 @@ in
     };
     packages = with pkgs; [
       fastfetch
+      zoxide
+      fzf
+      bat
+      fd
+      ripgrep
+      eza
     ];
   };
 
@@ -36,9 +46,55 @@ in
 
   programs.starship.enable = true;
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+    defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    defaultOptions = [
+      "--height 40%"
+      "--layout=reverse"
+      "--border"
+    ];
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
     shellAliases = commonShellAliases;
+    autocd = true;
+
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
+
+    history = {
+      size = 100000;
+      save = 100000;
+      ignoreDups = true;
+      ignoreSpace = true;
+      share = true;
+      expireDuplicatesFirst = true;
+      extended = true;
+    };
+
+    historySubstringSearch = {
+      enable = true;
+      searchUpKey = [ "^[[A" ];
+      searchDownKey = [ "^[[B" ];
+    };
+
+    initContent = ''
+      bindkey '^[[1;5C' forward-word
+      bindkey '^[[1;5D' backward-word
+      bindkey '^[[3~' delete-char
+      bindkey '^H' backward-kill-word
+    '';
   };
 
   programs.bash = {

@@ -88,7 +88,6 @@
       ShowPathbar = true;
       ShowStatusBar = true;
       FXDefaultSearchScope = "SCcf"; # search current folder by default
-      FXPreferredViewStyle = "Nlsv"; # list view by default
       _FXShowPosixPathInTitle = true;
       QuitMenuItem = true; # allow Finder to be quit
     };
