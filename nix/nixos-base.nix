@@ -18,9 +18,12 @@ in
       "nix-command"
       "flakes"
     ];
-    optimise.automatic = true;
-    gc = {
+    optimise = {
       automatic = true;
+      dates = [ "03:00" ];
+    };
+    gc = {
+      automatic = false;
       options = "--delete-older-than 30d";
     };
   };
@@ -50,6 +53,7 @@ in
     loader.systemd-boot.enable = true;
     loader.timeout = 4;
     loader.efi.canTouchEfiVariables = true;
+    plymouth.enable = true;
   };
 
   # --- System state version ---
@@ -104,7 +108,7 @@ in
     usbutils
     steam-run
     appimage-run
-    tldr
+    tealdeer
     libsecret
     dnsmasq
     file-roller
@@ -163,15 +167,29 @@ in
     power-profiles-daemon.enable = host.flakeTarget != "macbook-pro-2017";
     gnome.gnome-keyring.enable = true;
     flatpak.enable = true;
+    fwupd.enable = true;
     openssh.enable = false;
     dbus.implementation = "broker";
     irqbalance.enable = true;
+  };
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 30d --keep 5";
   };
 
   # --- systemd stuff ---
   systemd = {
     services.NetworkManager-wait-online.enable = false;
     oomd.enable = true;
+    services.flatpak-add-flathub = {
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      serviceConfig.Type = "oneshot";
+      script = "${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo";
+    };
   };
 
   # --- User services ---

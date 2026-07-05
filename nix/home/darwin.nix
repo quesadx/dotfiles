@@ -1,13 +1,11 @@
 {
   shared,
-  lib,
   pkgs,
   host,
   ...
 }:
 let
   shellAliases = {
-    ls = lib.mkForce "ls -a -G";
     rebuild-test = "cd ~/dotfiles/nix && sudo darwin-rebuild test --flake .#${host.flakeTarget}";
     rebuild = "cd ~/dotfiles/nix && git add . && sudo darwin-rebuild switch --flake .#${host.flakeTarget}";
   };

@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   host,
   shared,
@@ -7,7 +6,6 @@
 }:
 let
   shellAliases = {
-    ls = lib.mkForce "ls -a --color=auto";
     rebuild-test = "cd ~/dotfiles/nix && sudo nixos-rebuild test --flake .#${host.flakeTarget}";
     rebuild = "cd ~/dotfiles/nix && git add . && sudo nixos-rebuild switch --flake .#${host.flakeTarget}";
   };

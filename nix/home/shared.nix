@@ -3,6 +3,8 @@ let
   commonShellAliases = {
     ll = "eza -la --icons --group-directories-first";
     l = "eza -1 --icons --group-directories-first";
+    ls = "l";
+    lh = "eza -lah --icons --group-directories-first";
     lt = "eza -la --icons --group-directories-first --tree --level=2";
     cat = "bat --paging=never --style=plain";
     grep = "rg";
@@ -10,6 +12,7 @@ let
     gs = "git status";
     ga = "git add .";
     gc = "git commit -m";
+    gf = "git fetch";
     gp = "git push";
     dcu = "docker compose up";
     dcud = "docker compose up -d";
@@ -39,6 +42,8 @@ in
       fd
       ripgrep
       eza
+      tealdeer
+      bottom
     ];
   };
 
@@ -94,6 +99,8 @@ in
       bindkey '^[[1;5D' backward-word
       bindkey '^[[3~' delete-char
       bindkey '^H' backward-kill-word
+      bindkey '^P' up-line-or-history
+      bindkey '^N' down-line-or-history
     '';
   };
 

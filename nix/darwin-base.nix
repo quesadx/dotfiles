@@ -47,9 +47,6 @@
     shell = pkgs.zsh;
   };
 
-  # > note:
-  # to manually trust stuff, do as such:
-  # /opt/homebrew/bin/brew trust theboredteam/boring-notch
   homebrew = {
     enable = true;
 
