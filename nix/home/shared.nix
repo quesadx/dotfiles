@@ -9,9 +9,11 @@ let
     gp = "git push";
     dcu = "docker compose up";
     dcud = "docker compose up -d";
+    dcub = "docker compose up --build";
     dcd = "docker compose down";
     dcdv = "docker compose down -v";
     dotfiles = "cd ~/dotfiles";
+    init-flake = "cp ~/dotfiles/nix/templates/placeholder-flake.nix ./flake.nix && echo 'use flake' > .envrc";
   };
 in
 {
@@ -79,8 +81,6 @@ in
       };
       theme = {
         mode = "system";
-        light = "Zedokai Light";
-        dark = "Zedokai Dark";
       };
     };
     extensions = [
