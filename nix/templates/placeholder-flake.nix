@@ -1,14 +1,14 @@
 {
-  description = "Dev shell";
+  description = "Dev shell template";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
   outputs =
     { nixpkgs, ... }:
     let
-      forEachSystem = nixpkgs.lib.genAttrs [
+      systems = [
         "x86_64-linux"
         "aarch64-darwin"
       ];
+      forEachSystem = nixpkgs.lib.genAttrs systems;
     in
     {
       devShells = forEachSystem (
@@ -20,9 +20,9 @@
           };
         in
         {
-          default = pkgs.mkShell {
+          default = pkgs.mkShellNoCC {
             packages = with pkgs; [
-              # add project-specific packages here
+              opencode
             ];
           };
         }
