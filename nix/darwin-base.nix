@@ -65,6 +65,7 @@
       "obsidian"
       "discord"
       "firefox@developer-edition"
+      "onlyoffice"
     ];
   };
 
