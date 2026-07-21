@@ -50,15 +50,10 @@
   homebrew = {
     enable = true;
 
-    onActivation = {
-      autoUpdate = true;
-      upgrade = true;
-      cleanup = "zap";
-
-      extraFlags = [
-        "--force"
-      ];
-    };
+    taps = [
+      "deskflow/tap"
+      "TheBoredTeam/boring-notch"
+    ];
 
     casks = [
       "spotify"
@@ -66,6 +61,9 @@
       "discord"
       "firefox@developer-edition"
       "onlyoffice"
+      "deskflow"
+      "telegram"
+      "TheBoredTeam/boring-notch/boring-notch"
     ];
   };
 
