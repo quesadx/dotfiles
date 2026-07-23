@@ -13,11 +13,6 @@
   # Required by home-manager's xfconf module
   programs.xfconf.enable = true;
 
-  services.displayManager.lightdm = {
-    enable = true;
-    greeters.slick.enable = true;
-  };
-
   environment.systemPackages = with pkgs; [
     xfce4-whiskermenu-plugin
     xfce4-terminal
@@ -29,5 +24,9 @@
     pavucontrol
     networkmanagerapplet
     ghostty
+
+    xfce4-whiskermenu-plugin
+    xfce4-xkb-plugin
+    xfdashboard
   ];
 }
