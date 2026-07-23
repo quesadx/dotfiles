@@ -64,6 +64,7 @@
       "deskflow"
       "telegram"
       "TheBoredTeam/boring-notch/boring-notch"
+      "thunderbird"
     ];
   };
 
@@ -76,22 +77,6 @@
     docker
     colima
   ];
-
-  system.defaults = {
-    finder = {
-      AppleShowAllFiles = true;
-      FXEnableExtensionChangeWarning = false;
-      ShowPathbar = true;
-      ShowStatusBar = true;
-      FXDefaultSearchScope = "SCcf"; # search current folder by default
-      _FXShowPosixPathInTitle = true;
-      QuitMenuItem = true; # allow Finder to be quit
-    };
-
-    SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
-  };
-
-  environment.variables.EDITOR = "nano";
 
   # --- Home Manager ---
   home-manager.useGlobalPkgs = true;
