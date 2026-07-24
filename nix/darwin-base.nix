@@ -49,8 +49,6 @@
     comma
     nixd
     nil
-    docker
-    colima
   ];
 
   # --- Home Manager ---
