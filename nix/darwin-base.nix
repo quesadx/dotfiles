@@ -35,6 +35,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # --- Host ---
+  networking.hostName = host.hostname;
   system.primaryUser = shared.username;
   system.stateVersion = 6;
 

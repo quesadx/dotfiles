@@ -19,6 +19,10 @@ in
     username = shared.username;
     homeDirectory = "/Users/${shared.username}";
     packages = with pkgs; [
+      ghostty-bin
+    ];
+    sessionPath = [
+      "/opt/homebrew/bin"
     ];
   };
 
