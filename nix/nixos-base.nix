@@ -145,7 +145,7 @@ in
 
   # --- Virtualization ---
   virtualisation = {
-    docker.enable = true;
+    docker.enable = false;
     docker.daemon.settings = {
       bip = "192.168.30.1/24";
       "default-address-pools" = [
