@@ -28,6 +28,9 @@ in
     };
   };
 
+  # Trynna save my shit
+  # services.usbmuxd.enable = true;
+
   nixpkgs.config.allowUnfree = true;
 
   # --- Home Manager ---

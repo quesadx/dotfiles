@@ -8,8 +8,8 @@
       hostModules = [
         ./host-specific/i5-9400-desktop.nix
       ];
-      desktop = [ ./desktop/xfce.nix ];
-      home = [ ./desktop/xfce-user.nix ];
+      desktop = [ ./desktop/cosmic.nix ];
+      home = [ ./desktop/cosmic-user.nix ];
     };
 
     "thinkpad-x13-gen2" = {

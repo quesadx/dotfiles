@@ -6,8 +6,6 @@
   ...
 }:
 {
-  imports = [ ];
-
   # --- Nix ---
   nix = {
     enable = true;
@@ -37,7 +35,6 @@
   nixpkgs.config.allowUnfree = true;
 
   # --- Host ---
-  networking.hostName = host.hostname;
   system.primaryUser = shared.username;
   system.stateVersion = 6;
 
@@ -47,33 +44,11 @@
     shell = pkgs.zsh;
   };
 
-  homebrew = {
-    enable = true;
-
-    taps = [
-      "deskflow/tap"
-      "TheBoredTeam/boring-notch"
-    ];
-
-    casks = [
-      "spotify"
-      "obsidian"
-      "discord"
-      "firefox@developer-edition"
-      "onlyoffice"
-      "deskflow"
-      "telegram"
-      "TheBoredTeam/boring-notch/boring-notch"
-      "thunderbird"
-    ];
-  };
-
   environment.systemPackages = with pkgs; [
     nix-tree
     comma
     nixd
     nil
-
     docker
     colima
   ];
