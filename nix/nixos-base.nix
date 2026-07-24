@@ -162,6 +162,7 @@ in
     polkit.enable = true;
     rtkit.enable = true;
     pam.services.login.enableGnomeKeyring = true;
+    pam.services.cosmic-greeter.enableGnomeKeyring = true;
     sudo.wheelNeedsPassword = false;
   };
 
