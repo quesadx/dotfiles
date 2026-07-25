@@ -56,7 +56,7 @@ in
     loader.systemd-boot.enable = true;
     loader.timeout = 4;
     loader.efi.canTouchEfiVariables = true;
-    plymouth.enable = true;
+    plymouth.enable = false;
   };
 
   # --- System state version ---
