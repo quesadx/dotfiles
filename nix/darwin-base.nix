@@ -50,6 +50,8 @@
     comma
     nixd
     nil
+    podman
+    docker-client
   ];
 
   # --- Home Manager ---
