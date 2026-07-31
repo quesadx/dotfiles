@@ -172,9 +172,14 @@ in
     gnome.gnome-keyring.enable = true;
     flatpak.enable = true;
     fwupd.enable = true;
-    openssh.enable = false;
     dbus.implementation = "broker";
     irqbalance.enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        PermitRootLogin = "no";
+      };
+    };
   };
 
   programs.nh = {
