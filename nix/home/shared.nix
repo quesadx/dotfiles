@@ -101,6 +101,7 @@ in
       bindkey '^H' backward-kill-word
       bindkey '^P' up-line-or-history
       bindkey '^N' down-line-or-history
+      ssh-cloudflared() { ssh -o ProxyCommand="cloudflared access ssh --hostname %h" "$@"; }
     '';
   };
 
