@@ -12,12 +12,24 @@ in
 {
   imports = [ ];
 
+  nixpkgs.overlays = [
+      inputs.nix-cachyos-kernel.overlays.default
+  ];
+
   # --- Nix ---
   nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+
+      # CachyOS kernel stuff
+      substituters = [ "https://attic.xuyh0120.win/lantian" ];
+      trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
+    };
     optimise = {
       automatic = true;
       dates = [ "03:00" ];
@@ -52,7 +64,7 @@ in
 
   # --- Boot ---
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
     loader.systemd-boot.enable = true;
     loader.timeout = 4;
     loader.efi.canTouchEfiVariables = true;
@@ -145,7 +157,7 @@ in
 
   # --- Virtualization ---
   virtualisation = {
-    docker.enable = false;
+    docker.enable = true;
     docker.daemon.settings = {
       bip = "192.168.30.1/24";
       "default-address-pools" = [
