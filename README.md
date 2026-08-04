@@ -26,7 +26,7 @@ local/bin/                  scripts → ~/.local/bin
 | host | system | DE |
 |---|---|---|
 | `i5-9400-desktop` | NixOS x86_64 | GNOME |
-| `thinkpad-x13-gen2` | NixOS x86_64 | Plasma |
+| `thinkpad-x13-gen2` | NixOS x86_64 | TTY (server) |
 | `macbook-pro-2017` | NixOS x86_64 | Plasma |
 | `macbook-air` | darwin aarch64 | — |
 | `macbook-pro-m1-pro` | darwin aarch64 | — |

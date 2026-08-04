@@ -18,9 +18,8 @@
       hardware = ./hardware/thinkpad-x13-gen2.nix;
       hostModules = [
         nixos-hardware.nixosModules.lenovo-thinkpad-x13-intel
+        ./host-specific/thinkpad-x13-gen2.nix
       ];
-      desktop = [ ./desktop/plasma.nix ];
-      home = [ ./desktop/plasma-user.nix ];
     };
 
     "macbook-pro-2017" = {
