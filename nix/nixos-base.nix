@@ -12,18 +12,9 @@ in
 {
   imports = [ ];
 
-  nixpkgs.overlays = [
-      inputs.nix-cachyos-kernel.overlays.default
-  ];
-
   # --- Nix ---
   nix = {
     settings = {
-
-      # CachyOS kernel stuff
-      substituters = [ "https://attic.xuyh0120.win/lantian" ];
-      trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
-
       experimental-features = [
         "nix-command"
         "flakes"
@@ -64,7 +55,7 @@ in
 
   # --- Boot ---
   boot = {
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+    kernelPackages = pkgs.linuxPackages_zen;
     loader.systemd-boot.enable = true;
     loader.timeout = 4;
     loader.efi.canTouchEfiVariables = true;
