@@ -41,6 +41,7 @@
   services.lact.enable = true;
   programs.gamemode.enable = true;
 
+  # sunshine --creds sunshine somepassword
   services.sunshine = {
     enable = true;
     autoStart = true;
