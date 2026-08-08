@@ -79,6 +79,12 @@ in
     graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        mesa
+        libva
+        libva-vdpau-driver
+        libvdpau-va-gl
+      ];
     };
   };
 
@@ -183,6 +189,7 @@ in
         PermitRootLogin = "no";
       };
     };
+
   };
 
   programs.nh = {
@@ -217,6 +224,11 @@ in
 
     font-awesome
   ];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+  };
 
   # --- Locale ---
   time.timeZone = shared.timeZone;

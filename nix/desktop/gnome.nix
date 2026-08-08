@@ -1,6 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, shared, ... }:
 
 {
+  # --- GDM Autologin ---
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = shared.username;
+  };
+
   # --- GNOME Services ---
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
