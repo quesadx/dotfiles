@@ -3,6 +3,11 @@
 {
   dconf.enable = true;
 
+  home.file.".local/bin/reset-gnome.sh" = {
+    source = ../../local/bin/reset-gnome.sh;
+    executable = true;
+  };
+
   dconf.settings = {
     # --- GNOME Shell Extensions ---
     "org/gnome/shell".enabled-extensions = [
