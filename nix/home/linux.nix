@@ -26,6 +26,8 @@ in
       wl-clipboard
       xournalpp
       deskflow
+      podman
+      docker-compose
     ];
   };
 
