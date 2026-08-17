@@ -10,6 +10,8 @@
 
   boot.kernel.sysctl."vm.max_map_count" = 2147483642;
 
+  programs.fuse.userAllowOther = true;
+
   services.scx = {
     enable = true;
     scheduler = "scx_lavd";
@@ -28,6 +30,9 @@
     vkbasalt
     gamescope
     gpu-screen-recorder-gtk
+    fuse3
+    nss
+    nspr
   ];
 
   programs.steam = {
