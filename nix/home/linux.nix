@@ -22,7 +22,6 @@ in
       adwaita-icon-theme
       glib
       gtk3
-      onlyoffice-desktopeditors
       dconf-editor
       wl-clipboard
       xournalpp
