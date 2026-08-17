@@ -36,6 +36,19 @@
     };
   };
 
+  # Non-NixOS / non-darwin hosts managed with standalone home-manager
+  # (e.g. Fedora Asahi). No NixOS system modules here.
+  foreign = {
+    "macbook-pro-m1-pro-asahi" = {
+      flakeTarget = "macbook-pro-m1-pro-asahi";
+      hostname = "macbook-pro-m1-pro-asahi";
+      system = "aarch64-linux";
+      hostModules = [
+        ./host-specific/macbook-pro-m1-pro-asahi.nix
+      ];
+    };
+  };
+
   darwin = {
     "macbook-air" = {
       flakeTarget = "macbook-air";

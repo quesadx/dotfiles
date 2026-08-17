@@ -1,6 +1,6 @@
 # dotfiles
 
-Nix flake managing NixOS and nix-darwin systems via home-manager.
+Nix flake managing NixOS, nix-darwin and standalone home-manager systems.
 
 ## structure
 
@@ -30,6 +30,7 @@ local/bin/                  scripts → ~/.local/bin
 | `macbook-pro-2017` | NixOS x86_64 | Plasma |
 | `macbook-air` | darwin aarch64 | — |
 | `macbook-pro-m1-pro` | darwin aarch64 | — |
+| `macbook-pro-m1-pro-asahi` | Fedora Asahi (standalone home-manager) aarch64 | — |
 
 ## rebuild
 
@@ -39,6 +40,9 @@ sudo nixos-rebuild switch --flake .#thinkpad-x13-gen2
 
 # darwin
 sudo darwin-rebuild switch --flake .#macbook-air
+
+# standalone home-manager (Fedora Asahi)
+home-manager switch --flake .#macbook-pro-m1-pro-asahi
 
 # or use aliases (available in shell):
 rebuild-test   # test build

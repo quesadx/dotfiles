@@ -1,5 +1,5 @@
 {
-  description = "Multi-platform dotfiles for NixOS and nix-darwin";
+  description = "Multi-platform dotfiles for NixOS, nix-darwin and standalone home-manager";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -49,5 +49,14 @@
           ++ [ home-manager.darwinModules.home-manager ];
       }
     ) allHosts.darwin;
+
+    homeConfigurations = builtins.mapAttrs (_: host:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${host.system};
+        extraSpecialArgs = mkSpecialArgs host;
+        modules =
+          [ ./home/linux.nix ] ++ (host.hostModules or []) ++ (host.home or []);
+      }
+    ) (allHosts.foreign or {});
   };
 }
