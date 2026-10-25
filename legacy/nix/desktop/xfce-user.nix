@@ -1,0 +1,7 @@
+{ pkgs, ... }:
+
+{
+  xfconf.settings = {
+
+  };
+}

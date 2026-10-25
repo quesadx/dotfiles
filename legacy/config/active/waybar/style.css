@@ -1,0 +1,96 @@
+* {
+    font-family: "IBM Plex Mono";
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: #2D2B55;
+    border-top: 1px solid #4B4892;
+    color: #C7C4FF;
+    opacity: 0.92;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    padding: 0 1px;
+    color: #C7C4FF;
+}
+
+button:hover {
+    background-color: #4B4892;
+}
+
+/* Module container styling */
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#bluetooth,
+#pulseaudio,
+#clock,
+#tray,
+#scratchpad,
+#power-profiles-daemon {
+    border-top: 1px solid #4B4892;
+    background-color: #3A3866;
+    padding: 0 8px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+#workspaces button.hover {
+    background-color: rgba(75, 72, 146, 0.5);
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    background-color: #91B4FF;
+    color: #1E1E3F;
+}
+
+#workspaces button.urgent {
+    background-color: #FF628C;
+}
+
+#window {
+    margin: 0 4px;
+}
+
+#workspaces {
+    margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+/* Critical states only */
+#battery.critical:not(.charging) {
+    background-color: #FF628C;
+    animation: blink 0.5s steps(12) infinite alternate;
+}
+
+@keyframes blink {
+    to { background-color: #FF9DFF; }
+}
+
+#network.disconnected {
+    background-color: #FF628C;
+}
+
+#temperature.critical {
+    background-color: #FF628C;
+}

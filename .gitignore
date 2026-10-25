@@ -1,0 +1,10 @@
+*.log
+*.cache
+secrets.conf
+private.conf
+.env
+.planning
+.DS_Store
+.direnv/
+result
+result-*
