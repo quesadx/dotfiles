@@ -1,5 +1,5 @@
 {
-  description = "Minimal NixOS dotfiles for a desktop and a ThinkPad server";
+  description = "Minimal NixOS dotfiles for easy deployable hosts";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -35,6 +35,7 @@
       nixosConfigurations = {
         i5-9400-desktop = mkHost "i5-9400-desktop" ./hosts/i5-9400-desktop.nix;
         thinkpad-x13-gen2 = mkHost "thinkpad-x13-gen2" ./hosts/thinkpad-x13-gen2.nix;
+        hp-445-g10 = mkHost "hp-445-g10" ./hosts/hp-445-g10.nix;
       };
     };
 }

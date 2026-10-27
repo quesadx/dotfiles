@@ -9,6 +9,7 @@
 {
   imports = [
     ../modules/desktop.nix
+    ../modules/development.nix
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -76,16 +77,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # Development
-    gcc
-    gnumake
-    python3
-    nodejs_22
-    jdk21
-    go
-    gh
-    just
-
     # Gaming
     mangohud
     protonup-qt
