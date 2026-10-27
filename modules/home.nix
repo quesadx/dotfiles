@@ -54,6 +54,8 @@ in
       tealdeer
       bottom
 
+      opencode
+
       podman
       docker-compose
     ];
